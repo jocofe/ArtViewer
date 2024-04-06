@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import Patterns from "./components/patterns";
+import Patterns from "./components/Patterns.tsx";
 
 export const router = createBrowserRouter([
   {
