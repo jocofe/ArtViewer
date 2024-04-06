@@ -1,0 +1,55 @@
+/*------------------------------------*\
+    $COLOR-VAR
+\*------------------------------------*/
+$color-white: hsl(0, 0%, 100%);
+$color-blackout: hsl(0, 0%, 9%);
+$color-blackout-ligther: hsl(0, 0%, 85%);
+
+
+/*------------------------------------*\
+    $BUTTON
+\*------------------------------------*/
+
+.btn {
+    background-color:$color-white;
+    color: $color-blackout;
+
+    &--hover {
+        background-color: $color-blackout;
+        color: $color-white;
+    }
+}
+
+/*------------------------------------*\
+    $BUTTON--SIZES
+\*------------------------------------*/
+
+.btn {
+    &.btn--small {
+        border-radius: 60px;
+        height: 36px;
+        padding: 0px 24px;
+    }
+
+    &.btn--medium {
+        border-radius: 67px;
+        height: 48px;
+        padding: 0px 24px;
+    }
+
+    &.btn--large {
+        border-radius: 40px;
+        height: 56px;
+        padding: 0px 24px;
+    }
+}
+
+
+
+/*------------------------------------*\
+    $BUTTTON--{STATES}
+\*------------------------------------*/
+
+
+
+
