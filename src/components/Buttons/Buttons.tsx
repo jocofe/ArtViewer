@@ -11,10 +11,13 @@ export default function Button (props: any) {
     const { label, size = "medium"} = props
 
     const [isHovered, setIsHovered] = useState(false);
+    const [isPressed, setIsPressed] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
 
-    const btnClass = `btn ${sizes[size]} ${isHovered? "btn--hover" : ""}`;
+    const btnClass = `btn ${sizes[size]} ${isHovered? "btn--hover" : ""} ${isPressed? "btn--press" : ""} ${isFocused? "btn--focus" : ""} `;
+    
 
-
+    //Hovered functionality
     const handleMouseEnter = () => {
         setIsHovered(true);
     };
@@ -23,11 +26,37 @@ export default function Button (props: any) {
         setIsHovered(false);
     };
 
+
+    //Focused functionality
+    const handleMouseDown = (event: any) => {
+        event.preventDefault(); // Avoid focus state appearing on the first click
+        setIsPressed(true);
+        setIsFocused(false);
+    };
+
+    const handleMouseUp = () => {
+        setIsPressed(false);
+    };
+
+
+    //Focused functionality
+    const handleFocus = () => {
+        setIsFocused(true);
+      };
+
+    const handleBlur = () => {
+        setIsFocused(false);
+    };
+
     return (
         <button
             className={btnClass}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
         >
             {label}
         </button>

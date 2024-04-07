@@ -1,4 +1,11 @@
 /*------------------------------------*\
+    $COLOR-VAR
+\*------------------------------------*/
+$color-white: hsl(0, 0%, 100%);
+$color-blackout: hsl(0, 0%, 9%);
+$color-blackout-ligther: hsl(0, 0%, 50%);
+
+/*------------------------------------*\
     $RESET
 \*------------------------------------*/
 
@@ -33,9 +40,10 @@ button {
   font-size: 14px;
   font-family: Hanken Grotesk;
   font-weight: 500;
-  display: flex;
-  align-items: center; 
-  justify-content: center; 
+  border: 1px solid $color-blackout;
+
 }
 
-
+button:focus {
+    outline:0;
+}
