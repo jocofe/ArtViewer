@@ -1,7 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/config";
-export const SignIn = () => {
+
+export const SignUp = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,9 +15,9 @@ export const SignIn = () => {
         setPassword(event.target.value);
     }
 
-    const submitSignIn = (event: FormEvent<HTMLFormElement>) => {
+    const submitSignUp = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
             })
@@ -27,11 +28,11 @@ export const SignIn = () => {
 
     return (
         <div className="signin-container">
-            <form onSubmit={submitSignIn}>
-                <h1>Log In</h1>
+            <form onSubmit={submitSignUp}>
+                <h1>Sing Up</h1>
                 <input type="email" placeholder="Email" value={email} onChange={handleEmailInputChange} />
                 <input type="password" placeholder="Password" value={password} onChange={handlePasswordInputChange} />
-                <button type="submit">Log In</button>
+                <button type="submit">Sing Up</button>
             </form>
         </div>
     );
