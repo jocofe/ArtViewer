@@ -1,6 +1,3 @@
-import * as React from "react";
-
-
 // Heart Icons <3
 export function IconHeart() {
     return (
