@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArtCardDetails } from "../../models/art-card";
 import { IconHeart, IconHeartPressed, Save, Saved, LinkIcon } from "../Icons/icons";
-import "./_artcard-style.scss"
+import "../../styles/components/_artcard.scss"
 
 
 export const ArtCard = (props: ArtCardDetails) => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./_buttons-style.scss";
+import "../../styles/components/_buttons.scss";
 
 const sizes: any = {
     small: "btn--small",
