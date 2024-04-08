@@ -21,7 +21,7 @@ export default function Button (props: any) {
     const handleMouseEnter = () => {
         setIsHovered(true);
     };
-     
+
     const handleMouseLeave = () => {
         setIsHovered(false);
     };
@@ -42,7 +42,7 @@ export default function Button (props: any) {
     //Focused functionality
     const handleFocus = () => {
         setIsFocused(true);
-      };
+    };
 
     const handleBlur = () => {
         setIsFocused(false);
@@ -61,7 +61,7 @@ export default function Button (props: any) {
             {label}
         </button>
     )
-};
+}
 
 // type ButtonSize = 'small' | 'medium' | 'huge';
 // type ButtonVariant = 'primary' | 'secondary' | 'default' | 'disabled';

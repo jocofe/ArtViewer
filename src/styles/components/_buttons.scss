@@ -1,10 +1,10 @@
-
+@import '../base/colors';
 /*------------------------------------*\
     $BUTTON & $BUTTON--STATES
 \*------------------------------------*/
 
 .btn {
-    background-color:$color-white;
+    background-color: $color-white;
     color: $color-blackout;
 
     &--hover {
