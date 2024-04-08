@@ -1,3 +1,5 @@
+import "../../styles/index.scss";
+
 // Heart Icons <3
 export function IconHeart() {
     return (
