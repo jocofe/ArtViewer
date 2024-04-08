@@ -2,10 +2,10 @@ import ArtCard from "./components/ArtCard/ArtCard";
 import Button from "./components/Buttons/Buttons"
 import "./components/Buttons/_buttons-style.scss";
 import "./components/ArtCard/_artcard-style.scss"
-import { SignIn } from "./components/Auth/SignIn";
+import { SignIn } from "./features/authentication/SignIn";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./config/config";
-import { SignUp } from "./components/Auth/SingUp";
+import { SignUp } from "./features/authentication/SingUp";
 
 export const Firebase = initializeApp(firebaseConfig);
 

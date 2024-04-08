@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArtCardDetails } from "../../models/art-card";
-import { IconHeart, IconHeartPressed, Save, Saved, LinkIcon } from "../icons";
+import { IconHeart, IconHeartPressed, Save, Saved, LinkIcon } from "../Icons/icons";
 import "./_artcard-style.scss"
 
 
