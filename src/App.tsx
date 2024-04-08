@@ -1,7 +1,7 @@
 import ArtCard from "./components/ArtCard/ArtCard";
-import Button from "./components/Buttons/Buttons"
-import "./components/Buttons/_buttons-style.scss";
-import "./components/ArtCard/_artcard-style.scss"
+import Button from "./components/Buttons/Buttons";
+import "../../styles/components/_artcard.scss";
+import "../../styles/components/_artcard.scss";
 import { SignIn } from "./features/authentication/SignIn";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./config/config";
