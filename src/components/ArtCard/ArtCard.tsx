@@ -42,4 +42,3 @@ export const ArtCard = (props: ArtCardDetails) => {
   );
 };
 
-export default ArtCard;

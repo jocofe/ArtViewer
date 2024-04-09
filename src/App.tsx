@@ -1,5 +1,5 @@
-import ArtCard from "./components/ArtCard/ArtCard";
-import Button from "./components/Buttons/Buttons";
+import { ArtCard } from "./components/ArtCard/ArtCard";
+import { Button } from "./components/Buttons/Buttons";
 import "./styles/index.scss";
 import { SignIn } from "./features/authentication/SignIn";
 import { initializeApp } from "firebase/app";
@@ -23,7 +23,8 @@ function App() {
       />
         <Button label="Small" size="small" />
         <Button label="Default" />
-        <Button label="Large"size="large" />
+        <Button label="Large" size="large" />
+        <Button label="Disabled" disabled={true} />
       <SignIn />
       <SignUp />
     </>
