@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
 import "../../styles/index.scss";
 
 const sizes: any = {
@@ -27,8 +27,8 @@ export default function Button (props: any) {
     };
 
 
-    //Focused functionality
-    const handleMouseDown = (event: any) => {
+    //Pressed functionality
+    const handleMouseDown = (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault(); // Avoid focus state appearing on the first click
         setIsPressed(true);
         setIsFocused(false);

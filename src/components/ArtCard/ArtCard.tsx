@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArtCardDetails } from "../../models/art-card";
-import { IconHeart, IconHeartPressed, Save, Saved, LinkIcon } from "../Icons/icons";
+import { Heart, FullHeart, CopyLink, Bookmark, FullBookmark } from "../Icons/icons";
 import "../../styles/index.scss"
 
 
@@ -29,13 +29,13 @@ export const ArtCard = (props: ArtCardDetails) => {
 
         <section className="art-card__buttons">
           <i className="btn-icon">
-            {<LinkIcon/>}
+            {<CopyLink />}
           </i>
           <i onClick={handleSaved} className="btn-icon">
-            {isOnSaved? <Saved/> : <Save/> }
+            {isOnSaved? <FullBookmark/> : <Bookmark/> }
           </i>
           <i onClick={handleFav} className="btn-icon">
-            {isOnFav? <IconHeartPressed/> : <IconHeart/>}
+            {isOnFav? <FullHeart/> : <Heart/>}
           </i>
         </section>
     </div>

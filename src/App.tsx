@@ -1,5 +1,7 @@
 import ArtCard from "./components/ArtCard/ArtCard";
 import Button from "./components/Buttons/Buttons";
+import { Menu, Heart, FullHeart, Bookmark, FullBookmark, CopyLink } from "./components/Icons/icons";
+import { IconButton } from "./components/Buttons/IconButton";
 import "./styles/index.scss";
 import { SignIn } from "./features/authentication/SignIn";
 import { initializeApp } from "firebase/app";
@@ -26,6 +28,7 @@ function App() {
         <Button label="Large"size="large" />
       <SignIn />
       <SignUp />
+      <IconButton icon={<Menu />} onClick={() => (console.log('clicked'))} />
     </>
   );
 }
