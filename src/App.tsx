@@ -1,5 +1,6 @@
 import ArtCard from "./components/ArtCard/ArtCard";
 import Button from "./components/Buttons/Buttons";
+import { TopBar } from "./layouts/Topbar/TopBar";
 import { Menu } from "./components/Icons/icons";
 import { IconButton } from "./components/Buttons/IconButton";
 import "./styles/index.scss";
@@ -29,6 +30,7 @@ function App() {
       <SignIn />
       <SignUp />
       <IconButton icon={<Menu />} onClick={() => (console.log('clicked'))} />
+      <TopBar />
     </>
   );
 }
