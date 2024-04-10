@@ -44,6 +44,7 @@ function App() {
       <SignIn />
       <SignUp />
       <IconButton icon={<Menu />} onClick={() => (console.log('clicked'))} />
+      <TopBar />
     </>
   );
 }
