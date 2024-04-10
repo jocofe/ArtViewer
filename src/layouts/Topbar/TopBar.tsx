@@ -1,5 +1,5 @@
 import "../../styles/index.scss";
-import Button from "../../components/Buttons/Buttons";
+import { Button } from "../../components/Buttons/Buttons";
 import { Menu } from "../../components/Icons/icons";
 import { IconButton } from "../../components/Buttons/IconButton";
 
