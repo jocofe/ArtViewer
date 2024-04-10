@@ -1,60 +1,144 @@
 @import '../base/colors';
 
-/*------------------------------------*\
-    $BUTTON & $BUTTON--STATES
-\*------------------------------------*/
-
 .btn {
-    background-color: $color-white;
-    color: $color-blackout;
 
-    &--hover {
-        background-color: $color-blackout;
-        color: $color-white;
+    //Disabled
+    &:disabled {
+        background-color: white;
+        border: 1px solid $color-blackout-lighter;
+        color: $color-blackout-lighter;
+        cursor: not-allowed;
     }
 
-    &--press {
-        background-color: $color-blackout-light;
-        color: $color-white;
-        border: 1px solid $color-blackout-light;
-    }
-
-    &--focus {
-        background-color: $color-white;
-        color: $color-wooden;
-        border: 1px solid $color-wooden;
-    }
-}
-
-/*------------------------------------*\
-    $BUTTON--SIZES
-\*------------------------------------*/
-
-.btn {
-    &.btn--small {
+    //Sizes
+    &--small {
         border-radius: 60px;
         height: 36px;
         padding: 0px 24px;
     }
 
-    &.btn--medium {
+    &--medium {
         border-radius: 67px;
         height: 48px;
         padding: 0px 24px;
     }
 
-    &.btn--large {
+    &--large {
         border-radius: 40px;
         height: 56px;
         padding: 0px 24px;
     }
+};
+
+/*------------------------------------*\
+    $BUTTON--TYPES
+\*------------------------------------*/
+
+//Primary
+.btn--primary {
+    background-color: $color-blackout;
+    color: $color-white;
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: $color-white;
+            color: $color-blackout;
+            border: 1px solid $color-blackout;
+        }
+
+        &:active {
+            background-color: $color-blackout-ligth;
+            color: $color-white;
+            border: 1px solid $color-blackout-ligth;
+        }
+    }
+
+    &:focus-visible {
+        background-color: $color-blackout;
+        color: $color-white;
+     }
+}
+
+
+//SubPrimary
+.btn--sub_primary {
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: $color-blackout;
+            color: $color-white;
+        }
+
+        &:active {
+            background-color: $color-blackout-ligth;
+            color: $color-white;
+            border: 1px solid $color-blackout-ligth;
+        }
+    }
+
+    &:focus-visible {
+         background-color: $color-white;
+         color: $color-wooden;
+         border: 1px solid $color-wooden;
+     }
+}
+
+
+//Secondary
+.btn--secondary {
+    background-color: $color-white;
+    color: $color-wooden;
+    border: 1px solid $color-wooden;
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: $color-wooden;
+            color: $color-white;
+            border: 1px solid $color-wooden;
+        }
+
+        &:active {
+            background-color: $color-wooden-light;
+            color: $color-white;
+            border: 1px solid $color-wooden-light;
+        }
+    }
+
+    &:focus-visible {
+         background-color: $color-white;
+         color: $color-wooden;
+         border: 1px solid $color-golden;
+     }
+}
+
+
+//Default
+.btn--default {
+    background-color: $color-pearlwhite;
+    color: $color-wooden;
+    border: 1px solid $color-wooden;
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: $color-golden;
+            color: $color-wooden;
+            border: 1px solid $color-golden;
+        }
+
+        &:active {
+            background-color: $color-golden-dark;
+            color: $color-white;
+            border: 1px solid $color-golden-dark;
+        }
+    }
+
+    &:focus-visible {
+         background-color: $color-pearlwhite;
+         color: $color-wooden;
+         border: 1px solid $color-golden;
+     }
 }
 
 /*------------------------------------*\
-    $ICON_BUTTON--SIZES
+    $DROPDOWN--BUTTON
 \*------------------------------------*/
-
-.btn-icon {
-    border: none;
-    background-color: transparent;
-}

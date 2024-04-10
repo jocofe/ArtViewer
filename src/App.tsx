@@ -1,7 +1,5 @@
-import ArtCard from "./components/ArtCard/ArtCard";
-import Button from "./components/Buttons/Buttons";
-import { Menu } from "./components/Icons/icons";
-import { IconButton } from "./components/Buttons/IconButton";
+import { ArtCard } from "./components/ArtCard/ArtCard";
+import { Button } from "./components/Buttons/Buttons";
 import "./styles/index.scss";
 import { SignIn } from "./features/authentication/SignIn";
 import { initializeApp } from "firebase/app";
@@ -23,9 +21,26 @@ function App() {
       author="Boticelli"
       date="1480"
       />
-        <Button label="Small" size="small" />
-        <Button label="Default" />
-        <Button label="Large"size="large" />
+        <div>
+          <Button label="Primary" size="small"/>
+          <Button label="Primary"/>
+          <Button label="Primary" size="large"/>
+        </div>
+        <div>
+          <Button label="SubPrimary" type="sub_primary" size="small"/>
+          <Button label="SubPrimary" type="sub_primary"/>
+          <Button label="SubPrimary" type="sub_primary" size="large"/>
+        </div>
+        <div>
+          <Button label="Secondary" type="secondary" size="small"/>
+          <Button label="Secondary" type="secondary"/>
+          <Button label="Secondary" type="secondary" size="large"/>
+        </div>
+        <div>
+          <Button label="Default" type="default" size="small"/>
+          <Button label="Default" type="default"/>
+          <Button label="Default" type="default" size="large"/>
+        </div>
       <SignIn />
       <SignUp />
       <IconButton icon={<Menu />} onClick={() => (console.log('clicked'))} />
