@@ -1,6 +1,6 @@
 import ArtCard from "./components/ArtCard/ArtCard";
 import Button from "./components/Buttons/Buttons";
-import { Menu, Heart, FullHeart, Bookmark, FullBookmark, CopyLink } from "./components/Icons/icons";
+import { Menu } from "./components/Icons/icons";
 import { IconButton } from "./components/Buttons/IconButton";
 import "./styles/index.scss";
 import { SignIn } from "./features/authentication/SignIn";
