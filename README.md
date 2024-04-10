@@ -4,8 +4,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="./src/media/images/Logotype.svg" alt="Logo">
+  <a href="https://github.com/jocofe/ArtViewer">
+    <img src="./src\assets\Logotype.svg" alt="Logo">
   </a>
 
   <h3 align="center">ArtViewer App</h3>
@@ -92,4 +92,4 @@ Project Link: [https://github.com/jocofe/ArtViewer](https://github.com/jocofe/Ar
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: ./src/media/images/app-screenshot.jpg
+[product-screenshot]: ./src\assets\app-screenshot.jpg

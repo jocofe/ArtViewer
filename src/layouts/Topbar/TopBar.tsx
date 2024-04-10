@@ -1,9 +1,7 @@
-export const Header = () => {
+export const TopBar = () => {
   return (
     <div className="header">
       <p>Header</p>
     </div>
   );
 };
-
-export default Header;
