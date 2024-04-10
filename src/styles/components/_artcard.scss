@@ -1,4 +1,7 @@
-@import '../base/colors.scss';
+@import '../base/colors';
+@import '../base/global';
+@import '../base/reset';
+@import '../base/typography';
 
 .art-card {
     width: 440px;

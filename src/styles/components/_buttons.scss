@@ -1,4 +1,7 @@
 @import '../base/colors';
+@import '../base/global';
+@import '../base/reset';
+@import '../base/typography';
 
 .btn {
     user-select: none;
@@ -62,6 +65,7 @@
 
 //SubPrimary
 .btn--sub_primary {
+    background-color: $color-white;
 
     &:not(:disabled) {
         &:hover {

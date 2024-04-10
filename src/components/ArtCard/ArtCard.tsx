@@ -28,14 +28,14 @@ export const ArtCard = (props: ArtCardDetails) => {
         </section>
 
         <section className="art-card__buttons">
-          <i className="btn-icon">
-            {<CopyLink />}
+          <i className="icon">
+            {<CopyLink className="icon"/>}
           </i>
-          <i onClick={handleSaved} className="btn-icon">
-            {isOnSaved? <FullBookmark/> : <Bookmark/> }
+          <i onClick={handleSaved} >
+            {isOnSaved? <FullBookmark className="icon" /> : <Bookmark className="icon"/> }
           </i>
-          <i onClick={handleFav} className="btn-icon">
-            {isOnFav? <FullHeart/> : <Heart/>}
+          <i onClick={handleFav} className="icon">
+            {isOnFav? <FullHeart className="icon"/> : <Heart className="icon"/>}
           </i>
         </section>
     </div>
