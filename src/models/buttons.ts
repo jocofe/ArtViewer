@@ -1,4 +1,3 @@
-
 export interface ButtonProps {
     label: string,
     size?: 'small' | 'medium' | 'large',

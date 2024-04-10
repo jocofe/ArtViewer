@@ -1,7 +1,7 @@
 @import '../base/colors';
 
 .btn {
-
+    user-select: none;
     //Disabled
     &:disabled {
         background-color: white;

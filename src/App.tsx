@@ -25,23 +25,23 @@ function App() {
       date="1480"
       />
         <div>
-          <Button label="Primary" size="small"/>
-          <Button label="Primary"/>
-          <Button label="Primary" size="large"/>
+          <Button label="Primary" size="small" type="primary"/>
+          <Button label="Primary" type="primary" size='medium'/>
+          <Button label="Primary" size="large" type="primary"/>
         </div>
         <div>
           <Button label="SubPrimary" type="sub_primary" size="small"/>
-          <Button label="SubPrimary" type="sub_primary"/>
+          <Button label="SubPrimary" type="sub_primary" size='medium'/>
           <Button label="SubPrimary" type="sub_primary" size="large"/>
         </div>
         <div>
           <Button label="Secondary" type="secondary" size="small"/>
-          <Button label="Secondary" type="secondary"/>
+          <Button label="Secondary" type="secondary" size='medium'/>
           <Button label="Secondary" type="secondary" size="large"/>
         </div>
         <div>
           <Button label="Default" type="default" size="small"/>
-          <Button label="Default" type="default"/>
+          <Button label="Default" type="default" size='medium'/>
           <Button label="Default" type="default" size="large"/>
         </div>
       <SignIn />
