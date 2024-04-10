@@ -4,5 +4,5 @@ export interface ButtonProps {
     size?: 'small' | 'medium' | 'large',
     disabled?: boolean,
     type?: 'primary' | 'sub_primary' |'secondary' | 'default',
-};
+}
 
