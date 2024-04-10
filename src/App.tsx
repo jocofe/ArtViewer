@@ -41,11 +41,6 @@ function App() {
           <Button label="Default" type="default"/>
           <Button label="Default" type="default" size="large"/>
         </div>
-        <div>
-          <Button label="Disabled" disabled size="small"/>
-          <Button label="Disabled" disabled size="medium"/>
-          <Button label="Disabled" disabled size="large"/>
-        </div>
       <SignIn />
       <SignUp />
     </>

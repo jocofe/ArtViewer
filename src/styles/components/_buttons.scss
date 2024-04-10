@@ -1,9 +1,14 @@
 @import '../base/colors';
-/*------------------------------------*\
-    $BUTTON--SIZES & $BUTTON:DISABLED
-\*------------------------------------*/
 
 .btn {
+
+    //Disabled
+    &:disabled {
+        background-color: white;
+        border: 1px solid $color-blackout-lighter;
+        color: $color-blackout-lighter;
+        cursor: not-allowed;
+    }
 
     //Sizes
     &--small {
@@ -23,16 +28,7 @@
         height: 56px;
         padding: 0px 24px;
     }
-
-    //Disabled
-    &:disabled {
-        background-color: white;
-        border: 1px solid $color-blackout-lighter;
-        color: $color-blackout-lighter;
-        cursor: not-allowed;
-    }
 };
-
 
 /*------------------------------------*\
     $BUTTON--TYPES
@@ -142,7 +138,6 @@
          border: 1px solid $color-golden;
      }
 }
-
 
 /*------------------------------------*\
     $DROPDOWN--BUTTON
