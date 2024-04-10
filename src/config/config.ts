@@ -8,7 +8,7 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const firebaseConfig = {
-  apiKey: "AIzaSyBqFY65zkx7s7Lza2AUQg1KNn028GFrFHs",
+  apiKey: process.env.Firebase_API,
   authDomain: "artviewer-249d0.firebaseapp.com",
   projectId: "artviewer-249d0",
   storageBucket: "artviewer-249d0.appspot.com",

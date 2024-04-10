@@ -1,22 +1,28 @@
-/*------------------------------------*\
-    $COLOR-VAR
-\*------------------------------------*/
-$color-white: hsl(0, 0%, 100%);
-$color-blackout: hsl(0, 0%, 9%);
-$color-blackout-ligther: hsl(0, 0%, 85%);
-
+@import '../base/colors';
 
 /*------------------------------------*\
-    $BUTTON
+    $BUTTON & $BUTTON--STATES
 \*------------------------------------*/
 
 .btn {
-    background-color:$color-white;
+    background-color: $color-white;
     color: $color-blackout;
 
     &--hover {
         background-color: $color-blackout;
         color: $color-white;
+    }
+
+    &--press {
+        background-color: $color-blackout-light;
+        color: $color-white;
+        border: 1px solid $color-blackout-light;
+    }
+
+    &--focus {
+        background-color: $color-white;
+        color: $color-wooden;
+        border: 1px solid $color-wooden;
     }
 }
 
@@ -44,12 +50,11 @@ $color-blackout-ligther: hsl(0, 0%, 85%);
     }
 }
 
-
-
 /*------------------------------------*\
-    $BUTTTON--{STATES}
+    $ICON_BUTTON--SIZES
 \*------------------------------------*/
 
-
-
-
+.btn-icon {
+    border: none;
+    background-color: transparent;
+}
