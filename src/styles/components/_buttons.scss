@@ -12,49 +12,18 @@
 
     //Sizes
     &--small {
-      
-/*------------------------------------*\
-    $BUTTON & $BUTTON--STATES
-\*------------------------------------*/
-
-.btn {
-    background-color: $color-white;
-    color: $color-blackout;
-
-    &--hover {
-        background-color: $color-blackout;
-        color: $color-white;
-    }
-
-    &--press {
-        background-color: $color-blackout-light;
-        color: $color-white;
-        border: 1px solid $color-blackout-light;
-    }
-
-    &--focus {
-        background-color: $color-white;
-        color: $color-wooden;
-        border: 1px solid $color-wooden;
-    }
-}
-
-/*------------------------------------*\
-    $BUTTON--SIZES
-\*------------------------------------*/
-
-.btn {
-    &.btn--small {
         border-radius: 60px;
         height: 36px;
         padding: 0px 24px;
     }
-    &.btn--medium {
+
+    &--medium {
         border-radius: 67px;
         height: 48px;
         padding: 0px 24px;
     }
-    &.btn--large {
+
+    &--large {
         border-radius: 40px;
         height: 56px;
         padding: 0px 24px;
@@ -87,7 +56,7 @@
     &:focus-visible {
         background-color: $color-blackout;
         color: $color-white;
-     }
+    }
 }
 
 
@@ -108,12 +77,11 @@
     }
 
     &:focus-visible {
-         background-color: $color-white;
-         color: $color-wooden;
-         border: 1px solid $color-wooden;
-     }
+        background-color: $color-white;
+        color: $color-wooden;
+        border: 1px solid $color-wooden;
+    }
 }
-
 
 //Secondary
 .btn--secondary {
@@ -136,10 +104,10 @@
     }
 
     &:focus-visible {
-         background-color: $color-white;
-         color: $color-wooden;
-         border: 1px solid $color-golden;
-     }
+        background-color: $color-white;
+        color: $color-wooden;
+        border: 1px solid $color-golden;
+    }
 }
 
 
@@ -164,22 +132,8 @@
     }
 
     &:focus-visible {
-         background-color: $color-pearlwhite;
-         color: $color-wooden;
-         border: 1px solid $color-golden;
-     }
-}
-
-/*------------------------------------*\
-    $DROPDOWN--BUTTON
-\*------------------------------------*/
-}
-
-/*------------------------------------*\
-    $ICON_BUTTON--SIZES
-\*------------------------------------*/
-
-.btn-icon {
-    border: none;
-    background-color: transparent;
+        background-color: $color-pearlwhite;
+        color: $color-wooden;
+        border: 1px solid $color-golden;
+    }
 }
