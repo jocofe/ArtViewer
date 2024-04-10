@@ -21,10 +21,31 @@ function App() {
       author="Boticelli"
       date="1480"
       />
-        <Button label="Small" size="small" />
-        <Button label="Default" />
-        <Button label="Large" size="large" />
-        <Button label="Disabled" disabled={true} />
+        <div>
+          <Button label="Primary" size="small"/>
+          <Button label="Primary"/>
+          <Button label="Primary" size="large"/>
+        </div>
+        <div>
+          <Button label="SubPrimary" type="sub_primary" size="small"/>
+          <Button label="SubPrimary" type="sub_primary"/>
+          <Button label="SubPrimary" type="sub_primary" size="large"/>
+        </div>
+        <div>
+          <Button label="Secondary" type="secondary" size="small"/>
+          <Button label="Secondary" type="secondary"/>
+          <Button label="Secondary" type="secondary" size="large"/>
+        </div>
+        <div>
+          <Button label="Default" type="default" size="small"/>
+          <Button label="Default" type="default"/>
+          <Button label="Default" type="default" size="large"/>
+        </div>
+        <div>
+          <Button label="Disabled" disabled size="small"/>
+          <Button label="Disabled" disabled size="medium"/>
+          <Button label="Disabled" disabled size="large"/>
+        </div>
       <SignIn />
       <SignUp />
     </>
