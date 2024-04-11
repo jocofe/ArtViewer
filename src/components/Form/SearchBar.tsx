@@ -7,14 +7,14 @@ export const SearchBar = ({size}: SearchBarProps, {placeholder}: SearchBarProps)
 
   const searchBarClass = classNames(
     'searchbar',
-    `topbar--${size}`
+    `searchbar--${size}`
   );
 
   return (
-    <div>
+    <form className='nav-search'>
         <input className={searchBarClass} placeholder={placeholder} />
-        < SearchGlass className='icon'/>
-    </div>
+        < SearchGlass className='icon--absolute'/>
+    </form>
   );
 };
 

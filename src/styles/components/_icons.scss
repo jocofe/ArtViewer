@@ -5,4 +5,10 @@
 
 .icon {
     color: $color-blackout;
+
+    &--absolute{
+        position: absolute;
+        color: $color-blackout-ligth;
+    }
 }
+

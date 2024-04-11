@@ -7,25 +7,30 @@
     background-color: $color-white;
     border: 0;
     user-select: none;
+    outline: none; //Prevent size changing
 
-    &--small {
+    &--medium {
         border-radius: 6px;
         height: 48px;
         width: 48px;
     }
 
-    &--medium {
+    &--small {
         border-radius: 6px;
         height: 32px;
         width: 32px;
     }
 
     &:hover {
-        border: 1px solid $color-blackout;
+        outline: 1px solid $color-blackout; //Border to outline
     }
 
     &:active {
         background-color: $color-blackout;
         color: $color-white;
     }
+}
+
+.btn-icon:active svg {
+    color: $color-white;
 }

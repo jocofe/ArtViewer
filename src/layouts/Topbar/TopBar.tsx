@@ -4,7 +4,7 @@ import { Button } from "../../components/Buttons/Buttons";
 import { Logotype, Menu } from "../../components/Icons/icons";
 import { IconButton } from "../../components/Buttons/IconButton";
 import { TopBarProps } from "../../models/topbar";
-import { SearchBar } from '../../components/SearchBar/SearchBar';
+import { SearchBar } from '../../components/Form/SearchBar';
 
 export const TopBar = ({size}: TopBarProps, {type}: TopBarProps) => {
 

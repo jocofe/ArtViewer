@@ -17,6 +17,10 @@ button {
     border: 1px solid $color-blackout;
 }
 
+svg {
+    color: $color-blackout;
+}
+
 button:focus {
     outline:0;
 }

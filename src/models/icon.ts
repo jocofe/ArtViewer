@@ -1,3 +1,3 @@
 export interface IconProps {
-    className: 'icon';
+    className: 'icon' | 'icon--absolute'
 }
