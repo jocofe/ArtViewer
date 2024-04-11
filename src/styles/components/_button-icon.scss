@@ -1,9 +1,10 @@
 @import '../base/colors';
 
-.btn-icon{
+.btn-icon {
     background-color: $color-white;
     border: 0;
     user-select: none;
+    outline: none; /* Evitamos el outline que cambia el tamaño */
 
     &--small {
         border-radius: 6px;
@@ -18,7 +19,7 @@
     }
 
     &:hover {
-        border: 1px solid $color-blackout;
+        outline: 1px solid $color-blackout; /* de border a outline */
     }
 
     &:active {

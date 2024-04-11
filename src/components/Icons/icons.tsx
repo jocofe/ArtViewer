@@ -92,9 +92,9 @@ export function CopyLink() {
     );
 }
   
+
+
 //Menu Icon
-
-
 export const Menu = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
@@ -102,3 +102,13 @@ export const Menu = () => {
 </svg>
   );
 } 
+
+
+//Dropdown arrow icon
+export const ArrowDown = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 25" fill="none">
+      <path d="M12 19.5C12.4735 19.4863 12.9064 19.3082 13.2582 18.9247L23.54 8.26712C23.8377 7.96575 24 7.58219 24 7.13014C24 6.22603 23.2965 5.5 22.4036 5.5C21.9707 5.5 21.5513 5.67808 21.2401 5.99315L12.0135 15.5959L2.75986 5.99315C2.4487 5.69178 2.04284 5.5 1.59639 5.5C0.703495 5.5 0 6.22603 0 7.13014C0 7.58219 0.162345 7.96575 0.459977 8.26712L10.7554 18.9247C11.1206 19.3082 11.5265 19.5 12 19.5Z" fill="#161616"/>
+    </svg>
+  );
+}

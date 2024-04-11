@@ -8,6 +8,7 @@ import { SignIn } from "./features/authentication/SignIn";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./config/config";
 import { SignUp } from "./features/authentication/SingUp";
+import { DropdownButton } from "./components/Buttons/DropdownBtn";
 
 export const Firebase = initializeApp(firebaseConfig);
 
@@ -44,10 +45,14 @@ function App() {
           <Button label="Default" type="default" size='medium'/>
           <Button label="Default" type="default" size="large"/>
         </div>
+        <DropdownButton 
+        label="Example" 
+        options={['Example', 'Example']}  
+        onOptionSelect={(option) => {option}} />
       <SignIn />
       <SignUp />
       <IconButton icon={<Menu />} onClick={() => (console.log('clicked'))} />
-      <TopBar />
+      <TopBar /> 
     </>
   );
 }
