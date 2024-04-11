@@ -6,7 +6,9 @@ import { IconButton } from "../../components/Buttons/IconButton";
 import { TopBarProps } from "../../models/topbar";
 import { SearchBar } from '../../components/Form/SearchBar';
 
-export const TopBar = ({size}: TopBarProps, {type}: TopBarProps) => {
+export const TopBar = (props: TopBarProps) => {
+
+  const {size, type} = props;
 
   const topBarClass = classNames(
     'topbar',
@@ -17,7 +19,7 @@ export const TopBar = ({size}: TopBarProps, {type}: TopBarProps) => {
   return (
     <div className={topBarClass}>
         <div className="topbar__logo">
-          <IconButton icon= {<Menu className='icon'/>} onClick={() => (console.log('clicked'))} />
+          <IconButton size='medium' position='default' icon= {<Menu className='icon'/>} onClick={() => (console.log('clicked'))} />
             <Logotype className='icon' />
         </div>
         <SearchBar size='large' placeholder='Search...'/>

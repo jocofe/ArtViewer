@@ -46,8 +46,8 @@ function App() {
         </div>
       <SignIn />
       <SignUp />
-      <IconButton icon={<Menu />} onClick={() => (console.log('clicked'))} />
-      <TopBar />
+      <IconButton icon={<Menu className="icon"/>} onClick={() => (console.log('clicked'))} />
+      <TopBar  size='normal' type='without-login' />
     </>
   );
 }

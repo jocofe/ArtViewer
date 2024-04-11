@@ -1,6 +1,6 @@
 export interface IconBtnProps {
     onClick: () => void;
     icon: React.ReactNode;
-    size?: 'default' | 'medium';
+    size?: 'small' | 'medium';
     position?: 'absolute' | 'default';
 }
