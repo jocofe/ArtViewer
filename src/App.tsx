@@ -1,4 +1,5 @@
 import { TopBar } from "./layouts/Topbar/TopBar";
+import { Footer } from "./layouts/Footer/Footer";
 import { IconButton } from "./components/Buttons/IconButton";
 import { Menu } from "./components/Icons/icons";
 import { ArtCard } from "./components/ArtCard/ArtCard";
@@ -53,6 +54,7 @@ function App() {
       <SignUp />
       <IconButton icon={<Menu />} onClick={() => (console.log('clicked'))} />
       <TopBar /> 
+      <Footer/>
     </>
   );
 }
