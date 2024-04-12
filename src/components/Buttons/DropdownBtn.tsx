@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../styles/index.scss"
-import { ArrowDown } from "../Icons/icons";
+import { ArrowDown, ArrowUp } from "../Icons/icons";
 
 interface DropdownButtonProps {
     label: string,
@@ -8,15 +8,23 @@ interface DropdownButtonProps {
     onOptionSelect: (option: string) => void; 
 };
 
+
 export const DropdownButton: React.FC<DropdownButtonProps> = ({ label, options, onOptionSelect }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [icon , setIcon] = useState(<ArrowDown/>);
   
     const handleOptionSelect = (option: string) => {
       onOptionSelect(option);
       setIsOpen(false);
     };
   
-    /* Mapping array of options ti <li/>  */
+    /* Set isOpen when click & Change Icon when dropdown is open */
+    const handleChangeIcon = () => {
+      setIsOpen(!isOpen);
+      setIcon(isOpen ? <ArrowDown/> : <ArrowUp/>);
+    };
+
+    /* Mapping array of options to render option in dropdown */
     const renderOptions = () => {
       return options.map((option) => (
         <li className="dropdown--option" key={option} onClick={() => handleOptionSelect(option)}>
@@ -24,14 +32,15 @@ export const DropdownButton: React.FC<DropdownButtonProps> = ({ label, options, 
         </li>
       ));
     };
+
   
     return (
       <div className="dropdown">
-        <div className="dropdown--btn" onClick={() => setIsOpen(!isOpen)}>
+        <div className="dropdown--btn" onClick={handleChangeIcon}>
           <i>
             {label}
           </i>
-          <ArrowDown/>
+          {icon}
         </div>
         {isOpen && (
           <ul className="dropdown--content">{renderOptions()}</ul>

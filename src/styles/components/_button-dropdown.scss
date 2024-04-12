@@ -2,6 +2,7 @@
 
 
 .dropdown {
+    user-select: none;
     position: relative;
     display: inline-block;
 
@@ -14,18 +15,27 @@
         font-size: 14px;;
 
         background-color: $color-white;
-        border: 1px solid $color-blackout-ligth;
+        border: 1px solid $color-blackout-lighter;
         border-radius: 6px;
         height: 36px;
         padding: 0px 21px;
 
-    }
+        &:hover {
+            background-color: $color-blackout;
+            color: $color-white;
 
+            svg {
+                path {
+                    fill: $color-white;
+                }
+            }
+        }
+    }
 
     &--content {
         box-shadow: 0px 0px 15px hsla(0, 0%, 9%, 0.25);
         background-color: $color-white;
-        border: 1px solid $color-blackout-ligth;
+        border: none;
         border-radius: 6px;
         margin-top: 6px;
     }
@@ -33,11 +43,11 @@
     &--option {
         padding: 12px;
         font-size: 14px;
-    }
-}
 
-.dropdown--btn:hover {
-    background-color: $color-blackout-ligth;
+        &:hover {
+            background-color: $color-golden-lighter;
+        }
+    }
 }
 
 
