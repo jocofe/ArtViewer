@@ -17,6 +17,10 @@ button {
     border: 1px solid $color-blackout;
 }
 
+svg {
+    color: $color-blackout;
+}
+
 button:focus {
     outline:0;
 }
@@ -35,4 +39,18 @@ p {
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+/*------------------------------------*\
+    $BODY
+\*------------------------------------*/
+
+body {
+    font-family: $sans-serif;
+    font-weight: $font-weight-normal;
+    line-height: 1.5;
+    font-size: 16px;
+    color: $color-blackout;
+    margin-left: auto;
+    margin-right: auto;
 }

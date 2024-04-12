@@ -1,29 +1,34 @@
-@import '../base/colors';
-
-.btn-icon {
+.btn-icon{
     background-color: $color-white;
     border: 0;
     user-select: none;
-    outline: none; /* Evitamos el outline que cambia el tamaño */
+    outline: none; //Prevent size changing
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    &--small {
+    &--medium {
         border-radius: 6px;
         height: 48px;
         width: 48px;
     }
 
-    &--medium {
+    &--small {
         border-radius: 6px;
         height: 32px;
         width: 32px;
     }
 
     &:hover {
-        outline: 1px solid $color-blackout; /* de border a outline */
+        outline: 1px solid $color-blackout; //Border to outline
     }
 
     &:active {
         background-color: $color-blackout;
         color: $color-white;
     }
+}
+
+.btn-icon:active svg {
+    color: $color-white;
 }

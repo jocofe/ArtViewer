@@ -92,4 +92,4 @@ Project Link: [https://github.com/jocofe/ArtViewer](https://github.com/jocofe/Ar
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[product-screenshot]: ./src\assets\app-screenshot.jpg
+[product-screenshot]: ./src/assets/app-screenshot.jpg
