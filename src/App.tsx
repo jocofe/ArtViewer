@@ -1,6 +1,4 @@
 import { TopBar } from "./layouts/Topbar/TopBar";
-import { IconButton } from "./components/Buttons/IconButton";
-import { Menu } from "./components/Icons/icons";
 import { ArtCard } from "./components/ArtCard/ArtCard";
 import { Button } from "./components/Buttons/Buttons";
 import "./styles/index.scss";
@@ -14,6 +12,7 @@ export const Firebase = initializeApp(firebaseConfig);
 function App() {
   return (
     <>
+      <TopBar  size='normal' type='without-login' />
       <h1>Art Viewer</h1>
       <p >
         Pruebas
@@ -46,8 +45,6 @@ function App() {
         </div>
       <SignIn />
       <SignUp />
-      <IconButton icon={<Menu className="icon"/>} onClick={() => (console.log('clicked'))} />
-      <TopBar  size='normal' type='without-login' />
     </>
   );
 }

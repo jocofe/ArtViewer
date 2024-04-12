@@ -8,6 +8,9 @@
     border: 0;
     user-select: none;
     outline: none; //Prevent size changing
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &--medium {
         border-radius: 6px;

@@ -20,11 +20,13 @@ export const TopBar = (props: TopBarProps) => {
     <div className={topBarClass}>
         <div className="topbar__logo">
           <IconButton size='medium' position='default' icon= {<Menu className='icon'/>} onClick={() => (console.log('clicked'))} />
-            <Logotype className='icon' />
+            <Logotype className='logotype' />
         </div>
         <SearchBar size='large' placeholder='Search...'/>
-        <Button label='Log In' size='small' type='sub_primary' />
-        <Button label='Sign Up' size='small' type='primary' />
+        <div className='signup-wrapper'>
+          <Button label='Log In' size='medium' type='sub_primary' />
+          <Button label='Sign Up' size='medium' type='primary' />
+        </div>
     </div>
   );
 };

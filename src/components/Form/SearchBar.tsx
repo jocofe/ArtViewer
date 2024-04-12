@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import "../../styles/index.scss";
 import { SearchBarProps } from '../../models/searchbar'
 import { SearchGlass } from "../Icons/icons";
+import '../../styles/components/_searchbar.scss'
 
 export const SearchBar = (props: SearchBarProps) => {
 
@@ -9,13 +10,13 @@ export const SearchBar = (props: SearchBarProps) => {
 
   const searchBarClass = classNames(
     'searchbar',
-    `searchbar--${size}`
+    `searchbar--${size}`,
   );
 
   return (
     <form className='searchbar-wrapper'>
-        <input className={searchBarClass} placeholder={placeholder} />
-        < SearchGlass className='icon'/>
+      < SearchGlass className='icon--absolute'/>
+      <input className={searchBarClass} placeholder={placeholder} />
     </form>
   );
 };
