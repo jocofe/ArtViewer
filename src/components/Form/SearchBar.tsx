@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import "../../styles/index.scss";
 import { SearchBarProps } from '../../models/searchbar'
 import { SearchGlass } from "../Icons/icons";
-import '../../styles/components/_searchbar.scss'
 
 export const SearchBar = (props: SearchBarProps) => {
 

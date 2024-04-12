@@ -1,7 +1,8 @@
+import { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import "../../styles/index.scss";
 import { Button } from "../../components/Buttons/Buttons";
-import { Logotype, Menu } from "../../components/Icons/icons";
+import { Logotype, Menu, IconLogotype } from "../../components/Icons/icons";
 import { IconButton } from "../../components/Buttons/IconButton";
 import { TopBarProps } from "../../models/topbar";
 import { SearchBar } from '../../components/Form/SearchBar';
@@ -15,8 +16,40 @@ export const TopBar = (props: TopBarProps) => {
     `topbar--${size}`,
     `topbar--${type}`
   );
+ 
+  const [isCollapse, setIsCollapse] = useState (false);
 
-  return (
+  useEffect(() => {
+    const checkWindowSize = () => {
+      setIsCollapse(window.matchMedia("(max-width: 1100px)").matches);
+    };
+
+    checkWindowSize();
+
+    const resizeListener = () => {
+      checkWindowSize();
+    };
+
+    window.addEventListener('resize', resizeListener);
+
+    return () => {
+      window.removeEventListener('resize', resizeListener);
+    };
+  }, []);
+
+  if (isCollapse) {
+    return (
+      <div className={topBarClass}>
+        <div className="topbar__logo">
+          <IconButton size='medium' position='default' icon= {<Menu className='icon'/>} onClick={() => (console.log('clicked'))} />
+            <IconLogotype className='icon-logotype' />
+        </div>
+        <div className='signup-wrapper'>
+          <Button label='Sign Up' size='medium' type='primary' />
+        </div>
+    </div>
+    );
+  } return (
     <div className={topBarClass}>
         <div className="topbar__logo">
           <IconButton size='medium' position='default' icon= {<Menu className='icon'/>} onClick={() => (console.log('clicked'))} />
