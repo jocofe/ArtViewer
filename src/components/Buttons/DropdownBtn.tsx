@@ -6,12 +6,12 @@ interface DropdownButtonProps {
     label: string,
     options: string[],
     onOptionSelect: (option: string) => void; 
-};
+}
 
 
 export const DropdownButton: React.FC<DropdownButtonProps> = ({ label, options, onOptionSelect }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [icon , setIcon] = useState(<ArrowDown/>);
+    const [icon , setIcon] = useState(<ArrowDown className="icon"/>);
   
     const handleOptionSelect = (option: string) => {
       onOptionSelect(option);
@@ -21,7 +21,7 @@ export const DropdownButton: React.FC<DropdownButtonProps> = ({ label, options, 
     /* Set isOpen when click & Change Icon when dropdown is open */
     const handleChangeIcon = () => {
       setIsOpen(!isOpen);
-      setIcon(isOpen ? <ArrowDown/> : <ArrowUp/>);
+      setIcon(isOpen ? <ArrowDown className="icon"/> : <ArrowUp className="icon"/>);
     };
 
     /* Mapping array of options to render option in dropdown */
