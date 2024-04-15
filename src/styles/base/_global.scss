@@ -1,3 +1,7 @@
+html {
+    font-size: 100%;
+}
+
 ul {
     list-style-type: none;
     padding-inline-start: 0;
@@ -8,13 +12,6 @@ ul {
 a, a:visited {
     color:  hsl(0, 0%, 12%);
     text-decoration: none;
-}
-
-button {
-    font-size: 14px;
-    font-family: Hanken Grotesk;
-    font-weight: 500;
-    border: 1px solid $color-blackout;
 }
 
 svg {
