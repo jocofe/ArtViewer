@@ -1,8 +1,8 @@
 import { SignGoogleProps } from "../../models/signin-google";
 import classNames from "classnames";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"; 
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup } from "firebase/auth"; 
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import '../../styles/index.scss';
 import { GoogleIcon } from "../Icons/icons";
 
@@ -17,6 +17,17 @@ export const SignGoogle = (props: SignGoogleProps) => {
     const auth = getAuth();
     const navigate = useNavigate();
     const [authing, setAuthing] = useState(false);
+
+    useEffect(() => {
+        AuthCheck();
+        return () => AuthCheck();
+    }, [auth]);
+
+    const AuthCheck = onAuthStateChanged(auth, (user) => {
+        if (user) {
+            console.log('Exist')
+        } return console.log(`Don't Exist`)
+    })
 
     const signInWithGoogle = async () => {
         setAuthing(true);

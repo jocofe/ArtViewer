@@ -2,11 +2,13 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/config";
 import '../../styles/index.scss'
+import { useNavigate } from "react-router-dom";
 
 export const SignIn = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -21,6 +23,7 @@ export const SignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
+                navigate('/')
             })
             .catch((error) => {
                 console.log(error);
