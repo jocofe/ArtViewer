@@ -7,7 +7,7 @@ export const ModalDefault = () => {
             <p>Are you sure?</p>
             <p>You're about to delete this collection.</p>
             <section>
-                <Button label="Delete" />
+                <Button onClick={() => {}} label="Delete" />
             </section>
         </div>
     )
