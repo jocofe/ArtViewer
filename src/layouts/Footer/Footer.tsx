@@ -1,11 +1,14 @@
 import { Logotype, ArrowUp } from "../../components/Icons/icons";
+import "../../styles/index.scss";
+import "../../styles/layouts/_footer.scss"
+
 
 export const Footer = () => {
   return (
     <div className="footer">
       <div className="footer--container">
 
-        <Logotype className="footer--logotype"/>
+        <Logotype className="icon-logotype"/>
 
         <div className="footer--links">
           <ul className="footer--links_list">
@@ -36,9 +39,7 @@ export const Footer = () => {
           </ul>
         </div>
 
-        <div className="footer-top">
-          <a href="">Back to top <ArrowUp/></a> 
-        </div>
+        <a  className="footer--top" href="">Back to top <ArrowUp className="icon"/></a> 
       </div>
         
   </div>
