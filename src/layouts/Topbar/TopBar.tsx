@@ -6,6 +6,7 @@ import { Logotype, Menu, IconLogotype, SearchGlass } from "../../components/Icon
 import { IconButton } from "../../components/Buttons/IconButton";
 import { TopBarProps } from "../../models/topbar";
 import { SearchBar } from '../../components/Form/SearchBar';
+import { Link } from 'react-router-dom';
 
 export const TopBar = (props: TopBarProps) => {
     const { size, type } = props;
@@ -46,13 +47,13 @@ export const TopBar = (props: TopBarProps) => {
             {(isCollapse) && (
                 <div className='signup-wrapper'>
                     <SearchGlass className='icon' />
-                    <Button label='Sign Up' size='medium' type='primary' />
+                    <Link to={'/signup'}><Button label='Sign Up' size='medium' type='primary' /> </Link>
                 </div>
             )}
             {!isCollapse && (
                 <div className='signup-wrapper'>
-                    <Button label='Log In' size='medium' type='sub_primary' />
-                    <Button label='Sign Up' size='medium' type='primary' />
+                    <Link to={'/signin'}><Button label='Log In' size='medium' type='sub_primary' /></Link>
+                    <Link to={'/signup'}><Button label='Sign Up' size='medium' type='primary' /></Link>
                 </div>
             )}
         </div>

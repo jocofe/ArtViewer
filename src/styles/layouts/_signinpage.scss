@@ -1,0 +1,12 @@
+.signinpage-wrapper{
+    width: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.imgsign-wrapper{
+    width: 31.25rem;
+    height: 100vh;
+    background: url('../../assets/img-background-placeholder-signin.jpeg') lightgray 50% / cover no-repeat;
+}
