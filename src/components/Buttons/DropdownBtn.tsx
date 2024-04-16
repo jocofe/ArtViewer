@@ -37,9 +37,7 @@ export const DropdownButton: React.FC<DropdownButtonProps> = ({ label, options, 
     return (
       <div className="dropdown">
         <div className="dropdown--btn" onClick={handleChangeIcon}>
-          <i>
             {label}
-          </i>
           {icon}
         </div>
         {isOpen && (
