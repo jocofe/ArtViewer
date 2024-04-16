@@ -47,13 +47,13 @@ export const TopBar = (props: TopBarProps) => {
             {(isCollapse) && (
                 <div className='signup-wrapper'>
                     <SearchGlass className='icon' />
-                    <Link to={'/signup'}><Button label='Sign Up' size='medium' type='primary' /> </Link>
+                    <Link to={'/signup'}><Button label='Sign Up' size='medium' type='primary' onClick={() => {}} /> </Link>
                 </div>
             )}
             {!isCollapse && (
                 <div className='signup-wrapper'>
-                    <Link to={'/signin'}><Button label='Log In' size='medium' type='sub_primary' /></Link>
-                    <Link to={'/signup'}><Button label='Sign Up' size='medium' type='primary' /></Link>
+                    <Link to={'/signin'}><Button label='Log In' size='medium' type='sub_primary' onClick={() => {}}/></Link>
+                    <Link to={'/signup'}><Button label='Sign Up' size='medium' type='primary' onClick={() => {}}/></Link>
                 </div>
             )}
         </div>
