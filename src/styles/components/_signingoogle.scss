@@ -1,0 +1,11 @@
+.sign-google {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 6px;
+    border: 1px solid $color-blackout-light;
+    background: $color-white;
+    min-height: 3rem;
+}

@@ -4,6 +4,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import '../../styles/index.scss';
+import { GoogleIcon } from "../Icons/icons";
 
 
 export const SignGoogle = (props: SignGoogleProps) => {
@@ -32,6 +33,6 @@ export const SignGoogle = (props: SignGoogleProps) => {
     }
 
     return (
-        <button onClick={() => signInWithGoogle()} disabled={authing} className={SignInGoogleClass}>{label}</button>
+        <button onClick={() => signInWithGoogle()} disabled={authing} className={SignInGoogleClass}><GoogleIcon className="icon"/>{label}</button>
     );
 }

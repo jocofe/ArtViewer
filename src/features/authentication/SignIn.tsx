@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/config";
+import '../../styles/index.scss'
+
 export const SignIn = () => {
 
     const [email, setEmail] = useState('');
@@ -26,12 +28,21 @@ export const SignIn = () => {
     }
 
     return (
-        <div className="signin-container">
-            <form onSubmit={submitSignIn}>
-                <h1>Log In</h1>
-                <input type="email" placeholder="Email" value={email} onChange={handleEmailInputChange} />
-                <input type="password" placeholder="Password" value={password} onChange={handlePasswordInputChange} />
-                <button type="submit">Log In</button>
+        <div className="signincomp-wrapper">
+            <form className="signincomp__container" onSubmit={submitSignIn}>
+                <div className="input-wrapper">
+                    <label>Email</label>
+                <input className='signincomp__input' type="email" value={email} onChange={handleEmailInputChange} />
+                </div>
+                <div className="input-wrapper">
+                    <div className="label-wrapper">
+                    <label>Password</label>
+                    <a href="#">Forgot?</a>
+                    </div>
+                    <input className='signincomp__input' type="password" value={password} onChange={handlePasswordInputChange} />
+                </div>
+                
+                <button className='btnsign--white' type="submit">Sign In</button>
             </form>
         </div>
     );

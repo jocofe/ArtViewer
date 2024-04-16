@@ -8,5 +8,101 @@
 .imgsign-wrapper{
     width: 31.25rem;
     height: 100vh;
-    background: url('../../assets/img-background-placeholder-signin.jpeg') lightgray 50% / cover no-repeat;
+    background: url('../src/assets/img-background-placeholder-signin.jpeg') lightgray 50% / cover no-repeat;
+}
+
+.sign-wrapper{
+    width: auto;
+    padding: 0 8.375rem 0 8.375rem;
+    display: flex;
+    justify-content: center;
+}
+
+.sign__content{
+    display: flex;
+    width: 20.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.sing__separator {
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    width: 100%;
+}
+
+.signincomp-wrapper {
+    width: 100%;
+}
+
+.signincomp__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+}
+
+.label-wrapper {
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+
+    & a {
+        font-size: $font-size-12;
+        text-decoration: underline;
+    }
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.signincomp__input{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 33px;
+    border: 1px solid $color-blackout-light;
+    background: $color-white;
+    min-height: 2.5rem;
+    padding: 12px;
+}
+
+.btnsign--white {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 6px;
+    border: 1px solid $color-blackout-light;
+    background: $color-white;
+    min-height: 2.5rem;
+}
+
+.noaccount-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    justify-content: center;
+    align-items: center;
+
+    & p, a{
+        font-size: $font-size-12;
+    }
+
+    & a {
+        text-decoration: underline;
+    }
 }
