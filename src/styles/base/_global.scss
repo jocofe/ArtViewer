@@ -1,5 +1,5 @@
 html {
-    font-size: 100%;
+    font-size: 62.5%;
 }
 
 ul {
@@ -15,7 +15,7 @@ a, a:visited {
 }
 
 svg {
-    color: $color-blackout;
+    color: var(--color-blackout);
 }
 
 button:focus {
@@ -38,7 +38,7 @@ hr {
     height: 1px;
     width: 75%;
     margin: 0;
-    background-color: $color-blackout-lighter;
+    background-color: var(--color-blackout-lighter);
 }
 
 *,
@@ -52,11 +52,11 @@ hr {
 \*------------------------------------*/
 
 body {
-    font-family: $sans-serif;
-    font-weight: $font-weight-normal;
+    font-family: var(--sans-serif);
+    font-weight: var(--font-weight-normal);
     line-height: 1.5;
     font-size: 16px;
-    color: $color-blackout;
+    color: var(--color-blackout);
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;

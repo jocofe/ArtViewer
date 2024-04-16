@@ -54,7 +54,7 @@
     align-items: center;
 
     & a {
-        font-size: $font-size-12;
+        font-size: var(--font-size-12);
         text-decoration: underline;
     }
 }
@@ -72,8 +72,8 @@
     justify-content: center;
     gap: 10px;
     border-radius: 33px;
-    border: 1px solid $color-blackout-light;
-    background: $color-white;
+    border: 1px solid var(--color-blackout-light);
+    background: var(--color-white);
     min-height: 2.5rem;
     padding: 12px;
 }
@@ -85,8 +85,8 @@
     justify-content: center;
     gap: 10px;
     border-radius: 6px;
-    border: 1px solid $color-blackout-light;
-    background: $color-white;
+    border: 1px solid var(--color-blackout-light);
+    background: var(--color-white);
     min-height: 2.5rem;
 }
 
@@ -99,7 +99,7 @@
     align-items: center;
 
     & p, a{
-        font-size: $font-size-12;
+        font-size: var(--font-size-12);
     }
 
     & a {

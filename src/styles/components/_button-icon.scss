@@ -1,5 +1,5 @@
 .btn-icon{
-    background-color: $color-white;
+    background-color: var(--color-white);
     border: 0;
     user-select: none;
     outline: none; //Prevent size changing
@@ -20,15 +20,15 @@
     }
 
     &:hover {
-        outline: 1px solid $color-blackout; //Border to outline
+        outline: 1px solid var(--color-blackout); //Border to outline
     }
 
     &:active {
-        background-color: $color-blackout;
-        color: $color-white;
+        background-color: var(--color-blackout);
+        color: var(--color-white);
     }
 }
 
 .btn-icon:active svg {
-    color: $color-white;
+    color: var(--color-white);
 }

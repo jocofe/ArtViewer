@@ -1,11 +1,5 @@
-
-
-//variables
-$footer-gap: 64px;
-$footer-margin: 20px;
-
 .footer {
-    margin: $footer-margin;
+    margin: var(--footer-margin);
 
     &--container {
     font-size: 16px;
@@ -13,7 +7,7 @@ $footer-margin: 20px;
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: auto 1fr;
-    gap: $footer-gap;
+    gap: var(--footer-gap);
     height: auto;
     }
 
@@ -29,7 +23,7 @@ $footer-margin: 20px;
         grid-column: 2 / 3;
         flex-direction: row;
         display: flex;
-        gap: $footer-gap; 
+        gap: var(--footer-gap); 
         justify-content: flex-end;
 
         &_list {

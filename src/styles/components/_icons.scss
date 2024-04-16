@@ -1,12 +1,12 @@
 .icon {
-    color: $color-blackout;
+    color: var(--color-blackout);
     width: 24px;
     height: 24px;
     display: flex;
 
     &--absolute{
         position: absolute;
-        color: $color-blackout-light;
+        color: var(--color-blackout-light);
         top: 32%;
         right:24px;
         width: 16px;
