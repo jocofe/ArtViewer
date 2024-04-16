@@ -1,19 +1,41 @@
 @import '../base/colors';
 
+//variables
+$footer-gap: 64px;
+$footer-margin: 20px;
+
 .footer {
+    margin: $footer-margin;
+
+    &--container {
     font-size: 16px;
     line-height: 1.8;
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: auto 1fr;
-    gap: 64px;
+    gap: $footer-gap;
     height: auto;
-    margin: 0px 20px;
+    
+        //TODO responsive
+        @media (max-width: 435px) {
+            background-color: red;
+            grid-template-columns: 1fr;
+            gap: 32px;
 
-    &--div {
-        margin: 36px 20px 12px 20px;
-        color: $color-blackout;
+            &.footer--container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+    }
 
+
+
+    hr {
+        &.footer--div {
+            margin: 32px 0;
+            color: $color-blackout;
+        }
     }
 
     &--logotype {
@@ -28,8 +50,8 @@
         grid-column: 2 / 3;
         flex-direction: row;
         display: flex;
-        gap: 64px; 
-        justify-content: right;
+        gap: $footer-gap; 
+        justify-content: flex-end;
 
         &_list {
             padding: 0;
@@ -54,5 +76,5 @@
         flex-direction: row;
         justify-content: right;
     }
+    }
 }
-

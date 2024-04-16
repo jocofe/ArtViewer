@@ -2,8 +2,8 @@ import { Logotype, ArrowUp } from "../../components/Icons/icons";
 
 export const Footer = () => {
   return (
-    <div>
-      <div className="footer">
+    <div className="footer">
+      <div className="footer--container">
 
         <Logotype className="footer--logotype"/>
 
@@ -26,7 +26,7 @@ export const Footer = () => {
 
       <hr className="footer--div"/>
     
-      <div className="footer">
+      <div className="footer--container">
         <div className="footer--copy">
           <p>ArtView © 2024</p>
           <ul>
