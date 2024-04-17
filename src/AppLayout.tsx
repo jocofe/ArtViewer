@@ -6,23 +6,22 @@ import { useState } from "react";
 import { ModalDefault } from "./components/Dialogs/ModalDefault";
 
 const AppLayout: React.FC = () => {
-  console.log('AppLayout renderizado');
+  console.log("AppLayout renderizado");
 
   const [isModalClose, SetIsModalClose] = useState(false);
 
   const handleCloseModal = () => {
-    SetIsModalClose(true)
+    SetIsModalClose(true);
   };
-
 
   return (
     <>
-      <TopBar  size='normal' type='without-login' />
+      <TopBar size="normal" type="without-login" />
       <Outlet />
+      <ModalDefault isClose={isModalClose} onClose={handleCloseModal} />
       <Footer />
-      <ModalDefault isClose={isModalClose} onClose={handleCloseModal}/>
     </>
   );
-}
+};
 
 export default AppLayout;
