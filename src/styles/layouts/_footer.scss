@@ -15,7 +15,7 @@
     &--div {
         width: 100%;
         margin: 34px 0px;
-        background-color: black;
+        background-color: var(--color-blackout);
     }
 
     &--links {
@@ -42,13 +42,15 @@
         }
     }
 
-    // &--top {
-    //     grid-column: 2 / 3;
-    //     grid-row: 1 / 2;
-    //     display: flex;
-    //     flex-direction: row;
-    //     justify-content: right;
-    // }
+    &--top {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        display: flex;
+        flex-direction: row;
+        gap: 1.2rem;
+        align-content: center;
+        height: auto;
+    }
 }
 
 
@@ -63,8 +65,4 @@
     display: flex;
     flex-direction: row;
     gap: 6px;
-}
-
-.icon {
-    width: 12px;
 }
