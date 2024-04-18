@@ -6,21 +6,21 @@
 }
 
 .imgsign-wrapper{
-    width: 31.25rem;
+    width: 500px;
     height: 100vh;
     background: url('../src/assets/img-background-placeholder-signin.jpeg') lightgray 50% / cover no-repeat;
 }
 
 .sign-wrapper{
     width: auto;
-    padding: 0 8.375rem 0 8.375rem;
+    padding: 0 134px 0 134px;
     display: flex;
     justify-content: center;
 }
 
 .sign__content{
     display: flex;
-    width: 20.5rem;
+    width: 328px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -54,7 +54,7 @@
     align-items: center;
 
     & a {
-        font-size: $font-size-12;
+        font-size: var(--font-size-12);
         text-decoration: underline;
     }
 }
@@ -72,8 +72,8 @@
     justify-content: center;
     gap: 10px;
     border-radius: 33px;
-    border: 1px solid $color-blackout-light;
-    background: $color-white;
+    border: 1px solid var(--color-blackout-light);
+    background: var(--color-white);
     min-height: 2.5rem;
     padding: 12px;
 }
@@ -85,9 +85,9 @@
     justify-content: center;
     gap: 10px;
     border-radius: 6px;
-    border: 1px solid $color-blackout-light;
-    background: $color-white;
-    min-height: 2.5rem;
+    border: 1px solid var(--color-blackout-light);
+    background: var(--color-white);
+    min-height: 48px;
 }
 
 .noaccount-wrapper {
@@ -99,10 +99,11 @@
     align-items: center;
 
     & p, a{
-        font-size: $font-size-12;
+        font-size: var(--font-size-12);
     }
 
     & a {
         text-decoration: underline;
+        color: var(--color-blackout);
     }
 }
