@@ -2,22 +2,24 @@ import classNames from "classnames";
 import "../../styles/index.scss";
 import { ButtonProps } from "../../models/buttons";
 
-export const Button: React.FC<ButtonProps> = ({
-  children,
-  size,
+export const Button = ({
+  className = "",
+  size = "medium",
   disabled,
-  type,
-}) => {
-  // Set default props
-  Button.defaultProps = {
-    size: "medium",
-    type: "primary",
-  };
-
-  const btnClass = classNames("btn", `btn--${size}`, `btn--${type}`);
+  type = "primary",
+  children,
+  ...rest
+}: ButtonProps) => {
+  const btnClass = classNames({
+    btn: true,
+    [className]: className,
+    [`btn--${size}`]: size,
+    [`btn--${type}`]: type,
+    "btn--disabled": disabled,
+  });
 
   return (
-    <button className={btnClass} disabled={disabled}>
+    <button className={btnClass} disabled={disabled} {...rest}>
       {children}
     </button>
   );

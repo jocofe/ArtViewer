@@ -23,9 +23,7 @@ export const ModalDefault: React.FC<ModalProps> = ({ isClose, onClose }) => {
         <p>You're about to delete this collection.</p>
       </section>
       <section className="modal--btn">
-        <Button onClick={() => {}} type="primary">
-          Delete
-        </Button>
+        <Button onClick={() => {}}>Delete</Button>
         <Button onClick={() => {}} type="sub_primary">
           Cancel
         </Button>

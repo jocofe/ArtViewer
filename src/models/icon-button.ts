@@ -1,6 +1,10 @@
+import { ReactNode } from "react";
+
 export interface IconBtnProps {
-    onClick: () => void;
-    icon: React.ReactNode;
-    size?: 'small' | 'medium';
-    position?: 'absolute' | 'default';
+  className?: "string";
+  onClick: () => void;
+  icon: React.ReactNode;
+  size?: "small" | "medium";
+  position?: "absolute" | "default";
+  children: ReactNode;
 }
