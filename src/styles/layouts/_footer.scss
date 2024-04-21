@@ -6,6 +6,9 @@ $tablet-bp: 1200px;
 
 .footer {
   margin: $footer-margin;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-blackout);
 
   // MOBILE
   @media (max-width: $mobile-bp) {
@@ -28,6 +31,7 @@ $tablet-bp: 1200px;
           flex-direction: row;
           gap: 24px;
         }
+
       }
 
       &--bottom {
@@ -121,6 +125,8 @@ $tablet-bp: 1200px;
 
     &_list {
       list-style: none;
+      font-size: var(--font-size-16);
+      color: var(--color-blackout);
     }
   }
 
