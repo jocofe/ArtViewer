@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Children } from "react";
 import classNames from "classnames";
 import "../../styles/index.scss";
 import { Button } from "../../components/Buttons/Buttons";
@@ -49,8 +49,7 @@ export const TopBar = (props: TopBarProps) => {
           size="medium"
           position="default"
           icon={<Menu className="icon" />}
-          onClick={() => console.log("clicked")}
-        />
+          onClick={() => console.log("clicked")}/>
         {isCollapse ? (
           <IconLogotype className="icon" />
         ) : (

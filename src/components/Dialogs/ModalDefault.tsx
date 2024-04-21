@@ -30,20 +30,4 @@ export const ModalDefault: React.FC<ModalProps> = ({ isClose, onClose }) => {
       </section>
     </div>
   );
-
-  //   <div className="modal">
-  //     <section className="modal--title">
-  //       <h4>Are you sure?</h4>
-  //       <ModalButtonHider onClose={onClose} />
-  //     </section>
-
-  //     <section className="modal--content">
-  //       <p>You're about to delete this collection.</p>
-  //     </section>
-
-  //     <section className="modal--btn">
-  //       <Button onClick={() => {}} label="Delete" type="primary" />
-  //     </section>
-  //   </div>
-  // );
 };

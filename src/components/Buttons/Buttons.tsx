@@ -8,6 +8,7 @@ export const Button = ({
   disabled,
   type = "primary",
   children,
+  onClick,
   ...rest
 }: ButtonProps) => {
   const btnClass = classNames({

@@ -5,7 +5,7 @@ import "../../styles/layouts/_footer.scss";
 export const Footer = () => {
   return (
     <div className="footer">
-      <div className="footer--container">
+      <div className="footer--head">
         <Logotype className="icon-logotype" />
 
         <div className="footer--links">
@@ -43,20 +43,14 @@ export const Footer = () => {
 
       <hr className="footer--div" />
 
-      <div className="footer--container">
+      <div className="footer--bottom">
         <div className="footer--copy">
           <p>ArtView © 2024</p>
-          <ul>
-            <li>
-              <a href="">Terms & policies</a>
-            </li>
-            <li>
-              <a href="">Privacy policy</a>
-            </li>
-            <li>
-              <a href="">Brand guidelines</a>
-            </li>
-          </ul>
+          
+            <a href="">Terms & policies</a>
+            <a href="">Privacy policy</a>
+            <a href="">Brand guidelines</a>
+          
         </div>
 
         <a className="footer--top" href="#">
