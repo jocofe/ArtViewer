@@ -34,9 +34,21 @@ export const SignGoogle = (props: SignGoogleProps) => {
 
         signInWithPopup(auth, new GoogleAuthProvider())
             .then((response) => {
-                console.log(response.user.uid)
-                navigate('/')
+                console.log(response)
+
+                const userCreationTime = response.user.metadata?.creationTime;
+
+                if (userCreationTime) {
+                    const creationDate = new Date(userCreationTime);
+                    const currentDate = new Date();
+
+                    if (creationDate > currentDate) {
+                        navigate('/new')
+                    }
+                    navigate('/')
+                }
             })
+                
             .catch((error) => {
                 console.log(error);
                 setAuthing(false);

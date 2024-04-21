@@ -14,19 +14,19 @@
         gap: 12px;
         font-size: 14px;;
 
-        background-color: $color-white;
-        border: 1px solid $color-blackout-light;
+        background-color: var(--color-white);
+        border: 1px solid var(--color-blackout-light);
         border-radius: 6px;
         height: 36px;
         padding: 0px 21px;
 
         &:hover {
-            background-color: $color-blackout;
-            color: $color-white;
+            background-color: var(--color-blackout);
+            color: var(--color-white);
 
             svg {
                 path {
-                    fill: $color-white;
+                    fill: var(--color-white);
                 }
             }
         }
@@ -34,7 +34,7 @@
 
     &--content {
         box-shadow: 0px 0px 15px hsla(0, 0%, 9%, 0.25);
-        background-color: $color-white;
+        background-color: var(--color-white);
         border: none;
         border-radius: 6px;
         margin-top: 6px;
@@ -45,7 +45,7 @@
         font-size: 14px;
 
         &:hover {
-            background-color: $color-golden-lighter;
+            background-color: var(--color-golden-lighter);
         }
     }
 }
