@@ -1,25 +1,26 @@
-import classNames from 'classnames';
-import '../../styles/index.scss';
-import { ButtonProps } from '../../models/buttons';
+import classNames from "classnames";
+import "../../styles/index.scss";
+import { ButtonProps } from "../../models/buttons";
 
-
-export const Button: React.FC<ButtonProps> = ({ onClick, label, size, disabled, type }) => {
-  // Set default props
-Button.defaultProps = {
-  size: 'medium',
-  type: 'primary',
-};
-  
-  const btnClass = classNames(
-    'btn',
-    `btn--${size}`,
-    `btn--${type}`
-
-  );
+export const Button = ({
+  className = "",
+  size = "medium",
+  disabled,
+  type = "primary",
+  children,
+  onClick,
+  ...rest
+}: ButtonProps) => {
+  const btnClass = classNames({
+    btn: true,
+    [className]: className,
+    [`btn--${size}`]: size,
+    [`btn--${type}`]: type,
+    "btn--disabled": disabled,
+  });
 
   return (
-    <button onClick={onClick} className={btnClass} disabled={disabled}>
-      {label}
+    <button className={btnClass} disabled={disabled} {...rest}>
+      {children}
     </button>
   );
-};
