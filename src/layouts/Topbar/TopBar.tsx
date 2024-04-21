@@ -1,4 +1,4 @@
-import { useState, useEffect, Children } from "react";
+import { useState, useEffect } from "react";
 import classNames from "classnames";
 import "../../styles/index.scss";
 import { Button } from "../../components/Buttons/Buttons";
