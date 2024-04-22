@@ -23,7 +23,7 @@ export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
 function AppLayout() {
   console.log('AppLayout renderizado');
 
-   const [artpieces, setArtPieces] = useState<[]>([]);
+  const [artpieces, setArtPieces] = useState<[]>([]);
 
   useEffect (() => {
 

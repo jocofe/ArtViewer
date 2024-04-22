@@ -1,15 +1,15 @@
 export interface ArtListItem {
-  title: string;
-  imageUrlThumbnail: string;
-  imageUrlBase: string;
-  id: number;
-  author: string;
-  date: string;
-  location: string;
+    title: string;
+    imageUrlThumbnail: string;
+    imageUrlBase: string;
+    id: number;
+    author: string;
+    date: string;
+    location: string;
 }
 
 export interface ArtListItemFromApi {
-    records: Array<object>;
+    records: ArtItem[];
     info: object;
     clusters: object;
 }
