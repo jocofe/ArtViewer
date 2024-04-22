@@ -1,7 +1,5 @@
-import { Footer } from "../../layouts/Footer/Footer"
+import { Footer } from "../../layouts/Footer/Footer";
 
-export const DesingSystem = () => {
-    return (
-        <Footer />
-    );
-}
+export const DesignSystem = () => {
+  return <Footer />;
+};

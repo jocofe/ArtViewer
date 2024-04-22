@@ -15,7 +15,7 @@ import { UserSettings } from "./views/user-profile/user-settings/UserSettings";
 import { UserCollection } from "./views/user-profile/UserCollection";
 import { PasswordSettings } from "./views/user-profile/user-settings/PasswordSettings";
 import { SessionsSettings } from "./views/user-profile/user-settings/SessionsSettings";
-import { DesignSystem } from "./views/desing-system/DesignSystem";
+import { DesignSystem } from "./views/design-system/DesignSystem";
 import { Home } from "./views/home/home";
 
 export const router = createBrowserRouter([
@@ -95,6 +95,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "/design-system",
-    element: <DesingSystem />,
+    element: <DesignSystem />,
   },
 ]);
