@@ -25,7 +25,7 @@ export const ArtCard = (props: ArtCardDetails) => {
       event.target.style.width = '500px';
     } else {
       event.target.style.width = '500px';
-      event.target.style.width = 'auto';
+      event.target.style.height = 'auto';
     }
   }
 

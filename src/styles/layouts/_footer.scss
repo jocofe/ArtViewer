@@ -1,17 +1,11 @@
-//variables
-$footer-gap: 64px;
-$footer-margin: 20px 20px;
-$mobile-bp: 768px;
-$tablet-bp: 1200px;
-
 .footer {
-  margin: $footer-margin;
+  margin: var(--footer-margin);
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-normal);
   color: var(--color-blackout);
 
   // MOBILE
-  @media (max-width: $mobile-bp) {
+  @media (max-width: var(--mobile-bp)) {
     .footer {
       &--head {
         display: flex;
@@ -59,7 +53,7 @@ $tablet-bp: 1200px;
 
 
   //TABLET
-  @media (min-width: $mobile-bp) and (max-width: $tablet-bp) {
+  @media (min-width: var(--mobile-bp)) and (max-width: var(--tablet-bp)) {
     .footer {
       &--head {
         display: flex;
@@ -106,7 +100,7 @@ $tablet-bp: 1200px;
     line-height: 1.8;
     display: flex;
     flex-direction: row;
-    gap: $footer-gap;
+    gap: var(--footer-gap);
     align-items: flex-start;
     justify-content: space-between;
   }
@@ -121,7 +115,7 @@ $tablet-bp: 1200px;
   &--links {
     display: flex;
     flex-direction: row;
-    gap: $footer-gap;
+    gap: var(--footer-gap);
 
     &_list {
       list-style: none;
