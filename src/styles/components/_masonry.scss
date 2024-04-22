@@ -1,0 +1,15 @@
+.masonry-section {
+    margin-top: 64px;
+    margin-bottom: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+}
+
+.masonry__wrapper {
+    display: grid;
+    gap: 32px 32px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: dense;
+}

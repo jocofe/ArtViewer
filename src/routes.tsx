@@ -15,15 +15,19 @@ import { UserSettings } from "./views/user-profile/user-settings/UserSettings";
 import { UserCollection } from "./views/user-profile/UserCollection";
 import { PasswordSettings } from "./views/user-profile/user-settings/PasswordSettings";
 import { SessionsSettings } from "./views/user-profile/user-settings/SessionsSettings";
+import { Home } from "./views/home/Home";
 
 export const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       {
-        path: '/',
         element: <AppLayout />,
         children: [
+          {
+            path: '/',
+            element: <Home />
+          },
           {
             path: '/landing',
             element: <LandingPage />
