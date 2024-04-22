@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import { SignUpPage } from "./views/SignIn-LogIn/SignUpPage";
 import { SignInPage } from "./views/SignIn-LogIn/SignInPage";
-import AppLayout  from "./AppLayout";
+import AppLayout from "./AppLayout";
 import { SearchPage } from "./views/search/SearchPage";
 import { ExplorePage } from "./views/explore/ExplorePage";
 import { ArtPage } from "./views/art-page/ArtPage";
@@ -15,7 +15,8 @@ import { UserSettings } from "./views/user-profile/user-settings/UserSettings";
 import { UserCollection } from "./views/user-profile/UserCollection";
 import { PasswordSettings } from "./views/user-profile/user-settings/PasswordSettings";
 import { SessionsSettings } from "./views/user-profile/user-settings/SessionsSettings";
-import { Home } from './views/home/home'
+import { DesignSystem } from "./views/desing-system/DesignSystem";
+import { Home } from "./views/home/home";
 
 export const router = createBrowserRouter([
   {
@@ -25,71 +26,76 @@ export const router = createBrowserRouter([
         element: <AppLayout />,
         children: [
           {
-            path: '/',
-            element: <Home />
+            path: "/",
+            element: <Home />,
           },
           {
-            path: '/landing',
-            element: <LandingPage />
+            path: "/landing",
+            element: <LandingPage />,
           },
           {
-            path: '/search',
-            element: <SearchPage />
+            path: "/search",
+            element: <SearchPage />,
           },
           {
-            path: '/explore',
-            element: <ExplorePage />
+            path: "/explore",
+            element: <ExplorePage />,
           },
           {
-            path: '/art-piece',
-            element: <ArtPage />
+            path: "/art-piece",
+            element: <ArtPage />,
           },
           {
-            path: '/art-detail',
-            element: <ArtDetailPage />
+            path: "/art-detail",
+            element: <ArtDetailPage />,
           },
           {
-            path: '/user-profile',
+            path: "/user-profile",
             element: <UserPage />,
             children: [
               {
-                path: '/user-profile/collectionname',
-                element: <UserCollection />
+                path: "/user-profile/collectionname",
+                element: <UserCollection />,
               },
               {
-                path: '/user-profile/settings',
+                path: "/user-profile/settings",
                 element: <UserSettings />,
                 children: [
                   {
-                    path: '/user-profile/settings/general',
-                    element: <GeneralSettings />
+                    path: "/user-profile/settings/general",
+                    element: <GeneralSettings />,
                   },
                   {
-                    path: '/user-profile/settings/profile',
-                    element: <ProfileSettings />
+                    path: "/user-profile/settings/profile",
+                    element: <ProfileSettings />,
                   },
                   {
-                    path: '/user-profile/settings/password',
-                    element: <PasswordSettings />
+                    path: "/user-profile/settings/password",
+                    element: <PasswordSettings />,
                   },
                   {
-                    path: '/user-profile/settings/sessions',
-                    element: <SessionsSettings />
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                    path: "/user-profile/settings/sessions",
+                    element: <SessionsSettings />,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
-    path: '/signin',
-    element: <SignInPage />
+    path: "/signin",
+    element: <SignInPage />,
   },
   {
-    path: '/signup',
-    element: <SignUpPage />
-  }
+    path: "/signup",
+    element: <SignUpPage />,
+  },
+
+  {
+    path: "/design-system",
+    element: <DesignSystem />,
+  },
 ]);
