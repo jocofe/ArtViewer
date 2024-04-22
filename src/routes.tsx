@@ -93,9 +93,8 @@ export const router = createBrowserRouter([
     path: "/signup",
     element: <SignUpPage />,
   },
-
   {
     path: "/design-system",
-    element: <DesignSystem />,
+    element: <DesingSystem />,
   },
 ]);
