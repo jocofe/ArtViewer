@@ -16,6 +16,7 @@ import { UserCollection } from "./views/user-profile/UserCollection";
 import { PasswordSettings } from "./views/user-profile/user-settings/PasswordSettings";
 import { SessionsSettings } from "./views/user-profile/user-settings/SessionsSettings";
 import { Home } from './views/home/home'
+import { DesingSystem } from "./views/design-system/DesignSystem";
 
 export const router = createBrowserRouter([
   {
@@ -91,5 +92,9 @@ export const router = createBrowserRouter([
   {
     path: '/signup',
     element: <SignUpPage />
+  },
+  {
+    path: '/design-system',
+    element: <DesingSystem />
   }
 ]);
