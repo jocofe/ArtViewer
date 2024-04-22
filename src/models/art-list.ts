@@ -3,9 +3,11 @@ export interface ArtListItem {
     imageUrlThumbnail: string;
     imageUrlBase: string;
     id: number;
+    imageId: string;
     author: string;
     date: string;
     location: string;
+    height: string;
 }
 
 export interface ArtListItemFromApi {
@@ -34,4 +36,5 @@ export interface ArtItem {
     accessionNumber: string;
     objectType: string;
     systemNumber: string;
+    height: string;
 }

@@ -8,7 +8,8 @@ export const ArtCard = (props: ArtCardDetails) => {
   const [ isOnFav, setIsOnFav ] = useState(false);
   const [ isOnSaved, setIsOnSaved ] = useState(false);
 
-  const { imageURL, title, author, date } = props;
+  const { imageId, title, author, date } = props;
+  const iiiUrl = `https://framemark.vam.ac.uk/collections/${imageId}/full/!500,500/0/default.jpg`;
 
   const handleSaved = () => {
     setIsOnSaved(!isOnSaved);
@@ -18,9 +19,19 @@ export const ArtCard = (props: ArtCardDetails) => {
     setIsOnFav(!isOnFav);
   };
 
+  const handleImageSize = (event: React.ChangeEvent<HTMLImageElement>) => {
+    if (event.target.height > event.target.width) {
+      event.target.style.maxHeight = 'auto';
+      event.target.style.width = '500px';
+    } else {
+      event.target.style.width = '500px';
+      event.target.style.width = 'auto';
+    }
+  }
+
   return (
     <div className="art-card">
-      <img src={imageURL} alt={title} className="art-card__image" />
+      <img src={iiiUrl} onLoad={handleImageSize} alt={title} className="art-card__image" />
         <section className="art-card__info">
           <h2 className="art-card__title">{title}</h2>
           <p className="art-card__author">{author}</p>
