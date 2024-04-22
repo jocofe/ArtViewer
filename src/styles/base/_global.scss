@@ -1,3 +1,7 @@
+html {
+    font-size: 62.5%;
+}
+
 ul {
     list-style-type: none;
     padding-inline-start: 0;
@@ -6,15 +10,12 @@ ul {
 }
 
 a, a:visited {
-    color:  hsl(0, 0%, 12%);
+    color: var(--color-blackout-light);
     text-decoration: none;
 }
 
-button {
-    font-size: 14px;
-    font-family: Hanken Grotesk;
-    font-weight: 500;
-    border: 1px solid $color-blackout;
+svg {
+    color: var(--color-blackout);
 }
 
 button:focus {
@@ -31,8 +32,33 @@ p {
     margin-bottom: 0;
 }
 
+hr {
+    border: 0;
+    border-radius: 6px;
+    height: 1px;
+    width: 75%;
+    margin: 0;
+    background-color: var(--color-blackout-light);
+}
+
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*------------------------------------*\
+    $BODY
+\*------------------------------------*/
+
+body {
+    font-family: var(--sans-serif);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+    font-size: 16px;
+    color: var(--color-blackout);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
 }

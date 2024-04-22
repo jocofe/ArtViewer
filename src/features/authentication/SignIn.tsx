@@ -1,10 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/config";
+import '../../styles/index.scss'
+import { useNavigate } from "react-router-dom";
+
 export const SignIn = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleEmailInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
@@ -19,6 +23,7 @@ export const SignIn = () => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
+                navigate('/')
             })
             .catch((error) => {
                 console.log(error);
@@ -26,12 +31,21 @@ export const SignIn = () => {
     }
 
     return (
-        <div className="signin-container">
-            <form onSubmit={submitSignIn}>
-                <h1>Log In</h1>
-                <input type="email" placeholder="Email" value={email} onChange={handleEmailInputChange} />
-                <input type="password" placeholder="Password" value={password} onChange={handlePasswordInputChange} />
-                <button type="submit">Log In</button>
+        <div className="signincomp-wrapper">
+            <form className="signincomp__container" onSubmit={submitSignIn}>
+                <div className="input-wrapper">
+                    <label>Email</label>
+                <input className='signincomp__input' type="email" value={email} onChange={handleEmailInputChange} />
+                </div>
+                <div className="input-wrapper">
+                    <div className="label-wrapper">
+                    <label>Password</label>
+                    <a href="#">Forgot?</a>
+                    </div>
+                    <input className='signincomp__input' type="password" value={password} onChange={handlePasswordInputChange} />
+                </div>
+                
+                <button className='btnsign--white' type="submit">Sign In</button>
             </form>
         </div>
     );

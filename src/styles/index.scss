@@ -1,4 +1,11 @@
-@import 'components/artcard', 'components/buttons', 'components/icons', 'layouts/footer','layouts/topbar', 
-'utilities/functions', 'utilities/variables', 'utilities/mixins', 'base/global', 'base/colors', 'base/reset', 'base/typography'; 
-
-@import url('https://fonts.googleapis.com/css?family=Hanken Grotesk');
+@import 'global.styles';
+@import 'components/searchbar';
+@import 'components/artcard';
+@import 'components/signingoogle';
+@import 'components/buttons';
+@import 'components/button-icon'; 
+@import 'components/icons'; 
+@import 'layouts/footer';
+@import 'layouts/topbar';
+@import 'layouts/signinpage';
+@import 'components/masonry';

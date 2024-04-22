@@ -1,60 +1,138 @@
-@import '../base/colors';
-
-/*------------------------------------*\
-    $BUTTON & $BUTTON--STATES
-\*------------------------------------*/
-
 .btn {
-    background-color: $color-white;
-    color: $color-blackout;
-
-    &--hover {
-        background-color: $color-blackout;
-        color: $color-white;
+    user-select: none;
+    //Disabled
+    &:disabled {
+        background-color: var(--color-white);
+        border: 1px solid var(--color-blackout-lighter);
+        color: var(--color-blackout-lighter);
+        cursor: not-allowed;
     }
 
-    &--press {
-        background-color: $color-blackout-light;
-        color: $color-white;
-        border: 1px solid $color-blackout-light;
-    }
-
-    &--focus {
-        background-color: $color-white;
-        color: $color-wooden;
-        border: 1px solid $color-wooden;
-    }
-}
-
-/*------------------------------------*\
-    $BUTTON--SIZES
-\*------------------------------------*/
-
-.btn {
-    &.btn--small {
+    //Sizes
+    &--small {
         border-radius: 60px;
         height: 36px;
         padding: 0px 24px;
     }
 
-    &.btn--medium {
+    &--medium {
         border-radius: 67px;
         height: 48px;
         padding: 0px 24px;
     }
 
-    &.btn--large {
+    &--large {
         border-radius: 40px;
         height: 56px;
         padding: 0px 24px;
     }
-}
+};
 
 /*------------------------------------*\
-    $ICON_BUTTON--SIZES
+    $BUTTON--TYPES
 \*------------------------------------*/
 
-.btn-icon {
-    border: none;
-    background-color: transparent;
+//Primary
+.btn--primary {
+    background-color: var(--color-blackout);
+    color: var(--color-white);
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: var(--color-white);
+            color: var(--color-blackout);
+            border: 1px solid var(--color-blackout);
+        }
+
+        &:active {
+            background-color: var(--color-blackout-light);
+            color: var(--color-white);
+            border: 1px solid var(--color-blackout-light);
+        }
+    }
+
+    &:focus-visible {
+        background-color: var(--color-blackout);
+        color: var(--color-white);
+    }
+}
+
+
+//SubPrimary
+.btn--sub_primary {
+    background-color: var(--color-white);
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: var(--color-blackout);
+            color: var(--color-white);
+        }
+
+        &:active {
+            background-color: var(--color-blackout-light);
+            color: var(--color-white);
+            border: 1px solid var(--color-blackout-light);
+        }
+    }
+
+    &:focus-visible {
+        background-color: var(--color-white);
+        color: var(--color-wooden);
+        border: 1px solid var(--color-wooden);
+    }
+}
+
+//Secondary
+.btn--secondary {
+    background-color: var(--color-white);
+    color: var(--color-wooden);
+    border: 1px solid var(--color-wooden);
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: var(--color-wooden);
+            color: var(--color-white);
+            border: 1px solid var(--color-wooden);
+        }
+
+        &:active {
+            background-color: var(--color-wooden-light);
+            color: var(--color-white);
+            border: 1px solid var(--color-wooden-light);
+        }
+    }
+
+    &:focus-visible {
+        background-color: var(--color-white);
+        color: var(--color-wooden);
+        border: 1px solid var(--color-golden);
+    }
+}
+
+
+//Default
+.btn--default {
+    background-color: var(--color-pearlwhite);
+    color: var(--color-wooden);
+    border: 1px solid var(--color-wooden);
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: var(--color-golden);
+            color: var(--color-wooden);
+            border: 1px solid var(--color-golden);
+        }
+
+        &:active {
+            background-color: var(--color-golden-dark);
+            color: var(--color-white);
+            border: 1px solid var(--color-golden-dark);
+        }
+    }
+
+    &:focus-visible {
+        background-color: var(--color-pearlwhite);
+        color: var(--color-wooden);
+        border: 1px solid var(--color-golden);
+    }
 }

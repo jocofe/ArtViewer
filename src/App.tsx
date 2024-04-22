@@ -1,34 +1,18 @@
-import ArtCard from "./components/ArtCard/ArtCard";
-import Button from "./components/Buttons/Buttons";
-import { Menu } from "./components/Icons/icons";
-import { IconButton } from "./components/Buttons/IconButton";
 import "./styles/index.scss";
-import { SignIn } from "./features/authentication/SignIn";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "./config/config";
-import { SignUp } from "./features/authentication/SingUp";
+import { UserContextProviderFirebase } from "./context/UserContextProvider";
+import { Outlet } from "react-router-dom";
 
-export const Firebase = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 function App() {
+  console.log('App renderizado');
   return (
     <>
-      <h1>Art Viewer</h1>
-      <p >
-        Pruebas
-      </p>
-      <ArtCard
-      imageURL="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1920px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg"
-      title="The birth of Venus"
-      author="Boticelli"
-      date="1480"
-      />
-        <Button label="Small" size="small" />
-        <Button label="Default" />
-        <Button label="Large"size="large" />
-      <SignIn />
-      <SignUp />
-      <IconButton icon={<Menu />} onClick={() => (console.log('clicked'))} />
+    <UserContextProviderFirebase>
+      <Outlet />
+    </UserContextProviderFirebase>
     </>
   );
 }

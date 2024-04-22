@@ -1,0 +1,27 @@
+.searchbar-wrapper{
+    position: relative;
+    align-items: center;
+    width: 500px;
+    min-width: 500px;
+    height: 48px;
+    max-height: 48px;
+    display: flex;
+}
+
+.searchbar {
+    height: 48px;
+    max-height: 48px;
+    border-radius: 60px;
+    padding-left: 24px;
+    background-color: var(--color-blackout-lighter);
+    border: 0;
+    width: 500px;
+
+    &:active {
+        border: 0;
+    }
+
+    &:focus {
+        outline: 1px solid var(--color-blackout-light);
+    }
+}
