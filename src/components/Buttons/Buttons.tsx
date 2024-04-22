@@ -20,7 +20,7 @@ export const Button = ({
   });
 
   return (
-    <button className={btnClass} disabled={disabled} {...rest}>
+    <button className={btnClass} disabled={disabled} onClick={onClick} {...rest}>
       {children}
     </button>
   );
