@@ -3,10 +3,14 @@
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-normal);
   color: var(--color-blackout);
+  padding: 0 268px 0 268px;
+  margin-bottom: 128px;
 
   // MOBILE
-  @media (max-width: var(--mobile-bp)) {
+  @media (max-width: 768px) {
     .footer {
+      padding: 0 16px 0 16px;
+
       &--head {
         display: flex;
         flex-direction: column;
@@ -53,8 +57,10 @@
 
 
   //TABLET
-  @media (min-width: var(--mobile-bp)) and (max-width: var(--tablet-bp)) {
+  @media (min-width: 768px) and (max-width: 1200px) {
     .footer {
+      padding: 0 32px 0 32px;
+      
       &--head {
         display: flex;
         flex-direction: column;
