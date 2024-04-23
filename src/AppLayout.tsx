@@ -4,6 +4,7 @@ import { Footer } from "./layouts/Footer/Footer";
 import "./styles/index.scss";
 import { useState } from "react";
 import { ModalDefault } from "./components/Dialogs/ModalDefault";
+import { ArtistSlider } from "./components/ArtistSlider/ArtistSlider";
 
 const AppLayout: React.FC = () => {
   console.log("AppLayout renderizado");
@@ -17,6 +18,7 @@ const AppLayout: React.FC = () => {
   return (
     <>
       <TopBar size="normal" type="without-login" />
+      <ArtistSlider/>
       <Outlet />
       <ModalDefault isClose={isModalClose} onClose={handleCloseModal} />
       <Footer />
