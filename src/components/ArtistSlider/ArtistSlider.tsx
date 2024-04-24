@@ -4,14 +4,23 @@ import { ArtistItem, ArtistSliderItem, ArtistSliderItemFromApi } from "../../mod
 import { ArtistCard } from "./ArtistCard";
 
 export const mapArtistApitoSlider = (artist: ArtistSliderItemFromApi): ArtistSliderItem[] => {
-return artist.records.map((artistItem: ArtistItem, index: number) => {
-    return {
-    id: index + 1,
-    author: artistItem._primaryMaker.name,
-    imageId: artistItem._primaryImageId
-    };
-});
-};
+    const arrayMapping: Record<string, boolean> = {};
+    const uniqueArtists: ArtistSliderItem[] = [];
+  
+    // Avoid duplicated artist
+    artist.records.forEach((artistItem: ArtistItem) => {
+      if (!arrayMapping[artistItem._primaryMaker.name]) {
+        arrayMapping[artistItem._primaryMaker.name] = true;
+        uniqueArtists.push({
+          id: uniqueArtists.length + 1,
+          author: artistItem._primaryMaker.name,
+          imageId: artistItem._primaryImageId
+        });
+      }
+    });
+  
+    return uniqueArtists;
+  };
 
 export const ArtistSlider = () => {
     
@@ -19,11 +28,15 @@ export const ArtistSlider = () => {
 
     useEffect(() => {
         const fetchArtist = async () => {
-            const apiURL = `https://api.vam.ac.uk/v2/objects/search?q_object_type=drawing&order_sort=asc&page=1&page_size=7&images_exist=true`;
+            const apiURL = `https://api.vam.ac.uk/v2/objects/search?order_sort=asc&page=1&page_size=15&images_exist=true`;
+           
+
+            
             console.log('Llamada a la API');
             try {
                 const response = await axios.get<ArtistSliderItemFromApi>(apiURL);
                 const mappedArtist = mapArtistApitoSlider(response.data);
+                
                 setArtist(mappedArtist);
                 console.log(mappedArtist);
             } catch (error) {
@@ -34,9 +47,16 @@ export const ArtistSlider = () => {
         fetchArtist();
     }, []);
 
+
     
     return (
             <div className='slider'>
+                {artist.map((artistItem: ArtistSliderItem) => (
+                    <ArtistCard
+                        author={artistItem.author}
+                        imageId={artistItem.imageId}
+                    />
+                ))}
                 {artist.map((artistItem: ArtistSliderItem) => (
                     <ArtistCard
                         author={artistItem.author}

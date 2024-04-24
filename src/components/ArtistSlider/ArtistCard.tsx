@@ -7,7 +7,7 @@ export const ArtistCard = (props: ArtistCardDetails) => {
     return(
         <div className="artist-card">
             <img src={iiiUrl} className="artist-card__img"/>
-            <h3 className="artist-card__author">{author}</h3>
+            <h4 className="artist-card__author">{author}</h4>
         </div>
     );
 }

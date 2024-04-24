@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArtItem, ArtListItem, ArtListItemFromApi } from "../../models/art-list";
 import axios from "axios";
 import { ArtCard } from "../../components/ArtCard/ArtCard";
+import { ArtistSlider } from "../../components/ArtistSlider/ArtistSlider";
 
 export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
 return art.records.map((artItem: ArtItem, index: number) => {
@@ -42,6 +43,8 @@ export const Home = () => {
 
     
     return (
+        <div>
+          <ArtistSlider/>  
         <div className='masonry-section'>
             <h3 className='masonry__title'>Explore some art</h3>
             <div className='masonry__wrapper'>
@@ -55,6 +58,7 @@ export const Home = () => {
                     />
                 ))}
             </div>
+        </div>
         </div>
     );
 }

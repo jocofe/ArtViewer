@@ -31,3 +31,9 @@ export const ModalDefault: React.FC<ModalProps> = ({ isClose, onClose }) => {
     </div>
   );
 };
+
+//TODO MODAL DEFAUL LOGIC:
+// const [isModalClose, SetIsModalClose] = useState(false);
+// const handleCloseModal = () => {
+//   SetIsModalClose(true);
+// };

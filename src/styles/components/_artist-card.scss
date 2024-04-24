@@ -1,5 +1,5 @@
 .artist-card {
-    width: 250px;
+    min-width: 250px;
     height: 300px;
     position: relative;
     overflow: hidden;
@@ -26,4 +26,4 @@
         align-items: center;
         justify-content: center;
     }
-}
+};
