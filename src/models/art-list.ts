@@ -2,12 +2,11 @@ export interface ArtListItem {
     title: string;
     imageUrlThumbnail: string;
     imageUrlBase: string;
-    id: number;
+    id: string;
     imageId: string;
     author: string;
     date: string;
     location: string;
-    height: string;
 }
 
 export interface ArtListItemFromApi {
@@ -17,7 +16,19 @@ export interface ArtListItemFromApi {
 }
 
 export interface ArtItem {
-    _currentLocation: object;
+    _currentLocation: {
+        id: string,
+        displayName: string,
+        type: string,
+        site: string,
+        onDisplay: true,
+        detail: {
+        free: string,
+        case: string,
+        shelf: string,
+        box: string
+        }
+    }
     _images: {
         _iiif_image_base_url: string;
         _iiif_presentation_url: string; 
@@ -36,5 +47,4 @@ export interface ArtItem {
     accessionNumber: string;
     objectType: string;
     systemNumber: string;
-    height: string;
 }
