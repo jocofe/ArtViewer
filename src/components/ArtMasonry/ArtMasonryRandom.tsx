@@ -3,6 +3,7 @@ import { ArtItem, ArtListItem, ArtListItemFromApi } from "../../models/art-list"
 import axios from "axios";
 import { ArtCard } from "../../components/ArtCard/ArtCard";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
+import { Link } from "react-router-dom";
 
 export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
 return art.records.map((artItem: ArtItem) => {

@@ -9,14 +9,26 @@ export const mapArtistApitoSlider = (artist: ArtistSliderItemFromApi): ArtistSli
   
     // Avoid duplicated artist
     artist.records.forEach((artistItem: ArtistItem) => {
-      if (!arrayMapping[artistItem._primaryMaker.name]) {
-        arrayMapping[artistItem._primaryMaker.name] = true;
-        uniqueArtists.push({
-          id: uniqueArtists.length + 1,
-          author: artistItem._primaryMaker.name,
-          imageId: artistItem._primaryImageId
-        });
-      }
+
+        // Fixing author format from 'Lastname, Name' => 'Name Lastname'
+        const author = artistItem._primaryMaker.name;
+        let formattedAuthor = '';
+
+        if (author.includes(',')) {
+            const [lastname, firstname] = author.split(', ');
+            formattedAuthor = `${firstname} ${lastname}`;
+        } else {
+            formattedAuthor = author;
+        }
+
+        if (!arrayMapping[formattedAuthor]) {
+            arrayMapping[formattedAuthor] = true;
+            uniqueArtists.push({
+            id: uniqueArtists.length + 1,
+            author: formattedAuthor,
+            imageId: artistItem._primaryImageId
+            });
+        }
     });
   
     return uniqueArtists;
@@ -28,11 +40,8 @@ export const ArtistSlider = () => {
 
     useEffect(() => {
         const fetchArtist = async () => {
-            const apiURL = `https://api.vam.ac.uk/v2/objects/search?order_sort=asc&page=1&page_size=15&images_exist=true`;
-           
+            const apiURL = `https://api.vam.ac.uk/v2/objects/search?order_sort=asc&page=1&page_size=10&images_exist=true`;
 
-            
-            console.log('Llamada a la API');
             try {
                 const response = await axios.get<ArtistSliderItemFromApi>(apiURL);
                 const mappedArtist = mapArtistApitoSlider(response.data);

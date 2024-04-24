@@ -3,8 +3,7 @@
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-normal);
   color: var(--color-blackout);
-  padding: 0 268px 0 268px;
-  margin-bottom: 128px;
+  padding: 20px;
 
   // MOBILE
   @media (max-width: 768px) {
@@ -29,7 +28,6 @@
           flex-direction: row;
           gap: 24px;
         }
-
       }
 
       &--bottom {
@@ -41,11 +39,11 @@
 
       &--copy {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column;
         gap: 12px;
         align-items: center;
         justify-content: center;
+
         }
 
       &--div {
