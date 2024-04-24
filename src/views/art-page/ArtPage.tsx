@@ -25,15 +25,16 @@ export const ArtPage = () => {
 
     useEffect(() => {
         const fetchArtDetails = async () => {
-                const apiURL = `https://api.vam.ac.uk/v2/objects/${artId}`;
+                const apiURL = `https://api.vam.ac.uk/v1/museumobject/${artId}`;
                 const response = await axios.get<ArtItem>(apiURL);
                 const artItem = response.data;
+                console.log(artItem)
                 const artDetails = mapArtListItemFromApiToArtDetails(artItem);
                 setArtDetails(artDetails);
         };
 
         fetchArtDetails();
-    }, []);
+    }, [artId]);
 
     const { title, location, date, author, imageUrlBase } = artDetails  ?? {};
 
