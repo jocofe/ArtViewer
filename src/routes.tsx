@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
             element: <ExplorePage />,
           },
           {
-            path: "/art-piece",
+            path: "/art-piece/:artId",
             element: <ArtPage />,
           },
           {
