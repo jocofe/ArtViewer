@@ -1,4 +1,5 @@
 .artpiece-section {
+    margin-top: 134px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -6,10 +7,19 @@
     gap: 32px;
 }
 
+.artpiece__img {
+    margin-bottom: 32px;
+}
+
 .artpiece-info-wrapper {
     display: flex;
     flex-direction: column;
     gap: 32px;
+    padding: 0 32px 0 32px;
+}
+
+.art__title {
+    text-align: center;
 }
 
 .artpiece__properties {

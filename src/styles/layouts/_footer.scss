@@ -3,7 +3,9 @@
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-normal);
   color: var(--color-blackout);
-  padding: 20px;
+  padding: 0 268px 0 268px;
+  margin-top: 134px;
+  margin-bottom: 64px;
 
   // MOBILE
   @media (max-width: 768px) {

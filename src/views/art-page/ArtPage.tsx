@@ -54,7 +54,7 @@ export const ArtPage = () => {
                 )}
             </div>
             <div className='artpiece-info-wrapper'>
-                <h1>{artDetails?.[0]?.title}</h1>
+                <h1 className ='art__title'>{artDetails?.[0]?.title}</h1>
                 <div className='artpiece__properties'>
                     <h3>{artDetails?.[0]?.artist}</h3>
                     <p>{artDetails?.[0]?.date}</p>
