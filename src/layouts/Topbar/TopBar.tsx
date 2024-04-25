@@ -42,6 +42,8 @@ export const TopBar = (props: TopBarProps) => {
     };
   }, []);
 
+
+
   return (
     <div className={topBarClass}>
       <div className="topbar__logo">
