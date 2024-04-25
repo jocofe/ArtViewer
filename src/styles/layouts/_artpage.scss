@@ -1,0 +1,21 @@
+.artpiece-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+.artpiece-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.artpiece__properties {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}

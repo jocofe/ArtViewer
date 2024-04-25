@@ -51,9 +51,13 @@ export const TopBar = (props: TopBarProps) => {
           icon={<Menu className="icon" />}
           onClick={() => console.log("clicked")}/>
         {isCollapse ? (
+          <Link to={"/"}>
           <IconLogotype className="icon" />
+          </Link>
         ) : (
+          <Link to={"/"}>
           <Logotype className="logotype" />
+          </Link>
         )}
       </div>
       {!isCollapse && <SearchBar size="large" placeholder="Search..." />}

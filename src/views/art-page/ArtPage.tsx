@@ -1,54 +1,57 @@
 import { useEffect, useState } from "react";
-import { ArtItem, ArtListItem } from "../../models/art-list";
+import { ArtObject, ArtObjectDetails, ArtObjectFromApi } from "../../models/art-list";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-const mapArtListItemFromApiToArtDetails = (artItem: ArtItem): ArtListItem => {
-    const { _images, _primaryTitle, _primaryMaker, _primaryDate, _primaryImageId, systemNumber, _currentLocation} = artItem;
-
+export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDetails[] => {
+return art.map((artItem: ArtObject) => {
     return {
-        title: _primaryTitle,
-        id: systemNumber,
-        location: _currentLocation.displayName,
-        date: _primaryDate,
-        author: _primaryMaker.name,
-        imageUrlBase: _images._iiif_image_base_url,
-        imageId: _primaryImageId,
-        imageUrlThumbnail: _images._primary_thumbnail
-    }
-}
+    title: artItem.fields.title,
+    date: artItem.fields.date_text,
+    artist: artItem.fields.artist,
+    id: artItem.fields.object_number,
+    imageId: artItem.fields.primary_image_id,
+    location: artItem.fields.place,
+    type: artItem.fields.object,
+    dimensions: artItem.fields.dimensions,
+    image: artItem.fields.primary_image_id
+    };
+});
+};
 
 export const ArtPage = () => {
 
-    const [artDetails, setArtDetails] = useState<ArtListItem>();
+    const [artDetails, setArtDetails] = useState<ArtObjectDetails[]>([]);
     const { artId } = useParams();
+    
 
     useEffect(() => {
         const fetchArtDetails = async () => {
                 const apiURL = `https://api.vam.ac.uk/v1/museumobject/${artId}`;
-                const response = await axios.get<ArtItem>(apiURL);
-                const artItem = response.data;
-                console.log(artItem)
-                const artDetails = mapArtListItemFromApiToArtDetails(artItem);
-                setArtDetails(artDetails);
+                const response = await axios.get<ArtObjectFromApi>(apiURL);
+                const mappedArtObject = mapArtObjectApitoArtObject(response.data)
+                console.log(mappedArtObject)
+                setArtDetails(mappedArtObject);
         };
 
         fetchArtDetails();
     }, [artId]);
 
-    const { title, location, date, author, imageUrlBase } = artDetails  ?? {};
-
     return (
         <div className='artpiece-section'>
             <div className='artpiece__img'>
-                <img src={imageUrlBase} alt={title} className="art-card__image" />
+                {artDetails.length > 0 && (
+                    <img src={`https://framemark.vam.ac.uk/collections/${artDetails[0]?.imageId}/full/!1000,1000/0/default.jpg`} alt={artDetails?.[0]?.title} className="art-card__image" />
+                )}
             </div>
             <div className='artpiece-info-wrapper'>
+                <h1>{artDetails?.[0]?.title}</h1>
                 <div className='artpiece__properties'>
-                    <h1>{title}</h1>
-                    <p>{author}</p>
-                    <p>{date}</p>
-                    <p>{location}</p>
+                    <h3>{artDetails?.[0]?.artist}</h3>
+                    <p>{artDetails?.[0]?.date}</p>
+                    <p>{artDetails?.[0]?.type}</p>
+                    <p>{artDetails?.[0]?.dimensions}</p>
+                    <p>{artDetails?.[0]?.location}</p>
                 </div>
                 <div className='artpiece__socials'>
 
