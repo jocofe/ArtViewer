@@ -1,25 +1,31 @@
-export interface ResultsItem {
+export interface SearchItem {
     title: string;
-    imageUrl: string;
-    author: string;
     id: string;
-
+    author: string;
+    date: string;
+    location: string;
 }
 
-export interface ResultsItemFromApi {
-    records: Result[];
+export interface SearchItemFromApi {
+    records: Search[];
     info: object;
     clusters: object;
 }
 
-export interface Result {
+export interface Search {
     _images: {
         _iiif_image_base_url: string;
+        _iiif_presentation_url: string; 
+        _primary_thumbnail: string;
+        imageResolution: string;
     };
+    _primaryDate: string;
+    _primaryImageId: string;
     _primaryMaker: {
         association: string;
         name: string;
     };
     _primaryTitle: string;
-    _primaryImageId: string;
+    accessionNumber: string;
+    systemNumber: string;
 }
