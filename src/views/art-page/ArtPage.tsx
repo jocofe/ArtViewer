@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { ArtObject, ArtObjectDetails, ArtObjectFromApi } from "../../models/art-list";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Socials } from "../../components/Socials/socials";
+import { Button } from "../../components/Buttons/Buttons";
 
 export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDetails[] => {
 return art.map((artItem: ArtObject) => {
@@ -37,6 +39,13 @@ export const ArtPage = () => {
         fetchArtDetails();
     }, [artId]);
 
+
+    const linkToOfficialInfo = () => {
+        const officialPageURL = `https://collections.vam.ac.uk/item/${artDetails[0]?.id}`;
+        window.open(officialPageURL, "_blank");
+    };
+
+
     return (
         <div className='artpiece-section'>
             <div className='artpiece__img'>
@@ -54,7 +63,10 @@ export const ArtPage = () => {
                     <p>{artDetails?.[0]?.location}</p>
                 </div>
                 <div className='artpiece__socials'>
-
+                    <Socials />
+                </div>
+                <div className="artpiece__btn">
+                    <Button onClick={linkToOfficialInfo}>View more information</Button>
                 </div>
             </div>
         </div>
