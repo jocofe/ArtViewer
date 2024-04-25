@@ -20,7 +20,7 @@ return art.records.map((artItem: ArtItem) => {
 });
 };
 
-    export const ArtMasonryRandom = () => {
+export const ArtMasonryRandom = () => {
 
 const [artList, setArtList] = useState<ArtListItem[]>([]);
 
@@ -55,7 +55,6 @@ const [artList, setArtList] = useState<ArtListItem[]>([]);
                     </Masonry>
                 </ResponsiveMasonry>
             </div>
-            
-    </div>
+        </div>
     );
 }

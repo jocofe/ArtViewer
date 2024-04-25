@@ -90,3 +90,24 @@ export interface ArtObject {
         year_start: string;
     }
 }
+
+export interface ArtArtistItem {
+
+}
+
+export interface ArtArtistFromApi {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    map: any;
+}
+
+export interface ArtArtistDetails {
+    title: string;
+    date: string;
+    artist: string;
+    id: string;
+    image: string;
+    imageId: string;
+    location: string;
+    type: string;
+    dimensions: string;
+}

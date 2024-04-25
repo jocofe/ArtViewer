@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { ArtObject, ArtObjectDetails, ArtObjectFromApi } from "../../models/art-list";
+import { ArtItem, ArtListItem, ArtListItemFromApi, ArtObject, ArtObjectDetails, ArtObjectFromApi } from "../../models/art-list";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Socials } from "../../components/Socials/socials";
 import { Button } from "../../components/Buttons/Buttons";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
+import { ArtCard } from "../../components/ArtCard/ArtCard";
 
 export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDetails[] => {
 return art.map((artItem: ArtObject) => {
@@ -21,9 +23,25 @@ return art.map((artItem: ArtObject) => {
 });
 };
 
+export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
+return art.records.map((artItem: ArtItem) => {
+    return {
+    title: artItem._primaryTitle,
+    imageUrlThumbnail: artItem._images._primary_thumbnail,
+    imageUrlBase: artItem._images._iiif_image_base_url,
+    id: artItem.systemNumber,
+    author: artItem._primaryMaker.name,
+    date: artItem._primaryDate,
+    location: artItem._primaryPlace,
+    imageId: artItem._primaryImageId,
+    };
+});
+};
+
 export const ArtPage = () => {
 
     const [artDetails, setArtDetails] = useState<ArtObjectDetails[]>([]);
+    const [relatedArt, setRelatedArt] = useState([]);
     const { artId } = useParams();
     
 
@@ -31,7 +49,7 @@ export const ArtPage = () => {
         const fetchArtDetails = async () => {
                 const apiURL = `https://api.vam.ac.uk/v1/museumobject/${artId}`;
                 const response = await axios.get<ArtObjectFromApi>(apiURL);
-                const mappedArtObject = mapArtObjectApitoArtObject(response.data)
+                const mappedArtObject = mapArtObjectApitoArtObject(response.data);
                 console.log(mappedArtObject)
                 setArtDetails(mappedArtObject);
         };
@@ -39,6 +57,18 @@ export const ArtPage = () => {
         fetchArtDetails();
     }, [artId]);
 
+    useEffect(() => {
+        const fetchRelatedArt = async () => {
+            const artist = artDetails[0].artist;
+            const apiURL = `https://api.vam.ac.uk/v1/museumobject?artist=${artist}`;
+            const response = await axios.get(apiURL);
+            const relatedArtObjects = mapArtApitoArtView(response.data)
+            setRelatedArt(relatedArtObjects);
+};
+
+        fetchRelatedArt();
+    }, [artDetails]);
+    
 
     const linkToOfficialInfo = () => {
         const officialPageURL = `https://collections.vam.ac.uk/item/${artDetails[0]?.id}`;
@@ -47,6 +77,7 @@ export const ArtPage = () => {
 
 
     return (
+        <>
         <div className='artpiece-section'>
             <div className='artpiece__img'>
                 {artDetails.length > 0 && (
@@ -70,5 +101,26 @@ export const ArtPage = () => {
                 </div>
             </div>
         </div>
+        <div className="masonry-section">
+            <h2 className="masonry__title">Explore more by {artDetails[0]?.artist}</h2>
+            <div className="masonry-wrapper">
+                <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>
+                    <Masonry className="masonry__columns" gutter="32px">
+                        {relatedArt.map((artItem) => (
+                        <Link key={artItem.id} to={`/art-piece/${artItem.id}`}>
+                        <ArtCard
+                        key={artItem.id}
+                        title={artItem.title}
+                        imageId={artItem.imageId}
+                        author={artItem.artist}
+                        date={artItem.date}
+                        />
+                        </Link>
+                        ))}
+                    </Masonry>
+                </ResponsiveMasonry>
+            </div>
+        </div>
+        </>
     );
 }
