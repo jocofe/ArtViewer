@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArtItem, ArtListItem, ArtListItemFromApi, ArtObject, ArtObjectDetails, ArtObjectFromApi } from "../../models/art-list";
+import { ArtArtistDetails, ArtArtistFromApi, ArtArtistItem, ArtObject, ArtObjectDetails, ArtObjectFromApi } from "../../models/art-list";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { Socials } from "../../components/Socials/socials";
@@ -23,17 +23,14 @@ return art.map((artItem: ArtObject) => {
 });
 };
 
-export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
-return art.records.map((artItem: ArtItem) => {
+export const mapArtApitoArtView = (art: ArtArtistFromApi): ArtArtistItem[] => {
+return art.records.map((artArtist: ArtArtistDetails) => {
     return {
-    title: artItem._primaryTitle,
-    imageUrlThumbnail: artItem._images._primary_thumbnail,
-    imageUrlBase: artItem._images._iiif_image_base_url,
-    id: artItem.systemNumber,
-    author: artItem._primaryMaker.name,
-    date: artItem._primaryDate,
-    location: artItem._primaryPlace,
-    imageId: artItem._primaryImageId,
+    title: artArtist.fields.title,
+    id: artArtist.fields.object_number,
+    artist: artArtist.fields.artist,
+    date: artArtist.fields.date_text,
+    imageId: artArtist.fields.object_number
     };
 });
 };
@@ -41,33 +38,68 @@ return art.records.map((artItem: ArtItem) => {
 export const ArtPage = () => {
 
     const [artDetails, setArtDetails] = useState<ArtObjectDetails[]>([]);
-    const [relatedArt, setRelatedArt] = useState([]);
+    const [relatedArt, setRelatedArt] = useState<ArtArtistDetails[]>([]);
     const { artId } = useParams();
     
 
     useEffect(() => {
-        const fetchArtDetails = async () => {
-                const apiURL = `https://api.vam.ac.uk/v1/museumobject/${artId}`;
-                const response = await axios.get<ArtObjectFromApi>(apiURL);
-                const mappedArtObject = mapArtObjectApitoArtObject(response.data);
-                console.log(mappedArtObject)
-                setArtDetails(mappedArtObject);
-        };
-
-        fetchArtDetails();
-    }, [artId]);
-
-    useEffect(() => {
-        const fetchRelatedArt = async () => {
-            const artist = artDetails[0].artist;
-            const apiURL = `https://api.vam.ac.uk/v1/museumobject?artist=${artist}`;
+    const getInforforArtPage = async () => {
+        try {
+            const apiURL = `https://api.vam.ac.uk/v1/museumobject/${artId}`;
             const response = await axios.get(apiURL);
-            const relatedArtObjects = mapArtApitoArtView(response.data)
-            setRelatedArt(relatedArtObjects);
-};
+            console.log(response)
+            const mappedArtObject = mapArtObjectApitoArtObject(response.data);
+            setArtDetails(mappedArtObject);
+            const artistName = mappedArtObject[0]?.artist;
+            const encodedArtistName = encodeURIComponent(artistName);
+            
+            if (artistName) {
+                const artistApiUrl = `https://api.vam.ac.uk/v1/museumobject/?artist=${encodedArtistName}`;
+                const mapArtist = await axios.get(artistApiUrl);
+                console.log(mapArtist)
+                const relatedArtObjects = mapArtApitoArtView(mapArtist.data);
+                setRelatedArt(relatedArtObjects);
+            }
+        } catch(error){
+            console.log(error)
+        }
+    }
 
-        fetchRelatedArt();
-    }, [artDetails]);
+    if (artId) {
+        getInforforArtPage();
+    }
+}, [artId]);
+    
+
+    // useEffect(() => {
+    //     const fetchArtDetails = async () => {
+    //             const apiURL = `https://api.vam.ac.uk/v1/museumobject/${artId}`;
+    //             const response = await axios.get<ArtObjectFromApi>(apiURL);
+    //             const mappedArtObject = mapArtObjectApitoArtObject(response.data);
+    //             console.log(mappedArtObject)
+    //             setArtDetails(mappedArtObject);
+    //     };
+
+    //     fetchArtDetails();
+    // }, [artId]);
+
+    // useEffect(() => {
+    //     const fetchRelatedArt = async () => {
+    //         if (artDetails.length > 0) {
+    //         const artist = artDetails[0]?.artist;
+
+    //             if (artist) {
+    //                 const apiURL = `https://api.vam.ac.uk/v1/museumobject?artist=${artist}`;
+    //                 const response = await axios.get<ArtArtistFromApi>(apiURL);
+    //                 const relatedArtObjects = mapArtApitoArtView(response.data)
+    //                 console.log(response.data)
+    //                 setRelatedArt(relatedArtObjects);
+    //             }
+    //         }   
+    //     };
+
+    //     fetchRelatedArt();
+    // }, [artDetails]);
     
 
     const linkToOfficialInfo = () => {
@@ -106,14 +138,14 @@ export const ArtPage = () => {
             <div className="masonry-wrapper">
                 <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>
                     <Masonry className="masonry__columns" gutter="32px">
-                        {relatedArt.map((artItem) => (
-                        <Link key={artItem.id} to={`/art-piece/${artItem.id}`}>
+                        {relatedArt.map((artArtist) => (
+                        <Link key={artArtist.id} to={`/art-piece/${artArtist.id}`}>
                         <ArtCard
-                        key={artItem.id}
-                        title={artItem.title}
-                        imageId={artItem.imageId}
-                        author={artItem.artist}
-                        date={artItem.date}
+                        key={artArtist.id}
+                        title={artArtist.title}
+                        imageId={artArtist.imageId}
+                        author={artArtist.artist}
+                        date={artArtist.date}
                         />
                         </Link>
                         ))}

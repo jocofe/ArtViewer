@@ -92,22 +92,23 @@ export interface ArtObject {
 }
 
 export interface ArtArtistItem {
-
-}
-
-export interface ArtArtistFromApi {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    map: any;
-}
-
-export interface ArtArtistDetails {
     title: string;
     date: string;
     artist: string;
     id: string;
-    image: string;
     imageId: string;
-    location: string;
-    type: string;
-    dimensions: string;
+}
+
+export interface ArtArtistFromApi {
+    records: ArtArtistDetails[];
+}
+
+export interface ArtArtistDetails {
+    fields: {
+        id: string;
+        title: string;
+        date_text: string;
+        artist: string;
+        object_number: string;
+    }
 }
