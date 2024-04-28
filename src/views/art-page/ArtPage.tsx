@@ -26,11 +26,12 @@ return art.map((artItem: ArtObject) => {
 export const mapArtApitoArtView = (art: ArtArtistFromApi): ArtArtistItem[] => {
 return art.records.map((artArtist: ArtArtistDetails) => {
     return {
-    title: artArtist.fields.title,
-    id: artArtist.fields.object_number,
-    artist: artArtist.fields.artist,
-    date: artArtist.fields.date_text,
-    imageId: artArtist.fields.object_number
+    title: artArtist._primaryTitle,
+    id: artArtist.systemNumber,
+    artist: artArtist._primaryMaker.name,
+    date: artArtist._primaryDate,
+    location: artArtist._primaryPlace,
+    imageId: artArtist._primaryImageId,
     };
 });
 };
@@ -51,12 +52,14 @@ export const ArtPage = () => {
             const mappedArtObject = mapArtObjectApitoArtObject(response.data);
             setArtDetails(mappedArtObject);
             const artistName = mappedArtObject[0]?.artist;
-            const encodedArtistName = encodeURIComponent(artistName);
+            const cleanedArtistName = artistName.replace(/[^\w\d]+/g, ",");
+            console.log(cleanedArtistName);
             
             if (artistName) {
-                const artistApiUrl = `https://api.vam.ac.uk/v1/museumobject/?artist=${encodedArtistName}`;
+                const artistApiUrl = `https://api.vam.ac.uk/v2/objects/search?q_actor=${cleanedArtistName}&images_exist=true`;
+                console.log('Artist API URL:', artistApiUrl);
                 const mapArtist = await axios.get(artistApiUrl);
-                console.log(mapArtist)
+                console.log(mapArtist.data)
                 const relatedArtObjects = mapArtApitoArtView(mapArtist.data);
                 setRelatedArt(relatedArtObjects);
             }

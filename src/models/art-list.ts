@@ -104,11 +104,33 @@ export interface ArtArtistFromApi {
 }
 
 export interface ArtArtistDetails {
-    fields: {
-        id: string;
-        title: string;
-        date_text: string;
-        artist: string;
-        object_number: string;
+        _currentLocation: {
+        id: string,
+        displayName: string,
+        type: string,
+        site: string,
+        onDisplay: true,
+        detail: {
+        free: string,
+        case: string,
+        shelf: string,
+        box: string
+        }
     }
+    _images: {
+        _iiif_image_base_url: string;
+        _iiif_presentation_url: string; 
+        _primary_thumbnail: string;
+        imageResolution: string;
+    };
+    _primaryDate: string;
+    _primaryImageId: string;
+    _primaryMaker: {
+        association: string;
+        name: string;
+    };
+    _primaryPlace: string;
+    _primaryTitle: string;
+    objectType: string;
+    systemNumber: string;
 }
