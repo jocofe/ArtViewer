@@ -4,6 +4,7 @@ import axios from "axios";
 import { ArtCard } from "../../components/ArtCard/ArtCard";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import { Link } from "react-router-dom";
+import { Button } from "../Buttons/Buttons";
 
 export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
 return art.records.map((artItem: ArtItem) => {
@@ -54,6 +55,11 @@ const [artList, setArtList] = useState<ArtListItem[]>([]);
                         ))}
                     </Masonry>
                 </ResponsiveMasonry>
+                <Link to={"/signup"}>
+                    <div className='masonry__button'>
+                        <Button type="sub_primary">Sign Up to continue</Button>
+                    </div>
+                </Link>
             </div>
         </div>
     );

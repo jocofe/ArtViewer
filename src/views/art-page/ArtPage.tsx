@@ -122,6 +122,11 @@ export const ArtPage = () => {
                         ))}
                     </Masonry>
                 </ResponsiveMasonry>
+                <Link to={"/signup"}>
+                    <div className='masonry__button'>
+                        <Button type="sub_primary">Sign Up to continue</Button>
+                    </div>
+                </Link>
             </div>
         </div>
         </>
