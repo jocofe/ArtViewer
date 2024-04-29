@@ -38,6 +38,7 @@ export const SearchBar = (props: SearchBarProps) => {
     } catch(error) {
       console.error('Error fetching search results', error);
     }
+    searchParams;
     setSearchParams({ search: searchTerm });
     };
 
