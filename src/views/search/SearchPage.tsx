@@ -6,7 +6,7 @@ import { ArtCard } from '../../components/ArtCard/ArtCard';
 
 
 export const SearchPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search');
 
   const [searchResults, setSearchResults] = useState<ArtListItemFromApi | null>(null);
