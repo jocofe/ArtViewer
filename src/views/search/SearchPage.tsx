@@ -1,51 +1,53 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import axios from "axios";
-import { ArtItem, ArtListItem, ArtListItemFromApi } from "../../models/art-list";
-import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
-import { Link } from "react-router-dom";
-import { ArtCard } from "../../components/ArtCard/ArtCard";
-
-export const mapSearchToArtView = (art: ArtListItemFromApi): ArtListItem[] => {
-  return art.records.map((artItem: ArtItem) => {
-      return {
-      title: artItem._primaryTitle,
-      imageUrlThumbnail: artItem._images._primary_thumbnail,
-      imageUrlBase: artItem._images._iiif_image_base_url,
-      id: artItem.systemNumber,
-      author: artItem._primaryMaker.name,
-      date: artItem._primaryDate,
-      location: artItem._primaryPlace,
-      imageId: artItem._primaryImageId,
-      };
-  });
-  };
+import { Link, useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { ArtListItemFromApi } from '../../models/art-list';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
+import { ArtCard } from '../../components/ArtCard/ArtCard';
 
 
-  export const SearchPage = () => {
+export const SearchPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchTerm = searchParams.get('search');
 
-  const [search, setSearch] = useState<ArtListItem[]>([]);
-  const [params, setParams] = useSearchParams();
-  console.log(params.get('search'));
-
-  
+  const [searchResults, setSearchResults] = useState<ArtListItemFromApi | null>(null);
 
   useEffect(() => {
-    const fetchArt = async () => {
-        const apiURL = `https://api.vam.ac.uk/v2/objects/search?q=${'search'}&images_exist=true`;
-            const response = await axios.get<ArtListItemFromApi>(apiURL);
-            const mappedSearch = mapSearchToArtView(response.data);
-            setSearch(mappedSearch);
-            console.log((mappedSearch));
-    };
+    const results = localStorage.getItem('searchResults');
+    if (results) {
+      setSearchResults(JSON.parse(results));
+    }
 
-    fetchArt();
-  }, []);
+    console.log('test de re-renderizado')
+  }, [searchTerm]);
 
-  return (
-
+  if (searchResults && searchResults.records && searchResults.records.length > 0) {
+    return (
+      <div className='masonry-section'>
+        <h2 className='masonry__title'>Reuslts for {searchTerm}</h2>
+        <div className='masonry-wrapper'>
+          <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 768: 2, 1200: 3, 1920: 4,}}>
+            <Masonry className='masonry__columns' gutter='32px'>
+            {searchResults.records.map((result) => (
+              <Link key={result.systemNumber} to={`/art-piece/${result.systemNumber}`}>
+              <ArtCard
+              key={result.systemNumber}
+              title={result._primaryTitle}
+              imageId={result._primaryImageId}
+              author={result._primaryMaker.name}
+              date={result._primaryDate}
+              />
+              </Link>
+            ))}
+            </Masonry>
+          </ResponsiveMasonry>
+        </div>
+      </div>
+    );
+  } else {
+    return (
       <div>
-        
-    </div>
-  );
-};
+        <h2>Sorry, no search results found</h2>
+      </div>
+    );
+  }
+}

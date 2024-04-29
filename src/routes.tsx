@@ -3,7 +3,6 @@ import App from "./App";
 import { SignUpPage } from "./views/SignIn-LogIn/SignUpPage";
 import { SignInPage } from "./views/SignIn-LogIn/SignInPage";
 import AppLayout from "./AppLayout";
-import { SearchPage } from "./views/search/SearchPage";
 import { ExplorePage } from "./views/explore/ExplorePage";
 import { ArtPage } from "./views/art-page/ArtPage";
 import { ArtDetailPage } from "./views/art-detail/ArtDetailPage";
@@ -17,6 +16,7 @@ import { PasswordSettings } from "./views/user-profile/user-settings/PasswordSet
 import { SessionsSettings } from "./views/user-profile/user-settings/SessionsSettings";
 import { DesignSystem } from "./views/design-system/DesignSystem";
 import { Home } from "./views/home/home";
+import { SearchPage } from "./views/search/SearchPage";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +34,11 @@ export const router = createBrowserRouter([
             element: <LandingPage />,
           },
           {
-            path: "/?search",
+            path: "/search",
+            element: <SearchPage/>,
+          },
+          {
+            path: "/search/*",
             element: <SearchPage />,
           },
           {
