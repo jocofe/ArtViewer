@@ -51,7 +51,7 @@ export const Footer = () => {
               <a href="">Brand guidelines</a>
         </div>
 
-        <a className="footer--top" href="#">
+        <a className="footer--top" href="">
           Back to top <ArrowUp className="icon icon--small" />
         </a>
       </div>
