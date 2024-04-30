@@ -68,15 +68,21 @@ export const ArtPage = () => {
         }
     }
 
-    if (artId) {
-        getInforforArtPage();
-    }
-}, [artId]);
+        if (artId) {
+            getInforforArtPage();
+        }
+    }, [artId]);
 
     const linkToOfficialInfo = () => {
         const officialPageURL = `https://collections.vam.ac.uk/item/${artDetails[0]?.id}`;
         window.open(officialPageURL, "_blank");
     };
+
+    const artDetailsInfo = artDetails?.[0];
+
+    if (!artDetailsInfo) {
+        return console.log('error')
+    }
 
 
     return (
@@ -84,17 +90,17 @@ export const ArtPage = () => {
         <div className='artpiece-section'>
             <div className='artpiece__img'>
                 {artDetails.length > 0 && (
-                    <img src={`https://framemark.vam.ac.uk/collections/${artDetails[0]?.imageId}/full/!1000,1000/0/default.jpg`} alt={artDetails?.[0]?.title} className="art-card__image" />
+                    <img src={`https://framemark.vam.ac.uk/collections/${artDetailsInfo.imageId}/full/!1000,1000/0/default.jpg`} alt={artDetails?.[0]?.title} className="art-card__image" />
                 )}
             </div>
             <div className='artpiece-info-wrapper'>
-                <h1 className ='art__title'>{artDetails?.[0]?.title}</h1>
+                <h1 className ='art__title'>{artDetailsInfo.title}</h1>
                 <div className='artpiece__properties'>
-                    <h3>{artDetails?.[0]?.artist}</h3>
-                    <p>{artDetails?.[0]?.date}</p>
-                    <p>{artDetails?.[0]?.type}</p>
-                    <p>{artDetails?.[0]?.dimensions}</p>
-                    <p>{artDetails?.[0]?.location}</p>
+                    <h3>{artDetailsInfo.artist}</h3>
+                    <p>{artDetailsInfo.date}</p>
+                    <p>{artDetailsInfo.type}</p>
+                    <p>{artDetailsInfo.dimensions}</p>
+                    <p>{artDetailsInfo.location}</p>
                 </div>
                 <div className='artpiece__socials'>
                     <Socials />
@@ -105,7 +111,7 @@ export const ArtPage = () => {
             </div>
         </div>
         <div className="masonry-section">
-            <h2 className="masonry__title">Explore more by {artDetails[0]?.artist}</h2>
+            <h2 className="masonry__title">Explore more by {artDetailsInfo.artist}</h2>
             <div className="masonry-wrapper">
                 <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>
                     <Masonry className="masonry__columns" gutter="32px">
