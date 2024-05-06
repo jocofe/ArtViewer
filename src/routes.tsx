@@ -17,7 +17,7 @@ import { SessionsSettings } from "./views/user-profile/user-settings/SessionsSet
 import { Home } from "./views/home/home";
 import { SearchPage } from "./views/search/SearchPage";
 import { BrandTypography } from "./views/brand-guideline/BrandTypography";
-import { BrandGuideline } from "./views/brand-guideline/BrandGuideline";
+import { BrandGuideline } from "./views/brand-guideline/brandGuideline";
 import { BrandColor } from "./views/brand-guideline/BrandColor";
 
 export const router = createBrowserRouter([
