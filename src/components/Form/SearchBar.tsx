@@ -25,19 +25,9 @@ export const SearchBar = (props: SearchBarProps) => {
     if (searchTerm.trim() === '') { 
       return;
     }
-    navigate(`/search/=${searchTerm}`);
+    navigate(`/search/?query=${searchTerm}`);
 
-    try {
-      const response = await fetch(`https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&images_exist=true`);
-      const data = await response.json();
-      localStorage.setItem('searchResults', JSON.stringify(data));
-
-      // Check if term and data are updated each time
-      console.log('Termino:', searchTerm); 
-      console.log('Resultado:', data); 
-    } catch(error) {
-      console.error('Error fetching search results', error);
-    }
+    searchParams;
     setSearchParams({ search: searchTerm });
     };
 

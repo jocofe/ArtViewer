@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { ArtistItem, ArtistSliderItem, ArtistSliderItemFromApi } from "../../models/artist-slider";
 import { ArtistCard } from "./ArtistCard";
+import { formatAuthorName } from "../../utils/format-author-name";
 
 export const mapArtistApitoSlider = (artist: ArtistSliderItemFromApi): ArtistSliderItem[] => {
     const arrayMapping: Record<string, boolean> = {};
@@ -11,21 +12,13 @@ export const mapArtistApitoSlider = (artist: ArtistSliderItemFromApi): ArtistSli
     artist.records.forEach((artistItem: ArtistItem) => {
 
         // Fixing author format from 'Lastname, Name' => 'Name Lastname'
-        const author = artistItem._primaryMaker.name;
-        let formattedAuthor = '';
+        const author = formatAuthorName(artistItem._primaryMaker.name);
 
-        if (author.includes(',')) {
-            const [lastname, firstname] = author.split(', ');
-            formattedAuthor = `${firstname} ${lastname}`;
-        } else {
-            formattedAuthor = author;
-        }
-
-        if (!arrayMapping[formattedAuthor]) {
-            arrayMapping[formattedAuthor] = true;
+        if (!arrayMapping[author]) {
+            arrayMapping[author] = true;
             uniqueArtists.push({
             id: uniqueArtists.length + 1,
-            author: formattedAuthor,
+            author: author,
             imageId: artistItem._primaryImageId
             });
         }
