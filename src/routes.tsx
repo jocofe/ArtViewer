@@ -18,6 +18,7 @@ import { Home } from "./views/home/home";
 import { SearchPage } from "./views/search/SearchPage";
 import { BrandTypography } from "./views/brand-guideline/BrandTypography";
 import { BrandGuideline } from "./views/brand-guideline/BrandGuideline";
+import { BrandColor } from "./views/brand-guideline/BrandColor";
 
 export const router = createBrowserRouter([
   {
@@ -100,11 +101,19 @@ export const router = createBrowserRouter([
   },
   {
     path: "/brand-guidelines",
-    element: <><BrandGuideline /><Navigate to="/brand-guidelines/typography" /></>,
+    element: <BrandGuideline />,
     children: [
+      {
+            path: "",
+            element: <Navigate to="typography" />,
+      },
       {
         path: "/brand-guidelines/typography",
         element: <BrandTypography />
+      },
+      {
+        path: "/brand-guidelines/color",
+        element: <BrandColor />
       },
     ]
   },

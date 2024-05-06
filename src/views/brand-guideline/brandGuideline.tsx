@@ -19,10 +19,10 @@ export const BrandGuideline = () => {
         </div>
         <section className="header">
             <div className="header__content">
-                <h1 className="header__title">
+                <h2 className="header__title">
                 ArtViewer Pattern Library
-                </h1>
-                <h2 className="header__subtitle">Our guide used to build the ArtViewer application.</h2>
+                </h2>
+                <h3 className="header__subtitle">Our guide used to build the ArtViewer application.</h3>
             </div>
         </section>
         <section className="guide">
