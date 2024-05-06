@@ -1,5 +1,6 @@
 export interface ArtistSliderItem {
-    id: number;
+    id: string
+    slider_id: number;
     author: string;
     imageId: string;
 }
@@ -16,4 +17,5 @@ export interface ArtistItem {
         association: string;
         name: string;
     };
+    systemNumber: string;
 }
