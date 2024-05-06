@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import { IconLogotype } from "../../components/Icons/icons"
 import { Footer } from "../../layouts/Footer/Footer"
 
@@ -19,10 +19,10 @@ export const BrandGuideline = () => {
         </div>
         <section className="header">
             <div className="header__content">
-                <h1 className="header__title">
+                <h2 className="header__title">
                 ArtViewer Pattern Library
-                </h1>
-                <h2 className="header__subtitle">Our guide used to build the ArtViewer application.</h2>
+                </h2>
+                <h3 className="header__subtitle">Our guide used to build the ArtViewer application.</h3>
             </div>
         </section>
         <section className="guide">
@@ -92,7 +92,7 @@ export const BrandGuideline = () => {
                 </div>
             </div>
             <div className="guide__content">
-
+                <Outlet />
             </div>
         </section>
         <Footer />

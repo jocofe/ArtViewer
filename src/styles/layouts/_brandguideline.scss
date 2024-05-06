@@ -18,15 +18,21 @@
 .header__content {
     padding-top: 6rem;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
 .guide {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1300px;
     margin: 0 auto;
     padding-top: 16rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.guide__navbar {
+    width: 20%;
 }
 
 .header__title {
@@ -66,12 +72,120 @@
     }
 }
 
-.navbar-wrapper {
-    width: 25%;
-}
-
 .navbar__list {
     margin-bottom: 5rem;
     border-bottom: 1px solid var(--color-blackout-light);
     padding-bottom: 2.4rem;
+}
+
+.guide__content {
+    justify-content: center;
+    display: flex;
+    width: 80%;
+    padding-left: 8rem;
+    margin-top: -2rem;
+}
+
+.guide__intro {
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    margin-bottom: 4rem;
+}
+
+.guide__title {
+    font-size: var(--font-size-28);
+    margin-top: -0.5rem;
+    font-weight: var(--font-weight-regular);
+}
+
+.guide__subtitle {
+    font-size: var(--font-size-72);
+    font-weight: var(--font-weight-bold);
+    max-width: 80rem;
+}
+
+.guide__text {
+    font-size: var(--font-size-16);
+    max-width: 635px;
+    margin-top: 1.6rem;
+}
+
+.guide__list {
+    max-width: 63rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+}
+
+.list__label {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid var(--color-blackout-light);
+}
+
+.size {
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-blackout-light);
+}
+
+.h1 {
+    font-size: var(--font-size-72);
+    font-weight: var(--font-weight-semibold);
+    line-height: 7rem;
+    color: var(--color-blackout);
+}
+
+.h2 {
+    font-size: var(--font-size-48);
+    font-weight: var(--font-weight-medium);
+    line-height: 7rem;
+    color: var(--color-blackout);
+}
+
+.h3 {
+    font-size: var(--font-size-28);
+    font-weight: var(--font-weight-regular);
+    line-height: 3.5rem;
+    color: var(--color-blackout);
+}
+
+.h4 {
+    font-size: var(--font-size-20);
+    font-weight: var(--font-weight-regular);
+    line-height: 2.5rem;
+    color: var(--color-blackout);
+}
+
+.body {
+    font-size: var(--font-size-16);
+    font-weight: var(--font-weight-regular);
+    line-height: 2.4rem;
+    color: var(--color-blackout);
+}
+
+.button {
+    font-size: var(--font-size-14);
+    font-weight: var(--font-weight-regular);
+    line-height: 2.4rem;
+}
+
+.guide__list-wrapper {
+    margin-top: 3.2rem;
+}
+
+.guide__paragraphs {
+    margin-top: 3.2rem;
+}
+
+.guide__example {
+    margin-top: 3.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    max-width: 635px;
 }
