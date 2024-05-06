@@ -48,7 +48,7 @@ export const Footer = () => {
               <p>ArtView © 2024</p>
               <a href="">Terms & policies</a>
               <a href="">Privacy policy</a>
-              <a href="">Brand guidelines</a>
+              <a href="/brand-guidelines">Brand guidelines</a>
         </div>
 
         <a className="footer--top" href="#">

@@ -14,9 +14,9 @@ import { UserSettings } from "./views/user-profile/user-settings/UserSettings";
 import { UserCollection } from "./views/user-profile/UserCollection";
 import { PasswordSettings } from "./views/user-profile/user-settings/PasswordSettings";
 import { SessionsSettings } from "./views/user-profile/user-settings/SessionsSettings";
-import { DesignSystem } from "./views/design-system/DesignSystem";
 import { Home } from "./views/home/home";
 import { SearchPage } from "./views/search/SearchPage";
+import { BrandGuideline } from "./views/brand-guideline/brandGuideline";
 
 export const router = createBrowserRouter([
   {
@@ -98,7 +98,12 @@ export const router = createBrowserRouter([
     element: <SignUpPage />,
   },
   {
-    path: "/design-system",
-    element: <DesignSystem />,
+    path: "/brand-guidelines",
+    element: <BrandGuideline />,
+    children: [
+      {
+        path: "/brand-guidelines/color",
+      },
+    ]
   },
 ]);
