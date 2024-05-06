@@ -1,5 +1,7 @@
 .btn {
     user-select: none;
+    box-sizing: border-box;
+
     //Disabled
     &:disabled {
         background-color: var(--color-white);
@@ -36,24 +38,24 @@
 .btn--primary {
     background-color: var(--color-blackout);
     color: var(--color-white);
+    border: 1px solid var(--color-blackout);
 
     &:not(:disabled) {
         &:hover {
-            background-color: var(--color-white);
-            color: var(--color-blackout);
-            border: 1px solid var(--color-blackout);
-        }
-
-        &:active {
             background-color: var(--color-blackout-light);
             color: var(--color-white);
             border: 1px solid var(--color-blackout-light);
         }
+
+        &:active {
+            box-shadow: inset 0 0 0 1px var(--color-blackout-light), inset 0 0 0 3px var(--color-white);
+            background-color: var(--color-blackout-light);
+        }
     }
 
     &:focus-visible {
-        background-color: var(--color-blackout);
-        color: var(--color-white);
+        box-shadow: inset 0 0 0 1px var(--color-blackout-light), inset 0 0 0 3px var(--color-white);
+        background-color: var(--color-blackout-light);
     }
 }
 
@@ -68,16 +70,16 @@
         }
 
         &:active {
-            background-color: var(--color-blackout-light);
+            box-shadow: inset 0 0 0 1px var(--color-blackout), inset 0 0 0 3px var(--color-white);
+            background-color: var(--color-blackout);
             color: var(--color-white);
-            border: 1px solid var(--color-blackout-light);
         }
     }
 
     &:focus-visible {
-        background-color: var(--color-white);
-        color: var(--color-wooden);
-        border: 1px solid var(--color-wooden);
+        box-shadow: inset 0 0 0 1px var(--color-blackout), inset 0 0 0 3px var(--color-white);
+        background-color: var(--color-blackout);
+        color: var(--color-white);
     }
 }
 
@@ -95,16 +97,16 @@
         }
 
         &:active {
-            background-color: var(--color-wooden-light);
+            background-color: var(--color-wooden);
             color: var(--color-white);
-            border: 1px solid var(--color-wooden-light);
+            box-shadow: inset 0 0 0 1px var(--color-wooden), inset 0 0 0 3px var(--color-white);
         }
     }
 
     &:focus-visible {
-        background-color: var(--color-white);
-        color: var(--color-wooden);
-        border: 1px solid var(--color-golden);
+        background-color: var(--color-wooden);
+        color: var(--color-white);
+        box-shadow: inset 0 0 0 1px var(--color-wooden), inset 0 0 0 3px var(--color-white);
     }
 }
 

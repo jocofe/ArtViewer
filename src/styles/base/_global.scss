@@ -18,10 +18,6 @@ svg {
     color: var(--color-blackout);
 }
 
-button:focus {
-    outline:0;
-}
-
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     margin-top: 0;
     margin-bottom: 0;
@@ -41,10 +37,19 @@ hr {
     background-color: var(--color-blackout-light);
 }
 
+button:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
 *,
 *::before,
 *::after {
     box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
 }
 
 /*------------------------------------*\
