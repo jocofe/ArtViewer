@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 import { IconLogotype } from "../../components/Icons/icons"
 import { Footer } from "../../layouts/Footer/Footer"
 
@@ -92,7 +92,7 @@ export const BrandGuideline = () => {
                 </div>
             </div>
             <div className="guide__content">
-
+                <Outlet />
             </div>
         </section>
         <Footer />

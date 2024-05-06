@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Navigate, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import { SignUpPage } from "./views/SignIn-LogIn/SignUpPage";
 import { SignInPage } from "./views/SignIn-LogIn/SignInPage";
@@ -16,6 +16,7 @@ import { PasswordSettings } from "./views/user-profile/user-settings/PasswordSet
 import { SessionsSettings } from "./views/user-profile/user-settings/SessionsSettings";
 import { Home } from "./views/home/home";
 import { SearchPage } from "./views/search/SearchPage";
+import { BrandTypography } from "./views/brand-guideline/BrandTypography";
 import { BrandGuideline } from "./views/brand-guideline/brandGuideline";
 
 export const router = createBrowserRouter([
@@ -99,10 +100,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/brand-guidelines",
-    element: <BrandGuideline />,
+    element: <><BrandGuideline /><Navigate to="/brand-guidelines/typography" /></>,
     children: [
       {
-        path: "/brand-guidelines/color",
+        path: "/brand-guidelines/typography",
+        element: <BrandTypography />
       },
     ]
   },
