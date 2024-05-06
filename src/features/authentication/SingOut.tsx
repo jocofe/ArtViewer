@@ -5,6 +5,8 @@ export const SignOut = () => {
     const auth = getAuth();
 
     return (
-        <Button onClick={() => signOut(auth)} type="primary" label="Sign Out" size="medium"></Button>
+        <Button onClick={() => signOut(auth)} type="primary" size="medium">
+            Sing Out
+        </Button>
     )
 }

@@ -3,14 +3,21 @@
     height: 100px;
     display: flex;
     justify-content: space-between;
-    align-content: center;
+    align-items: center;
     flex-wrap: wrap;
     padding: 0px 32px 0 32px;
+    flex-direction: row;
 
     &__logo{
         display: flex;
         align-items: center;
+        flex-direction: row;
         gap: 12px;
+
+        & .icon:last-of-type {
+            width: 32px;
+            height: 32px;
+        }
     }
 }
 
@@ -22,4 +29,5 @@
 .signup-wrapper {
     gap: 12px;
     display: flex;
+    align-items: center;
 }

@@ -17,49 +17,49 @@ h1 {
     font-size: var(--font-size-72);
     font-style: normal;
     font-weight: var(--font-weight-semibold);
-    line-height: 4rem;
+    line-height: 8rem;
 }
 
 h2 {
     font-size: var(--font-size-48);
     font-style: normal;
     font-weight: var(--font-weight-medium);
-    line-height: 3.75rem;
+    line-height: 7rem;
 }
 
 h3 {
     font-size: var(--font-size-28);
     font-style: normal;
     font-weight: var(--font-weight-medium);
-    line-height: 2.188rem;
+    line-height: 3.5rem;
 }
 
 h4 {
     font-size: var(--font-size-20);
     font-style: normal;
     font-weight: var(--font-weight-normal);
-    line-height: 1.563rem;
+    line-height: 2.5rem;
 }
 
 h5 {
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: var(--font-weight-normal);
-    line-height: 1.25rem;
+    line-height: 2rem;
 }
 
 h6 {
     font-size: var(--font-size-14);
     font-style: normal;
     font-weight: var(--font-weight-normal);
-    line-height: 1rem;
+    line-height: 1.5rem;
 }
 
 p {
     font-size: var(--font-size-16);
     font-style: normal;
     font-weight: var(--font-weight-normal);
-    line-height: 1.5rem;
+    line-height: 2.4rem;
 }
 
 .h4--bold {
@@ -79,4 +79,18 @@ p {
 
 a {
     color: var(--color-blackout);
+}
+
+.title {
+    font-size: var(--font-size-72);
+    font-style: normal;
+    font-weight: var(--font-weight-semibold);
+    line-height: 6.4rem;
+}
+
+.sub-title {
+    font-size: var(--font-size-28);
+    font-style: normal;
+    font-weight: var(--font-weight-medium);
+    line-height: 3.5rem;
 }

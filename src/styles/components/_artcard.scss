@@ -25,9 +25,9 @@
     }
 
         &__title {
-            color: var(--color-blackout);
-            font-size: 20px;
-            font-weight: bold;
+            font-size: var(--font-size-20);
+            font-weight: var(--font-weight-bold);
+            line-height: 2.5rem;
         }
 
         &__author {
@@ -42,4 +42,16 @@
             font-weight: 300;
             margin-top: 12px;
         }
+
+        @media (min-width: 468px){
+                width: 360px;          
+        }
+        
+
+        @media (min-width: 1450px) {
+                width: 440px;
+        } 
 }
+
+
+

@@ -1,15 +1,28 @@
 .masonry-section {
     margin-top: 64px;
     margin-bottom: 64px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 64px;
 }
 
-.masonry__wrapper {
-    display: grid;
-    gap: 32px 32px;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-flow: dense;
+.masonry__title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 64px;
+}
+
+.masonry > div {
+    width: 440px;
+}
+
+.masonry__columns > div {
+    max-width: 440px;
+
+    @media (max-width: 1450px){
+                max-width: 360px;          
+        }
+}
+
+.masonry__button {
+    margin-top: 76px;
+    display: flex;
+    justify-content: center;
 }
