@@ -3,6 +3,7 @@ import axios from "axios";
 import { ArtistItem, ArtistSliderItem, ArtistSliderItemFromApi } from "../../models/artist-slider";
 import { ArtistCard } from "./ArtistCard";
 import { formatAuthorName } from "../../utils/format-author-name";
+import { Link } from "react-router-dom";
 
 export const mapArtistApitoSlider = (artist: ArtistSliderItemFromApi): ArtistSliderItem[] => {
     const arrayMapping: Record<string, boolean> = {};
@@ -17,9 +18,10 @@ export const mapArtistApitoSlider = (artist: ArtistSliderItemFromApi): ArtistSli
         if (!arrayMapping[author]) {
             arrayMapping[author] = true;
             uniqueArtists.push({
-            id: uniqueArtists.length + 1,
+            slider_id: uniqueArtists.length + 1,
             author: author,
-            imageId: artistItem._primaryImageId
+            imageId: artistItem._primaryImageId,
+            id: artistItem.systemNumber,
             });
         }
     });
@@ -48,22 +50,24 @@ export const ArtistSlider = () => {
 
         fetchArtist();
     }, []);
-
-
     
     return (
             <div className='slider'>
                 {artist.map((artistItem: ArtistSliderItem) => (
+                    <Link key={artistItem.id} to={`/art-piece/${artistItem.id}`}>
                     <ArtistCard
                         author={artistItem.author}
                         imageId={artistItem.imageId}
                     />
+                    </Link>
                 ))}
                 {artist.map((artistItem: ArtistSliderItem) => (
+                    <Link key={artistItem.id} to={`/art-piece/${artistItem.id}`}>
                     <ArtistCard
                         author={artistItem.author}
                         imageId={artistItem.imageId}
                     />
+                    </Link>
                 ))}
             </div>
     );

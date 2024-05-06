@@ -81,9 +81,8 @@ export const ArtPage = () => {
     const artDetailsInfo = artDetails?.[0];
 
     if (!artDetailsInfo) {
-        return console.log('error')
+        <div>Error: Art details not found</div>
     }
-
 
     return (
         <>
