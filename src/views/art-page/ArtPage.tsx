@@ -84,7 +84,6 @@ export const ArtPage = () => {
         return console.log('error')
     }
 
-
     return (
         <>
         <div className='artpiece-section'>
