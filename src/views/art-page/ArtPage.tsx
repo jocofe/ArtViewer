@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ArtArtistDetails, ArtArtistFromApi, ArtArtistItem, ArtObject, ArtObjectDetails, ArtObjectFromApi } from "../../models/art-list";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
@@ -6,7 +6,6 @@ import { Socials } from "../../components/Socials/socials";
 import { Button } from "../../components/Buttons/Buttons";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { ArtCard } from "../../components/ArtCard/ArtCard";
-import React from "react";
 
 export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDetails[] => {
 return art.map((artItem: ArtObject) => {
