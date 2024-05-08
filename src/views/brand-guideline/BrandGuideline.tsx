@@ -1,7 +1,6 @@
 import { Link, Outlet } from "react-router-dom"
 import { IconLogotype } from "../../components/Icons/icons"
 import { Footer } from "../../layouts/Footer/Footer"
-import React from "react"
 
 export const BrandGuideline = () => {
     

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../../styles/index.scss"
 import { ArrowDown, ArrowUp } from "../Icons/icons";
-import React from "react";
 
 interface DropdownButtonProps {
     label: string,
