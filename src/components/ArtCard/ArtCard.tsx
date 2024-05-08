@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ArtCardDetails } from "../../models/art-card";
 import { Heart, FullHeart, CopyLink, Bookmark, FullBookmark } from "../Icons/icons";
 
-
 export const ArtCard = (props: ArtCardDetails) => {
   const [ isOnFav, setIsOnFav ] = useState(false);
   const [ isOnSaved, setIsOnSaved ] = useState(false);

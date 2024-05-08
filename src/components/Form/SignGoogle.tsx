@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import '../../styles/index.scss';
 import { GoogleIcon } from "../Icons/icons";
 
-
 export const SignGoogle = (props: SignGoogleProps) => {
     const { label } = props;
 
@@ -21,6 +20,7 @@ export const SignGoogle = (props: SignGoogleProps) => {
     useEffect(() => {
         AuthCheck();
         return () => AuthCheck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [auth]);
 
     const AuthCheck = onAuthStateChanged(auth, (user) => {
