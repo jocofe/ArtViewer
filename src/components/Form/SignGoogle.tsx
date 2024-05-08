@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import '../../styles/index.scss';
 import { GoogleIcon } from "../Icons/icons";
-import React from "react";
-
 
 export const SignGoogle = (props: SignGoogleProps) => {
     const { label } = props;

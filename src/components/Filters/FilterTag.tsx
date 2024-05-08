@@ -1,6 +1,5 @@
 import classNames from "classnames";
 import { FilterTagProps } from "../../models/filter-tag";
-import React from "react";
 
 export const FilterTag =  ({
     className = "",

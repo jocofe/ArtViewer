@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ArtArtistDetails, ArtArtistFromApi, ArtArtistItem, ArtObject, ArtObjectDetails, ArtObjectFromApi } from "../../models/art-list";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";

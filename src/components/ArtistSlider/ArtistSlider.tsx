@@ -4,7 +4,6 @@ import { ArtistItem, ArtistSliderItem, ArtistSliderItemFromApi } from "../../mod
 import { ArtistCard } from "./ArtistCard";
 import { formatAuthorName } from "../../utils/format-author-name";
 import { Link } from "react-router-dom";
-import React from "react";
 
 export const mapArtistApitoSlider = (artist: ArtistSliderItemFromApi): ArtistSliderItem[] => {
     const arrayMapping: Record<string, boolean> = {};

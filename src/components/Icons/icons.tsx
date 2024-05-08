@@ -1,6 +1,5 @@
 import "../../styles/index.scss";
 import { IconProps } from "../../models/icon";
-import React from "react";
 
 // Heart Icons <3
 export function Heart(className: IconProps) {
