@@ -76,12 +76,12 @@ export const ArtPage = () => {
         }
     }, [artId]);
 
+    const artDetailsInfo = artDetails?.[0];
+
     const linkToOfficialInfo = () => {
-        const officialPageURL = `https://collections.vam.ac.uk/item/${artDetails[0]?.id}`;
+        const officialPageURL = `https://collections.vam.ac.uk/item/${artDetailsInfo.id}`;
         window.open(officialPageURL, "_blank");
     };
-
-    const artDetailsInfo = artDetails?.[0];
 
     if (!artDetailsInfo) {
         return <h3>No details found for this art.</h3>
