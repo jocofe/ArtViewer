@@ -7,7 +7,6 @@ import { Outlet } from "react-router-dom";
 initializeApp(firebaseConfig);
 
 function App() {
-  console.log('App renderizado');
   return (
     <>
     <UserContextProviderFirebase>

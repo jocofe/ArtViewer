@@ -19,8 +19,10 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-medium-image-zoom": "^5.2.0",
     "react-responsive-masonry": "^2.2.0",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "react-viewer": "^3.2.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
