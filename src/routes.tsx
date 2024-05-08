@@ -19,6 +19,7 @@ import { SearchPage } from "./views/search/SearchPage";
 import { BrandTypography } from "./views/brand-guideline/BrandTypography";
 import { BrandGuideline } from "./views/brand-guideline/BrandGuideline";
 import { BrandColor } from "./views/brand-guideline/BrandColor";
+import React from "react";
 
 export const router = createBrowserRouter([
   {

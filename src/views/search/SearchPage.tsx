@@ -6,6 +6,7 @@ import { ResultItem, ResultListFromApi, ResultsListItem } from '../../models/res
 import { FilterTag } from '../../components/Filters/FilterTag';
 import axios from 'axios';
 import { useFilters } from '../../hooks/useFilters';
+import React from 'react';
 
 const mapResultsFromApi = (result: ResultListFromApi): ResultsListItem[] => {
   return result.records.map((resultItem: ResultItem) => {

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "../Buttons/Buttons";
+import React from "react";
 
 export const CtaSection = () => {
     

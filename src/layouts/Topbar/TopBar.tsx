@@ -10,6 +10,7 @@ import {
 import { TopBarProps } from "../../models/topbar";
 import { SearchBar } from "../../components/Form/SearchBar";
 import { Link } from "react-router-dom";
+import React from "react";
 
 export const TopBar = (props: TopBarProps) => {
   const { size, type } = props;

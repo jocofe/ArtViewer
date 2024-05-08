@@ -1,3 +1,4 @@
+import React from "react";
 import { Heart, FullHeart, CopyLink, Bookmark, FullBookmark } from "../Icons/icons";
 import { useState } from "react";
 

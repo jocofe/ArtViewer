@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Button } from "./Buttons";
+import React from "react";
 
 describe("Button", () => {
   it("should render a child with a text indicated", () => {

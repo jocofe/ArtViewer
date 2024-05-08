@@ -6,6 +6,7 @@ import { Socials } from "../../components/Socials/socials";
 import { Button } from "../../components/Buttons/Buttons";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { ArtCard } from "../../components/ArtCard/ArtCard";
+import React from "react";
 
 export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDetails[] => {
 return art.map((artItem: ArtObject) => {

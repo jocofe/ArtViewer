@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import "../../styles/index.scss";
 import { ButtonProps } from "../../models/buttons";
+import React from "react";
 
 export const Button = ({
   className = "",

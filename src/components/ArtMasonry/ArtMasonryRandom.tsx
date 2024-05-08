@@ -5,6 +5,7 @@ import { ArtCard } from "../../components/ArtCard/ArtCard";
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry";
 import { Link } from "react-router-dom";
 import { Button } from "../Buttons/Buttons";
+import React from "react";
 
 export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
 return art.records.map((artItem: ArtItem) => {

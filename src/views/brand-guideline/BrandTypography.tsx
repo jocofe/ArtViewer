@@ -1,3 +1,5 @@
+import React from "react"
+
 export const BrandTypography = () => {
     return (
         <div className="guide-wrapper">

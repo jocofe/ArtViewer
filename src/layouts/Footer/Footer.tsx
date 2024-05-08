@@ -1,3 +1,4 @@
+import React from "react";
 import { Logotype, ArrowUp } from "../../components/Icons/icons";
 import "../../styles/index.scss";
 import "../../styles/layouts/_footer.scss";

@@ -1,3 +1,4 @@
+import React from "react";
 import { ArtistCardDetails } from "../../models/artist-card";
 
 export const ArtistCard = (props: ArtistCardDetails) => {

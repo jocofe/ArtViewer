@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/config";
 import '../../styles/index.scss'
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 export const SignIn = () => {
 

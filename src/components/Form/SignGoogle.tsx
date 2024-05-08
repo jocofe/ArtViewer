@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import '../../styles/index.scss';
 import { GoogleIcon } from "../Icons/icons";
+import React from "react";
 
 
 export const SignGoogle = (props: SignGoogleProps) => {
@@ -21,6 +22,7 @@ export const SignGoogle = (props: SignGoogleProps) => {
     useEffect(() => {
         AuthCheck();
         return () => AuthCheck();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [auth]);
 
     const AuthCheck = onAuthStateChanged(auth, (user) => {

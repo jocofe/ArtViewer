@@ -1,3 +1,4 @@
+import React from "react";
 import { SignGoogle } from "../../components/Form/SignGoogle";
 import { SignIn } from "../../features/authentication/SignIn";
 import "../../styles/index.scss";
