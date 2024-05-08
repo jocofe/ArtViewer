@@ -3,64 +3,15 @@
   font-size: var(--font-size-16);
   font-weight: var(--font-weight-normal);
   color: var(--color-blackout);
-  padding: 0 268px 0 268px;
   margin-top: 134px;
   margin-bottom: 64px;
-
-  // MOBILE
-  @media (max-width: 768px) {
-    .footer {
-      padding: 0 16px 0 16px;
-
-      &--head {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 32px;
-      }
-
-      &--links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-
-        &_list {
-          display: flex;
-          flex-direction: row;
-          gap: 24px;
-        }
-      }
-
-      &--bottom {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 24px;
-      }
-
-      &--copy {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        align-items: center;
-        justify-content: center;
-
-        }
-
-      &--div {
-          width: 100%;
-          margin: 24px 0px;
-      }
-    }
-  }
-
+  padding: 0 268px 0 268px;
 
   //TABLET
   @media (min-width: 768px) and (max-width: 1200px) {
+    padding: 0 32px 0 32px;
+
     .footer {
-      padding: 0 32px 0 32px;
-      
       &--head {
         display: flex;
         flex-direction: column;
@@ -101,6 +52,52 @@
     }
   }
 
+  // MOBILE
+  @media (max-width: 768px) {
+    padding: 0 16px 0 16px;
+    .footer {
+      &--head {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+
+      &--links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+
+        &_list {
+          display: flex;
+          flex-direction: row;
+          gap: 24px;
+        }
+      }
+
+      &--bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+
+      &--copy {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &--div {
+        width: 100%;
+        margin: 24px 0px;
+      }
+    }
+  }
+
   &--head {
     font-size: 1rem;
     line-height: 1.8;
@@ -116,7 +113,6 @@
     margin: 34px 0px;
     background-color: black;
   }
-
 
   &--links {
     display: flex;

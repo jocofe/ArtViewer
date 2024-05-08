@@ -1,55 +1,67 @@
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 ul {
-    list-style-type: none;
-    padding-inline-start: 0;
-    margin-block-start: 0;
-    margin-block-end: 0;
+  list-style-type: none;
+  padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
-a, a:visited {
-    color: var(--color-blackout-light);
-    text-decoration: none;
+a,
+a:visited {
+  color: var(--color-blackout-light);
+  text-decoration: none;
 }
 
 svg {
-    color: var(--color-blackout);
+  color: var(--color-blackout);
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    margin-top: 0;
-    margin-bottom: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 p {
-    margin-top: 0;
-    margin-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 hr {
-    border: 0;
-    border-radius: 6px;
-    height: 1px;
-    width: 75%;
-    margin: 0;
-    background-color: var(--color-blackout-light);
+  border: 0;
+  border-radius: 6px;
+  height: 1px;
+  width: 75%;
+  margin: 0;
+  background-color: var(--color-blackout-light);
 }
 
 button:focus {
-    outline: none;
-    box-shadow: none;
-  }
+  outline: none;
+  box-shadow: none;
+}
 
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
 /*------------------------------------*\
@@ -57,13 +69,13 @@ button:focus {
 \*------------------------------------*/
 
 body {
-    font-family: var(--sans-serif);
-    font-weight: var(--font-weight-normal);
-    line-height: 1.5;
-    font-size: 16px;
-    color: var(--color-blackout);
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0;
-    margin-bottom: 0;
+  font-family: var(--sans-serif);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+  font-size: 16px;
+  color: var(--color-blackout);
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
