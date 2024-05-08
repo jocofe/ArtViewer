@@ -6,6 +6,7 @@ import { Socials } from "../../components/Socials/socials";
 import { Button } from "../../components/Buttons/Buttons";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import { ArtCard } from "../../components/ArtCard/ArtCard";
+import Viewer from "react-viewer";
 
 export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDetails[] => {
 return art.map((artItem: ArtObject) => {
@@ -40,6 +41,8 @@ export const ArtPage = () => {
 
     const [artDetails, setArtDetails] = useState<ArtObjectDetails[]>([]);
     const [relatedArt, setRelatedArt] = useState<ArtArtistItem[]>([]);
+    const [isViewerVisible, setIsViewerVisible] = useState(false);
+    const [selectedImageUrl, setSelectedImageUrl] = useState('');
     const { artId } = useParams();
     
 
@@ -73,25 +76,48 @@ export const ArtPage = () => {
         }
     }, [artId]);
 
+    const artDetailsInfo = artDetails?.[0];
+
     const linkToOfficialInfo = () => {
-        const officialPageURL = `https://collections.vam.ac.uk/item/${artDetails[0]?.id}`;
+        const officialPageURL = `https://collections.vam.ac.uk/item/${artDetailsInfo.id}`;
         window.open(officialPageURL, "_blank");
     };
 
-    const artDetailsInfo = artDetails?.[0];
-
     if (!artDetailsInfo) {
-        return <div>Error: Art details not found</div>
+        return <h3>No details found for this art.</h3>
     }
+
+    const openViewer = (imageUrl: string) => {
+        setSelectedImageUrl(imageUrl);
+        setIsViewerVisible(true);
+    };
+
+    const closeViewer = () => {
+        setIsViewerVisible(false);
+    };
 
     return (
         <>
         <div className='artpiece-section'>
             <div className='artpiece__img'>
                 {artDetails.length > 0 && (
-                    <img src={`https://framemark.vam.ac.uk/collections/${artDetailsInfo.imageId}/full/!1000,1000/0/default.jpg`} alt={artDetails?.[0]?.title} className="art-card__image" />
+                    <img
+                        src={`https://framemark.vam.ac.uk/collections/${artDetailsInfo.imageId}/full/!1000,1000/0/default.jpg`}
+                        alt={artDetailsInfo.title}
+                        className="art-card__image"
+                        onClick={() =>
+                            openViewer(
+                                `https://framemark.vam.ac.uk/collections/${artDetailsInfo.imageId}/full/!5000,5000/0/default.jpg`
+                            )
+                        }
+                    />
                 )}
             </div>
+            <Viewer
+                visible={isViewerVisible}
+                onClose={closeViewer}
+                images={[{ src: selectedImageUrl, alt: 'Image' }]}
+            />
             <div className='artpiece-info-wrapper'>
                 <h1 className ='art__title'>{artDetailsInfo.title}</h1>
                 <div className='artpiece__properties'>
