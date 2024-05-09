@@ -114,6 +114,12 @@ export const ArtPage = () => {
                 )}
             </div>
             <Viewer
+                rotatable={false}
+                changeable={false}
+                attribute={false}
+                scalable= {false}
+                noImgDetails={true}
+                noNavbar={true}
                 visible={isViewerVisible}
                 onClose={closeViewer}
                 images={[{ src: selectedImageUrl, alt: 'Image' }]}
