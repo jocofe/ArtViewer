@@ -1,4 +1,4 @@
 export interface SearchBarProps {
-    size: 'normal' | 'small' | 'large';
-    placeholder: string;
+  size: 'normal' | 'small' | 'large';
+  placeholder: string;
 }

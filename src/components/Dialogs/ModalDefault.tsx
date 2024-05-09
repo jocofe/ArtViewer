@@ -1,6 +1,6 @@
-import "../../styles/index.scss";
-import { Button } from "../Buttons/Buttons";
-import { Close } from "../Icons/icons";
+import '../../styles/index.scss';
+import { Button } from '../Buttons/Buttons';
+import { Close } from '../Icons/icons';
 
 interface ModalProps {
   isClose: boolean;

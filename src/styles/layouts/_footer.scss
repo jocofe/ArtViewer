@@ -45,22 +45,20 @@
         gap: 12px;
         align-items: center;
         justify-content: center;
-
-        }
+      }
 
       &--div {
-          width: 100%;
-          margin: 24px 0px;
+        width: 100%;
+        margin: 24px 0px;
       }
     }
   }
-
 
   //TABLET
   @media (min-width: 768px) and (max-width: 1200px) {
     .footer {
       padding: 0 32px 0 32px;
-      
+
       &--head {
         display: flex;
         flex-direction: column;
@@ -116,7 +114,6 @@
     margin: 34px 0px;
     background-color: black;
   }
-
 
   &--links {
     display: flex;

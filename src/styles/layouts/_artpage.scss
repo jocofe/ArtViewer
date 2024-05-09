@@ -1,97 +1,99 @@
 .artpiece-section {
-    margin-top: 134px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
+  margin-top: 134px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
 }
 
 .artpiece__img {
-    margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .artpiece-info-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    padding: 0 32px 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 0 32px 0 32px;
 }
 
 .art__title {
-    text-align: center;
+  text-align: center;
 }
 
 .artpiece__properties {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
 .artpiece__btn {
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
 }
 
-.react-viewer .react-viewer-transition {
-    position: relative !important;
+.art-visualizer .react-viewer-mask {
+  background-color: var(--color-blackout);
 }
 
-.react-viewer-mask {
-    background-color: var(--color-blackout) !important;
-}
+// .react-viewer .react-viewer-transition {
+//     position: relative !important;
+// }
 
-.react-viewer-close.react-viewer-btn {
-    background-color: var(--color-golden-lighter) !important;
-    position: absolute !important;
-    right: 32px !important;
-    top: 32px !important;
-    border-radius: 60px !important;
-    display: flex !important;
-    justify-content: center !important;
-    width: 48px !important;
-    height: 48px !important;
-    align-items: center !important;
+// .react-viewer-mask {
+//     background-color: var(--color-blackout) !important;
+// }
 
-    &:hover {
-        background-color: var(--color-golden) !important;
-    }
-}
+// .react-viewer-close .react-viewer-btn {
+//     background-color: var(--color-golden-lighter) !important;
+//     position: absolute !important;
+//     right: 32px !important;
+//     top: 32px !important;
+//     border-radius: 60px !important;
+//     display: flex !important;
+//     justify-content: center !important;
+//     width: 48px !important;
+//     height: 48px !important;
+//     align-items: center !important;
 
-.react-viewer-close > i {
-    position: static !important;
-    color: var(--color-blackout);
-}
+//     &:hover {
+//         background-color: var(--color-golden) !important;
+//     }
+// }
 
+// .react-viewer-close > i {
+//     position: static !important;
+//     color: var(--color-blackout);
+// }
 
-.react-viewer-toolbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    height: auto !important;
-    padding-bottom: 32px !important;
-    gap: 16px !important;
-}
+// .react-viewer-toolbar {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: center;
+//     height: auto !important;
+//     padding-bottom: 32px !important;
+//     gap: 16px !important;
+// }
 
-.react-viewer-toolbar li {
-    width: 48px !important;
-    height: 48px !important;
-    background-color: var(--color-golden-lighter);
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    margin-right: 0 !important;
+// .react-viewer-toolbar li {
+//     width: 48px !important;
+//     height: 48px !important;
+//     background-color: var(--color-golden-lighter);
+//     display: flex !important;
+//     justify-content: center;
+//     align-items: center;
+//     margin-right: 0 !important;
 
+//     &:hover {
+//         background-color: var(--color-golden) !important;
+//     }
 
-    &:hover {
-        background-color: var(--color-golden) !important;
-    }
-
-    & i {
-        color: var(--color-blackout);
-        position: static !important;
-    }
-}
+//     & i {
+//         color: var(--color-blackout);
+//         position: static !important;
+//     }
+// }

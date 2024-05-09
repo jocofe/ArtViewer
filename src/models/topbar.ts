@@ -1,4 +1,4 @@
 export interface TopBarProps {
-    size: 'normal' | 'collapse';
-    type: 'without-login' | 'login';
+  size: 'normal' | 'collapse';
+  type: 'without-login' | 'login';
 }

@@ -1,6 +1,5 @@
 export interface SignGoogleProps {
-    icon?: React.ReactNode;
-    label: string;
-    type?: 'signin' | 'singup';
+  icon?: React.ReactNode;
+  label: string;
+  type?: 'signin' | 'singup';
 }
-

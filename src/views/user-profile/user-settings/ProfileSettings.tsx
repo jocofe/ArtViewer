@@ -1,5 +1,3 @@
 export const ProfileSettings = () => {
-    return (
-        <div>Profile Settings Page</div>
-    );
-}
+  return <div>Profile Settings Page</div>;
+};

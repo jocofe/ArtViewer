@@ -1,72 +1,66 @@
-
 .slider {
-    height: 300px;
-    margin: auto;
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    place-items: center;
-    gap: 38px;
-    margin-bottom: 128px;
-    overflow: hidden;
+  height: 300px;
+  margin: auto;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+  gap: 38px;
+  margin-bottom: 128px;
+  overflow: hidden;
 }
 
 .slider:hover {
-    .slider-track {
-        animation-play-state: paused;
-    }
+  .slider-track {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-	100% { 
-        transform: translateX(calc(-269px * 9))
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-269px * 9));
+  }
 }
 
 .slider-track {
-    animation: 45s scroll infinite linear;
+  animation: 45s scroll infinite linear;
 }
 
-
 .slide {
-    width: 250px;
-    height: 300px;
-    position: relative;
-    overflow: hidden;
-    border-radius: 5px;
-    
+  width: 250px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
 
-    &__img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-    &__author {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: hsla(0, 0%, 9%, 0.75);
-        color: var(--color-white);
-        font-weight: var(--font-weight-normal);
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 15px;
-    }
+  &__author {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: hsla(0, 0%, 9%, 0.75);
+    color: var(--color-white);
+    font-weight: var(--font-weight-normal);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+  }
 
-    &__author:hover {
-        background-color: transparent;
-        transition: 1.5s;
-    }
-};
-
-
-
+  &__author:hover {
+    background-color: transparent;
+    transition: 1.5s;
+  }
+}
