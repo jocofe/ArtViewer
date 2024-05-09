@@ -9,6 +9,25 @@
   margin-bottom: 64px;
 }
 
+@media (max-width: 768px) {
+  .masonry__title {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .masonry__columns > div {
+    max-width: 330px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 1450px) {
+  .masonry > div {
+    max-width: 360px;
+  }
+}
+
 .masonry > div {
   width: 440px;
 }
