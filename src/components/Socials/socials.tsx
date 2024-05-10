@@ -5,11 +5,13 @@ export const Socials = () => {
   const [isOnFav, setIsOnFav] = useState(false);
   const [isOnSaved, setIsOnSaved] = useState(false);
 
-  const handleSaved = () => {
+  const handleSaved = (event: React.MouseEvent<HTMLElement>) => {
+    event?.preventDefault();
     setIsOnSaved(!isOnSaved);
   };
 
-  const handleFav = () => {
+  const handleFav = (event: React.MouseEvent<HTMLElement>) => {
+    event?.preventDefault();
     setIsOnFav(!isOnFav);
   };
 
