@@ -11,22 +11,21 @@ export const SignUpPage = () => {
   };
 
   return (
-    <div className="signuppage-wrapper">
+    <div className="sign-up-page">
       <div className="topbar topbar--absolute topbar--white"></div>
-      <div className="imgsign-wrapper"></div>
-      <div className="sign-wrapper">
-        <div className="sign__content">
-          <h4 className="h4--bold">Sign Up to ArtViewer</h4>
+      <div className="sign-up-page__img"></div>
+        <div className="sign-up-page__content">
+          <h4 className="h4--bold sign-up-page__title">Sign Up to ArtViewer</h4>
           <SignGoogle label="Sign Up With Google" />
-          <div className="sing__separator">
+          <div className="sign-up-page__separator">
             <hr />
-            <p className="p--separator">or sign up with email</p>
+            <p className="sign-up-page__text">or sign up with email</p>
             <hr />
           </div>
           {showForm? (
             <SignUpForm />
           ) : (
-            <button onClick={handleShowForm}>Sign Up</button>
+            <button className='sign-up-page__btn' onClick={handleShowForm}>Sign Up</button>
           )}
           <div className="haveaccount-wrapper">
             <p className="subtext">Already have an account?</p>
@@ -34,6 +33,5 @@ export const SignUpPage = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
