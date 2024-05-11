@@ -59,6 +59,7 @@
     &__sign-in {
       font-size: var(--font-size-14);
       color: var(--color-blackout);
+      text-align: center;
     }
 
     &__link {
@@ -79,6 +80,10 @@
     &__link--bold:visited {
       color: var(--color-blackout);
     }
-  }
-
-
+    
+    &__content.hidden {
+      opacity: 0;
+      visibility: hidden;
+      display: none;
+    }
+}

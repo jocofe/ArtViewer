@@ -237,6 +237,21 @@ export const ArrowUp = (className: IconProps) => {
   );
 };
 
+export const ArrowLeft = (className: IconProps) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"  {...className} width="24" height="25" viewBox="0 0 24 25" fill="none">
+      <g clip-path="url(#clip0_201_577)">
+        <path d="M5 12.5C5 12.9735 5.17826 13.3794 5.56219 13.7311L16.2302 24.04C16.5318 24.3377 16.9158 24.5 17.3683 24.5C18.2733 24.5 19 23.7965 19 22.8901C19 22.4436 18.808 22.0513 18.5064 21.7401L8.89422 12.5L18.5064 3.25986C18.808 2.9487 19 2.54284 19 2.10992C19 1.20349 18.2733 0.5 17.3683 0.5C16.9158 0.5 16.5318 0.662345 16.2302 0.959977L5.56219 11.2554C5.17826 11.6206 5 12.0265 5 12.5Z" fill="#161616"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_201_577">
+          <rect width="24" height="24" fill="white" transform="translate(0 0.5)"/>
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
 //Close icon
 export const Close = (className: IconProps) => {
   return (
