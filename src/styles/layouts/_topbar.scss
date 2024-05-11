@@ -1,33 +1,46 @@
 .topbar {
-    width: auto;
-    height: 100px;
+  width: auto;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0px 32px 0 32px;
+  flex-direction: row;
+
+  &__logo {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    padding: 0px 32px 0 32px;
     flex-direction: row;
+    gap: 12px;
 
-    &__logo{
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        gap: 12px;
-
-        & .icon:last-of-type {
-            width: 32px;
-            height: 32px;
-        }
+    & .icon:last-of-type {
+      width: 32px;
+      height: 32px;
     }
+  }
 }
 
 .topbar--absolute {
-    position: absolute;
-    top: 2.375rem;
+  position: absolute;
+  top: 2.375rem;
 }
 
 .signup-wrapper {
-    gap: 12px;
-    display: flex;
-    align-items: center;
+  gap: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.profile-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+
+  & .profile-image {
+    border-radius: 60px;
+    height: 48px;
+    width: 48px;
+  }
 }

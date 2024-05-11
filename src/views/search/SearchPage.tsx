@@ -44,7 +44,11 @@ export const SearchPage = () => {
 
   return (
     <div className="masonry-section">
-      <h2 className="masonry__title">{searchTerm}</h2>
+      {searchTerm.trim() === '' ? (
+        <h2 className="masonry__title">Try to search something</h2>
+      ) : (
+        <h2 className="masonry__title">{searchTerm}</h2>
+      )}
 
       <div className="filters">
         <FilterTag
