@@ -40,6 +40,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onHideForm }) => {
     try {
       // Create new user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(userCredential);
 
       // Add user data to FIRESTORE -> TODO
       const userRef = collection(firestore, 'users');
