@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UserCredential, createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, firestore } from '../../config/config';
 import { ArrowLeft } from '../Icons/icons';
 import { collection, addDoc } from 'firebase/firestore';
