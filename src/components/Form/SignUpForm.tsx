@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, firestore } from '../../config/config';
 import { ArrowLeft } from '../Icons/icons';
 import { collection, addDoc } from 'firebase/firestore';
+import { validateEmail, validatePasswordLength } from '../../utils/validation';
 
 type TermsCheckboxProps = {
     checked: boolean;
@@ -34,6 +35,16 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onHideForm }) => {
     event.preventDefault();
     if (!termsAccepted) {
       setError('You must accept the terms and conditions to sign up.');
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
+    if (!validatePasswordLength(password)) {
+      setError('Please enter a password with at least 6 characters');
       return;
     }
 
