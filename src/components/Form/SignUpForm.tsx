@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../config/config';
+import { UserCredential, createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth, firestore } from '../../config/config';
 import { ArrowLeft } from '../Icons/icons';
+import { collection, addDoc } from 'firebase/firestore';
 
 type TermsCheckboxProps = {
     checked: boolean;
@@ -35,13 +36,31 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onHideForm }) => {
       setError('You must accept the terms and conditions to sign up.');
       return;
     }
+
     try {
+      // Create new user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(userCredential);
-      // TODO: Create a user document with name, username, and email
-    } catch (error) {
-      setError('Unknown error occurred');
-    }
+
+      // Add user data to FIRESTORE -> TODO
+      const userRef = collection(firestore, 'users');
+      await addDoc(userRef, {
+        name, 
+        email,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+
+      // Reset form
+      setEmail('');
+      setPassword('');
+      setName('');
+
+      //Success alert message
+      alert('User created succesfully');
+      } catch (error) {
+        // Error alert message
+        setError('Unknown error occurred');
+      }
   };
 
   return (
@@ -51,20 +70,47 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onHideForm }) => {
       <div className='sign-up-form__name'>
         <div className='sign-up-form__name-section'>
           <h5>Name</h5>
-          <input className='sign-up-form__input' type="text" placeholder='Name' value={name} onChange={(event) => setName(event.target.value)} />
+          <input 
+            className='sign-up-form__input' 
+            type="text" 
+            placeholder='Name' 
+            value={name} 
+            onChange={(event) => setName(event.target.value)}
+            required 
+            />
         </div>
         <div className='sign-up-form__name-section'>
           <h5>Username</h5>
-          <input className='sign-up-form__input' type="text" placeholder='Username' value={username} onChange={(event) => setUsername(event.target.value)} />
+          <input 
+            className='sign-up-form__input' 
+            type="text" placeholder='Username' 
+            value={username} 
+            onChange={(event) => setUsername(event.target.value)}
+            required
+            />
         </div>
       </div>
       <div>
         <h5>Email</h5>
-        <input className='sign-up-form__input' type="text" placeholder='Email' value={email} onChange={(event) => setEmail(event.target.value)} />
+        <input 
+          className='sign-up-form__input' 
+          type="text" 
+          placeholder='Email' 
+          value={email} 
+          onChange={(event) => setEmail(event.target.value)} 
+          required
+          />
       </div>
       <div>
         <h5>Password</h5>
-        <input className='sign-up-form__input' type="text" placeholder='6+ characters' value={password} onChange={(event) => setPassword(event.target.value)} />
+        <input 
+          className='sign-up-form__input' 
+          type="text" 
+          placeholder='6+ characters' 
+          value={password} 
+          onChange={(event) => setPassword(event.target.value)} 
+          required
+          />
       </div>
       <TermsCheckbox checked={termsAccepted} onChange={(event) => setTermsAccepted(event.target.checked)} />
       {error && <div style={{ color: 'red' }}>{error}</div>}
