@@ -22,6 +22,7 @@ export const SignUpNewUser = () => {
   } = useForm<FormInputs>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+  const [userUploadedAvatar, setUserUploadedAvatar] = useState<string | null>(null);
   const user = auth.currentUser;
   const providerData = user?.providerData[0];
   const fileInputRef = useRef<HTMLInputElement>(null); // Referencia al input de tipo file
@@ -38,7 +39,7 @@ export const SignUpNewUser = () => {
             id: user.uid,
             email: userEmail,
             name: user.displayName,
-            picture: selectedAvatar, // Usar la URL del avatar seleccionado
+            picture: userUploadedAvatar || selectedAvatar, // Usar la URL del avatar seleccionado o la imagen subida por el usuario
             username: data.username,
             location: data.location,
           });
@@ -55,7 +56,7 @@ export const SignUpNewUser = () => {
   };
 
   const handleAvatarSelection = (avatar: string) => {
-    setSelectedAvatar(avatar === selectedAvatar ? null : avatar);
+    setSelectedAvatar(avatar);
   };
 
   const handleChooseBtnClick = () => {
@@ -66,9 +67,10 @@ export const SignUpNewUser = () => {
     const file = e.target.files?.[0];
     if (file) {
       const storageRef = ref(storage, `avatars/${file.name}`);
-      await uploadBytes(storageRef, file); // Subir el archivo a Firebase Storage
-      const url = await getDownloadURL(storageRef); // Obtener la URL de descarga del archivo
-      setSelectedAvatar(url); // Guardar la URL en el estado
+      await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(storageRef);
+      setUserUploadedAvatar(url); // Guardar la URL de la imagen subida por el usuario
+      setSelectedAvatar('uploaded'); // Establecer el avatar seleccionado como 'uploaded'
     }
   };
 
@@ -105,13 +107,9 @@ export const SignUpNewUser = () => {
               <label className="h4">Add an avatar</label>
               <div className="options-wrapper">
                 <div className="upload-wrapper">
-                  {selectedAvatar ? (
-                    <img src={selectedAvatar} alt="Uploaded Avatar" />
-                  ) : (
-                    <button className="upload__btn" onClick={handleChooseBtnClick}>
-                      <Camera />
-                    </button>
-                  )}
+                  <button className="upload__btn" onClick={handleChooseBtnClick}>
+                    <Camera />
+                  </button>
                   {/* Input de tipo file oculto */}
                   <input
                     type="file"
@@ -127,6 +125,21 @@ export const SignUpNewUser = () => {
                   </Button>
                   <h5>Or choose one of our defaults</h5>
                   <div className="options-selector">
+                    {userUploadedAvatar && (
+                      <div className="checkbox-container">
+                        <div className="checkbox__circle">
+                          <input
+                            type="checkbox"
+                            id="uploaded-checkbox"
+                            checked={selectedAvatar === 'uploaded'}
+                            onChange={() => handleAvatarSelection('uploaded')}
+                          />
+                          <label htmlFor="uploaded-checkbox">
+                            <img className="uploaded-image" src={userUploadedAvatar} alt="Uploaded Avatar" />
+                          </label>
+                        </div>
+                      </div>
+                    )}
                     {providerData?.providerId === 'google.com' && user?.photoURL && (
                       <div className="checkbox-container">
                         <div className="checkbox__circle">
@@ -142,7 +155,6 @@ export const SignUpNewUser = () => {
                         </div>
                       </div>
                     )}
-
                     <div className="checkbox-container">
                       <div className="checkbox__circle">
                         <input
