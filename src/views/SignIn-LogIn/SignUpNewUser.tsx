@@ -28,20 +28,23 @@ export const SignUpNewUser = () => {
     setIsSubmitting(true);
     try {
       if (user) {
-        const userEmail = user.email;
-        const userRef = doc(db, 'users', userEmail);
-        await setDoc(userRef, {
-          id: user.uid,
-          email: userEmail,
-          name: user.displayName,
-          picture: user.photoURL,
-          username: data.username,
-          location: data.location,
-        });
-        console.log('User data added to Firestore successfully!');
-        navigate('/');
-      } else {
-        console.error('No user is currently authenticated');
+        const userEmail = user?.email;
+
+        if (userEmail) {
+          const userRef = doc(db, 'users', userEmail);
+          await setDoc(userRef, {
+            id: user.uid,
+            email: userEmail,
+            name: user.displayName,
+            picture: user.photoURL,
+            username: data.username,
+            location: data.location,
+          });
+          console.log('User data added to Firestore successfully!');
+          navigate('/');
+        } else {
+          console.error('No user is currently authenticated');
+        }
       }
     } catch (error) {
       console.error('Error adding user data to Firestore:', error);
@@ -62,7 +65,7 @@ export const SignUpNewUser = () => {
       </div>
       <div className="info-wrapper">
         <div className="info__form">
-          <h1 className="h2">Welcome! Let's create your profile</h1>
+          <h1 className="h3">Welcome! Let's create your profile</h1>
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <div className="input-wrapper">
               <label className="h4">Choose a username</label>
