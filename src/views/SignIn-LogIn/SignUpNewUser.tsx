@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { doc, setDoc } from 'firebase/firestore';
-import { db, auth } from '../../config/config';
+import { db, auth, storage } from '../../config/config'; // Asegúrate de importar storage desde tu configuración de Firebase
 import { Link, useNavigate } from 'react-router-dom';
 import { Camera, Logotype } from '../../components/Icons/icons';
 import { Button } from '../../components/Buttons/Buttons';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 interface FormInputs {
   username: string;
@@ -20,9 +21,10 @@ export const SignUpNewUser = () => {
     formState: { errors },
   } = useForm<FormInputs>();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null); // Estado para almacenar el avatar seleccionado
+  const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const user = auth.currentUser;
   const providerData = user?.providerData[0];
+  const fileInputRef = useRef<HTMLInputElement>(null); // Referencia al input de tipo file
 
   const onSubmit: SubmitHandler<FormInputs> = async data => {
     setIsSubmitting(true);
@@ -36,7 +38,7 @@ export const SignUpNewUser = () => {
             id: user.uid,
             email: userEmail,
             name: user.displayName,
-            picture: user.photoURL,
+            picture: selectedAvatar, // Usar la URL del avatar seleccionado
             username: data.username,
             location: data.location,
           });
@@ -53,7 +55,21 @@ export const SignUpNewUser = () => {
   };
 
   const handleAvatarSelection = (avatar: string) => {
-    setSelectedAvatar(avatar === selectedAvatar ? null : avatar); // Cambiar el avatar seleccionado si es diferente al actual
+    setSelectedAvatar(avatar === selectedAvatar ? null : avatar);
+  };
+
+  const handleChooseBtnClick = () => {
+    fileInputRef.current?.click(); // Simular clic en el input de tipo file
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const storageRef = ref(storage, `avatars/${file.name}`);
+      await uploadBytes(storageRef, file); // Subir el archivo a Firebase Storage
+      const url = await getDownloadURL(storageRef); // Obtener la URL de descarga del archivo
+      setSelectedAvatar(url); // Guardar la URL en el estado
+    }
   };
 
   return (
@@ -89,12 +105,24 @@ export const SignUpNewUser = () => {
               <label className="h4">Add an avatar</label>
               <div className="options-wrapper">
                 <div className="upload-wrapper">
-                  <button className="upload__btn">
-                    <Camera />
-                  </button>
+                  {selectedAvatar ? (
+                    <img src={selectedAvatar} alt="Uploaded Avatar" />
+                  ) : (
+                    <button className="upload__btn" onClick={handleChooseBtnClick}>
+                      <Camera />
+                    </button>
+                  )}
+                  {/* Input de tipo file oculto */}
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: 'none' }}
+                    onChange={handleFileChange}
+                    accept="image/*"
+                  />
                 </div>
                 <div className="selector-wrapper">
-                  <Button className="choose-btn" type="sub_primary">
+                  <Button className="choose-btn" type="sub_primary" onClick={handleChooseBtnClick}>
                     Choose Image
                   </Button>
                   <h5>Or choose one of our defaults</h5>
