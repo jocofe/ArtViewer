@@ -6,10 +6,8 @@ import { useState, useEffect } from 'react';
 import '../../styles/index.scss';
 import { GoogleIcon } from '../Icons/icons';
 
-export const SignGoogle = (props: SignGoogleProps) => {
-  const { label } = props;
-
-  const SignInGoogleClass = classNames('sign-google');
+export const SignGoogle = ({ label, className }: SignGoogleProps) => {
+  const SignInGoogleClass = classNames('sign-google', className);
 
   const auth = getAuth();
   const navigate = useNavigate();
@@ -55,7 +53,7 @@ export const SignGoogle = (props: SignGoogleProps) => {
   };
 
   return (
-    <button onClick={() => signInWithGoogle()} disabled={authing} className={SignInGoogleClass}>
+    <button onClick={signInWithGoogle} disabled={authing} className={SignInGoogleClass}>
       <GoogleIcon className="icon" />
       {label}
     </button>

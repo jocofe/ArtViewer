@@ -40,10 +40,6 @@ export const router = createBrowserRouter([
             element: <SearchPage />,
           },
           {
-            path: '/search/*',
-            element: <SearchPage />,
-          },
-          {
             path: '/explore',
             element: <ExplorePage />,
           },
