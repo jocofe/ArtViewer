@@ -41,7 +41,7 @@ export const DropdownProfileButton: React.FC = () => {
         <div className="dropdown-menu" ref={dropdownRef}>
           <ul className="dropdown__list">
             <li className="dropdown__item">
-              <Link to={'/user-profile'}>Profile</Link>
+              <Link to={`/profile/`}>Profile</Link>
             </li>
             <li className="dropdown__item">
               <Link to={'/user-profile/settings'}>Settings</Link>

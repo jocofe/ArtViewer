@@ -19,6 +19,7 @@ import { SearchPage } from './views/search/SearchPage';
 import { BrandTypography } from './views/brand-guideline/BrandTypography';
 import { BrandGuideline } from './views/brand-guideline/BrandGuideline';
 import { BrandColor } from './views/brand-guideline/BrandColor';
+import { SignUpNewUser } from './views/SignIn-LogIn/SignUpNewUser';
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +99,10 @@ export const router = createBrowserRouter([
   {
     path: '/signup',
     element: <SignUpPage />,
+  },
+  {
+    path: '/new-user',
+    element: <SignUpNewUser />,
   },
   {
     path: '/brand-guidelines',

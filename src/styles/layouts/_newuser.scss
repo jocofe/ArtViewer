@@ -1,0 +1,121 @@
+.newuser-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.imgsetup-wrapper {
+  width: 100%;
+  height: 100vh;
+  background: url("../src/assets/noche-estrellada-van-gogh.jpg") lightgray 50% / cover no-repeat;
+}
+
+.info-wrapper {
+  width: 100%;
+  padding: 0 134px 0 134px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.info__form {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input__box {
+  height: 48px;
+  max-height: 48px;
+  border-radius: 60px;
+  padding-left: 24px;
+  border: 1px solid var(--color-blackout-light);
+  width: 500px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.submit-btn {
+  width: 125px;
+  align-self: end;
+}
+
+.choose-btn {
+  width: 125px;
+}
+
+.upload__btn {
+  display: flex;
+  width: 164px;
+  height: 164px;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 109px;
+  background-color: var(--color-white);
+  border: 1px dashed var(--AV---Blackout-Lighter, #808080);
+}
+
+.options-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+
+.selector-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.google-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 60px;
+}
+
+.checkbox__circle label {
+  background-color: var(--color-wooden);
+  width: 48px;
+  color: var(--color-white);
+  height: 48px;
+  border-radius: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.checkbox__circle input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.checkbox__circle input[type="checkbox"]:checked + label {
+  box-shadow: 0 0 0 3px hsla(48, 64%, 75%, 1);
+}
+
+.checkbox__circle input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+
+.options-selector {
+  display: flex;
+  gap: 16px;
+}
