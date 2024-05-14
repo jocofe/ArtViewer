@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { doc, setDoc } from 'firebase/firestore';
-import { db, auth, storage } from '../../config/config'; // Asegúrate de importar storage desde tu configuración de Firebase
+import { db, auth, storage } from '../../config/config';
 import { Link, useNavigate } from 'react-router-dom';
 import { Camera, Logotype } from '../../components/Icons/icons';
 import { Button } from '../../components/Buttons/Buttons';
@@ -25,7 +25,7 @@ export const SignUpNewUser = () => {
   const [userUploadedAvatar, setUserUploadedAvatar] = useState<string | null>(null);
   const user = auth.currentUser;
   const providerData = user?.providerData[0];
-  const fileInputRef = useRef<HTMLInputElement>(null); // Referencia al input de tipo file
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onSubmit: SubmitHandler<FormInputs> = async data => {
     setIsSubmitting(true);
@@ -64,7 +64,7 @@ export const SignUpNewUser = () => {
   };
 
   const handleChooseBtnClick = () => {
-    fileInputRef.current?.click(); // Simular clic en el input de tipo file
+    fileInputRef.current?.click();
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,8 +73,8 @@ export const SignUpNewUser = () => {
       const storageRef = ref(storage, `avatars/${file.name}`);
       await uploadBytes(storageRef, file);
       const url = await getDownloadURL(storageRef);
-      setUserUploadedAvatar(url); // Guardar la URL de la imagen subida por el usuario
-      handleAvatarSelection('uploaded'); // Establecer el avatar seleccionado como 'uploaded'
+      setUserUploadedAvatar(url);
+      handleAvatarSelection('uploaded');
     }
   };
 
@@ -114,7 +114,6 @@ export const SignUpNewUser = () => {
                   <button className="upload__btn" onClick={handleChooseBtnClick}>
                     <Camera />
                   </button>
-                  {/* Input de tipo file oculto */}
                   <input
                     type="file"
                     ref={fileInputRef}
@@ -150,11 +149,11 @@ export const SignUpNewUser = () => {
                           <input
                             type="checkbox"
                             id="google-checkbox"
-                            checked={selectedAvatar === 'google'}
-                            onChange={() => handleAvatarSelection('google')}
+                            checked={selectedAvatar === (user.photoURL ?? '')}
+                            onChange={() => handleAvatarSelection(user.photoURL ?? '')}
                           />
                           <label htmlFor="google-checkbox">
-                            <img className="google-image" src={user?.photoURL} alt="Google profile" />
+                            <img className="google-image" src={user.photoURL} alt="Google profile" />
                           </label>
                         </div>
                       </div>

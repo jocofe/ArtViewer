@@ -1,5 +1,4 @@
-import { SignGoogle } from '../../components/Form/SignGoogle';
-import '../../styles/index.scss';
+import { SignGoogle } from '../../features/authentication/SignGoogle';
 import { useState } from 'react';
 import { SignUpForm } from '../../components/Form/SignUpForm';
 
