@@ -30,24 +30,28 @@ export const SignUpNewUser = () => {
   const onSubmit: SubmitHandler<FormInputs> = async data => {
     setIsSubmitting(true);
     try {
-      if (user) {
-        const userEmail = user?.email;
+      const user = auth.currentUser;
+      if (!user) {
+        console.error('No user is currently authenticated');
+        return;
+      }
 
-        if (userEmail) {
-          const userRef = doc(db, 'users', userEmail);
-          await setDoc(userRef, {
-            id: user.uid,
-            email: userEmail,
-            name: user.displayName,
-            picture: userUploadedAvatar || selectedAvatar, // Usar la URL del avatar seleccionado o la imagen subida por el usuario
-            username: data.username,
-            location: data.location,
-          });
-          console.log('User data added to Firestore successfully!');
-          navigate('/');
-        } else {
-          console.error('No user is currently authenticated');
-        }
+      const userEmail = user.email;
+
+      if (userEmail) {
+        const userRef = doc(db, 'users', userEmail);
+        await setDoc(userRef, {
+          id: user.uid,
+          email: userEmail,
+          name: user.displayName,
+          picture: userUploadedAvatar || selectedAvatar,
+          username: data.username,
+          location: data.location,
+        });
+        console.log('User data added to Firestore successfully!');
+        navigate('/');
+      } else {
+        console.error('No user email found');
       }
     } catch (error) {
       console.error('Error adding user data to Firestore:', error);
@@ -70,7 +74,7 @@ export const SignUpNewUser = () => {
       await uploadBytes(storageRef, file);
       const url = await getDownloadURL(storageRef);
       setUserUploadedAvatar(url); // Guardar la URL de la imagen subida por el usuario
-      setSelectedAvatar('uploaded'); // Establecer el avatar seleccionado como 'uploaded'
+      handleAvatarSelection('uploaded'); // Establecer el avatar seleccionado como 'uploaded'
     }
   };
 

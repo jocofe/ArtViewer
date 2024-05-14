@@ -17,6 +17,12 @@
   }
 }
 
+.profilecard-image {
+  height: 132px;
+  width: 132px;
+  border-radius: 100px;
+}
+
 .profilecard-info {
   display: flex;
   flex-direction: column;
