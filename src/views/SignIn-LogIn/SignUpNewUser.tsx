@@ -64,7 +64,9 @@ export const SignUpNewUser = () => {
   };
 
   const handleChooseBtnClick = () => {
-    fileInputRef.current?.click();
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,7 +113,7 @@ export const SignUpNewUser = () => {
               <label className="h4">Add an avatar</label>
               <div className="options-wrapper">
                 <div className="upload-wrapper">
-                  <button className="upload__btn" onClick={handleChooseBtnClick}>
+                  <button type="button" className="upload__btn" onClick={handleChooseBtnClick}>
                     <Camera />
                   </button>
                   <input
@@ -123,7 +125,7 @@ export const SignUpNewUser = () => {
                   />
                 </div>
                 <div className="selector-wrapper">
-                  <Button className="choose-btn" type="sub_primary" onClick={handleChooseBtnClick}>
+                  <Button className="choose-btn" type="sub_primary">
                     Choose Image
                   </Button>
                   <h5>Or choose one of our defaults</h5>
