@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth, firestore } from '../../config/config';
+import { auth, db } from '../../config/config';
 import { ArrowLeft } from '../Icons/icons';
 import { collection, addDoc } from 'firebase/firestore';
 import { validateEmail, validatePasswordLength } from '../../utils/validation';
@@ -54,7 +54,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onHideForm }) => {
       console.log(userCredential);
 
       // Add user data to FIRESTORE -> TODO
-      const userRef = collection(firestore, 'users');
+      const userRef = collection(db, 'users');
       await addDoc(userRef, {
         name, 
         email,

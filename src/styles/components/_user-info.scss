@@ -1,0 +1,24 @@
+.user-profile {
+    display: flex;
+    flex-direction: row;
+    gap: 64px;
+    justify-content: center;
+    margin: 124px 0;
+
+    &__img {
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+        background: url("../src/assets/img-background-placeholder-signin.jpeg") lightgray 50% / cover no-repeat;
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__location {
+        color: var(--color-blackout-light);
+    }
+}

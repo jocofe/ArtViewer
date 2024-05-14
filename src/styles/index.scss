@@ -5,7 +5,13 @@
 @import 'components/signingoogle';
 @import 'components/buttons';
 @import 'components/button-icon'; 
-@import 'components/icons'; 
+@import 'components/icons';
+@import 'components/artist-slider';
+@import 'components/filter-tag';
+@import 'components/signup-form';
+@import 'components/masonry';
+@import 'components/tabs';
+@import 'components/user-info'; 
 @import 'layouts/footer';
 @import 'layouts/home';
 @import 'layouts/topbar';
@@ -14,7 +20,3 @@
 @import 'layouts/artpage';
 @import 'layouts/brandguideline';
 @import './components/modal-default';
-@import 'components/masonry';
-@import './components/artist-slider';
-@import './components/filter-tag';
-@import './components/signup-form';
