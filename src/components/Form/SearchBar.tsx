@@ -13,22 +13,30 @@ export const SearchBar = (props: SearchBarProps) => {
 
   const searchBarClass = classNames('searchbar', `searchbar--${size}`);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    handleSearch();
+  };
 
-    // Avoid empty input to search
+  const handleIconClick = () => {
+    handleSearch();
+  };
+
+  const handleSearch = () => {
     if (searchTerm.trim() === '') {
-      return;
+      navigate('/search');
+    } else {
+      navigate(`/search/?query=${searchTerm}`);
+      searchParams;
+      setSearchParams({ search: searchTerm });
     }
-    navigate(`/search/?query=${searchTerm}`);
-
-    searchParams;
-    setSearchParams({ search: searchTerm });
   };
 
   return (
     <form className="searchbar-wrapper" onSubmit={handleSubmit}>
-      <SearchGlass className="icon--absolute" />
+      <div className="searchbar__magnifying" onClick={handleIconClick}>
+        <SearchGlass className="icon--absolute" />
+      </div>
       <input
         className={searchBarClass}
         placeholder={placeholder}

@@ -1,4 +1,4 @@
-import { SignGoogle } from '../../components/Form/SignGoogle';
+import { SignGoogle } from '../../features/authentication/SignGoogle';
 import { SignIn } from '../../features/authentication/SignIn';
 import '../../styles/index.scss';
 
