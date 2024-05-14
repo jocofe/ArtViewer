@@ -57,31 +57,31 @@ export const router = createBrowserRouter([
             element: <ArtDetailPage />,
           },
           {
-            path: '/user-profile',
+            path: '/:username',
             element: <UserPage />,
             children: [
               {
-                path: '/user-profile/collectionname',
+                path: 'collectionname',
                 element: <UserCollection />,
               },
               {
-                path: '/user-profile/settings',
+                path: 'settings',
                 element: <UserSettings />,
                 children: [
                   {
-                    path: '/user-profile/settings/general',
+                    path: 'general',
                     element: <GeneralSettings />,
                   },
                   {
-                    path: '/user-profile/settings/profile',
+                    path: 'profile',
                     element: <ProfileSettings />,
                   },
                   {
-                    path: '/user-profile/settings/password',
+                    path: 'password',
                     element: <PasswordSettings />,
                   },
                   {
-                    path: '/user-profile/settings/sessions',
+                    path: 'sessions',
                     element: <SessionsSettings />,
                   },
                 ],
@@ -113,11 +113,11 @@ export const router = createBrowserRouter([
         element: <Navigate to="typography" />,
       },
       {
-        path: '/brand-guidelines/typography',
+        path: 'typography',
         element: <BrandTypography />,
       },
       {
-        path: '/brand-guidelines/color',
+        path: 'color',
         element: <BrandColor />,
       },
     ],
