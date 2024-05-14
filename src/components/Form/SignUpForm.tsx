@@ -2,19 +2,35 @@ import React, { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../config/config';
 import { ArrowLeft } from '../Icons/icons';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, setDoc } from 'firebase/firestore';
 import { validateEmail, validatePasswordLength } from '../../utils/validation';
+import { Link } from 'react-router-dom';
+import { Button } from '../Buttons/Buttons';
 
 type TermsCheckboxProps = {
-    checked: boolean;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
+  checked: boolean;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 const TermsCheckbox: React.FC<TermsCheckboxProps> = ({ checked, onChange }) => {
   return (
     <div className="terms">
-      <input className='terms__checkbox' type="checkbox" id="terms" checked={checked} onChange={onChange} />
-      <p className='terms__text'>I agree with ArtViewer <a className='sign-up-page__link' href="">Terms of Service</a>, <a  className='sign-up-page__link' href="">Privacy Policy</a>, and default <a  className='sign-up-page__link' href="">Notification Settings</a>.</p>
+      <input className="terms__checkbox" type="checkbox" id="terms" checked={checked} onChange={onChange} />
+      <p className="terms__text">
+        I agree with ArtViewer{' '}
+        <a className="sign-up-page__link" href="">
+          Terms of Service
+        </a>
+        ,{' '}
+        <a className="sign-up-page__link" href="">
+          Privacy Policy
+        </a>
+        , and default{' '}
+        <a className="sign-up-page__link" href="">
+          Notification Settings
+        </a>
+        .
+      </p>
     </div>
   );
 };
@@ -25,7 +41,6 @@ type SignUpFormProps = {
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({ onHideForm }) => {
   const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
@@ -55,8 +70,8 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onHideForm }) => {
 
       // Add user data to FIRESTORE -> TODO
       const userRef = collection(db, 'users');
-      await addDoc(userRef, {
-        name, 
+      await setDoc(userRef, {
+        name,
         email,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -69,68 +84,61 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({ onHideForm }) => {
 
       //Success alert message
       alert('User created succesfully');
-      } catch (error) {
-        // Error alert message
-        setError('Unknown error occurred');
-      }
+    } catch (error) {
+      // Error alert message
+      setError('Unknown error occurred');
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className='sign-up-form'>
-      <ArrowLeft onClick={onHideForm} className='sign-up-form__back' />
-      <h4 className='sign-up-form__head h4--bold'>Sign up to ArtViewer</h4>
-      <div className='sign-up-form__name'>
-        <div className='sign-up-form__name-section'>
-          <h5>Name</h5>
-          <input 
-            className='sign-up-form__input' 
-            type="text" 
-            placeholder='Name' 
-            value={name} 
-            onChange={(event) => setName(event.target.value)}
-            required 
-            />
-        </div>
-        <div className='sign-up-form__name-section'>
-          <h5>Username</h5>
-          <input 
-            className='sign-up-form__input' 
-            type="text" placeholder='Username' 
-            value={username} 
-            onChange={(event) => setUsername(event.target.value)}
-            required
-            />
-        </div>
+    <form onSubmit={handleSubmit} className="sign-up-form">
+      <ArrowLeft onClick={onHideForm} className="sign-up-form__back" />
+      <h4 className="sign-up-form__head h4--bold">Sign up to ArtViewer</h4>
+      {error && <div className="terms-error">{error}</div>}
+      <div>
+        <h5>Name</h5>
+        <input
+          className="sign-up-form__input"
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={event => setName(event.target.value)}
+        />
       </div>
       <div>
         <h5>Email</h5>
-        <input 
-          className='sign-up-form__input' 
-          type="text" 
-          placeholder='Email' 
-          value={email} 
-          onChange={(event) => setEmail(event.target.value)} 
-          required
-          />
+        <input
+          className="sign-up-form__input"
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={event => setEmail(event.target.value)}
+        />
       </div>
       <div>
         <h5>Password</h5>
-        <input 
-          className='sign-up-form__input' 
-          type="text" 
-          placeholder='6+ characters' 
-          value={password} 
-          onChange={(event) => setPassword(event.target.value)} 
-          required
-          />
+        <input
+          className="sign-up-form__input"
+          type="text"
+          placeholder="6+ characters"
+          value={password}
+          onChange={event => setPassword(event.target.value)}
+        />
       </div>
-      <TermsCheckbox checked={termsAccepted} onChange={(event) => setTermsAccepted(event.target.checked)} />
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-      <button type="submit" className='sign-up-form__btn'>Create Account</button>
-
+      <TermsCheckbox checked={termsAccepted} onChange={event => setTermsAccepted(event.target.checked)} />
+      <Link id="" to={`/new-user`}>
+        <Button className="sign-up-form__btn" onClick={handleSubmit}>
+          Create Account
+        </Button>
+      </Link>
       <div>
-          <p className="sign-up-page__sign-in">Already have an account? <a className='sign-up-page__link--bold' href="/signin">Sign In</a> </p>
-        </div>
+        <p className="sign-up-page__sign-in">
+          Already have an account?{' '}
+          <a className="sign-up-page__link--bold" href="/signin">
+            Sign In
+          </a>{' '}
+        </p>
+      </div>
     </form>
   );
 };
