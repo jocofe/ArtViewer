@@ -4,6 +4,6 @@ export interface ButtonProps {
   children: ReactNode;
   size?: 'small' | 'medium' | 'large';
   disabled?: boolean;
-  type?: 'primary' | 'sub_primary' | 'secondary' | 'default';
+  type?: 'primary' | 'sub_primary' | 'secondary' | 'default' | 'submit';
   onClick?: () => void;
 }

@@ -55,8 +55,9 @@ export const SignUpNewUser = () => {
       }
     } catch (error) {
       console.error('Error adding user data to Firestore:', error);
+    } finally {
+      setIsSubmitting(false); // Establecer isSubmitting en false independientemente del resultado del envío del formulario
     }
-    setIsSubmitting(false);
   };
 
   const handleAvatarSelection = (avatar: string) => {
@@ -113,9 +114,37 @@ export const SignUpNewUser = () => {
               <label className="h4">Add an avatar</label>
               <div className="options-wrapper">
                 <div className="upload-wrapper">
-                  <button type="button" className="upload__btn" onClick={handleChooseBtnClick}>
-                    <Camera />
-                  </button>
+                  {!userUploadedAvatar && (
+                    <div className="upload__btn" onClick={handleChooseBtnClick}>
+                      <Camera />
+                    </div>
+                  )}
+                  {userUploadedAvatar && ( // Si hay una foto subida por el usuario
+                    <div className="checkbox-container-uploaded">
+                      <div className="checkbox__circle-uploaded">
+                        <input
+                          type="checkbox"
+                          id="uploaded-checkbox"
+                          checked={selectedAvatar === 'uploaded'}
+                          onChange={() => handleAvatarSelection('uploaded')}
+                        />
+                        <label htmlFor="uploaded-checkbox">
+                          <img className="uploaded-image" src={userUploadedAvatar} alt="Uploaded Avatar" />
+                        </label>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className="selector-wrapper">
+                  <Button
+                    className="choose-btn"
+                    type="sub_primary"
+                    onClick={() => {
+                      handleChooseBtnClick(); // Llamar a la función handleChooseBtnClick para abrir el explorador de archivos
+                    }}
+                  >
+                    Choose Image
+                  </Button>
                   <input
                     type="file"
                     ref={fileInputRef}
@@ -123,28 +152,8 @@ export const SignUpNewUser = () => {
                     onChange={handleFileChange}
                     accept="image/*"
                   />
-                </div>
-                <div className="selector-wrapper">
-                  <Button className="choose-btn" type="sub_primary">
-                    Choose Image
-                  </Button>
                   <h5>Or choose one of our defaults</h5>
                   <div className="options-selector">
-                    {userUploadedAvatar && (
-                      <div className="checkbox-container">
-                        <div className="checkbox__circle">
-                          <input
-                            type="checkbox"
-                            id="uploaded-checkbox"
-                            checked={selectedAvatar === 'uploaded'}
-                            onChange={() => handleAvatarSelection('uploaded')}
-                          />
-                          <label htmlFor="uploaded-checkbox">
-                            <img className="uploaded-image" src={userUploadedAvatar} alt="Uploaded Avatar" />
-                          </label>
-                        </div>
-                      </div>
-                    )}
                     {providerData?.providerId === 'google.com' && user?.photoURL && (
                       <div className="checkbox-container">
                         <div className="checkbox__circle">
@@ -175,9 +184,9 @@ export const SignUpNewUser = () => {
                 </div>
               </div>
             </div>
-            <Button className="submit-btn" type="sub_primary" disabled={isSubmitting}>
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>
               Continue
-            </Button>
+            </button>
           </form>
         </div>
       </div>

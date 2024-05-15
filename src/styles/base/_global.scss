@@ -50,9 +50,11 @@ hr {
   background-color: var(--color-blackout-light);
 }
 
-button:focus {
-  outline: none;
-  box-shadow: none;
+button {
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
 }
 
 *,
