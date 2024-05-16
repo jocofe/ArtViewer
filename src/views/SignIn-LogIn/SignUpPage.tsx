@@ -9,10 +9,6 @@ export const SignUpPage = () => {
     setShowForm(true);
   };
 
-  const handleHideForm = () => {
-    setShowForm(false);
-  };
-
   return (
     <div className="sign-up-page">
       <div className="topbar topbar--absolute topbar--white"></div>
@@ -56,7 +52,7 @@ export const SignUpPage = () => {
       </div>
       {showForm && (
         <div className="sign-up-page__content">
-          <SignUpForm onHideForm={handleHideForm} />
+          <SignUpForm />
         </div>
       )}
     </div>
