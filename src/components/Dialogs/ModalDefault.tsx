@@ -1,39 +1,30 @@
-import '../../styles/index.scss';
-import { Button } from '../Buttons/Buttons';
-import { Close } from '../Icons/icons';
+import { ReactNode } from 'react';
+import { createPortal } from 'react-dom';
+import classNames from 'classnames';
 
 interface ModalProps {
-  isClose: boolean;
-  onClose?: () => void;
+  show?: boolean;
+  children: ReactNode;
+  size: 'sm' | 'md';
 }
 
-export const ModalDefault: React.FC<ModalProps> = ({ isClose, onClose }) => {
-  if (isClose) {
+export const ModalDefault = ({ show, children, size = 'md' }: ModalProps) => {
+  if (!show) {
     return null;
   }
-  return (
-    <div className="modal">
-      <section className="modal--title">
-        <h4>Are you sure?</h4>
-        <button className="modal--close" onClick={onClose}>
-          <Close className="modal--icon" />
-        </button>
-      </section>
-      <div className="modal--content">
-        <p>You're about to delete this collection.</p>
+
+  const modalClasses = classNames({
+    modal__content: true,
+    [`modal__content--${size}`]: size,
+  });
+
+  return createPortal(
+    <>
+      <div className="modal-overlay" />
+      <div className="modal">
+        <div className={modalClasses}>{children}</div>
       </div>
-      <section className="modal--btn">
-        <Button onClick={() => {}}>Delete</Button>
-        <Button onClick={() => {}} type="sub_primary">
-          Cancel
-        </Button>
-      </section>
-    </div>
+    </>,
+    document.body,
   );
 };
-
-//TODO MODAL DEFAUL LOGIC:
-// const [isModalClose, SetIsModalClose] = useState(false);
-// const handleCloseModal = () => {
-//   SetIsModalClose(true);
-// };
