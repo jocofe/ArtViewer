@@ -6,14 +6,20 @@
     align-items: center;
 
     &__text {
-        width: 620px;
+        width: 500px;
         text-align: center;
     }
 }
+.changing-text {
+    color: var(--color-wooden);
+}
+
 .section {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
+    height: 1120px;
 
     &--golden {
         background-color: var(--color-golden-light);
@@ -22,11 +28,26 @@
     &--wooden {
         background-color: var(--color-wooden-light);
     }
+
+    &__claim {
+        width: 690px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        gap: 64px;
+    }
 }
 
-.claim {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
+.landing-btn {
+    width: fit-content;
+}
+
+.register-claim {
+    background-color: rgba(0, 0, 0, 0.75);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    color: #fff;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1200px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg');
 }
