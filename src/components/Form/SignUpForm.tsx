@@ -1,28 +1,27 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useState } from "react";
-import { db } from "../../config/config";
-import { doc, setDoc } from "firebase/firestore";
-import { ArrowLeft } from "../Icons/icons";
-import { Button } from "../Buttons/Buttons";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { PASSWORD_MIN_LENGTH, validateEmail, validatePasswordLength } from "../../utils/validation";
+import { useState } from 'react';
+import { db } from '../../config/config';
+import { doc, setDoc } from 'firebase/firestore';
+import { ArrowLeft } from '../Icons/icons';
+import { Button } from '../Buttons/Buttons';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { PASSWORD_MIN_LENGTH, validateEmail, validatePasswordLength } from '../../utils/validation';
 
 type TermsCheckboxProps = {
   checked: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
+interface Error {
+  code: string;
+  message: string;
+}
+
 const TermsCheckbox: React.FC<TermsCheckboxProps> = ({ checked, onChange }) => {
   return (
     <div className="terms">
-      <input
-        className="terms__checkbox"
-        type="checkbox"
-        id="terms"
-        checked={checked}
-        onChange={onChange}
-      />
+      <input className="terms__checkbox" type="checkbox" id="terms" checked={checked} onChange={onChange} />
       <p className="terms__text">
         I agree with ArtViewer{' '}
         <a className="sign-up-page__link" href="">
@@ -60,9 +59,9 @@ export const SignUpForm: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const auth = getAuth();
 
-  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<FormInputs> = async data => {
     if (!termsAccepted) {
-      alert("Please accept the terms and conditions");
+      alert('Please accept the terms and conditions');
       return;
     }
     setIsSubmitting(true);
@@ -87,12 +86,12 @@ export const SignUpForm: React.FC = () => {
       } else {
         setErrorMessage('Unknown error occurred');
       }
-    } catch (error: any) {
-      const errorCode = error.code;
+    } catch (error) {
+      const errorCode = (error as Error).code;
       if (errorCode === 'auth/email-already-in-use') {
-        setErrorMessage('Email has alredy been taken')
+        setErrorMessage('Email has alredy been taken');
       } else {
-        setErrorMessage(`Error adding user data to Firestore: ${error.message}`);
+        setErrorMessage(`Error adding user data to Firestore: ${(error as Error).message}`);
       }
     }
     setIsSubmitting(false);
@@ -121,10 +120,10 @@ export const SignUpForm: React.FC = () => {
           type="text"
           className="sign-up-form__input"
           placeholder="Email"
-          {...register('email', 
-          { required: 'Email is required', 
+          {...register('email', {
+            required: 'Email is required',
             validate: {
-              isValidEmail: (value) => validateEmail(value) || 'Invalid email address',
+              isValidEmail: value => validateEmail(value) || 'Invalid email address',
             },
           })}
         />
@@ -135,27 +134,20 @@ export const SignUpForm: React.FC = () => {
           type="password"
           className="sign-up-form__input"
           placeholder="6+ characters"
-          {...register('password', { 
+          {...register('password', {
             required: 'Password is required',
             minLength: {
               value: PASSWORD_MIN_LENGTH,
-              message: `Password must be at least ${PASSWORD_MIN_LENGTH} characters`
+              message: `Password must be at least ${PASSWORD_MIN_LENGTH} characters`,
             },
             validate: {
-              isValidPassword: (value) => validatePasswordLength(value) || 'Password is too short',
+              isValidPassword: value => validatePasswordLength(value) || 'Password is too short',
             },
           })}
         />
       </div>
-      <TermsCheckbox
-        checked={termsAccepted}
-        onChange={(event) => setTermsAccepted(event.target.checked)}
-      />
-      <Button
-        className="sign-up-form__btn"
-        type="sub_primary"
-        disabled={isSubmitting}
-      >
+      <TermsCheckbox checked={termsAccepted} onChange={event => setTermsAccepted(event.target.checked)} />
+      <Button className="sign-up-form__btn" color="sub_primary" disabled={isSubmitting} type="submit">
         Create Account
       </Button>
     </form>

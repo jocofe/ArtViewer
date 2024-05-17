@@ -138,7 +138,7 @@ export const SignUpNewUser = () => {
                 <div className="selector-wrapper">
                   <Button
                     className="choose-btn"
-                    type="sub_primary"
+                    color="sub_primary"
                     onClick={() => {
                       handleChooseBtnClick(); // Llamar a la función handleChooseBtnClick para abrir el explorador de archivos
                     }}
@@ -184,9 +184,9 @@ export const SignUpNewUser = () => {
                 </div>
               </div>
             </div>
-            <button type="submit" className="submit-btn" disabled={isSubmitting}>
+            <Button type="submit" className="submit-btn" disabled={isSubmitting}>
               Continue
-            </button>
+            </Button>
           </form>
         </div>
       </div>
