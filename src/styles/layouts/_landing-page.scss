@@ -1,0 +1,32 @@
+.hero {
+    height: 1036px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    &__text {
+        width: 620px;
+        text-align: center;
+    }
+}
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    &--golden {
+        background-color: var(--color-golden-light);
+    }
+
+    &--wooden {
+        background-color: var(--color-wooden-light);
+    }
+}
+
+.claim {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
