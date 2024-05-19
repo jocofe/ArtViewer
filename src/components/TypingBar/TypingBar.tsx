@@ -1,17 +1,14 @@
+import { Cursor, useTypewriter } from "react-simple-typewriter";
 import { SearchGlass } from "../Icons/icons"
-import { useState, useEffect } from "react";
 
 export const TypingBar = () => {
-    const [textIndex, setTextIndex] = useState(0);
-    const text = ['Picasso', 'Da Vinci', 'Monet', 'Rembrandt'];
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTextIndex((textIndex + 1) % text.length);
-        }, 2000);
-
-        return () => clearInterval(interval);
-    }, [textIndex, text.length]);
+    const [typeEffect] = useTypewriter({
+        words: ['Picasso', 'Da Vinci', 'Monet', 'Rembrandt'],
+        typeSpeed: 70,
+        deleteSpeed: 50,
+        delaySpeed: 1000,
+        loop: 0
+    })
 
     return (
         <div className="art">
@@ -31,7 +28,10 @@ export const TypingBar = () => {
             <div>
                 <div className="typing-wrapper">
                     <SearchGlass/>
-                    <p className="dynamic-text">{text[textIndex]}</p>
+                    <div className="dynamic-text">
+                        <span>{typeEffect}</span>
+                        <Cursor/>   
+                    </div>
                 </div>
             </div>
         </div>
