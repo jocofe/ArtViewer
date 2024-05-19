@@ -7,39 +7,13 @@ import { ArrowLeft } from '../Icons/icons';
 import { Button } from '../Buttons/Buttons';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { PASSWORD_MIN_LENGTH, validateEmail, validatePasswordLength } from '../../utils/validation';
-
-type TermsCheckboxProps = {
-  checked: boolean;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-};
+import { TermsCheckbox } from '../TermsCheckbox/TermsCheckbox';
 
 interface Error {
   code: string;
   message: string;
 }
 
-const TermsCheckbox: React.FC<TermsCheckboxProps> = ({ checked, onChange }) => {
-  return (
-    <div className="terms">
-      <input className="terms__checkbox" type="checkbox" id="terms" checked={checked} onChange={onChange} />
-      <p className="terms__text">
-        I agree with ArtViewer{' '}
-        <a className="sign-up-page__link" href="">
-          Terms of Service
-        </a>
-        ,{' '}
-        <a className="sign-up-page__link" href="">
-          Privacy Policy
-        </a>
-        , and default{' '}
-        <a className="sign-up-page__link" href="">
-          Notification Settings
-        </a>
-        .
-      </p>
-    </div>
-  );
-};
 
 interface FormInputs {
   name: string;

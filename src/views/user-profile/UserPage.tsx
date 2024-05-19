@@ -1,4 +1,4 @@
-import { Tabs } from '../../components/User/tabs';
+import { Tabs } from '../../components/Tabs/Tabs';
 import { ProfileCard } from '../../components/ProfileCard/ProfileCard';
 
 const collections = <div>Collections Content</div>;

@@ -4,13 +4,12 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, UserCredential } from 'fi
 import { getAdditionalUserInfo } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import '../../styles/index.scss';
 import { GoogleIcon } from '../../components/Icons/icons';
 
 export const SignGoogle = (props: SignGoogleProps) => {
   const { label } = props;
 
-  const SignInGoogleClass = classNames('sign-google');
+  const SignInGoogleClass = classNames('sign-google' || 'sign-google--white');
 
   const auth = getAuth();
   const navigate = useNavigate();

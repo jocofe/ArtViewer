@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
 import { Button } from "../../components/Buttons/Buttons"
 import { RandomMosaicImages } from "../../components/Landing/RandomMosaicImages"
 import { SignUpFromLanding } from "../../components/Landing/SignUpFromLanding"
@@ -6,7 +6,7 @@ import { SignUpFromLanding } from "../../components/Landing/SignUpFromLanding"
 export const LandingPage = () => {
     const [currentTextIndex, setCurrentTextIndex] = useState(0)
     const texts = ['research', 'explore', 'inspire', 'collect', 'discover']
-    
+
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTextIndex((currentTextIndex + 1) % texts.length);
@@ -46,7 +46,7 @@ export const LandingPage = () => {
                 </div>
             </section>
             <div className="register-claim section">
-                <h1 className="section__claim">Register now to watch art</h1>
+                <h1 className="section__claim--white">Register now to watch art</h1>
                 <SignUpFromLanding/>
             </div>
         </div>
