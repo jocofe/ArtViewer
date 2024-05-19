@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Button } from "../../components/Buttons/Buttons"
-import { RandomMosaicImages } from "../../components/Landing/RandomMosaicImages"
-import { SignUpFromLanding } from "../../components/Landing/SignUpFromLanding"
+import { RandomMosaicImages } from '../../components/MosaicImage/RandomMosaicImages';
+import { SignUpFromLanding } from "../../components/Form/SignUpFromLanding"
+import { TypingBar } from '../../components/TypingBar/TypingBar';
 
 export const LandingPage = () => {
     const [currentTextIndex, setCurrentTextIndex] = useState(0)
@@ -28,7 +29,7 @@ export const LandingPage = () => {
                 </div>
             </section>
             <section className="section section--golden">
-                <div>images</div>
+                <TypingBar/>
                 <div className="section__claim">
                     <h1>Search for some art piece</h1>
                     <h3>Are you studying some artist? Some movement? Just want to explore art? Try to explore now.</h3>
