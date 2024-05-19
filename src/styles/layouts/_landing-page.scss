@@ -1,25 +1,29 @@
+/* Hero Section */
 .hero {
-    height: 1036px;
+    height: 100vh;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-
-    &__text {
-        width: 500px;
-        text-align: center;
-    }
+    padding: 20px;
 }
+
+.hero__text {
+    text-align: center;
+}
+
 .changing-text {
     color: var(--color-wooden);
 }
 
+/* Section Styles */
 .section {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     height: 1200px;
+    gap: 72px;
 
     &--golden {
         background-color: var(--color-golden-light);
@@ -36,12 +40,10 @@
         text-align: center;
         align-items: center;
         gap: 64px;
-
-        &--white {
-            color: var(--color-white);
-        }
     }
 }
+
+/* Collections Section */
 
 .collect-bg {
     height: 400px;
@@ -77,10 +79,32 @@
     width: fit-content;
 }
 
+/* Register */
 .register-claim {
     background-color: rgba(0, 0, 0, 0.75);
     background-size: cover;
     background-position: center;
     background-blend-mode: multiply;
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1200px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg');
+
+    &__text {
+        color: var(--color-white);
+        width: 40%;
+        text-align: center;
+    }
 }
+
+/* Media querier */
+@media (min-width: 768px) and (max-width: 1200px) {
+    .hero {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .section {
+        flex-direction: column;
+    }
+
+
+}
+

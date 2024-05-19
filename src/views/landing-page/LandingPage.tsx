@@ -54,7 +54,7 @@ export const LandingPage = () => {
                 </div>
             </section>
             <div className="register-claim section">
-                <h1 className="section__claim--white">Register now to watch art</h1>
+                <h1 className="register-claim__text">Register now to watch art</h1>
                 <SignUpFromLanding/>
             </div>
         </div>
