@@ -43,7 +43,14 @@ export const LandingPage = () => {
                     <Button size="large" className="landing-btn">Explore</Button>
                 </div>
                 <div>
-                    Images
+                    <div className='collect-bg'>
+                        <p className='collect-bg__text'>My collection of Picasso</p>
+                    </div>
+                    <div className='collect-wrapper'>
+                        <img className='collect-card' src="https://uploads2.wikiart.org/00198/images/pablo-picasso/old-guitarist-chicago.jpg!Large.jpg" alt="El viejo guitarrista ciego - Pablo Picasso" />
+                        <img className='collect-card' src="https://s1.significados.com/foto/cubismo-picasso-significados_bg.jpg?class=article" alt="Las señoritas de Aviñón - Pablo Picasso" />
+                        <img className='collect-card' src="https://arteref.com/wp-content/uploads/2021/12/Pablo_Picasso_1910_Girl_with_a_Mandolin_Fanny_Tellier_oil_on_canvas_100.3_x_73.6_cm_Museum_of_Modern_Art_New_York.-1-1.jpg" alt="Mujer con una guitarra - Pablo Picasso" />
+                    </div>
                 </div>
             </section>
             <div className="register-claim section">
