@@ -1,0 +1,110 @@
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.hero__text {
+    text-align: center;
+}
+
+.changing-text {
+    color: var(--color-wooden);
+}
+
+/* Section Styles */
+.section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 1200px;
+    gap: 72px;
+
+    &--golden {
+        background-color: var(--color-golden-light);
+    }
+
+    &--wooden {
+        background-color: var(--color-wooden-light);
+    }
+
+    &__claim {
+        width: 690px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        gap: 64px;
+    }
+}
+
+/* Collections Section */
+
+.collect-bg {
+    height: 400px;
+    width: 440px;
+    border-radius: 40px;
+    background: url(https://static1.museoreinasofia.es/sites/all/themes/mrs_twitter_bootstrap/images/banner-repensar-guernica.jpg);
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: multiply;
+
+    &__text {
+        width: 80%;
+        padding: 40px 0 0 40px;
+        color: var(--color-white);
+        font-size: var(--font-size-62);
+        line-height: 6rem;
+    }
+}
+
+.collect-wrapper {
+    margin: -140px 0 0 80px;
+    display: flex;
+    gap: 20px;
+}
+
+.collect-card {
+    width: 145px;
+    height: 220px;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.landing-btn {
+    width: fit-content;
+}
+
+/* Register */
+.register-claim {
+    background-color: rgba(0, 0, 0, 0.75);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg/1200px-Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg');
+
+    &__text {
+        color: var(--color-white);
+        width: 40%;
+        text-align: center;
+    }
+}
+
+/* Media querier */
+@media (min-width: 768px) and (max-width: 1200px) {
+    .hero {
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .section {
+        flex-direction: column;
+    }
+
+
+}
+

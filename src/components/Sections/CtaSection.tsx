@@ -10,7 +10,7 @@ export const CtaSection = () => {
         <Link to={'/signup'}>
           <Button>Get Started Now</Button>
         </Link>
-        <Button type="sub_primary">Learn about collections</Button>
+        <Button color="sub_primary">Learn about collections</Button>
       </div>
     </div>
   );

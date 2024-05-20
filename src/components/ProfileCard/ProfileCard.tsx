@@ -29,7 +29,7 @@ export const ProfileCard = () => {
       <div className="profilecard-info">
         <h1 className="h3 profilecard__name">{fullName}</h1>
         <h3 className="h4 profilecard__location">{location}</h3>
-        <Button className="edit-btn" type="sub_primary">
+        <Button className="edit-btn" color="sub_primary">
           Edit Profile
         </Button>
       </div>

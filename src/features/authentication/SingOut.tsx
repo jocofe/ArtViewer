@@ -5,7 +5,7 @@ export const SignOut = () => {
   const auth = getAuth();
 
   return (
-    <Button onClick={() => signOut(auth)} type="primary" size="medium">
+    <Button onClick={() => signOut(auth)} color="primary" size="medium">
       Sing Out
     </Button>
   );

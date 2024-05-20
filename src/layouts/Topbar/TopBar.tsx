@@ -66,7 +66,7 @@ export const TopBar = (props: TopBarProps) => {
             <Button onClick={() => {}}>Sign Up</Button>
           </Link>
           <Link to={'/signin'}>
-            <Button type="sub_primary" onClick={() => {}}>
+            <Button color="sub_primary" onClick={() => {}}>
               Sign In
             </Button>
           </Link>

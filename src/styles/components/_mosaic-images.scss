@@ -1,0 +1,32 @@
+.image-container {
+    width: 255px;
+    height: 420px;
+    border-radius: 50px;
+    overflow: hidden;
+    background: url('https://framemark.vam.ac.uk/collections/${state.imageId}/full/full/0/default.jpg') / cover no-repeat;
+    background-position: center center;
+
+    opacity: 0;
+    transition: opacity 1000ms ease-in;
+}
+
+.image-container.loaded {
+    opacity: 1;
+}
+
+.mosaic-images{
+    display: flex;
+    flex-direction: row;
+    gap: 34px;
+    margin-top: 150px;
+    z-index: -1;
+}
+.mosaic-column {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+}
+
+.column-center {
+    margin-top: -100px;
+}

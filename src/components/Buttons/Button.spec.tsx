@@ -15,7 +15,7 @@ describe('Button', () => {
     const type = 'secondary';
 
     render(
-      <Button type={type} size={size}>
+      <Button color={type} size={size}>
         Test
       </Button>,
     );
