@@ -17,8 +17,6 @@ async function saveArtPieceToUser(artPieceId: string) {
     // User's UID
     const uid = user.uid;
 
-    // Reference to the user's document in Firestore
-    const userRef = doc(db, 'users', uid);
 
     // Get the user's email
     const userEmail = user.email;

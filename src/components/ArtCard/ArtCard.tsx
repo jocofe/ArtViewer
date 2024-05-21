@@ -7,7 +7,7 @@ const constructImageUrl = (imageId: string) => {
 
 export const ArtCard = (props: ArtCardDetails) => {
 
-  const { imageId, title, author, date } = props;
+  const { imageId, title, author, date, id } = props;
   const imageUrl = constructImageUrl(imageId);
 
 
@@ -31,7 +31,7 @@ export const ArtCard = (props: ArtCardDetails) => {
       </section>
 
       <section className="art-card__buttons">
-        <Socials artPieceId={imageId}/>
+        <Socials artPieceId={id}/>
       </section>
     </div>
   );

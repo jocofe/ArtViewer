@@ -3,4 +3,5 @@ export interface ArtCardDetails {
   author: string;
   date: string;
   imageId: string;
+  id: string;
 }

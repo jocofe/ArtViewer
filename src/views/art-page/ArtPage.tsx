@@ -160,6 +160,7 @@ export const ArtPage = () => {
                     imageId={artArtist.imageId}
                     author={artArtist.artist}
                     date={artArtist.date}
+                    id={artArtist.id}
                   />
                 </Link>
               ))}

@@ -86,7 +86,13 @@ export const SearchPage = () => {
           <Masonry className="masonry__columns" gutter="32px">
             {searchResults.map(result => (
               <Link key={result.id} to={`/artwork/${result.id}`}>
-                <ArtCard title={result.title} author={result.author} date={result.date} imageId={result.imageId} />
+                <ArtCard 
+                  title={result.title} 
+                  author={result.author} 
+                  date={result.date} 
+                  imageId={result.imageId} 
+                  id={result.id}
+                  />
               </Link>
             ))}
           </Masonry>

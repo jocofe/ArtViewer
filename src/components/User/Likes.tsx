@@ -33,9 +33,9 @@ const getFavourites = async (userEmail: string) => {
 
 const getArtPiece = async (artPieceId: string) => {
   try {
-    const response = await fetch(`https://api.vam.ac.uk/v2/objects/search?kw_system_number=${artPieceId}`);
+    const response = await fetch(`https://api.vam.ac.uk/v1/museumobject/${artPieceId}`);
     const data = await response.json();
-    return data.records[0] as ArtPiece;
+    return data[0].fields as ArtPiece;
   } catch (error) {
     console.error("Error fetching art piece:", error);
     return null;
@@ -87,6 +87,7 @@ export const Likes = () => {
                 imageId={artPiece.imageId}
                 author={artPiece.author}
                 date={artPiece.date}
+                id={artPiece.id}
               />
             </Link>
           ))}

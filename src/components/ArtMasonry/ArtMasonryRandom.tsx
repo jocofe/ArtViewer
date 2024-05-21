@@ -49,6 +49,7 @@ export const ArtMasonryRandom = () => {
                   imageId={artItem.imageId}
                   author={artItem.author}
                   date={artItem.date}
+                  id={artItem.id}
                 />
               </Link>
             ))}
