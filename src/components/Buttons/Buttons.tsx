@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import '../../styles/index.scss';
 import { ButtonProps } from '../../models/buttons';
-import { Link } from 'react-router-dom';
 
 export const Button = ({
   className = '',
@@ -10,7 +9,6 @@ export const Button = ({
   color = 'primary',
   children,
   onClick,
-  linkTo,
   ...rest
 }: ButtonProps) => {
   const btnClass = classNames({
@@ -21,15 +19,6 @@ export const Button = ({
     'btn--disabled': disabled,
   });
 
-  if (linkTo) {
-    return (
-      <Link to={linkTo} {...rest}>
-        <button className={btnClass} disabled={disabled} onClick={onClick}>
-          {children}
-        </button>
-      </Link>
-    );
-  }
 
   return (
     <button className={btnClass} disabled={disabled} onClick={onClick} {...rest}>

@@ -6,5 +6,4 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   color?: 'primary' | 'sub_primary' | 'secondary' | 'default' | 'submit';
   onClick?: () => void;
-  linkTo?: string;
 }
