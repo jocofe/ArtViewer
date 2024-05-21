@@ -12,12 +12,11 @@ interface UserContextType {
 
 export interface UserData {
   location: string;
-  charAt(arg0: number): React.SetStateAction<string | null>;
   name: string | null;
   email: string;
   displayName: string;
   username: string;
-  // Datos que quiero del usuario
+  // Otros datos que deseas del usuario
 }
 
 export const UserContext = createContext<UserContextType>({ isLoggedIn: false, userData: null });

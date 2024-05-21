@@ -2,10 +2,8 @@ import { ArtCardDetails } from '../../models/art-card';
 import { Socials } from '../Socials/socials';
 
 export const ArtCard = (props: ArtCardDetails) => {
-
   const { imageId, title, author, date } = props;
   const iiiUrl = `https://framemark.vam.ac.uk/collections/${imageId}/full/!500,500/0/default.jpg`;
-
 
   const handleImageSize = (event: React.ChangeEvent<HTMLImageElement>) => {
     if (event.target.height > event.target.width) {
@@ -27,7 +25,7 @@ export const ArtCard = (props: ArtCardDetails) => {
       </section>
 
       <section className="art-card__buttons">
-        <Socials/>
+        <Socials />
       </section>
     </div>
   );
