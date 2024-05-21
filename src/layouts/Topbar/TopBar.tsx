@@ -47,7 +47,9 @@ export const TopBar = (props: TopBarProps) => {
           <Link to={'/search'}>
             <SearchGlass className="icon" />
           </Link>
-          <Button>Sign Up</Button>
+          <Link to={'/signup'}>
+            <Button>Sign Up</Button>
+          </Link>
         </div>
       )}
       {isCollapse && isLoggedIn && (
@@ -60,10 +62,12 @@ export const TopBar = (props: TopBarProps) => {
       )}
       {!isCollapse && !isLoggedIn && (
         <div className="signup-wrapper">
-          <Button>Sign Up</Button>
-          <Button color="sub_primary">
-            Sign In
-          </Button>
+          <Link to={'/signup'}>
+            <Button>Sign Up</Button>
+          </Link>
+          <Link to={'/signin'}>
+            <Button color="sub_primary">Sign In</Button>
+          </Link>
         </div>
       )}
       {!isCollapse && isLoggedIn && (

@@ -42,7 +42,7 @@ export const ArtMasonryRandom = () => {
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>
           <Masonry className="masonry__columns" gutter="32px">
             {artList.map((artItem: ArtListItem) => (
-              <Link key={artItem.id} to={`/art-piece/${artItem.id}`}>
+              <div className="relative">
                 <ArtCard
                   key={artItem.id}
                   title={artItem.title}
@@ -50,7 +50,8 @@ export const ArtMasonryRandom = () => {
                   author={artItem.author}
                   date={artItem.date}
                 />
-              </Link>
+                <Link className="expanded-anchor" key={artItem.id} to={`/art-piece/${artItem.id}`} />
+              </div>
             ))}
           </Masonry>
         </ResponsiveMasonry>
