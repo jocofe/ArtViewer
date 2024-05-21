@@ -3,7 +3,7 @@ import { ArtItem, ArtListItem, ArtListItemFromApi } from '../../models/art-list'
 import axios from 'axios';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Button } from '../Buttons/Buttons';
 
 export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
@@ -55,11 +55,9 @@ export const ArtMasonryRandom = () => {
             ))}
           </Masonry>
         </ResponsiveMasonry>
-        <Link to={'/signup'}>
           <div className="masonry__button">
-            <Button color="sub_primary">Sign Up to continue</Button>
+            <Button color="sub_primary" component={NavLink} to={'/signup'}>Sign Up to continue</Button>
           </div>
-        </Link>
       </div>
     </div>
   );

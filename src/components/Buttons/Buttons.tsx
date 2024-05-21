@@ -4,6 +4,7 @@ import { ButtonProps } from '../../models/buttons';
 
 export const Button = ({
   className = '',
+  component = 'button',
   size = 'medium',
   disabled,
   color = 'primary',
@@ -19,10 +20,10 @@ export const Button = ({
     'btn--disabled': disabled,
   });
 
-
+  const Component = component;
   return (
-    <button className={btnClass} disabled={disabled} onClick={onClick} {...rest}>
+    <Component className={btnClass} disabled={disabled} onClick={onClick} {...rest}>
       {children}
-    </button>
+    </Component>
   );
 };
