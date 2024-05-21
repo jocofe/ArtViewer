@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import '../../styles/index.scss';
 import { ButtonProps } from '../../models/buttons';
+import { Link } from 'react-router-dom';
 
 export const Button = ({
   className = '',
@@ -9,14 +10,9 @@ export const Button = ({
   type = 'primary',
   children,
   onClick,
+  linkTo,
   ...rest
 }: ButtonProps) => {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault(); // Prevenir la acción predeterminada del evento de clic
-    if (onClick) {
-      onClick(); // Llamar al manejador de clic si está definido
-    }
-  };
   const btnClass = classNames({
     'btn': true,
     [className]: className,
@@ -25,8 +21,18 @@ export const Button = ({
     'btn--disabled': disabled,
   });
 
+  if (linkTo) {
+    return (
+      <Link to={linkTo} {...rest}>
+        <button className={btnClass} disabled={disabled} onClick={onClick}>
+          {children}
+        </button>
+      </Link>
+    );
+  }
+
   return (
-    <button className={btnClass} disabled={disabled} onClick={handleClick} {...rest}>
+    <button className={btnClass} disabled={disabled} onClick={onClick} {...rest}>
       {children}
     </button>
   );

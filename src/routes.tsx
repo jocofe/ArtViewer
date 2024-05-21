@@ -53,34 +53,52 @@ export const router = createBrowserRouter([
             element: <ArtDetailPage />,
           },
           {
+            path: '/settings/general',
+            element: <GeneralSettings />,
+          },
+          {
+            path: '/settings/profile',
+            element: <ProfileSettings />,
+          },
+          {
+            path: '/settings/password',
+            element: <PasswordSettings />,
+          },
+          {
+            path: '/settings/sessions',
+            element: <SessionsSettings />,
+          },
+          {
+            path: '/user-collection',
+            element: <UserCollection />,
+          },
+          {
             path: '/:username',
             element: <UserPage />,
+          },
+          {
+            path: '/:username/settings',
+            element: <UserSettings />,
             children: [
               {
-                path: 'collectionname',
-                element: <UserCollection />,
+                path: '',
+                element: <Navigate to="general" />,
               },
               {
-                path: 'settings',
-                element: <UserSettings />,
-                children: [
-                  {
-                    path: 'general',
-                    element: <GeneralSettings />,
-                  },
-                  {
-                    path: 'profile',
-                    element: <ProfileSettings />,
-                  },
-                  {
-                    path: 'password',
-                    element: <PasswordSettings />,
-                  },
-                  {
-                    path: 'sessions',
-                    element: <SessionsSettings />,
-                  },
-                ],
+                path: 'general',
+                element: <GeneralSettings />,
+              },
+              {
+                path: 'profile',
+                element: <ProfileSettings />,
+              },
+              {
+                path: 'password',
+                element: <PasswordSettings />,
+              },
+              {
+                path: 'sessions',
+                element: <SessionsSettings />,
               },
             ],
           },

@@ -50,7 +50,7 @@ export const DropdownProfileButton: React.FC = () => {
               <Link to={`/${username}`}>Profile</Link>
             </li>
             <li className="dropdown__item">
-              <Link to={'/user-profile/settings'}>Settings</Link>
+              <Link to={`/${username}/settings`}>Settings</Link>
             </li>
             <li className="dropdown__item" onClick={() => signOut(auth)}>
               Sign Out

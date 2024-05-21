@@ -6,4 +6,5 @@ export interface ButtonProps {
   disabled?: boolean;
   type?: 'primary' | 'sub_primary' | 'secondary' | 'default' | 'submit';
   onClick?: () => void;
+  linkTo?: string;
 }
