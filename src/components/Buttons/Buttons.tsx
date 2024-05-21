@@ -13,12 +13,6 @@ export const Button = ({
   linkTo,
   ...rest
 }: ButtonProps) => {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault(); // Prevenir la acción predeterminada del evento de clic
-    if (onClick) {
-      onClick(); // Llamar al manejador de clic si está definido
-    }
-  };
   const btnClass = classNames({
     'btn': true,
     [className]: className,
@@ -38,7 +32,7 @@ export const Button = ({
   }
 
   return (
-    <button className={btnClass} disabled={disabled} onClick={handleClick} {...rest}>
+    <button className={btnClass} disabled={disabled} onClick={onClick} {...rest}>
       {children}
     </button>
   );
