@@ -12,11 +12,11 @@ interface Favourite {
 }
 
 interface ArtPiece {
-  title: string;
-  id: string;
-  author: string;
-  date: string;
-  imageId: string;
+  _primaryTitle: string;
+  systemNumber: string;
+  _primaryMaker: string;
+  _primaryDate: string;
+  _primaryImageId: string;
 }
 
 const getFavourites = async (userEmail: string) => {
@@ -33,14 +33,29 @@ const getFavourites = async (userEmail: string) => {
 
 const getArtPiece = async (artPieceId: string) => {
   try {
-    const response = await fetch(`https://api.vam.ac.uk/v1/museumobject/${artPieceId}`);
+    const response = await fetch(`https://api.vam.ac.uk/v2/objects/search?kw_system_number=${artPieceId}`); 
     const data = await response.json();
-    return data[0].fields as ArtPiece;
+    const records = data.records;
+    
+    if (records && records.length > 0) {
+      const artPiece = records[0];
+      return {
+        _primaryTitle: artPiece._primaryTitle,
+        systemNumber: artPiece.systemNumber,
+        _primaryMaker: artPiece._primaryMaker.name,
+        _primaryDate: artPiece._primaryDate,
+        _primaryImageId: artPiece._primaryImageId,
+      };
+      } else {
+        console.warn(`No results found for artPieceid: ${artPieceId}`);
+        return null;
+      }
   } catch (error) {
-    console.error("Error fetching art piece:", error);
-    return null;
+      console.error("Error fetching art piece:", error);
+      return null;
   }
 };
+
 
 const fetchArtPieces = async (favourites: Favourite[]) => {
     try {
@@ -52,6 +67,7 @@ const fetchArtPieces = async (favourites: Favourite[]) => {
       return [];
     }
 };
+
 
 export const Likes = () => {
   const auth = getAuth();
@@ -75,19 +91,20 @@ export const Likes = () => {
     }
   }, [favourites]);
 
+
   return (
     <div>
       <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>
         <Masonry className="masonry__columns" gutter="32px">
           {artPieces.map((artPiece, index) => (
-            <Link key={index} to={`/art-piece/${artPiece.id}`}>
+            <Link key={index} to={`/art-piece/${artPiece.systemNumber}`}>
               <ArtCard
                 key={index}
-                title={artPiece.title}
-                imageId={artPiece.imageId}
-                author={artPiece.author}
-                date={artPiece.date}
-                id={artPiece.id}
+                title={artPiece._primaryTitle}
+                imageId={artPiece._primaryImageId}
+                author={artPiece._primaryMaker}
+                date={artPiece._primaryDate}
+                id={artPiece.systemNumber}
               />
             </Link>
           ))}
