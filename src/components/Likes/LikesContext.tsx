@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { collection, doc, getDocs, addDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../../config/config';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Toaster } from '../Dialogs/Toaster Message/ToasterMessage';
 
 interface Favourite {
   artPieceId: string;
@@ -29,6 +30,7 @@ export const useLikes = () => {
 
 export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
   const [favourites, setFavourites] = useState<Favourite[]>([]);
+  const [toasterMessage, setToasterMessage] = useState<string | null>(null);
   const auth = getAuth();
 
   useEffect(() => {
@@ -61,11 +63,13 @@ export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
           const likeDocRef = doc(favouritesRef, existingLike.id);
           await deleteDoc(likeDocRef);
           setFavourites(favourites.filter(fav => fav.artPieceId !== artPieceId));
+          setToasterMessage('Art piece removed from Likes');
         }
       } else {
         // art is NOT LIKED -> like it
         const docRef = await addDoc(favouritesRef, { artPieceId });
         setFavourites([...favourites, { artPieceId, id: docRef.id }]);
+        setToasterMessage('Art piece added to Likes');
       }
     }
   };
@@ -73,6 +77,7 @@ export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
   return (
     <LikesContext.Provider value={{ favourites, toggleLike }}>
       {children}
+      {toasterMessage && <Toaster message={toasterMessage} onClose={() => setToasterMessage(null)} /> }
     </LikesContext.Provider>
   );
 };
