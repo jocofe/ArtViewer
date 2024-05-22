@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import '../../styles/index.scss';
 import { SearchBarProps } from '../../models/searchbar';
 import { SearchGlass } from '../Icons/icons';
 import { useState } from 'react';

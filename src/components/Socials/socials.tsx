@@ -35,7 +35,7 @@ export const Socials = () => {
         <i onClick={handleFav}>{isOnFav ? <FullHeart className="icon" /> : <Heart className="icon" />}</i>
       </div>
       <ModalDefault show={showModal} size="md" onClose={handleCloseModal}>
-        <AddCollectionModal />
+        <AddCollectionModal collections={[]} />
       </ModalDefault>
     </>
   );
