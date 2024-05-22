@@ -64,7 +64,7 @@ export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
           const likeDocRef = doc(favouritesRef, existingLike.id);
           await deleteDoc(likeDocRef);
           setFavourites(favourites.filter((fav) => fav.artPieceId !== artPieceId));
-          setToasterMessage('Art piece removed from Likes');
+          setToasterMessage('Art piece removed from favourites');
         }
       } else {
         // Art is NOT LIKED -> like it
