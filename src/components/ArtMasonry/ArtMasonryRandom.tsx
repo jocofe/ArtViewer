@@ -49,6 +49,7 @@ export const ArtMasonryRandom = () => {
                   imageId={artItem.imageId}
                   author={artItem.author}
                   date={artItem.date}
+                  id={artItem.id}
                 />
                 <Link className="expanded-anchor" key={artItem.id} to={`/art-piece/${artItem.id}`} />
               </div>

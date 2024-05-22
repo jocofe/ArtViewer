@@ -1,14 +1,14 @@
-import { Tabs } from '../../components/Tabs/Tabs';
+import Tabs from '../../Tabs.tsx/Tabs';
 import { ProfileCard } from '../../components/ProfileCard/ProfileCard';
+import { Likes } from '../../components/Likes/Likes';
 
 const collections = <div>Collections Content</div>;
-const likes = <div>Likes content</div>;
 
 export const UserPage = () => {
   return (
     <div>
       <ProfileCard />
-      <Tabs collections={collections} likes={likes} />
+      <Tabs collections={collections} likes={<Likes/>} />
     </div>
   );
 };

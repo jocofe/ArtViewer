@@ -1,9 +1,14 @@
 import { ArtCardDetails } from '../../models/art-card';
 import { Socials } from '../Socials/socials';
 
+const constructImageUrl = (imageId: string) => {
+  return `https://framemark.vam.ac.uk/collections/${imageId}/full/!500,500/0/default.jpg`;
+}
+
 export const ArtCard = (props: ArtCardDetails) => {
-  const { imageId, title, author, date } = props;
-  const iiiUrl = `https://framemark.vam.ac.uk/collections/${imageId}/full/!500,500/0/default.jpg`;
+
+  const { imageId, title, author, date, id } = props;
+  const imageUrl = constructImageUrl(imageId);
 
   const handleImageSize = (event: React.ChangeEvent<HTMLImageElement>) => {
     if (event.target.height > event.target.width) {
@@ -17,7 +22,7 @@ export const ArtCard = (props: ArtCardDetails) => {
 
   return (
     <div className="art-card">
-      <img src={iiiUrl} onLoad={handleImageSize} alt={title} className="art-card__image" />
+      <img src={imageUrl} onLoad={handleImageSize} alt={title} className="art-card__image" />
       <section className="art-card__info">
         <h2 className="art-card__title">{title}</h2>
         <p className="art-card__author">{author}</p>
@@ -25,7 +30,7 @@ export const ArtCard = (props: ArtCardDetails) => {
       </section>
 
       <section className="art-card__buttons">
-        <Socials />
+        <Socials artPieceId={id}/>
       </section>
     </div>
   );
