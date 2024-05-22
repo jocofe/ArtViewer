@@ -1,6 +1,6 @@
-import { Tabs } from '../../components/User/tabs';
+import Tabs from '../../Tabs.tsx/Tabs';
 import { ProfileCard } from '../../components/ProfileCard/ProfileCard';
-import { Likes } from '../../components/User/Likes';
+import { Likes } from '../../components/Likes/Likes';
 
 const collections = <div>Collections Content</div>;
 

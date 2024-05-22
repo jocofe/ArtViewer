@@ -10,7 +10,6 @@ export const ArtCard = (props: ArtCardDetails) => {
   const { imageId, title, author, date, id } = props;
   const imageUrl = constructImageUrl(imageId);
 
-
   const handleImageSize = (event: React.ChangeEvent<HTMLImageElement>) => {
     if (event.target.height > event.target.width) {
       event.target.style.maxHeight = 'auto';
