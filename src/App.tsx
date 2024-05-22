@@ -9,13 +9,13 @@ initializeApp(firebaseConfig);
 
 function App() {
   return (
-    <>
+    <React.StrictMode>
       <UserContextProviderFirebase>
         <LikesProvider>
           <Outlet />
         </LikesProvider>
       </UserContextProviderFirebase>
-    </>
+    </React.StrictMode>
   );
 }
 

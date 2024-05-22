@@ -44,7 +44,7 @@ export const Socials = ({ artPieceId }: SocialProps) => {
         <i onClick={handleFav}>{isFavourite ? <FullHeart className="icon" /> : <Heart className="icon" />}</i>
       </div>
       <ModalDefault show={showModal} size="md" onClose={handleCloseModal}>
-        <AddCollectionModal />
+        <AddCollectionModal collections={[]} />
       </ModalDefault>
     </>
   );

@@ -13,14 +13,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
+  background-color: var(--color-pearlwhite);
+  border-radius: 30px;
   z-index: 1000; /*Más alto que el overlay */
-}
-
-.modal__content {
-  padding: 16px;
 }
 
 .modal__content--sm {
@@ -31,29 +26,115 @@
   width: 500px;
 }
 
-.collection-modal-wrapper {
+.collection-modal {
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 32px;
+    border-radius: 30px 30px 0 0;
+    background-color: var(--color-blackout);
+
+    & h3 {
+      color: var(--color-white);
+    }
+  }
+
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding: 0 32px 0 32px;
+  }
+
+  &__collections {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 32px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__label {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__name {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__description {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.collection-createnew__content {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  gap: 64px;
 }
 
-.collection-modal__title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
+.collection-input {
+  &__name {
+    border: 1px solid var(--color-blackout-light);
+    width: 100%;
+    height: 32px;
+    border-radius: 4px;
+    padding: 16px;
+  }
 
-.collection-modal__content {
-  width: 100%;
-}
-
-.collection-modal__collections {
-  margin-top: 20px;
-  text-align: center;
+  &__description {
+    border: 1px solid var(--color-blackout-light);
+    width: 100%;
+    height: 100px;
+    border-radius: 4px;
+    padding: 16px;
+  }
 }
 
 .collection-filter {
   width: 200px;
+}
+
+.filtercollectionbar {
+  height: 48px;
+  max-height: 48px;
+  border-radius: 60px;
+  padding-left: 24px;
+  background-color: var(--color-blackout-lighter);
+  border: 0;
+  width: 100%;
+  border: 1px solid var(--color-blackout);
+
+  &-wrapper {
+    position: relative;
+    align-items: center;
+    height: 48px;
+    max-height: 48px;
+    display: flex;
+  }
 }
