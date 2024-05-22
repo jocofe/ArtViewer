@@ -1,12 +1,71 @@
-.toaster-wrapper {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: var(--color-blackout);
-    color: var(--color-white);
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 5px var(--color-blackout-lighter);
-    z-index: 1000;
-    transition: opacity 0.3s ease;
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 35px;
+  border-radius: 2px;
+  background: var(--color-blackout);
+  padding: 20px 35px 20px 25px;
+  box-shadow: 0 0px 1px var(--color-blackout);
+  overflow: hidden;
+  transform: translateX(calc(100% + 30px));
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.25, 1.35);
+  &.active {
+    transform: translateX(0);
   }
+
+  .toast-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .message {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+    font-size: var(--font-size-20);
+    color: var(--color-white);
+
+  }
+
+  .toast-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    padding: 4px;
+    cursor: pointer;
+    opacity: 0.7;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: var(--color-white);
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      background-color: var(--color-blackout-light);
+      animation: progress 3s linear forwards;
+    }
+    &.active::before {
+      animation: progress 3s linear forwards;
+    }
+  }
+}
+
+@keyframes progress {
+  100% {
+    right: 100%;
+  }
+}
+
