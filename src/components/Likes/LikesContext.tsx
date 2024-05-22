@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { collection, doc, getDocs, addDoc, deleteDoc } from "firebase/firestore";
+import { collection, doc, getDocs, addDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../config/config';
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { Toaster
 
+ } from '../Dialogs/Toaster Message/ToasterMessage';
 interface Favourite {
   artPieceId: string;
   id?: string;
@@ -29,14 +31,15 @@ export const useLikes = () => {
 
 export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
   const [favourites, setFavourites] = useState<Favourite[]>([]);
+  const [toasterMessage, setToasterMessage] = useState<string | null>(null);
   const auth = getAuth();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         const userEmail = user.email!;
-        const userDocRef = doc(db, "users", userEmail);
-        const favouritesRef = collection(userDocRef, "favourites");
+        const userDocRef = doc(db, 'users', userEmail);
+        const favouritesRef = collection(userDocRef, 'favourites');
         const querySnapshot = await getDocs(favouritesRef);
         setFavourites(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id } as Favourite)));
       } else {
@@ -51,21 +54,23 @@ export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
     const user = auth.currentUser;
     if (user) {
       const userEmail = user.email!;
-      const userDocRef = doc(db, "users", userEmail);
-      const favouritesRef = collection(userDocRef, "favourites");
-      const existingLike = favourites.find(fav => fav.artPieceId === artPieceId);
-      
+      const userDocRef = doc(db, 'users', userEmail);
+      const favouritesRef = collection(userDocRef, 'favourites');
+      const existingLike = favourites.find((fav) => fav.artPieceId === artPieceId);
+
       if (existingLike) {
-        // art IS LIKED -> remove like
+        // Art IS LIKED -> remove like
         if (existingLike.id) {
           const likeDocRef = doc(favouritesRef, existingLike.id);
           await deleteDoc(likeDocRef);
-          setFavourites(favourites.filter(fav => fav.artPieceId !== artPieceId));
+          setFavourites(favourites.filter((fav) => fav.artPieceId !== artPieceId));
+          setToasterMessage('Art piece removed from Likes');
         }
       } else {
-        // art is NOT LIKED -> like it
+        // Art is NOT LIKED -> like it
         const docRef = await addDoc(favouritesRef, { artPieceId });
         setFavourites([...favourites, { artPieceId, id: docRef.id }]);
+        setToasterMessage('Art piece added to favourites');
       }
     }
   };
@@ -73,6 +78,7 @@ export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
   return (
     <LikesContext.Provider value={{ favourites, toggleLike }}>
       {children}
+      {toasterMessage && <Toaster message={toasterMessage} onClose={() => setToasterMessage(null)} />}
     </LikesContext.Provider>
   );
 };

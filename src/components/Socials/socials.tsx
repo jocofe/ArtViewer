@@ -11,12 +11,11 @@ interface SocialProps {
 
 export const Socials = ({ artPieceId }: SocialProps) => {
   const [isOnSaved, setIsOnSaved] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   // useLikes from LikesContext.tsx
   const { favourites, toggleLike } = useLikes();
   const isFavourite = favourites.some(fav => fav.artPieceId === artPieceId);
-
-  const [showModal, setShowModal] = useState(false);
 
   const handleSaved = (event: React.MouseEvent<HTMLElement>) => {
     event?.preventDefault();
