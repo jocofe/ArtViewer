@@ -1,109 +1,110 @@
-.signinpage-wrapper{
-    width: 100vh;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
+.signinpage-wrapper {
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
 }
 
-.imgsign-wrapper{
-    width: 500px;
-    height: 100vh;
-    background: url('../src/assets/img-background-placeholder-signin.jpeg') lightgray 50% / cover no-repeat;
+.imgsign-wrapper {
+  width: 1000px;
+  height: 100vh;
+  background: url("../src/assets/img-background-placeholder-signin.jpeg") lightgray 50% / cover no-repeat;
 }
 
-.sign-wrapper{
-    width: auto;
-    padding: 0 134px 0 134px;
-    display: flex;
-    justify-content: center;
+.sign-wrapper {
+  width: auto;
+  padding: 0 134px 0 134px;
+  display: flex;
+  justify-content: center;
 }
 
-.sign__content{
-    display: flex;
-    width: 328px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 32px;
+.sign__content {
+  display: flex;
+  width: 328px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
 }
 
 .sing__separator {
-    display: flex;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
-    width: 100%;
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  width: 100%;
 }
 
 .signincomp-wrapper {
-    width: 100%;
+  width: 100%;
 }
 
 .signincomp__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
 }
 
 .label-wrapper {
-    justify-content: space-between;
-    display: flex;
-    align-items: center;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
 
-    & a {
-        font-size: var(--font-size-12);
-        text-decoration: underline;
-    }
+  & a {
+    font-size: var(--font-size-12);
+    text-decoration: underline;
+  }
 }
 
 .input-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.signincomp__input{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border-radius: 33px;
-    border: 1px solid var(--color-blackout-light);
-    background: var(--color-white);
-    min-height: 2.5rem;
-    padding: 12px;
+.signincomp__input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 33px;
+  border: 1px solid var(--color-blackout-light);
+  background: var(--color-white);
+  min-height: 2.5rem;
+  padding: 12px;
 }
 
 .btnsign--white {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border-radius: 6px;
-    border: 1px solid var(--color-blackout-light);
-    background: var(--color-white);
-    min-height: 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--color-blackout-light);
+  background: var(--color-white);
+  min-height: 48px;
 }
 
 .noaccount-wrapper {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
 
-    & p, a{
-        font-size: var(--font-size-12);
-    }
+  & p,
+  a {
+    font-size: var(--font-size-12);
+  }
 
-    & a {
-        text-decoration: underline;
-        color: var(--color-blackout);
-    }
+  & a {
+    text-decoration: underline;
+    color: var(--color-blackout);
+  }
 }

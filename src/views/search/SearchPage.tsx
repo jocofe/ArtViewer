@@ -43,60 +43,66 @@ export const SearchPage = () => {
   }
 
   return (
-    <div className='masonry-section'>
-      <h2 className='masonry__title'>{searchTerm}</h2>
+    <div className="masonry-section">
+      {searchTerm.trim() === '' ? (
+        <h2 className="masonry__title">Try to search something</h2>
+      ) : (
+        <h2 className="masonry__title">{searchTerm}</h2>
+      )}
 
-      <div className='filters'>
+      <div className="filters">
         <FilterTag
           className={`filter ${activeFilter === 'author' ? 'active' : ''}`}
-          type='author'
+          type="author"
           onClick={() => handleFilterClick('author')}
         >
           Artist
         </FilterTag>
         <FilterTag
           className={`filter ${activeFilter === 'type' ? 'active' : ''}`}
-          type='type'
+          type="type"
           onClick={() => handleFilterClick('type')}
         >
           Type
         </FilterTag>
         <FilterTag
           className={`filter ${activeFilter === 'technique' ? 'active' : ''}`}
-          type='technique'
+          type="technique"
           onClick={() => handleFilterClick('technique')}
         >
           Technique
         </FilterTag>
         <FilterTag
           className={`filter ${activeFilter === 'location' ? 'active' : ''}`}
-          type='location'
+          type="location"
           onClick={() => handleFilterClick('location')}
         >
           Location
         </FilterTag>
       </div>
 
-      {searchResults && searchResults.length > 0? (
-      <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 768: 2, 1200: 3, 1920: 4,}}>
-        <Masonry className='masonry__columns' gutter='32px'>
-          {searchResults.map((result) => (
-            <Link key={result.id} to={`/art-piece/${result.id}`}>
-              <ArtCard
-                title={result.title}
-                author={result.author}
-                date={result.date}
-                imageId={result.imageId}
-              />
-            </Link>
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
-    ) : (
-      <div className='no-results'>
-        <h3>Sorry, no results found</h3>
-        <p>Try searching for something else?</p>
-      </div>
-    )}
-  </div>
-)}
+      {searchResults && searchResults.length > 0 ? (
+        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>
+          <Masonry className="masonry__columns" gutter="32px">
+            {searchResults.map(result => (
+              <Link key={result.id} to={`/art-piece/${result.id}`}>
+                <ArtCard 
+                  title={result.title} 
+                  author={result.author} 
+                  date={result.date} 
+                  imageId={result.imageId} 
+                  id={result.id}
+                  />
+              </Link>
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      ) : (
+        <div className="no-results">
+          <h3>Sorry, no results found</h3>
+          <p>Try searching for something else?</p>
+        </div>
+      )}
+    </div>
+  );
+};

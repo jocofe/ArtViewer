@@ -1,6 +1,6 @@
-import { SignGoogle } from "../../components/Form/SignGoogle";
-import { SignIn } from "../../features/authentication/SignIn";
-import "../../styles/index.scss";
+import { SignGoogle } from '../../features/authentication/SignGoogle';
+import { SignIn } from '../../features/authentication/SignIn';
+import '../../styles/index.scss';
 
 //TODO Arreglar botón de Sign In with Google si el usuario cierra el popup que vuelva a enabled
 //Implementar errores en login si el usuario no existe o la contraseña es erronea

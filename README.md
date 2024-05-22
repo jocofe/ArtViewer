@@ -1,4 +1,5 @@
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+
 <a name="readme-top"></a>
 
 <!-- PROJECT LOGO -->
@@ -36,6 +37,7 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://art-viewer-self.vercel.app/)
@@ -43,15 +45,16 @@
 There is an existing problem with the preservation of art and its possible digitization. Today there is no single platform that encompasses all the existing art of humanity and stores it so that it can be observed, studied and preserved. ArtViewer aims to be able to incorporate and digitize art on a single platform for easy access, distribution of information and the possibility of study and observation.
 
 Here's why:
-* The main problem is that museums have rights and information on a limited number of works, which means that users have to navigate through different portals to see different works.
-* Need to save time finding information and making it accessible in an intuitive and simple way for the user.
-* Make it easier for the world's museums to combine the information they have about different works of art and thus be able to create artistic culture in society and encourage visits to these places. 
+
+- The main problem is that museums have rights and information on a limited number of works, which means that users have to navigate through different portals to see different works.
+- Need to save time finding information and making it accessible in an intuitive and simple way for the user.
+- Make it easier for the world's museums to combine the information they have about different works of art and thus be able to create artistic culture in society and encourage visits to these places.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-* · React
+- · React
   · Vite.js
   · Node.js
   · Firebase
@@ -60,6 +63,7 @@ Here's why:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
 - [x] Add DataBase
@@ -82,6 +86,7 @@ Here's why:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTACT -->
+
 ## Contact
 
 José Codoñer - [@jocofe10](https://twitter.com/jocofe10) - helloyinx@gmail.com <br>
@@ -92,4 +97,5 @@ Project Link: [https://github.com/jocofe/ArtViewer](https://github.com/jocofe/Ar
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
+
 [product-screenshot]: ./src/assets/app-screenshot.jpg

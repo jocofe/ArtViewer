@@ -1,46 +1,47 @@
 import classNames from 'classnames';
-import "../../styles/index.scss";
-import { SearchBarProps } from '../../models/searchbar'
-import { SearchGlass } from "../Icons/icons";
+import { SearchBarProps } from '../../models/searchbar';
+import { SearchGlass } from '../Icons/icons';
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export const SearchBar = (props: SearchBarProps) => {
-
-  const {size, placeholder} = props;
+  const { size, placeholder } = props;
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  const searchBarClass = classNames('searchbar', `searchbar--${size}`);
 
-  const searchBarClass = classNames(
-    'searchbar',
-    `searchbar--${size}`,
-  );
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
-    // Avoid empty input to search
-    if (searchTerm.trim() === '') { 
-      return;
-    }
-    navigate(`/search/?query=${searchTerm}`);
+    handleSearch();
+  };
 
-    searchParams;
-    setSearchParams({ search: searchTerm });
-    };
+  const handleIconClick = () => {
+    handleSearch();
+  };
+
+  const handleSearch = () => {
+    if (searchTerm.trim() === '') {
+      navigate('/search');
+    } else {
+      navigate(`/search/?query=${searchTerm}`);
+      searchParams;
+      setSearchParams({ search: searchTerm });
+    }
+  };
 
   return (
-    <form className='searchbar-wrapper' onSubmit={handleSubmit}>
-      < SearchGlass className='icon--absolute' />
-      <input 
-        className={searchBarClass} 
-        placeholder={placeholder} 
+    <form className="searchbar-wrapper" onSubmit={handleSubmit}>
+      <div className="searchbar__magnifying" onClick={handleIconClick}>
+        <SearchGlass className="icon--absolute" />
+      </div>
+      <input
+        className={searchBarClass}
+        placeholder={placeholder}
         value={searchTerm}
         onChange={event => setSearchTerm(event.target.value)}
       />
     </form>
   );
 };
-

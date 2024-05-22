@@ -1,30 +1,26 @@
-import { useState, useEffect } from "react";
-import classNames from "classnames";
-import "../../styles/index.scss";
-import { Button } from "../../components/Buttons/Buttons";
-import {
-  Logotype,
-  IconLogotype,
-  SearchGlass,
-} from "../../components/Icons/icons";
-import { TopBarProps } from "../../models/topbar";
-import { SearchBar } from "../../components/Form/SearchBar";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useContext } from 'react';
+import classNames from 'classnames';
+import '../../styles/index.scss';
+import { Button } from '../../components/Buttons/Buttons';
+import { Logotype, IconLogotype, SearchGlass } from '../../components/Icons/icons';
+import { TopBarProps } from '../../models/topbar';
+import { SearchBar } from '../../components/Form/SearchBar';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../context/UserContextProvider';
+import { DropdownProfileButton } from '../../components/Buttons/DropdownProfile';
 
 export const TopBar = (props: TopBarProps) => {
-  const { size, type } = props;
-
-  const topBarClass = classNames(
-    "topbar",
-    `topbar--${size}`,
-    `topbar--${type}`
-  );
-
+  const { isLoggedIn } = useContext(UserContext);
+  const { size } = props;
+  const topBarClass = classNames('topbar', `topbar--${size}`, {
+    'topbar--login': isLoggedIn,
+    'topbar--without-login': !isLoggedIn,
+  });
   const [isCollapse, setIsCollapse] = useState(false);
 
   useEffect(() => {
     const checkWindowSize = () => {
-      setIsCollapse(window.matchMedia("(max-width: 1100px)").matches);
+      setIsCollapse(window.matchMedia('(max-width: 1100px)').matches);
     };
 
     checkWindowSize();
@@ -33,47 +29,50 @@ export const TopBar = (props: TopBarProps) => {
       checkWindowSize();
     };
 
-    window.addEventListener("resize", resizeListener);
+    window.addEventListener('resize', resizeListener);
 
     return () => {
-      window.removeEventListener("resize", resizeListener);
+      window.removeEventListener('resize', resizeListener);
     };
   }, []);
-
-
 
   return (
     <div className={topBarClass}>
       <div className="topbar__logo">
-        {isCollapse ? (
-          <Link to={"/"}>
-          <IconLogotype className="icon" />
-          </Link>
-        ) : (
-          <Link to={"/"}>
-          <Logotype className="logotype" />
-          </Link>
-        )}
+        <Link to={'/'}>{isCollapse ? <IconLogotype className="icon" /> : <Logotype className="logotype" />}</Link>
       </div>
       {!isCollapse && <SearchBar size="large" placeholder="Search..." />}
-      {isCollapse && (
+      {isCollapse && !isLoggedIn && (
         <div className="signup-wrapper">
-          <SearchGlass className="icon" />
-          <Link to={"/signup"}>
-            <Button onClick={() => {}}> Sing Up</Button>
+          <Link to={'/search'}>
+            <SearchGlass className="icon" />
+          </Link>
+          <Link to={'/signup'}>
+            <Button>Sign Up</Button>
           </Link>
         </div>
       )}
-      {!isCollapse && (
+      {isCollapse && isLoggedIn && (
+        <div className="profile-wrapper">
+          <Link to={'/search'}>
+            <SearchGlass className="icon" />
+          </Link>
+          <DropdownProfileButton />
+        </div>
+      )}
+      {!isCollapse && !isLoggedIn && (
         <div className="signup-wrapper">
-          <Link to={"/signin"}>
-            <Button type="sub_primary" onClick={() => {}}>
-              Log In
-            </Button>
+          <Link to={'/signup'}>
+            <Button>Sign Up</Button>
           </Link>
-          <Link to={"/signup"}>
-            <Button onClick={() => {}}>Sing Up</Button>
+          <Link to={'/signin'}>
+            <Button color="sub_primary">Sign In</Button>
           </Link>
+        </div>
+      )}
+      {!isCollapse && isLoggedIn && (
+        <div className="profile-wrapper">
+          <DropdownProfileButton />
         </div>
       )}
     </div>

@@ -1,32 +1,29 @@
-import classNames from "classnames";
-import "../../styles/index.scss";
-import { ButtonProps } from "../../models/buttons";
+import classNames from 'classnames';
+import '../../styles/index.scss';
+import { ButtonProps } from '../../models/buttons';
 
 export const Button = ({
-  className = "",
-  size = "medium",
+  className = '',
+  component = 'button',
+  size = 'medium',
   disabled,
-  type = "primary",
+  color = 'primary',
   children,
   onClick,
   ...rest
 }: ButtonProps) => {
   const btnClass = classNames({
-    btn: true,
+    'btn': true,
     [className]: className,
     [`btn--${size}`]: size,
-    [`btn--${type}`]: type,
-    "btn--disabled": disabled,
+    [`btn--${color}`]: color,
+    'btn--disabled': disabled,
   });
 
+  const Component = component;
   return (
-    <button
-      className={btnClass}
-      disabled={disabled}
-      onClick={onClick}
-      {...rest}
-    >
+    <Component className={btnClass} disabled={disabled} onClick={onClick} {...rest}>
       {children}
-    </button>
+    </Component>
   );
 };

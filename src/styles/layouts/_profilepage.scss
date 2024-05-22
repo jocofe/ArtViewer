@@ -1,0 +1,34 @@
+.profilecard-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  margin-top: 64px;
+}
+
+.profile-picture {
+  height: 132px;
+  width: 132px;
+
+  & .avatar-default {
+    height: 132px;
+    width: 132px;
+    border-radius: 100px;
+  }
+}
+
+.profilecard-image {
+  height: 132px;
+  width: 132px;
+  border-radius: 100px;
+}
+
+.profilecard-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.edit-btn {
+  width: 164px;
+}

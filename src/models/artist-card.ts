@@ -1,4 +1,4 @@
 export interface ArtistCardDetails {
-    author: string;
-    imageId: string;
+  author: string;
+  imageId: string;
 }

@@ -1,0 +1,28 @@
+.tabs {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 64px;
+  margin-top: 124px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.tablist {
+  display: flex;
+  gap: 64px;
+}
+
+.tab {
+  background-color: white;
+  border: 0;
+  font-size: var(--font-size-20);
+
+  &--selected {
+    border-bottom: 1px solid var(--color-blackout);
+  }
+}
+
+.tab-panel {
+  width: 100%;
+}

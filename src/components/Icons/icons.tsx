@@ -1,17 +1,10 @@
-import "../../styles/index.scss";
-import { IconProps } from "../../models/icon";
+import '../../styles/index.scss';
+import { IconProps } from '../../models/icon';
 
 // Heart Icons <3
 export function Heart(className: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="24"
-      height="25"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="25" viewBox="0 0 24 25" fill="none">
       <path
         d="M0 8.83725C0 13.8501 4.25692 18.8042 10.8735 23.0304C11.2411 23.2652 11.6917 23.5 12 23.5C12.3083 23.5 12.7589 23.2652 13.1265 23.0304C19.7549 18.8042 24 13.8501 24 8.83725C24 4.50534 20.9763 1.5 17.0988 1.5C14.834 1.5 13.0672 2.52134 12 4.07097C10.9565 2.53308 9.17787 1.5 6.91304 1.5C3.02372 1.5 0 4.50534 0 8.83725ZM2.44269 8.82551C2.44269 5.86713 4.41107 3.85966 7.05534 3.85966C9.18972 3.85966 10.3874 5.13927 11.1344 6.25454C11.4664 6.73586 11.6917 6.88847 12 6.88847C12.3202 6.88847 12.5217 6.72412 12.8656 6.25454C13.6719 5.16275 14.8221 3.85966 16.9447 3.85966C19.6008 3.85966 21.5692 5.86713 21.5692 8.82551C21.5692 12.9578 17.2292 17.5363 12.2253 20.8234C12.1186 20.8938 12.0474 20.9408 12 20.9408C11.9526 20.9408 11.8814 20.8938 11.7866 20.8234C6.78261 17.5363 2.44269 12.9578 2.44269 8.82551Z"
         fill="currentColor"
@@ -22,14 +15,7 @@ export function Heart(className: IconProps) {
 
 export function Logotype(className: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="208"
-      height="37"
-      viewBox="0 0 208 37"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="208" height="37" viewBox="0 0 208 37" fill="none">
       <g clipPath="url(#clip0_241_387)">
         <path
           d="M19.0349 20.6864C15.574 20.6864 12.1132 19.6773 9.34443 17.4909C8.65225 17.1545 8.47921 16.1455 8.8253 15.4727C9.69052 14.1273 16.4393 2.69091 17.4775 0.840909C17.8236 0.336364 18.3428 0 19.0349 0C19.7271 0 20.2463 0.336364 20.5924 0.840909L29.2446 15.4727C29.7637 16.1455 29.4176 17.1545 28.7255 17.6591C25.9567 19.6773 22.4958 20.6864 19.0349 20.6864ZM12.6323 15.6409C14.5358 16.65 16.7854 17.3227 19.0349 17.3227C21.2845 17.3227 23.5341 16.8182 25.4376 15.6409L19.0349 5.04545C17.1315 8.24091 14.1897 13.2864 12.6323 15.6409Z"
@@ -87,14 +73,7 @@ export function Logotype(className: IconProps) {
 
 export function IconLogotype(className: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="37"
-      height="38"
-      viewBox="0 0 37 38"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="37" height="38" viewBox="0 0 37 38" fill="none">
       <path
         d="M18.5 21.1864C15.1515 21.1864 11.8031 20.1773 9.1244 17.9909C8.45471 17.6545 8.28729 16.6455 8.62213 15.9727C9.45924 14.6273 15.9886 3.19091 16.9932 1.34091C17.328 0.836364 17.8303 0.5 18.5 0.5C19.1696 0.5 19.6719 0.836364 20.0067 1.34091L28.3778 15.9727C28.88 16.6455 28.5452 17.6545 27.8755 18.1591C25.1968 20.1773 21.8484 21.1864 18.5 21.1864ZM12.3054 16.1409C14.147 17.15 16.3235 17.8227 18.5 17.8227C20.6764 17.8227 22.8529 17.3182 24.6945 16.1409L18.5 5.54545C16.6583 8.74091 13.8122 13.7864 12.3054 16.1409Z"
         fill="currentColor"
@@ -109,14 +88,7 @@ export function IconLogotype(className: IconProps) {
 
 export const GoogleIcon = (className: IconProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="16" height="16" viewBox="0 0 16 16" fill="none">
       <g clipPath="url(#clip0_668_406)">
         <path
           d="M15.04 8.16666C15.04 7.64666 14.9933 7.14666 14.9067 6.66666H8V9.50666H11.9467C11.7733 10.42 11.2533 11.1933 10.4733 11.7133V13.56H12.8533C14.24 12.28 15.04 10.4 15.04 8.16666Z"
@@ -146,14 +118,7 @@ export const GoogleIcon = (className: IconProps) => {
 
 export function FullHeart(className: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="24"
-      height="25"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="25" viewBox="0 0 24 25" fill="none">
       <path
         d="M12 23.5C12.3083 23.5 12.7589 23.2652 13.1265 23.0304C19.7549 18.8042 24 13.8501 24 8.83725C24 4.50534 20.9763 1.5 17.1937 1.5C14.834 1.5 13.0672 2.79136 12 4.71665C10.9565 2.79136 9.17787 1.5 6.81818 1.5C3.02372 1.5 0 4.50534 0 8.83725C0 13.8501 4.25692 18.8042 10.8735 23.0304C11.2411 23.2652 11.6917 23.5 12 23.5Z"
         fill="currentColor"
@@ -162,16 +127,20 @@ export function FullHeart(className: IconProps) {
   );
 }
 
+export function Camera(className: IconProps) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="25" viewBox="0 0 24 25" fill="none">
+      <path
+        d="M3.19288 22H20.7974C22.8937 22 24 20.8412 24 18.627V7.76306C24 5.54889 22.8937 4.39007 20.7974 4.39007H18.148C17.391 4.39007 17.1484 4.25556 16.6729 3.72788L15.9062 2.84842C15.4015 2.27936 14.8872 2 13.8973 2H10.0445C9.05459 2 8.54994 2.27936 8.03558 2.84842L7.2689 3.72788C6.80307 4.24521 6.55075 4.39007 5.79377 4.39007H3.19288C1.09664 4.39007 0 5.54889 0 7.76306V18.627C0 20.8412 1.09664 22 3.19288 22ZM3.31905 19.941C2.43591 19.941 1.93126 19.4444 1.93126 18.4408V7.9493C1.93126 6.95603 2.43591 6.45939 3.31905 6.45939H6.35665C7.23008 6.45939 7.67651 6.29384 8.17145 5.72478L8.90902 4.85566C9.45249 4.22452 9.74363 4.05898 10.5977 4.05898H13.3441C14.1981 4.05898 14.4893 4.22452 15.023 4.84532L15.7703 5.72478C16.2653 6.29384 16.7117 6.45939 17.5851 6.45939H20.6712C21.5641 6.45939 22.059 6.95603 22.059 7.9493V18.4408C22.059 19.4444 21.5641 19.941 20.6712 19.941H3.31905ZM11.9951 18.5753C14.9066 18.5753 17.2357 16.0921 17.2357 12.9778C17.2357 9.86343 14.9066 7.38024 11.9951 7.38024C9.09341 7.38024 6.76425 9.86343 6.76425 12.9778C6.76425 16.0921 9.09341 18.5753 11.9951 18.5753ZM17.5657 9.27367C17.5657 10.029 18.1383 10.6187 18.837 10.6084C19.5164 10.6084 20.089 10.0186 20.089 9.27367C20.089 8.54941 19.5067 7.92861 18.837 7.92861C18.1383 7.92861 17.5657 8.54941 17.5657 9.27367ZM11.9951 16.6922C10.0833 16.6922 8.52082 15.0367 8.52082 12.9778C8.52082 10.9084 10.0736 9.26332 11.9951 9.26332C13.9264 9.26332 15.4792 10.9084 15.4792 12.9778C15.4792 15.0367 13.9264 16.6922 11.9951 16.6922Z"
+        fill="#1C1C1E"
+      />
+    </svg>
+  );
+}
+
 export function SearchGlass(className: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="24"
-      height="25"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="25" viewBox="0 0 24 25" fill="none">
       <g clipPath="url(#clip0_201_412)">
         <path
           d="M9.90456 20.1239C11.9056 20.1239 13.7808 19.5255 15.3414 18.5031L20.8537 23.9764C21.2187 24.3255 21.6843 24.5 22.1877 24.5C23.2323 24.5 24 23.6896 24 22.6673C24 22.1935 23.8364 21.7322 23.484 21.3831L18.0094 15.9348C19.1421 14.339 19.8091 12.4065 19.8091 10.3119C19.8091 4.91351 15.354 0.5 9.90456 0.5C4.46775 0.5 0 4.91351 0 10.3119C0 15.7104 4.45517 20.1239 9.90456 20.1239ZM9.90456 17.5057C5.91505 17.5057 2.64289 14.2642 2.64289 10.3119C2.64289 6.35974 5.91505 3.11818 9.90456 3.11818C13.8941 3.11818 17.1662 6.35974 17.1662 10.3119C17.1662 14.2642 13.8941 17.5057 9.90456 17.5057Z"
@@ -180,12 +149,7 @@ export function SearchGlass(className: IconProps) {
       </g>
       <defs>
         <clipPath id="clip0_201_412">
-          <rect
-            width="24"
-            height="24"
-            fill="white"
-            transform="translate(0 0.5)"
-          />
+          <rect width="24" height="24" fill="white" transform="translate(0 0.5)" />
         </clipPath>
       </defs>
     </svg>
@@ -195,21 +159,9 @@ export function SearchGlass(className: IconProps) {
 //Save Icons
 export function Bookmark(className: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="24"
-      height="25"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="25" viewBox="0 0 24 25" fill="none">
       <g clipPath="url(#clip0_201_582)">
-        <rect
-          width="24"
-          height="24"
-          transform="translate(0 0.5)"
-          fill="white"
-        />
+        <rect width="24" height="24" transform="translate(0 0.5)" fill="white" />
         <path
           d="M5.49821 24.5C6.1158 24.5 6.51608 24.1939 7.48821 23.2863L11.9028 19.1096C11.9485 19.0549 12.0515 19.0549 12.0972 19.1096L16.5232 23.2863C17.4954 24.1939 17.8842 24.5 18.5132 24.5C19.4282 24.5 20 23.8986 20 22.9146V3.82392C20 1.64806 18.8106 0.5 16.5575 0.5H7.44246C5.18942 0.5 4 1.64806 4 3.82392V22.9146C4 23.8986 4.57184 24.5 5.49821 24.5ZM6.5847 20.9027C6.43603 21.0449 6.25304 21.0011 6.25304 20.7934V3.96606C6.25304 3.09134 6.71051 2.66492 7.62545 2.66492H16.3746C17.2895 2.66492 17.747 3.09134 17.747 3.96606V20.7934C17.747 21.0011 17.5754 21.0449 17.4153 20.9027L12.7605 16.5948C12.2802 16.1355 11.7312 16.1355 11.2395 16.5948L6.5847 20.9027Z"
           fill="currentColor"
@@ -217,12 +169,7 @@ export function Bookmark(className: IconProps) {
       </g>
       <defs>
         <clipPath id="clip0_201_582">
-          <rect
-            width="24"
-            height="24"
-            fill="white"
-            transform="translate(0 0.5)"
-          />
+          <rect width="24" height="24" fill="white" transform="translate(0 0.5)" />
         </clipPath>
       </defs>
     </svg>
@@ -231,14 +178,7 @@ export function Bookmark(className: IconProps) {
 
 export function FullBookmark(className: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="24"
-      height="25"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="25" viewBox="0 0 24 25" fill="none">
       <g clipPath="url(#clip0_238_233)">
         <path
           d="M21 3.82V22.91C21 23.9 20.3587 24.5 19.3237 24.5C18.615 24.5 18.1875 24.19 17.085 23.29L12.1125 19.11C12.0563 19.05 11.9437 19.05 11.8875 19.11L6.92625 23.29C5.835 24.19 5.385 24.5 4.6875 24.5C3.64125 24.5 3 23.9 3 22.91V3.82C3 1.65 4.33875 0.5 6.87 0.5H17.13C19.6613 0.5 21 1.65 21 3.82Z"
@@ -247,12 +187,7 @@ export function FullBookmark(className: IconProps) {
       </g>
       <defs>
         <clipPath id="clip0_238_233">
-          <rect
-            width="24"
-            height="24"
-            fill="white"
-            transform="translate(0 0.5)"
-          />
+          <rect width="24" height="24" fill="white" transform="translate(0 0.5)" />
         </clipPath>
       </defs>
     </svg>
@@ -262,14 +197,7 @@ export function FullBookmark(className: IconProps) {
 //Link Icon
 export function CopyLink(className: IconProps) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="24"
-      height="24"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="24" viewBox="0 0 24 25" fill="none">
       <g clipPath="url(#clip0_201_583)">
         <path
           d="M11.4815 17.2038L13.1875 15.4779C11.8718 15.3666 10.924 14.9323 10.2439 14.2531C8.35958 12.3713 8.35958 9.71 10.2328 7.85046L13.9345 4.14252C15.8188 2.27185 18.4725 2.26072 20.3568 4.14252C22.2523 6.03547 22.23 8.68558 20.3679 10.5563L18.4725 12.4381C18.8293 13.262 18.9519 14.2642 18.7512 15.1327L21.9401 11.9593C24.6829 9.2312 24.6941 5.33396 21.9289 2.57249C19.1526 -0.200108 15.2725 -0.177838 12.5296 2.56136L8.64948 6.43632C5.90662 9.17552 5.89547 13.0616 8.66063 15.8231C9.30732 16.4801 10.1993 16.97 11.4815 17.2038ZM12.5185 7.79479L10.8125 9.5207C12.1282 9.64319 13.076 10.0663 13.7561 10.7456C15.6516 12.6274 15.6404 15.2886 13.7672 17.1593L10.0655 20.8561C8.18118 22.7379 5.52753 22.7379 3.65436 20.8561C1.75889 18.9631 1.77003 16.3242 3.64321 14.4535L5.52753 12.5605C5.17073 11.7477 5.05923 10.7455 5.24878 9.86589L2.05993 13.0505C-0.682927 15.7785 -0.694077 19.6646 2.07108 22.4261C4.84739 25.1987 8.72753 25.1764 11.4704 22.4484L15.3505 18.5623C18.0934 15.8231 18.1045 11.937 15.3394 9.17552C14.6927 8.52969 13.8118 8.03976 12.5185 7.79479Z"
@@ -278,12 +206,7 @@ export function CopyLink(className: IconProps) {
       </g>
       <defs>
         <clipPath id="clip0_201_583">
-          <rect
-            width="24"
-            height="24"
-            fill="white"
-            transform="translate(0 0.5)"
-          />
+          <rect width="24" height="24" fill="white" transform="translate(0 0.5)" />
         </clipPath>
       </defs>
     </svg>
@@ -292,14 +215,7 @@ export function CopyLink(className: IconProps) {
 //Menu Icon
 export const Menu = (className: IconProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="24"
-      height="24"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="24" viewBox="0 0 24 25" fill="none">
       <path
         d="M1.89518 9.10678H22.1048C23.1111 9.10678 24 8.28418 24 7.30339C24 6.30678 23.1111 5.5 22.1048 5.5H1.89518C0.90566 5.5 0 6.30678 0 7.30339C0 8.28418 0.90566 9.10678 1.89518 9.10678ZM1.89518 19.5H22.1048C23.1111 19.5 24 18.6774 24 17.6966C24 16.7158 23.1111 15.8932 22.1048 15.8932H1.89518C0.90566 15.8932 0 16.7158 0 17.6966C0 18.6774 0.90566 19.5 1.89518 19.5Z"
         fill="currentColor"
@@ -311,14 +227,7 @@ export const Menu = (className: IconProps) => {
 //Dropdown arrow icon
 export const ArrowDown = (className: IconProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="12"
-      height="12"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="12" height="12" viewBox="0 0 24 25" fill="none">
       <path
         d="M12 19.5C12.4735 19.4863 12.9064 19.3082 13.2582 18.9247L23.54 8.26712C23.8377 7.96575 24 7.58219 24 7.13014C24 6.22603 23.2965 5.5 22.4036 5.5C21.9707 5.5 21.5513 5.67808 21.2401 5.99315L12.0135 15.5959L2.75986 5.99315C2.4487 5.69178 2.04284 5.5 1.59639 5.5C0.703495 5.5 0 6.22603 0 7.13014C0 7.58219 0.162345 7.96575 0.459977 8.26712L10.7554 18.9247C11.1206 19.3082 11.5265 19.5 12 19.5Z"
         fill="currentColor"
@@ -330,14 +239,7 @@ export const ArrowDown = (className: IconProps) => {
 //Dropup arrow icon
 export const ArrowUp = (className: IconProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="12"
-      height="12"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="12" height="12" viewBox="0 0 24 25" fill="none">
       <path
         d="M0.459977 16.7302L10.7554 6.06219C11.1071 5.67826 11.5265 5.5 12 5.5C12.4735 5.5 12.9064 5.69197 13.2582 6.06219L23.54 16.7302C23.8377 17.0318 24 17.4158 24 17.8683C24 18.787 23.2965 19.5 22.4036 19.5C21.9707 19.5 21.5513 19.3355 21.2401 19.0064L12.0135 9.39422L2.75986 19.0064C2.46223 19.3217 2.04284 19.5 1.59639 19.5C0.703495 19.5 0 18.787 0 17.8683C0 17.4295 0.162345 17.0318 0.459977 16.7302Z"
         fill="currentColor"
@@ -346,18 +248,27 @@ export const ArrowUp = (className: IconProps) => {
   );
 };
 
+export const ArrowLeft = (className: IconProps) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="25" viewBox="0 0 24 25" fill="none">
+      <path
+        d="M5 12.5C5 12.9735 5.17826 13.3794 5.56219 13.7311L16.2302 24.04C16.5318 24.3377 16.9158 24.5 17.3683 24.5C18.2733 24.5 19 23.7965 19 22.8901C19 22.4436 18.808 22.0513 18.5064 21.7401L8.89422 12.5L18.5064 3.25986C18.808 2.9487 19 2.54284 19 2.10992C19 1.20349 18.2733 0.5 17.3683 0.5C16.9158 0.5 16.5318 0.662345 16.2302 0.959977L5.56219 11.2554C5.17826 11.6206 5 12.0265 5 12.5Z"
+        fill="#161616"
+      />
+      <defs>
+        <clipPath id="clip0_201_577">
+          <rect width="24" height="24" fill="white" transform="translate(0 0.5)" />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
+
 //Close icon
 export const Close = (className: IconProps) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      {...className}
-      width="11"
-      height="12"
-      viewBox="0 0 24 25"
-      fill="none"
-    >
-      <g clip-path="url(#clip0_201_598)">
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="11" height="12" viewBox="0 0 24 25" fill="none">
+      <g clipPath="url(#clip0_201_598)">
         <path
           d="M0.567922 21.0803C-0.17455 21.8225 -0.209906 23.148 0.5856 23.908C1.34575 24.7032 2.68927 24.6679 3.43174 23.9256L12.0055 15.3542L20.5793 23.9256C21.3395 24.6856 22.6476 24.7032 23.4078 23.908C24.2033 23.148 24.1856 21.8225 23.4255 21.0626L14.8517 12.4912L23.4255 3.93741C24.1856 3.15979 24.2033 1.85199 23.4078 1.09205C22.6476 0.29676 21.3395 0.314433 20.5793 1.07437L12.0055 9.6458L3.43174 1.07437C2.68927 0.332106 1.34575 0.29676 0.5856 1.09205C-0.209906 1.85199 -0.17455 3.17747 0.567922 3.91973L9.14171 12.4912L0.567922 21.0803Z"
           fill="white"

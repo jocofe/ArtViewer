@@ -1,28 +1,47 @@
 .masonry-section {
-    margin-top: 64px;
-    margin-bottom: 64px;
+  margin-top: 64px;
+  margin-bottom: 64px;
 }
 
 .masonry__title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 64px;
+}
+
+@media (max-width: 768px) {
+  .masonry__title {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .masonry__columns > div {
+    max-width: 330px;
     display: flex;
-    justify-content: center;
-    margin-bottom: 64px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 1450px) {
+  .masonry > div {
+    max-width: 360px;
+  }
 }
 
 .masonry > div {
-    width: 440px;
+  width: 440px;
 }
 
 .masonry__columns > div {
-    max-width: 440px;
+  max-width: 440px;
 
-    @media (max-width: 1450px){
-                max-width: 360px;          
-        }
+  @media (max-width: 1450px) {
+    max-width: 360px;
+  }
 }
 
 .masonry__button {
-    margin-top: 76px;
-    display: flex;
-    justify-content: center;
+  margin-top: 76px;
+  display: flex;
+  justify-content: center;
 }

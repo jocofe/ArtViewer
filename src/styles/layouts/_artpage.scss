@@ -1,37 +1,90 @@
 .artpiece-section {
-    margin-top: 134px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
+  margin-top: 134px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
 }
 
 .artpiece__img {
-    margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 
 .artpiece-info-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    padding: 0 32px 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 0 32px 0 32px;
 }
 
 .art__title {
-    text-align: center;
+  text-align: center;
 }
 
 .artpiece__properties {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
 }
 
 .artpiece__btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.art-visualizer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+
+  & .react-viewer-mask {
+    background-color: var(--color-blackout);
+    width: 100vw;
+    height: 100vh;
+  }
+
+  & .react-viewer-toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: auto;
+    padding-bottom: 32px;
+    gap: 16px;
+  }
+
+  & .react-viewer-btn {
+    background-color: var(--color-golden-lighter);
+    height: 48px;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & i {
+      color: var(--color-blackout);
+    }
+
+    &:hover {
+      background-color: var(--color-golden);
+    }
+  }
+
+  & .react-viewer-close {
+    top: 32px;
+    right: 32px;
+    height: 48px;
+    width: 48px;
+    border-radius: 60px;
     display: flex;
     justify-content: center;
-    margin-top: 16px;
+    align-items: center;
+
+    & i {
+      position: static;
+    }
+  }
 }

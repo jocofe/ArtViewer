@@ -1,5 +1,3 @@
 export const GeneralSettings = () => {
-    return (
-        <div>General Settings Page</div>
-    );
-}
+  return <div>General Settings Page</div>;
+};

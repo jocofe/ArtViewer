@@ -1,20 +1,20 @@
 .icon {
-    color: var(--color-blackout);
-    width: 24px;
-    height: 24px;
-    display: flex;
+  color: var(--color-blackout);
+  width: 24px;
+  height: 24px;
+  display: flex;
 
-    &--absolute{
-        position: absolute;
-        color: var(--color-blackout-light);
-        top: 32%;
-        right:24px;
-        width: 16px;
-        height: 16px;
-    }
+  &--absolute {
+    position: absolute;
+    color: var(--color-blackout-light);
+    top: 32%;
+    right: 24px;
+    width: 16px;
+    height: 16px;
+  }
 
-    &--small {
-        width: 14px;
-        height: 14px;
-    }
+  &--small {
+    width: 14px;
+    height: 14px;
+  }
 }

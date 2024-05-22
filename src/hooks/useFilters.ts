@@ -25,7 +25,7 @@ export const useFilters = (searchTerm: string) => {
   }, [searchTerm, activeFilter]);
 
   const handleFilterClick = (filter: ActiveFilter) => {
-    setActiveFilter((prevFilter) => (prevFilter === filter? null : filter));
+    setActiveFilter(prevFilter => (prevFilter === filter ? null : filter));
   };
 
   return { apiUrl, handleFilterClick, activeFilter };
