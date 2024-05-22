@@ -4,6 +4,7 @@ import { firebaseConfig } from './config/config';
 import { UserContextProviderFirebase } from './context/UserContextProvider';
 import { Outlet } from 'react-router-dom';
 import { LikesProvider } from './components/Likes/LikesContext';
+import React from 'react';
 
 initializeApp(firebaseConfig);
 
