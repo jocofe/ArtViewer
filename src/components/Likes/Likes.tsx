@@ -1,17 +1,17 @@
-import { collection, doc, getDocs } from "firebase/firestore";
-import { db } from "../../config/config";
-import { getAuth } from "firebase/auth";
-import { useState, useEffect } from "react";
-import Masonry from "react-responsive-masonry";
-import { Link } from "react-router-dom";
-import { ArtCard } from "../ArtCard/ArtCard";
-import { ResponsiveMasonry } from "react-responsive-masonry";
+import { collection, doc, getDocs } from 'firebase/firestore';
+import { db } from '../../config/config';
+import { getAuth } from 'firebase/auth';
+import { useState, useEffect } from 'react';
+import Masonry from 'react-responsive-masonry';
+import { Link } from 'react-router-dom';
+import { ArtCard } from '../ArtCard/ArtCard';
+import { ResponsiveMasonry } from 'react-responsive-masonry';
 
 interface Favourite {
   artPieceId: string;
 }
 
-interface ArtPiece {
+export interface ArtPiece {
   _primaryTitle: string;
   systemNumber: string;
   _primaryMaker: string;
@@ -21,22 +21,22 @@ interface ArtPiece {
 
 const getFavourites = async (userEmail: string) => {
   try {
-    const userDocRef = doc(db, "users", userEmail);
-    const favouritesRef = collection(userDocRef, "favourites");
+    const userDocRef = doc(db, 'users', userEmail);
+    const favouritesRef = collection(userDocRef, 'favourites');
     const querySnapshot = await getDocs(favouritesRef);
-    return querySnapshot.docs.map((doc) => doc.data() as Favourite);
+    return querySnapshot.docs.map(doc => doc.data() as Favourite);
   } catch (error) {
-    console.error("Error fetching favourites:", error);
+    console.error('Error fetching favourites:', error);
     return [];
   }
 };
 
-const getArtPiece = async (artPieceId: string) => {
+export const getArtPiece = async (artPieceId: string) => {
   try {
-    const response = await fetch(`https://api.vam.ac.uk/v2/objects/search?kw_system_number=${artPieceId}`); 
+    const response = await fetch(`https://api.vam.ac.uk/v2/objects/search?kw_system_number=${artPieceId}`);
     const data = await response.json();
     const records = data.records;
-    
+
     if (records && records.length > 0) {
       const artPiece = records[0];
       return {
@@ -46,28 +46,26 @@ const getArtPiece = async (artPieceId: string) => {
         _primaryDate: artPiece._primaryDate,
         _primaryImageId: artPiece._primaryImageId,
       };
-      } else {
-        console.warn(`No results found for artPieceid: ${artPieceId}`);
-        return null;
-      }
-  } catch (error) {
-      console.error("Error fetching art piece:", error);
+    } else {
+      console.warn(`No results found for artPieceid: ${artPieceId}`);
       return null;
+    }
+  } catch (error) {
+    console.error('Error fetching art piece:', error);
+    return null;
   }
 };
 
-
 const fetchArtPieces = async (favourites: Favourite[]) => {
-    try {
-      const artPieces = await Promise.all(favourites.map((favourite) => getArtPiece(favourite.artPieceId)));
-      const filteredArtPieces = artPieces.filter((artPiece): artPiece is ArtPiece => artPiece!== null);
-      return filteredArtPieces;
-    } catch (error) {
-      console.error("Error fetching art pieces:", error);
-      return [];
-    }
+  try {
+    const artPieces = await Promise.all(favourites.map(favourite => getArtPiece(favourite.artPieceId)));
+    const filteredArtPieces = artPieces.filter((artPiece): artPiece is ArtPiece => artPiece !== null);
+    return filteredArtPieces;
+  } catch (error) {
+    console.error('Error fetching art pieces:', error);
+    return [];
+  }
 };
-
 
 export const Likes = () => {
   const auth = getAuth();
@@ -79,18 +77,17 @@ export const Likes = () => {
   useEffect(() => {
     if (user) {
       const userEmail = user.email!;
-      getFavourites(userEmail).then((favourites) => setFavourites(favourites));
+      getFavourites(userEmail).then(favourites => setFavourites(favourites));
     } else {
-      console.error("No user signed in");
+      console.error('No user signed in');
     }
   }, [user]);
 
   useEffect(() => {
     if (favourites.length > 0) {
-      fetchArtPieces(favourites).then((artPieces) => setArtPieces(artPieces));
+      fetchArtPieces(favourites).then(artPieces => setArtPieces(artPieces));
     }
   }, [favourites]);
-
 
   return (
     <div>

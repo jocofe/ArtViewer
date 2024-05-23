@@ -1,7 +1,7 @@
 export interface ArtCardDetails {
-  title: string;
-  author: string;
-  date: string;
+  title?: string;
+  author?: string;
+  date?: string;
   imageId: string;
   id: string;
 }

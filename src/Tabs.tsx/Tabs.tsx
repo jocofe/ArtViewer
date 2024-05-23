@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Collection } from '../views/user-profile/UserPage';
+import { CollectionCard } from '../components/Collections/CollectionCard';
 
 interface TabsProps {
-  collections: React.ReactNode;
+  collections: Collection[];
   likes: React.ReactNode;
 }
 
@@ -19,7 +21,7 @@ export const Tabs: React.FC<TabsProps> = ({ collections, likes }) => {
           Collections
         </button>
         <button
-          role="tablist"
+          role="tab"
           className={`tab ${selectedTab === 'likes' ? 'tab--selected' : ''}`}
           onClick={() => setSelectedTab('likes')}
         >
@@ -27,7 +29,15 @@ export const Tabs: React.FC<TabsProps> = ({ collections, likes }) => {
         </button>
       </div>
       <div className="tab-panel" role="tabpanel">
-        {selectedTab === 'collections' ? collections : likes}
+        {selectedTab === 'collections' ? (
+          <div>
+            {collections.map((collection, index) => (
+              <CollectionCard key={index} collection={collection} />
+            ))}
+          </div>
+        ) : (
+          likes
+        )}
       </div>
     </div>
   );
