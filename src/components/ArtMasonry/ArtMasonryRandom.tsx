@@ -57,7 +57,7 @@ export const ArtMasonryRandom = () => {
           </Masonry>
         </ResponsiveMasonry>
           <div className="masonry__button">
-            <Button color="sub_primary" component={NavLink} to={'/signup'}>Sign Up to continue</Button>
+            <Button color="sub_primary" component={NavLink} to={'/signup'} className='btn-link--black'>Sign Up to continue</Button>
           </div>
       </div>
     </div>

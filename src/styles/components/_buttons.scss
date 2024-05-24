@@ -150,3 +150,16 @@
   }
 }
 
+/* Styles for link buttons */
+.btn-link {
+  &--white {
+    color: var(--color-white);
+    text-decoration: none;
+  }
+
+  &--black {
+    color: var(--color-blackout);
+    text-decoration: none;
+  }
+}
+

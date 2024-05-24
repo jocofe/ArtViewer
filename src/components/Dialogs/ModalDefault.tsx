@@ -1,15 +1,17 @@
 import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
+import { Close } from '../Icons/icons';
 
 interface ModalProps {
   show?: boolean;
   children: ReactNode;
   size?: 'sm' | 'md';
   onClose?: () => void;
+  title?: string
 }
 
-export const ModalDefault = ({ show = false, children, size = 'md', onClose }: ModalProps) => {
+export const ModalDefault = ({ show = false, children, size = 'md', onClose, title }: ModalProps) => {
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -40,9 +42,19 @@ export const ModalDefault = ({ show = false, children, size = 'md', onClose }: M
   return createPortal(
     <>
       <div className="modal-overlay" onClick={onClose} />
-      <div className="modal">
-        <div className={modalClasses}>{children}</div>
-      </div>
+        <div className={modalClasses}>
+          <div className='modal'>
+          <div className='modal-wrapper'>
+            <div className='modal__title'>
+              <h4>{title}</h4>
+              <Close className="modal__icon" onClick={onClose}/>
+            </div>
+            <div className='modal__content'>
+              {children}
+            </div>
+            </div>
+          </div>
+        </div>
     </>,
     document.body,
   );
