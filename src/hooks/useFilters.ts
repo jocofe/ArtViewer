@@ -12,21 +12,26 @@ const apiUrlParams: Record<ActiveFilter, string> = {
 export const useFilters = (searchTerm: string) => {
   const [activeFilter, setActiveFilter] = useState<ActiveFilter | null>(null);
   const [apiUrl, setApiUrl] = useState('');
+  const [page, setPage] = useState(15);
 
   useEffect(() => {
     const constructApiUrl = () => {
-      let url = `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&images_exist=true`;
+      let url = `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&order_sort=asc&page=1&page_size=${page}&images_exist=true`;
       if (activeFilter) {
-        url = `https://api.vam.ac.uk/v2/objects/search?${apiUrlParams[activeFilter]}=${searchTerm}&images_exist=true`;
+        url = `https://api.vam.ac.uk/v2/objects/search?${apiUrlParams[activeFilter]}=${searchTerm}&order_sort=asc&page=1&page_size=${page}&images_exist=true`;
       }
       setApiUrl(url);
     };
     constructApiUrl();
-  }, [searchTerm, activeFilter]);
+  }, [searchTerm, activeFilter, page]);
 
   const handleFilterClick = (filter: ActiveFilter) => {
     setActiveFilter(prevFilter => (prevFilter === filter ? null : filter));
   };
 
-  return { apiUrl, handleFilterClick, activeFilter };
+  const handleLoadMore = () => {
+    setPage(page * 2);
+  }
+
+  return { apiUrl, handleFilterClick, activeFilter, handleLoadMore };
 };

@@ -6,6 +6,7 @@ import { ResultItem, ResultListFromApi, ResultsListItem } from '../../models/res
 import { FilterTag } from '../../components/Filters/FilterTag';
 import axios from 'axios';
 import { useFilters } from '../../hooks/useFilters';
+import { Button } from '../../components/Buttons/Buttons';
 
 const mapResultsFromApi = (result: ResultListFromApi): ResultsListItem[] => {
   return result.records.map((resultItem: ResultItem) => {
@@ -25,22 +26,29 @@ export const SearchPage = () => {
   const searchTerm = searchParams.get('search') || '';
   const [searchResults, setSearchResults] = useState<ResultsListItem[] | null>(null);
   const [loading, setLoading] = useState(false);
-  const { apiUrl, handleFilterClick, activeFilter } = useFilters(searchTerm);
+
+  const { apiUrl, handleFilterClick, activeFilter, handleLoadMore } = useFilters(searchTerm);
 
   useEffect(() => {
     const getResults = async () => {
-      setLoading(true);
-      const response = await axios.get<ResultListFromApi>(apiUrl);
-      const mappedResults = mapResultsFromApi(response.data);
-      setSearchResults(mappedResults);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const response = await axios.get<ResultListFromApi>(apiUrl);
+        const mappedResults = mapResultsFromApi(response.data);
+        setSearchResults(mappedResults);
+      } catch(error) {
+        console.log('mal')
+      }
     };
     getResults();
+    setLoading(false);
   }, [apiUrl]);
+
 
   if (loading) {
     return <div>Loading...</div>;
   }
+  
 
   return (
     <div className="masonry-section">
@@ -87,6 +95,7 @@ export const SearchPage = () => {
             {searchResults.map(result => (
               <Link key={result.id} to={`/art-piece/${result.id}`}>
                 <ArtCard 
+                  key={`art-item-${result.id}.id`}
                   title={result.title} 
                   author={result.author} 
                   date={result.date} 
@@ -103,6 +112,7 @@ export const SearchPage = () => {
           <p>Try searching for something else?</p>
         </div>
       )}
+      <Button onClick={handleLoadMore}>Load More</Button>
     </div>
   );
 };

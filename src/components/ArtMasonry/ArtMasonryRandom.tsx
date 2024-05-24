@@ -5,6 +5,7 @@ import { ArtCard } from '../../components/ArtCard/ArtCard';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { Link, NavLink } from 'react-router-dom';
 import { Button } from '../Buttons/Buttons';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
   return art.records.map((artItem: ArtItem) => {
@@ -23,17 +24,44 @@ export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
 
 export const ArtMasonryRandom = () => {
   const [artList, setArtList] = useState<ArtListItem[]>([]);
+  const [user, setUser] = useState(false);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const fetchArt = async () => {
-      const apiURL = `https://api.vam.ac.uk/v2/objects/search?q_object_type=drawing&order_sort=asc&page=1&page_size=15&images_exist=true`;
+      const apiURL = `https://api.vam.ac.uk/v2/objects/search?q_object_type=drawing&order_sort=asc&page=${page}&page_size=15&images_exist=true`;
       const response = await axios.get<ArtListItemFromApi>(apiURL);
       const mappedArtList = mapArtApitoArtView(response.data);
-      setArtList(mappedArtList);
+      setArtList([...artList, ...mappedArtList]);
     };
 
     fetchArt();
-  }, []);
+
+    // Check if there is user loged
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(true); 
+      } else {
+        setUser(false); 
+      }
+    });
+
+    return () => unsubscribe(); // Clean when unmounted
+  }, [page]);
+
+  const handleLoadMore = () => {
+    setPage(page + 1);
+  }
+
+  useEffect(() => {
+    if (artList.length > 0) {
+      const lastArtItem = document.getElementById(`art-item-${artList.length - 1}.id`);
+      if (lastArtItem) {
+        lastArtItem.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [artList]);
 
   return (
     <div className="masonry-section">
@@ -44,7 +72,7 @@ export const ArtMasonryRandom = () => {
             {artList.map((artItem: ArtListItem) => (
               <div className="relative">
                 <ArtCard
-                  key={artItem.id}
+                  key={`art-item-${artItem.id}.id`}
                   title={artItem.title}
                   imageId={artItem.imageId}
                   author={artItem.author}
@@ -57,7 +85,12 @@ export const ArtMasonryRandom = () => {
           </Masonry>
         </ResponsiveMasonry>
           <div className="masonry__button">
-            <Button color="sub_primary" component={NavLink} to={'/signup'} className='btn-link--black'>Sign Up to continue</Button>
+            {user && (
+              <Button color='sub_primary' onClick={handleLoadMore}>Load More</Button>
+            )}
+            {!user && (
+              <Button color='sub_primary' component={NavLink} className='btn-link--black'>Sign Up to continue</Button>
+            )}
           </div>
       </div>
     </div>
