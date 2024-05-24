@@ -6,23 +6,25 @@ import { Button } from '../../Buttons/Buttons';
 import { FilterCollectionBar } from '../../Form/FilterCollectionBar';
 import { Close } from '../../Icons/icons';
 import { UserContext } from '../../../context/UserContextProvider';
-import { constructImageUrl } from '../../ArtCard/ArtCard';
-import { ArtCardDetails } from '../../../models/art-card';
 
-interface Collection {
+export interface CollectionUser {
   id: string;
   name: string;
   artpieces: ArtPiece[];
+  description: string;
 }
 
 interface ArtPiece {
-  id: string; // Cambiado de artPieceId a id
-  imageUrl: string; // Agregada propiedad imageUrl
+  id: string;
+  title?: string;
+  author?: string;
+  date?: string;
+  imageId: string;
 }
 
 interface AddCollectionModalProps {
-  collections: Collection[];
-  artPieceDetails: ArtCardDetails;
+  collections: CollectionUser[];
+  artPieceDetails: ArtPiece;
   onClose: () => void;
   onSave: () => void;
 }
@@ -34,9 +36,9 @@ interface NewCollectionFormInputs {
 
 export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSave }: AddCollectionModalProps) => {
   const { userData } = useContext(UserContext);
-  const [filteredCollections, setFilteredCollections] = useState<Collection[]>(collections);
+  const [filteredCollections, setFilteredCollections] = useState<CollectionUser[]>(collections);
   const [isCreatingNewCollection, setIsCreatingNewCollection] = useState(false);
-  const [userCollections, setUserCollections] = useState<Collection[]>([]);
+  const [userCollections, setUserCollections] = useState<CollectionUser[]>([]);
   const [selectedCollections, setSelectedCollections] = useState<Set<string>>(new Set());
   const { register, handleSubmit, reset } = useForm<NewCollectionFormInputs>();
 
@@ -45,17 +47,21 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
       const fetchCollections = async () => {
         const collectionRef = collection(db, `users/${userData.email}/collections`);
         const collectionSnap = await getDocs(collectionRef);
-        const collectionsData = collectionSnap.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Collection[];
+        const collectionsData = collectionSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }) as CollectionUser);
         setUserCollections(collectionsData);
         setFilteredCollections(collectionsData);
+
+        // Verificar si la obra de arte está presente en alguna colección y marcar el checkbox correspondiente
+        const collectionsWithArtPiece = collectionsData.filter(collection =>
+          collection.artpieces.some(piece => piece.id === artPieceDetails.id),
+        );
+        const selectedCollectionIds = new Set(collectionsWithArtPiece.map(collection => collection.id));
+        setSelectedCollections(selectedCollectionIds);
       };
 
       fetchCollections();
     }
-  }, [userData]);
+  }, [userData, artPieceDetails.id]);
 
   const handleSearch = (searchTerm: string) => {
     if (searchTerm.trim() === '') {
@@ -82,14 +88,14 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
     if (!userData) return;
 
     try {
-      const { id: artPieceId, imageId } = artPieceDetails;
-      const imageUrl = constructImageUrl(imageId);
-      await addDoc(collection(db, `users/${userData.email}/collections`), {
+      const newCollection = {
         name: data.name,
         description: data.description,
-        artpieces: [{ id: artPieceId, imageUrl: imageUrl }], // Incluye el ID en el objeto de artpieces
-      });
-      console.log('Collection created successfully');
+        artpieces: [],
+      };
+
+      await addDoc(collection(db, `users/${userData.email}/collections`), newCollection);
+      setIsCreatingNewCollection(false);
       onSave();
       handleCloseModal();
     } catch (error) {
@@ -110,31 +116,49 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
   };
 
   const handleDone = async () => {
-    if (!userData) return;
+    if (!userData || !artPieceDetails) return;
 
     try {
       await Promise.all(
-        Array.from(selectedCollections).map(async collectionId => {
-          const collectionDoc = doc(db, `users/${userData.email}/collections`, collectionId);
-          const selectedCollection = filteredCollections.find(col => col.id === collectionId);
-          if (selectedCollection) {
-            const existingArtPiece = selectedCollection.artpieces.find(ap => ap.id === artPieceDetails.id);
-            if (!existingArtPiece) {
-              await updateDoc(collectionDoc, {
-                artpieces: [
-                  ...(selectedCollection.artpieces || []),
-                  { id: artPieceDetails.id, imageUrl: constructImageUrl(artPieceDetails.imageId) },
-                ],
-              });
+        userCollections.map(async collection => {
+          const collectionDoc = doc(db, `users/${userData.email}/collections`, collection.id);
+
+          const artPieceIndex = collection.artpieces.findIndex(piece => piece.id === artPieceDetails.id);
+
+          if (selectedCollections.has(collection.id)) {
+            // La colección está seleccionada
+            if (artPieceIndex === -1) {
+              // La obra de arte no está presente, agrégala
+              const updatedArtPieces = [
+                ...collection.artpieces,
+                {
+                  id: artPieceDetails.id,
+                  title: artPieceDetails.title || '',
+                  author: artPieceDetails.author || '',
+                  date: artPieceDetails.date || '',
+                  imageId: artPieceDetails.imageId,
+                },
+              ];
+              await updateDoc(collectionDoc, { artpieces: updatedArtPieces });
+            }
+          } else {
+            // La colección no está seleccionada
+            if (artPieceIndex !== -1) {
+              // La obra de arte está presente, elimínala
+              const updatedArtPieces = [
+                ...collection.artpieces.slice(0, artPieceIndex),
+                ...collection.artpieces.slice(artPieceIndex + 1),
+              ];
+              await updateDoc(collectionDoc, { artpieces: updatedArtPieces });
             }
           }
         }),
       );
-      console.log('Art piece added to selected collections successfully');
+
       onSave();
       handleCloseModal();
     } catch (error) {
-      console.error('Error adding art piece to collections:', error);
+      console.error('Error updating art piece in collections:', error);
     }
   };
 
@@ -184,13 +208,18 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
                 filteredCollections.map(collection => (
                   <div className="collections-wrapper" key={collection.id}>
                     <div className="collection">
+                      <div className="collection__image">
+                        <img src="" alt="" />
+                      </div>
+                      <div className="collection-info">
+                        <p className="collection__name">{collection.name}</p>
+                        <p className="collection__artpieces">{collection.artpieces?.length ?? 0} Pieces</p>
+                      </div>
                       <input
                         type="checkbox"
                         onChange={() => handleCollectionSelect(collection.id)}
                         checked={selectedCollections.has(collection.id)}
                       />
-                      <p className="collection__name">{collection.name}</p>
-                      <p className="collection__artpieces">{collection.artpieces.length} Pieces</p>
                     </div>
                   </div>
                 ))

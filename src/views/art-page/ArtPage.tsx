@@ -140,7 +140,13 @@ export const ArtPage = () => {
             <p>{artDetailsInfo.location}</p>
           </div>
           <div className="artpiece__socials">
-            <Socials artPieceId={artDetailsInfo.id}/>
+            <Socials
+              artPieceId={artDetailsInfo.id}
+              artPieceImageId={artDetailsInfo.imageId}
+              artPieceAuthor={artDetailsInfo.artist}
+              artPieceDate={artDetailsInfo.date}
+              artPieceTitle={artDetailsInfo.title}
+            />
           </div>
           <div className="artpiece__btn">
             <Button onClick={linkToOfficialInfo}>View more information</Button>

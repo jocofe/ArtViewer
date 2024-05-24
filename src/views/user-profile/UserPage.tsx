@@ -1,20 +1,15 @@
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/config';
 import { UserContext } from '../../context/UserContextProvider';
-import Tabs from '../../Tabs.tsx/Tabs';
+import Tabs from '../../components/Tabs/Tabs';
 import { ProfileCard } from '../../components/ProfileCard/ProfileCard';
 import { Likes } from '../../components/Likes/Likes';
+import { CollectionUser } from '../../components/Dialogs/Collection Modal/AddCollection';
 
-export interface Collection {
-  id: string;
-  name: string;
-  artpieces: { artPieceId: string; imageUrl: string }[];
-}
-
-export const UserPage: React.FC = () => {
+export const UserPage = () => {
   const { userData } = useContext(UserContext);
-  const [collections, setCollections] = useState<Collection[]>([]);
+  const [collections, setCollections] = useState<CollectionUser[]>([]);
 
   useEffect(() => {
     if (userData) {
@@ -24,7 +19,7 @@ export const UserPage: React.FC = () => {
         const collectionsData = collectionSnap.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
-        })) as Collection[];
+        })) as CollectionUser[];
         setCollections(collectionsData);
       };
 

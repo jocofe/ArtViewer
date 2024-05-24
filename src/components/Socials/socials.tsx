@@ -1,17 +1,21 @@
 import { Heart, FullHeart, CopyLink, Bookmark, FullBookmark } from '../Icons/icons';
 import { useState, useEffect, useContext, useCallback } from 'react';
 import { ModalDefault } from '../Dialogs/ModalDefault';
-import { AddCollectionModal } from '../Dialogs/Collection Modal/AddCollection';
+import { AddCollectionModal, CollectionUser } from '../Dialogs/Collection Modal/AddCollection';
 import { UserContext } from '../../context/UserContextProvider';
 import { useLikes } from '../Likes/LikesContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/config';
 
-interface SocialProps {
+export interface SocialProps {
   artPieceId: string;
+  artPieceImageId: string;
+  artPieceAuthor: string;
+  artPieceDate: string;
+  artPieceTitle: string;
 }
 
-export const Socials = ({ artPieceId }: SocialProps) => {
+export const Socials = ({ artPieceId, artPieceImageId, artPieceAuthor, artPieceDate, artPieceTitle }: SocialProps) => {
   const [isOnSaved, setIsOnSaved] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { userData } = useContext(UserContext);
@@ -25,11 +29,13 @@ export const Socials = ({ artPieceId }: SocialProps) => {
     try {
       const collectionRef = collection(db, `users/${userData.email}/collections`);
       const collectionSnap = await getDocs(collectionRef);
-      const collectionsData = collectionSnap.docs.map(doc => doc.data());
+      const collectionsData = collectionSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }) as CollectionUser);
 
-      const isSaved = collectionsData.some(collection =>
-        collection.artpieces.some((piece: { artPieceId: string }) => piece.artPieceId === artPieceId),
-      );
+      const isSaved =
+        collectionsData &&
+        collectionsData.some(collection =>
+          collection.artpieces?.some((piece: { id: string }) => piece.id === artPieceId),
+        );
 
       setIsOnSaved(isSaved);
     } catch (error) {
@@ -73,7 +79,13 @@ export const Socials = ({ artPieceId }: SocialProps) => {
       <ModalDefault show={showModal} size="md" onClose={handleCloseModal}>
         <AddCollectionModal
           collections={[]}
-          artPieceDetails={{ id: artPieceId, imageId: '' }}
+          artPieceDetails={{
+            id: artPieceId,
+            imageId: artPieceImageId,
+            author: artPieceAuthor,
+            title: artPieceTitle,
+            date: artPieceDate,
+          }}
           onClose={handleCloseModal}
           onSave={handleSave}
         />

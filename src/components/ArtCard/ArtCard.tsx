@@ -29,7 +29,13 @@ export const ArtCard = (props: ArtCardDetails) => {
       </section>
 
       <section className="art-card__buttons">
-        <Socials artPieceId={id} />
+        <Socials
+          artPieceId={id}
+          artPieceImageId={imageId}
+          artPieceAuthor={author}
+          artPieceDate={date}
+          artPieceTitle={title}
+        />
       </section>
     </div>
   );
