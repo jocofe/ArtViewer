@@ -4,4 +4,5 @@ export interface SocialProps {
   artPieceAuthor: string;
   artPieceDate: string;
   artPieceTitle: string;
+  artPieceImageUrl: string;
 }

@@ -9,7 +9,14 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/config';
 import { SocialProps } from '../../models/socials';
 
-export const Socials = ({ artPieceId, artPieceImageId, artPieceAuthor, artPieceDate, artPieceTitle }: SocialProps) => {
+export const Socials = ({
+  artPieceId,
+  artPieceImageId,
+  artPieceAuthor,
+  artPieceDate,
+  artPieceTitle,
+  artPieceImageUrl,
+}: SocialProps) => {
   const [isOnSaved, setIsOnSaved] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const { userData } = useContext(UserContext);
@@ -79,6 +86,7 @@ export const Socials = ({ artPieceId, artPieceImageId, artPieceAuthor, artPieceD
             author: artPieceAuthor,
             title: artPieceTitle,
             date: artPieceDate,
+            imageUrl: artPieceImageUrl,
           }}
           onClose={handleCloseModal}
           onSave={handleSave}
