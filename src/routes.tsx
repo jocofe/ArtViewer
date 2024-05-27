@@ -93,31 +93,31 @@ export const router = createBrowserRouter([
                 path: '',
                 element: <UserPage />,
               },
-            ],
-          },
-          {
-            path: '/:username/settings',
-            element: <UserSettings />,
-            children: [
               {
-                path: '',
-                element: <Navigate to="general" />,
-              },
-              {
-                path: 'general',
-                element: <GeneralSettings />,
-              },
-              {
-                path: 'profile',
-                element: <ProfileSettings />,
-              },
-              {
-                path: 'password',
-                element: <PasswordSettings />,
-              },
-              {
-                path: 'sessions',
-                element: <SessionsSettings />,
+                path: '/:username/settings',
+                element: <UserSettings />,
+                children: [
+                  {
+                    path: '',
+                    element: <Navigate to="general" />,
+                  },
+                  {
+                    path: 'general',
+                    element: <GeneralSettings />,
+                  },
+                  {
+                    path: 'profile',
+                    element: <ProfileSettings />,
+                  },
+                  {
+                    path: 'password',
+                    element: <PasswordSettings />,
+                  },
+                  {
+                    path: 'sessions',
+                    element: <SessionsSettings />,
+                  },
+                ],
               },
             ],
           },
