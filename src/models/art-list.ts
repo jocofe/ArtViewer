@@ -59,6 +59,7 @@ export interface ArtObjectDetails {
   location: string;
   type: string;
   dimensions: string;
+  imageUrl: string;
 }
 
 export interface ArtObjectFromApi {

@@ -146,6 +146,7 @@ export const ArtPage = () => {
               artPieceAuthor={artDetailsInfo.artist}
               artPieceDate={artDetailsInfo.date}
               artPieceTitle={artDetailsInfo.title}
+              artPieceImageUrl={artDetailsInfo.imageUrl}
             />
           </div>
           <div className="artpiece__btn">
