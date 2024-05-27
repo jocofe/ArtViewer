@@ -35,6 +35,7 @@ export const ArtCard = (props: ArtCardDetails) => {
           artPieceAuthor={author}
           artPieceDate={date}
           artPieceTitle={title}
+          artPieceImageUrl={imageUrl}
         />
       </section>
     </div>
