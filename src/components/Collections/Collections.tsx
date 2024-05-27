@@ -14,7 +14,7 @@ export const Collections = ({ collections }: CollectionsProps) => {
         {collections.map(collection => (
           <div className="relative" key={collection.id}>
             <CollectionCard key={collection.id} collection={collection} />
-            <Link className="expanded-anchor" to={`/collection/${collection.name}`} />
+            <Link className="expanded-anchor" to={`/collection/${collection.id}`} />
           </div>
         ))}
       </Masonry>

@@ -2,15 +2,16 @@ export interface Collection {
   id: string;
   name: string;
   description: string;
-  artpieces: { artPieceId: string; imageUrl: string }[];
+  artpieces: ArtPiece[];
 }
 
 export interface ArtPiece {
   id: string;
-  title?: string;
-  author?: string;
-  date?: string;
+  title: string;
+  author: string;
+  date: string;
   imageId: string;
+  imageUrl: string;
 }
 
 export interface CollectionUser {

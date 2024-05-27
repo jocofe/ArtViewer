@@ -9,11 +9,11 @@ export const CollectionCard = ({ collection }: CollectionCardProps) => {
     <div className="collectioncard-wrapper">
       {firstArtPiece ? (
         <div className="image-wrapper">
-          <img
-            src={firstArtPiece.imageUrl}
-            className="collectioncard__image"
-            alt={`Art Piece ${firstArtPiece.artPieceId}`}
-          />
+          {firstArtPiece.imageUrl ? (
+            <img src={firstArtPiece.imageUrl} className="collectioncard__image" alt={`Art Piece ${firstArtPiece.id}`} />
+          ) : (
+            <p>No image available</p>
+          )}
         </div>
       ) : (
         <p>No image available</p>

@@ -69,7 +69,7 @@ export const router = createBrowserRouter([
             element: <SessionsSettings />,
           },
           {
-            path: '/user-collection',
+            path: '/collection/:collectionId',
             element: <UserCollection />,
           },
           {
