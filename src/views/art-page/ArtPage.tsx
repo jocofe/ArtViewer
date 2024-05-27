@@ -31,6 +31,7 @@ export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDeta
   });
 };
 
+
 export const mapArtApitoArtView = (art: ArtArtistFromApi): ArtArtistItem[] => {
   return art.records.map((artArtist: ArtArtistDetails) => {
     return {
