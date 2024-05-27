@@ -1,13 +1,19 @@
+import { useState, useEffect } from 'react';
 import { CollectionCardProps } from '../../models/collection';
 
 export const CollectionCard = ({ collection }: CollectionCardProps) => {
   const { name, artpieces } = collection;
-  const firstArtPiece = artpieces && artpieces.length > 0 ? artpieces[0] : null;
+  const [firstArtPiece, setFirstArtPiece] = useState(artpieces && artpieces.length > 0 ? artpieces[0] : null);
+
+  // Recalcula el primer elemento cuando artpieces cambia
+  useEffect(() => {
+    setFirstArtPiece(artpieces && artpieces.length > 0 ? artpieces[0] : null);
+  }, [artpieces]);
+
   console.log('Imagen URL:', firstArtPiece?.imageUrl);
 
   return (
     <div key={collection.id} className="collectioncard-wrapper">
-      {' '}
       {firstArtPiece ? (
         <div className="image-wrapper">
           {firstArtPiece.imageUrl ? (

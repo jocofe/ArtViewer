@@ -96,6 +96,7 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
           const collectionDoc = doc(db, `users/${userData.email}/collections`, collection.id);
 
           const artPieceIndex = collection.artpieces.findIndex(piece => piece.id === artPieceDetails.id);
+          const imageUrl = `https://framemark.vam.ac.uk/collections/${artPieceDetails.imageId}/full/!500,500/0/default.jpg`;
 
           if (selectedCollections.has(collection.id)) {
             if (artPieceIndex === -1) {
@@ -107,6 +108,7 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
                   author: artPieceDetails.author || '',
                   date: artPieceDetails.date || '',
                   imageId: artPieceDetails.imageId,
+                  imageUrl: imageUrl, // Agregar el campo imageUrl
                 },
               ];
               await updateDoc(collectionDoc, { artpieces: updatedArtPieces });

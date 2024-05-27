@@ -39,12 +39,17 @@ export const UserCollection = () => {
   return (
     <div className="usercollection-wrapper">
       <div className="usercollection-card">
-        <div className="usercollection__info">
-          <h1 className="usercollection__name">{collectionData.name}</h1>
-          <p className="usercollection__description">{collectionData.description}</p>
+        <div className="usercollectioncard-wrapper">
+          <div className="usercollection__info">
+            <h1 className="usercollection__name h4">{collectionData.name}</h1>
+            <p className="usercollection__count">{collectionData.artpieces.length} pieces</p>
+            <p className="usercollection__description">{collectionData.description}</p>
+          </div>
+          <div className="usercollection-buttons">
+            <Button>Edit Collection</Button>
+            <Button>Delete Collection</Button>
+          </div>
         </div>
-        <Button>Edit Collection</Button>
-        <Button>Delete Collection</Button>
       </div>
       <div>
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>

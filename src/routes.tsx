@@ -70,7 +70,7 @@ export const router = createBrowserRouter([
           },
           {
             path: '/collection/:collectionId',
-            element: <UserCollection id={''} name={''} description={''} artpieces={[]} />,
+            element: <UserCollection />,
           },
           {
             path: '/:username',
