@@ -1,5 +1,5 @@
 import { ArtCardDetails } from '../../models/art-card';
-import { Socials } from '../Socials/socials';
+import { Socials } from '../Socials/Socials';
 
 const constructImageUrl = (imageId: string) => {
   return `https://framemark.vam.ac.uk/collections/${imageId}/full/!500,500/0/default.jpg`;

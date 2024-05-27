@@ -20,6 +20,7 @@ import { BrandTypography } from './views/brand-guideline/BrandTypography';
 import { BrandGuideline } from './views/brand-guideline/BrandGuideline';
 import { BrandColor } from './views/brand-guideline/BrandColor';
 import { SignUpNewUser } from './views/SignIn-LogIn/SignUpNewUser';
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -53,28 +54,46 @@ export const router = createBrowserRouter([
             element: <ArtDetailPage />,
           },
           {
-            path: '/settings/general',
-            element: <GeneralSettings />,
-          },
-          {
-            path: '/settings/profile',
-            element: <ProfileSettings />,
-          },
-          {
-            path: '/settings/password',
-            element: <PasswordSettings />,
-          },
-          {
-            path: '/settings/sessions',
-            element: <SessionsSettings />,
+            path: '/settings',
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: '/settings/general',
+                element: <GeneralSettings />,
+              },
+              {
+                path: '/settings/profile',
+                element: <ProfileSettings />,
+              },
+              {
+                path: '/settings/password',
+                element: <PasswordSettings />,
+              },
+              {
+                path: '/settings/sessions',
+                element: <SessionsSettings />,
+              },
+            ],
           },
           {
             path: '/user-collection',
-            element: <UserCollection />,
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: '',
+                element: <UserCollection />,
+              },
+            ],
           },
           {
             path: '/:username',
-            element: <UserPage />,
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: '',
+                element: <UserPage />,
+              },
+            ],
           },
           {
             path: '/:username/settings',
