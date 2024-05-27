@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from 'react';
 import { auth, db } from '../config/config';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import 'firebase/auth';
 import { UserContextProviderFirebaseProps } from '../models/usercontext';
+import { Collection } from '../models/collection';
 
 interface UserContextType {
   isLoggedIn: boolean;
@@ -17,6 +18,7 @@ export interface UserData {
   email: string;
   displayName: string;
   username: string;
+  collections?: Collection[];
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -24,7 +26,6 @@ export const UserContext = createContext<UserContextType>({
   userData: null,
 });
 
-// Componente de proveedor de usuario con Firebase
 export const UserContextProviderFirebase = ({ children }: UserContextProviderFirebaseProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
@@ -38,7 +39,22 @@ export const UserContextProviderFirebase = ({ children }: UserContextProviderFir
           try {
             const userDoc = await getDoc(doc(db, 'users', userEmail));
             const userDataFromFirestore = userDoc.data() as UserData;
-            setUserData(userDataFromFirestore);
+
+            // Obtener colecciones del usuario
+            const collectionsRef = collection(db, `users/${userEmail}/collections`);
+            const collectionsSnapshot = await getDocs(collectionsRef);
+            const collections: Collection[] = collectionsSnapshot.docs.map(docSnapshot => {
+              const collectionData = docSnapshot.data() as Omit<Collection, 'id'>;
+              return {
+                id: docSnapshot.id,
+                ...collectionData,
+              };
+            });
+
+            // Agregar colecciones a userData sin sobrescribir la propiedad 'id'
+            const updatedUserData = { ...userDataFromFirestore, collections };
+
+            setUserData(updatedUserData);
           } catch (error) {
             console.error('Error fetching user data:', error);
           }

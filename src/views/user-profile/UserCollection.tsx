@@ -1,23 +1,23 @@
 import { useContext, useEffect, useState } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../config/config';
 import { Button } from '../../components/Buttons/Buttons';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import { Collection } from '../../models/collection';
 import { UserContext } from '../../context/UserContextProvider';
+import { useParams } from 'react-router-dom';
 
-export const UserCollection = ({ id }: Collection) => {
+export const UserCollection = () => {
   const { userData } = useContext(UserContext);
   const [collectionData, setCollectionData] = useState<Collection | null>(null);
+  const { collectionId } = useParams<{ collectionId: string }>();
 
   useEffect(() => {
-    if (userData) {
+    if (userData && collectionId) {
       const fetchCollection = async () => {
         try {
-          const collectionRef = collection(db, `users/${userData.email}/collections/${id}`);
-          const collectionSnapshot = await getDocs(collectionRef);
-          const collectionDoc = collectionSnapshot.docs[0];
+          const collectionDoc = await getDoc(doc(db, `users/${userData.email}/collections/${collectionId}`));
           if (collectionDoc.exists()) {
             setCollectionData({ id: collectionDoc.id, ...collectionDoc.data() } as Collection);
           } else {
@@ -30,7 +30,7 @@ export const UserCollection = ({ id }: Collection) => {
 
       fetchCollection();
     }
-  }, [userData, id]); // Agregar id como una dependencia
+  }, [userData, collectionId]);
 
   if (!collectionData) {
     return <div>Loading...</div>;
