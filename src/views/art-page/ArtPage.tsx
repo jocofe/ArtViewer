@@ -9,7 +9,7 @@ import {
 } from '../../models/art-list';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import { Socials } from '../../components/Socials/Socials';
+import  { Socials } from '../../components/Socials/Socials'
 import { Button } from '../../components/Buttons/Buttons';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
