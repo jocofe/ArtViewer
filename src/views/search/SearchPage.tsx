@@ -29,6 +29,8 @@ export const SearchPage = () => {
 
   const { apiUrl, handleFilterClick, activeFilter, handleLoadMore } = useFilters(searchTerm);
 
+
+  // Api call
   useEffect(() => {
     const getResults = async () => {
       try {

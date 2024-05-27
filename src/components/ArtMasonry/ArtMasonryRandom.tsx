@@ -89,7 +89,7 @@ export const ArtMasonryRandom = () => {
               <Button color='sub_primary' onClick={handleLoadMore}>Load More</Button>
             )}
             {!user && (
-              <Button color='sub_primary' component={NavLink} className='btn-link--black'>Sign Up to continue</Button>
+              <Button color='sub_primary' component={NavLink} to='/signup' className='btn-link--black'>Sign Up to continue</Button>
             )}
           </div>
       </div>
