@@ -2,9 +2,11 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { collection, doc, getDocs, addDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../config/config';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { Toaster
+import { Toaster } from '../Dialogs/Toaster Message/ToasterMessage';
+import { ModalDefault } from '../Dialogs/ModalDefault';
+import { Button } from '../Buttons/Buttons';
+import { NavLink } from 'react-router-dom';
 
- } from '../Dialogs/Toaster Message/ToasterMessage';
 interface Favourite {
   artPieceId: string;
   id?: string;
@@ -32,6 +34,7 @@ export const useLikes = () => {
 export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
   const [favourites, setFavourites] = useState<Favourite[]>([]);
   const [toasterMessage, setToasterMessage] = useState<string | null>(null);
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const auth = getAuth();
 
   useEffect(() => {
@@ -52,6 +55,11 @@ export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
 
   const toggleLike = async (artPieceId: string) => {
     const user = auth.currentUser;
+    if (!user) {
+      setShowLoginModal(true);
+      return;
+    }
+
     if (user) {
       const userEmail = user.email!;
       const userDocRef = doc(db, 'users', userEmail);
@@ -75,10 +83,20 @@ export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
     }
   };
 
+  const closeLoginModal = () => setShowLoginModal(false);
+
   return (
     <LikesContext.Provider value={{ favourites, toggleLike }}>
       {children}
       {toasterMessage && <Toaster message={toasterMessage} onClose={() => setToasterMessage(null)} />}
+      <ModalDefault onClose={closeLoginModal} show={showLoginModal} size='md' title='Join ArtViewer now!'>
+        <p className='modal-signup__content'>     
+          Register to discover your <span>favorite</span> art pieces and create your own <span>unique collections</span>.
+        </p>
+        <div className='modal-signup__btn'>
+          <Button component={NavLink} to='/signup' className='btn-link--white'>Sign Up</Button>
+        </div>
+      </ModalDefault>
     </LikesContext.Provider>
   );
 };

@@ -1,4 +1,4 @@
-import Tabs from '../../Tabs.tsx/Tabs';
+import Tabs from '../../components/Tabs/Tabs';
 import { ProfileCard } from '../../components/ProfileCard/ProfileCard';
 import { Likes } from '../../components/Likes/Likes';
 
