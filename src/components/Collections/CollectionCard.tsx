@@ -6,7 +6,8 @@ export const CollectionCard = ({ collection }: CollectionCardProps) => {
   console.log('Imagen URL:', firstArtPiece?.imageUrl);
 
   return (
-    <div className="collectioncard-wrapper">
+    <div key={collection.id} className="collectioncard-wrapper">
+      {' '}
       {firstArtPiece ? (
         <div className="image-wrapper">
           {firstArtPiece.imageUrl ? (
