@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ArtItem, ArtListItem, ArtListItemFromApi } from '../../models/art-list';
 import axios from 'axios';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { Link, NavLink } from 'react-router-dom';
 import { Button } from '../Buttons/Buttons';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { UserContext } from '../../context/UserContextProvider';
 
 export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
   return art.records.map((artItem: ArtItem) => {
@@ -24,8 +24,9 @@ export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
 
 export const ArtMasonryRandom = () => {
   const [artList, setArtList] = useState<ArtListItem[]>([]);
-  const [user, setUser] = useState(false);
   const [page, setPage] = useState(1);
+
+  const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     const fetchArt = async () => {
@@ -37,17 +38,6 @@ export const ArtMasonryRandom = () => {
 
     fetchArt();
 
-    // Check if there is user loged
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(true); 
-      } else {
-        setUser(false); 
-      }
-    });
-
-    return () => unsubscribe(); // Clean when unmounted
   }, [page]);
 
   const handleLoadMore = () => {
@@ -85,10 +75,10 @@ export const ArtMasonryRandom = () => {
           </Masonry>
         </ResponsiveMasonry>
           <div className="masonry__button">
-            {user && (
+            {isLoggedIn && (
               <Button color='sub_primary' onClick={handleLoadMore}>Load More</Button>
             )}
-            {!user && (
+            {!isLoggedIn && (
               <Button color='sub_primary' component={NavLink} to='/signup' className='btn-link--black'>Sign Up to continue</Button>
             )}
           </div>

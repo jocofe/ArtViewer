@@ -2,17 +2,18 @@ import { ArtMasonryRandom } from '../../components/ArtMasonry/ArtMasonryRandom';
 import { CtaSection } from '../../components/Sections/CtaSection';
 import { Hero } from '../../components/Sections/Hero';
 import { ArtistSlider } from '../../components/ArtistSlider/ArtistSlider';
-import { useUserAuth } from '../../hooks/useUserAuth';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContextProvider';
 
 export const Home = () => {
-const { user } = useUserAuth();
+const { isLoggedIn } = useContext(UserContext);
 
   return (
     <>
       <Hero />
       <ArtistSlider />
       <ArtMasonryRandom />
-      {!user && (
+      {!isLoggedIn && (
         <CtaSection />
       )}
     </>
