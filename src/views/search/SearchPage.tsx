@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, NavLink, useSearchParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
@@ -7,6 +7,8 @@ import { FilterTag } from '../../components/Filters/FilterTag';
 import axios from 'axios';
 import { useFilters } from '../../hooks/useFilters';
 import { Button } from '../../components/Buttons/Buttons';
+import { useUserAuth } from '../../hooks/useUserAuth';
+import { CtaSection } from '../../components/Sections/CtaSection';
 
 const mapResultsFromApi = (result: ResultListFromApi): ResultsListItem[] => {
   return result.records.map((resultItem: ResultItem) => {
@@ -28,7 +30,7 @@ export const SearchPage = () => {
   const [loading, setLoading] = useState(false);
 
   const { apiUrl, handleFilterClick, activeFilter, handleLoadMore } = useFilters(searchTerm);
-
+  const { user } = useUserAuth();
 
   // Api call
   useEffect(() => {
@@ -113,8 +115,20 @@ export const SearchPage = () => {
           <h3>Sorry, no results found</h3>
           <p>Try searching for something else?</p>
         </div>
+      )} 
+      {user && (
+        <div className="masonry__button">
+        <Button onClick={handleLoadMore}>Load More</Button>
+        </div>
       )}
-      <Button onClick={handleLoadMore}>Load More</Button>
+      {!user && (
+        <div>
+          <div className='masonry__button'>
+            <Button color='sub_primary' component={NavLink} to='/signup' className='btn-link--black'>Sign Up to continue</Button>
+          </div>
+          <CtaSection/>
+        </div>
+      )}
     </div>
   );
 };
