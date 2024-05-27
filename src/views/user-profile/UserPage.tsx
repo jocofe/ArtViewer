@@ -2,14 +2,14 @@ import { useEffect, useState, useContext } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/config';
 import { UserContext } from '../../context/UserContextProvider';
-import Tabs from '../../components/Tabs/Tabs';
+import { Tabs } from '../../components/Tabs/Tabs';
 import { ProfileCard } from '../../components/ProfileCard/ProfileCard';
 import { Likes } from '../../components/Likes/Likes';
-import { CollectionUser } from '../../components/Dialogs/Collection Modal/AddCollection';
+import { Collection } from '../../models/collection';
 
 export const UserPage = () => {
   const { userData } = useContext(UserContext);
-  const [collections, setCollections] = useState<CollectionUser[]>([]);
+  const [collections, setCollections] = useState<Collection[]>([]);
 
   useEffect(() => {
     if (userData) {
@@ -19,7 +19,7 @@ export const UserPage = () => {
         const collectionsData = collectionSnap.docs.map(doc => ({
           id: doc.id,
           ...doc.data(),
-        })) as CollectionUser[];
+        })) as Collection[];
         setCollections(collectionsData);
       };
 

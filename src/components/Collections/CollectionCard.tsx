@@ -1,33 +1,23 @@
-import { FC } from 'react';
+import { CollectionCardProps } from '../../models/collection';
 
-interface ArtPiece {
-  artPieceId: string;
-  imageUrl: string;
-}
-
-interface Collection {
-  name: string;
-  artpieces: ArtPiece[];
-}
-
-interface CollectionCardProps {
-  collection: Collection;
-}
-
-export const CollectionCard: FC<CollectionCardProps> = ({ collection }) => {
+export const CollectionCard = ({ collection }: CollectionCardProps) => {
   const { name, artpieces } = collection;
   const firstArtPiece = artpieces && artpieces.length > 0 ? artpieces[0] : null;
   console.log('Imagen URL:', firstArtPiece?.imageUrl);
 
   return (
     <div className="collectioncard-wrapper">
-      <div className="collectioncard__img">
-        {firstArtPiece ? (
-          <img src={firstArtPiece.imageUrl} alt={`Art Piece ${firstArtPiece.artPieceId}`} />
-        ) : (
-          <p>No image available</p>
-        )}
-      </div>
+      {firstArtPiece ? (
+        <div className="image-wrapper">
+          <img
+            src={firstArtPiece.imageUrl}
+            className="collectioncard__image"
+            alt={`Art Piece ${firstArtPiece.artPieceId}`}
+          />
+        </div>
+      ) : (
+        <p>No image available</p>
+      )}
       <div className="collectioncard__name">{name}</div>
       <div className="collectioncard__count">{artpieces ? artpieces.length : 0} pieces</div>
     </div>

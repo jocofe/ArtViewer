@@ -1,19 +1,13 @@
 import { Heart, FullHeart, CopyLink, Bookmark, FullBookmark } from '../Icons/icons';
 import { useState, useEffect, useContext, useCallback } from 'react';
 import { ModalDefault } from '../Dialogs/ModalDefault';
-import { AddCollectionModal, CollectionUser } from '../Dialogs/Collection Modal/AddCollection';
+import { AddCollectionModal } from '../Dialogs/Collection Modal/AddCollection';
+import { CollectionUser } from '../../models/collection';
 import { UserContext } from '../../context/UserContextProvider';
 import { useLikes } from '../Likes/LikesContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/config';
-
-export interface SocialProps {
-  artPieceId: string;
-  artPieceImageId: string;
-  artPieceAuthor: string;
-  artPieceDate: string;
-  artPieceTitle: string;
-}
+import { SocialProps } from '../../models/socials';
 
 export const Socials = ({ artPieceId, artPieceImageId, artPieceAuthor, artPieceDate, artPieceTitle }: SocialProps) => {
   const [isOnSaved, setIsOnSaved] = useState(false);

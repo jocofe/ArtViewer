@@ -1,12 +1,10 @@
-import { ProfileImageProps, useUserProfilePhoto } from '../../hooks/useUserProfileImg';
 import { DefaultAvatar } from '../Avatar/DefaultAvatar';
 import { Button } from '../Buttons/Buttons';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../context/UserContextProvider';
 
 export const ProfileCard = () => {
-  const userProfilePhoto: ProfileImageProps | null = useUserProfilePhoto();
-  const { userData } = useContext(UserContext);
+  const { userData, userProfilePhoto } = useContext(UserContext);
   const [fullName, setFullName] = useState<string | null>(null);
   const [location, setLocation] = useState<string | null>(null);
 
@@ -20,7 +18,7 @@ export const ProfileCard = () => {
   return (
     <div className="profilecard-wrapper">
       <div className="profile-picture">
-        {userProfilePhoto && userProfilePhoto.imageUrl !== 'default' ? (
+        {userProfilePhoto ? ( // Utiliza userProfilePhoto del contexto
           <img src={userProfilePhoto.imageUrl} alt="User Profile" className="profilecard-image" />
         ) : (
           <DefaultAvatar />

@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
-import { CollectionUser } from '../Dialogs/Collection Modal/AddCollection';
+import { useState } from 'react';
+import { Collection } from '../../models/collection';
+import { Collections } from '../Collections/Collections';
 
 interface TabsProps {
-  collections: CollectionUser[];
+  collections: Collection[];
   likes: React.ReactNode;
+  className?: string;
 }
 
-const Tabs = ({ collections, likes }: TabsProps) => {
+export const Tabs = ({ collections, likes, className }: TabsProps) => {
   const [selectedTab, setSelectedTab] = useState('collections');
 
   return (
-    <div className="tabs">
+    <div className={`tabs ${className}`}>
       <div className="tablist" role="tablist">
         <button
           role="tab"
@@ -28,21 +30,8 @@ const Tabs = ({ collections, likes }: TabsProps) => {
         </button>
       </div>
       <div className="tab-panel" role="tabpanel">
-        {selectedTab === 'collections' ? (
-          <div>
-            {collections.map((collection, index) => (
-              <div key={index}>
-                {/* Renderiza aquí los detalles de cada colección */}
-                {collection.name}
-              </div>
-            ))}
-          </div>
-        ) : (
-          likes
-        )}
+        {selectedTab === 'collections' ? <Collections collections={collections} /> : likes}
       </div>
     </div>
   );
 };
-
-export default Tabs;

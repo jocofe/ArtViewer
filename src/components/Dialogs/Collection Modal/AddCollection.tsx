@@ -6,33 +6,7 @@ import { Button } from '../../Buttons/Buttons';
 import { FilterCollectionBar } from '../../Form/FilterCollectionBar';
 import { Close } from '../../Icons/icons';
 import { UserContext } from '../../../context/UserContextProvider';
-
-export interface CollectionUser {
-  id: string;
-  name: string;
-  artpieces: ArtPiece[];
-  description: string;
-}
-
-interface ArtPiece {
-  id: string;
-  title?: string;
-  author?: string;
-  date?: string;
-  imageId: string;
-}
-
-interface AddCollectionModalProps {
-  collections: CollectionUser[];
-  artPieceDetails: ArtPiece;
-  onClose: () => void;
-  onSave: () => void;
-}
-
-interface NewCollectionFormInputs {
-  name: string;
-  description: string;
-}
+import { AddCollectionModalProps, CollectionUser, NewCollectionFormInputs } from '../../../models/collection';
 
 export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSave }: AddCollectionModalProps) => {
   const { userData } = useContext(UserContext);
@@ -50,8 +24,6 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
         const collectionsData = collectionSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }) as CollectionUser);
         setUserCollections(collectionsData);
         setFilteredCollections(collectionsData);
-
-        // Verificar si la obra de arte está presente en alguna colección y marcar el checkbox correspondiente
         const collectionsWithArtPiece = collectionsData.filter(collection =>
           collection.artpieces.some(piece => piece.id === artPieceDetails.id),
         );
@@ -126,9 +98,7 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
           const artPieceIndex = collection.artpieces.findIndex(piece => piece.id === artPieceDetails.id);
 
           if (selectedCollections.has(collection.id)) {
-            // La colección está seleccionada
             if (artPieceIndex === -1) {
-              // La obra de arte no está presente, agrégala
               const updatedArtPieces = [
                 ...collection.artpieces,
                 {
@@ -142,9 +112,7 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
               await updateDoc(collectionDoc, { artpieces: updatedArtPieces });
             }
           } else {
-            // La colección no está seleccionada
             if (artPieceIndex !== -1) {
-              // La obra de arte está presente, elimínala
               const updatedArtPieces = [
                 ...collection.artpieces.slice(0, artPieceIndex),
                 ...collection.artpieces.slice(artPieceIndex + 1),
