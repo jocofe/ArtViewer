@@ -9,6 +9,7 @@ interface UserContextType {
   isLoggedIn: boolean;
   userData: UserData | null;
   updateUserProfilePhoto: (newPhotoURL: string) => void; // Nuevo método
+  updateUserProfileName: (newName: string) => void;
 }
 
 export interface UserData {
@@ -21,7 +22,12 @@ export interface UserData {
   // Otros datos que deseas del usuario
 }
 
-export const UserContext = createContext<UserContextType>({ isLoggedIn: false, userData: null, updateUserProfilePhoto: () => {} });
+export const UserContext = createContext<UserContextType>({ 
+  isLoggedIn: false, 
+  userData: null, 
+  updateUserProfilePhoto: () => {},
+  updateUserProfileName: () => {},
+});
 
 // Componente de proveedor de usuario con Firebase
 export const UserContextProviderFirebase: React.FC<UserContextProviderFirebaseProps> = ({ children }) => {
@@ -61,7 +67,20 @@ export const UserContextProviderFirebase: React.FC<UserContextProviderFirebasePr
 
   const updateUserProfilePhoto = (newPhotoURL: string) => {
     setUserData(prevData => prevData ? { ...prevData, photoURL: newPhotoURL } : prevData);
-  }
+  };
 
-  return <UserContext.Provider value={{ isLoggedIn, userData, updateUserProfilePhoto }}>{children}</UserContext.Provider>;
+  const updateUserProfileName = (newName: string) => {
+    setUserData(prevData => prevData ? { ...prevData, name: newName } : prevData);
+  };
+
+  return ( 
+    <UserContext.Provider value={{ 
+      isLoggedIn, 
+      userData, 
+      updateUserProfilePhoto,
+      updateUserProfileName,
+    }}>
+      {children}
+    </UserContext.Provider>
+  );
 };

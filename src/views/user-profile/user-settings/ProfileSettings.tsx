@@ -8,11 +8,12 @@ import { ProfileImageProps, useUserProfilePhoto } from "../../../hooks/useUserPr
 import { UserContext } from "../../../context/UserContextProvider";
 
 export const ProfileSettings = () => {
-  const { userData, updateUserProfilePhoto } = useContext(UserContext);
+  const { userData, updateUserProfilePhoto, updateUserProfileName } = useContext(UserContext);
   const userProfilePhoto: ProfileImageProps | null = useUserProfilePhoto();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [name, setName] = useState<string>(userData?.name || '');
   const [location, setLocation] = useState<string>(userData?.location || '');
+
 
   const handleChooseBtnClick = () => {
     if (fileInputRef.current) {
@@ -38,6 +39,9 @@ export const ProfileSettings = () => {
     if (userData?.email) {
       const userDocRef = doc(db, 'users', userData.email);
       await updateDoc(userDocRef, { name, location });
+
+      //Actualizar el nombre en el contexto
+      updateUserProfileName(name)
     }
   };
 
@@ -45,7 +49,7 @@ export const ProfileSettings = () => {
     <div className="settings">
       <div className="settings-picture">
         <div className="profile-picture-settings">
-          {userProfilePhoto && userProfilePhoto.imageUrl !== 'default' ? (
+        {userProfilePhoto && userProfilePhoto.imageUrl !== 'default' ? (
             <img src={userProfilePhoto.imageUrl} alt="User Profile" className="profilecard-image" />
           ) : (
             <div className="profile-picture-settings">
