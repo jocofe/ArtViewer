@@ -9,11 +9,12 @@ import {
 } from '../../models/art-list';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import { Socials } from '../../components/Socials/socials';
+import { Socials } from '../../components/Socials/Socials';
 import { Button } from '../../components/Buttons/Buttons';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import Viewer from 'react-viewer';
+import { generateArtworkDescription } from '../../features/openai/openai';
 
 export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDetails[] => {
   return art.map((artItem: ArtObject) => {
@@ -49,6 +50,7 @@ export const ArtPage = () => {
   const [relatedArt, setRelatedArt] = useState<ArtArtistItem[]>([]);
   const [isViewerVisible, setIsViewerVisible] = useState(false);
   const [selectedImageUrl, setSelectedImageUrl] = useState('');
+  const [description, setDescription] = useState('');
   const { artId } = useParams();
 
   useEffect(() => {
@@ -56,23 +58,22 @@ export const ArtPage = () => {
       try {
         const apiURL = `https://api.vam.ac.uk/v1/museumobject/${artId}`;
         const response = await axios.get(apiURL);
-        console.log(response);
         const mappedArtObject = mapArtObjectApitoArtObject(response.data);
         setArtDetails(mappedArtObject);
-        const artistName = mappedArtObject[0]?.artist;
-        const cleanedArtistName = artistName.replace(/[^\w\d]+/g, ',');
-        console.log(cleanedArtistName);
 
-        if (artistName) {
-          const artistApiUrl = `https://api.vam.ac.uk/v2/objects/search?q_actor=${cleanedArtistName}&images_exist=true`;
-          console.log('Artist API URL:', artistApiUrl);
-          const mapArtist = await axios.get(artistApiUrl);
-          console.log(mapArtist.data);
-          const relatedArtObjects = mapArtApitoArtView(mapArtist.data);
-          setRelatedArt(relatedArtObjects);
+        if (mappedArtObject.length > 0) {
+          const artistName = mappedArtObject[0]?.artist;
+          const cleanedArtistName = artistName.replace(/[^\w\d]+/g, ',');
+
+          if (artistName) {
+            const artistApiUrl = `https://api.vam.ac.uk/v2/objects/search?q_actor=${cleanedArtistName}&images_exist=true`;
+            const mapArtist = await axios.get(artistApiUrl);
+            const relatedArtObjects = mapArtApitoArtView(mapArtist.data);
+            setRelatedArt(relatedArtObjects);
+          }
         }
       } catch (error) {
-        console.log(error);
+        console.error('Error fetching artwork details:', error);
       }
     };
 
@@ -80,6 +81,22 @@ export const ArtPage = () => {
       getInforforArtPage();
     }
   }, [artId]);
+
+  useEffect(() => {
+    const setDescriptionAsync = async () => {
+      try {
+        if (artDetails.length > 0) {
+          const artTitle = artDetails[0].title;
+          const generatedDescription = await generateArtworkDescription(artTitle);
+          setDescription(generatedDescription);
+        }
+      } catch (error) {
+        console.error('Error generating artwork description:', error);
+      }
+    };
+
+    setDescriptionAsync();
+  }, [artDetails]);
 
   const artDetailsInfo = artDetails?.[0];
 
@@ -140,7 +157,18 @@ export const ArtPage = () => {
             <p>{artDetailsInfo.location}</p>
           </div>
           <div className="artpiece__socials">
-            <Socials artPieceId={artDetailsInfo.id}/>
+            <Socials
+              artPieceId={artDetailsInfo.id}
+              artPieceImageId={artDetailsInfo.imageId}
+              artPieceAuthor={artDetailsInfo.artist}
+              artPieceDate={artDetailsInfo.date}
+              artPieceTitle={artDetailsInfo.title}
+              artPieceImageUrl={artDetailsInfo.imageUrl}
+            />
+          </div>
+          <div className="artpiece__description">
+            <h3 className="description__title">Description</h3>
+            <p className="description__text">{description}</p>
           </div>
           <div className="artpiece__btn">
             <Button onClick={linkToOfficialInfo}>View more information</Button>

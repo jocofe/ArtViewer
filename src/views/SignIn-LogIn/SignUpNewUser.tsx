@@ -160,7 +160,7 @@ export const SignUpNewUser = () => {
                           <input
                             type="checkbox"
                             id="google-checkbox"
-                            checked={selectedAvatar === (user.photoURL ?? '')}
+                            checked={selectedAvatar === user.photoURL}
                             onChange={() => handleAvatarSelection(user.photoURL ?? '')}
                           />
                           <label htmlFor="google-checkbox">
@@ -184,7 +184,7 @@ export const SignUpNewUser = () => {
                 </div>
               </div>
             </div>
-            <Button type="submit" className="submit-btn" disabled={isSubmitting}>
+            <Button type="submit" className="submit-btn btn-link--black" disabled={isSubmitting}>
               Continue
             </Button>
           </form>

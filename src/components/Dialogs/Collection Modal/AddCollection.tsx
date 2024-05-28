@@ -1,53 +1,38 @@
 import { useContext, useState, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { collection, addDoc, getDocs, query, where, collectionGroup } from 'firebase/firestore';
+import { collection, getDocs, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../config/config';
 import { Button } from '../../Buttons/Buttons';
 import { FilterCollectionBar } from '../../Form/FilterCollectionBar';
-import { Close } from '../../Icons/icons';
 import { UserContext } from '../../../context/UserContextProvider';
+import { AddCollectionModalProps, CollectionUser, NewCollectionFormInputs } from '../../../models/collection';
 
-interface Collection {
-  id: string;
-  name: string;
-  artpieces: []; // Actualiza el tipo según la estructura de tus datos de arte
-}
-
-interface AddCollectionModalProps {
-  collections: Collection[];
-}
-
-interface NewCollectionFormInputs {
-  name: string;
-}
-
-export const AddCollectionModal = ({ collections }: AddCollectionModalProps) => {
-  const { userData } = useContext(UserContext);
-  const [filteredCollections, setFilteredCollections] = useState<Collection[]>(collections);
-  const [userCollections, setUserCollections] = useState<Collection[]>([]);
+export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSave }: AddCollectionModalProps) => {
   const [isCreatingNewCollection, setIsCreatingNewCollection] = useState(false);
+  const [filteredCollections, setFilteredCollections] = useState<CollectionUser[]>(collections);
+  const [userCollections, setUserCollections] = useState<CollectionUser[]>([]);
+  const [selectedCollections, setSelectedCollections] = useState<Set<string>>(new Set());
+  const { userData } = useContext(UserContext);
   const { register, handleSubmit, reset } = useForm<NewCollectionFormInputs>();
 
   useEffect(() => {
-    if (!userData) return;
+    if (userData) {
+      const fetchCollections = async () => {
+        const collectionRef = collection(db, `users/${userData.email}/collections`);
+        const collectionSnap = await getDocs(collectionRef);
+        const collectionsData = collectionSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }) as CollectionUser);
+        setUserCollections(collectionsData);
+        setFilteredCollections(collectionsData);
+        const collectionsWithArtPiece = collectionsData.filter(collection =>
+          collection.artpieces.some(piece => piece.id === artPieceDetails.id),
+        );
+        const selectedCollectionIds = new Set(collectionsWithArtPiece.map(collection => collection.id));
+        setSelectedCollections(selectedCollectionIds);
+      };
 
-    const fetchCollections = async () => {
-      try {
-        const q = query(collectionGroup(db, 'collections'), where('userId', '==', userData.email));
-        const querySnapshot = await getDocs(q);
-        const userCollectionsData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Collection[];
-        setUserCollections(userCollectionsData);
-        setFilteredCollections(userCollectionsData);
-      } catch (error) {
-        console.error('Error fetching collections:', error);
-      }
-    };
-
-    fetchCollections();
-  }, [userData]);
+      fetchCollections();
+    }
+  }, [userData, artPieceDetails.id]);
 
   const handleSearch = (searchTerm: string) => {
     if (searchTerm.trim() === '') {
@@ -65,51 +50,115 @@ export const AddCollectionModal = ({ collections }: AddCollectionModalProps) => 
   };
 
   const handleCloseModal = () => {
-    setIsCreatingNewCollection(false);
-    reset();
+    if (isCreatingNewCollection) {
+      setIsCreatingNewCollection(false);
+      reset();
+    } else {
+      onClose();
+    }
   };
 
   const onSubmit: SubmitHandler<NewCollectionFormInputs> = async data => {
     if (!userData) return;
 
     try {
-      await addDoc(collection(db, `users/${userData.email}/collections`), {
+      const newCollection = {
         name: data.name,
+        description: data.description,
         artpieces: [],
-      });
-      console.log('Collection created successfully');
+      };
+
+      await addDoc(collection(db, `users/${userData.email}/collections`), newCollection);
+      setIsCreatingNewCollection(false);
+      onSave();
       handleCloseModal();
-      // Fetch updated collections
-      const q = query(collectionGroup(db, 'collections'), where('userId', '==', userData.email));
-      const querySnapshot = await getDocs(q);
-      const updatedUserCollections = querySnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Collection[];
-      setUserCollections(updatedUserCollections);
-      setFilteredCollections(updatedUserCollections);
     } catch (error) {
       console.error('Error creating collection:', error);
     }
   };
 
+  const handleCollectionSelect = (collectionId: string) => {
+    setSelectedCollections(prev => {
+      const newSelectedCollections = new Set(prev);
+      if (newSelectedCollections.has(collectionId)) {
+        newSelectedCollections.delete(collectionId);
+      } else {
+        newSelectedCollections.add(collectionId);
+      }
+      return newSelectedCollections;
+    });
+  };
+
+  const handleDone = async () => {
+    if (!userData || !artPieceDetails) return;
+
+    try {
+      await Promise.all(
+        userCollections.map(async collection => {
+          const collectionDoc = doc(db, `users/${userData.email}/collections`, collection.id);
+
+          const artPieceIndex = collection.artpieces.findIndex(piece => piece.id === artPieceDetails.id);
+          const imageUrl = `https://framemark.vam.ac.uk/collections/${artPieceDetails.imageId}/full/!500,500/0/default.jpg`;
+
+          if (selectedCollections.has(collection.id)) {
+            if (artPieceIndex === -1) {
+              const updatedArtPieces = [
+                ...collection.artpieces,
+                {
+                  id: artPieceDetails.id,
+                  title: artPieceDetails.title || '',
+                  author: artPieceDetails.author || '',
+                  date: artPieceDetails.date || '',
+                  imageId: artPieceDetails.imageId,
+                  imageUrl: imageUrl, // Agregar el campo imageUrl
+                },
+              ];
+              await updateDoc(collectionDoc, { artpieces: updatedArtPieces });
+            }
+          } else {
+            if (artPieceIndex !== -1) {
+              const updatedArtPieces = [
+                ...collection.artpieces.slice(0, artPieceIndex),
+                ...collection.artpieces.slice(artPieceIndex + 1),
+              ];
+              await updateDoc(collectionDoc, { artpieces: updatedArtPieces });
+            }
+          }
+        }),
+      );
+
+      onSave();
+      handleCloseModal();
+    } catch (error) {
+      console.error('Error updating art piece in collections:', error);
+    }
+  };
+
   return (
     <div className="collection-modal-wrapper">
-      <div className="collection-modal__title">
-        <h3>{isCreatingNewCollection ? 'Create New Collection' : 'Add this Piece to a collection'}</h3>
-        <Close className="icon-absolute" onClick={handleCloseModal} />
-      </div>
       <div className="collection-modal__content">
         {isCreatingNewCollection ? (
           <form onSubmit={handleSubmit(onSubmit)} className="collection-modal-wrapper">
             <div className="collection-modal__content">
               <div className="collection-modal__form">
                 <div className="collection-modal__name">
-                  <p>Name</p> <p>64</p>
+                  <div className="collection-modal__text">
+                    <p>Name</p> <p>64</p>
+                  </div>
                   <input
                     className="collection-input__name"
                     type="text"
                     {...register('name', { required: true, maxLength: 64 })}
+                  />
+                </div>
+                <div className="collection-modal__description">
+                  <div className="collection-modal__text">
+                    <p>Description (optional)</p> <p>160</p>
+                  </div>
+                  <input
+                    className="collection-input__description"
+                    type="text"
+                    {...register('description', { maxLength: 160 })}
                   />
                 </div>
               </div>
@@ -131,9 +180,23 @@ export const AddCollectionModal = ({ collections }: AddCollectionModalProps) => 
                 filteredCollections.map(collection => (
                   <div className="collections-wrapper" key={collection.id}>
                     <div className="collection">
-                      <div className="collection__image"></div>
-                      <p className="collection__name">{collection.name}</p>
-                      <p className="collection__artpieces">Art Pieces: {collection.artpieces.length}</p>
+                      <div className="collection__image">
+                        {collection.artpieces && collection.artpieces.length > 0 ? (
+                          <img className="image-collection" src={collection.artpieces[0].imageUrl} alt="" />
+                        ) : (
+                          <div className="placeholder-image"></div>
+                        )}
+                      </div>
+                      <div className="collection-info">
+                        <p className="collection__name">{collection.name}</p>
+                        <p className="collection__artpieces">{collection.artpieces?.length ?? 0} Pieces</p>
+                      </div>
+                      <input
+                        className="checkbox-collection"
+                        type="checkbox"
+                        onChange={() => handleCollectionSelect(collection.id)}
+                        checked={selectedCollections.has(collection.id)}
+                      />
                     </div>
                   </div>
                 ))
@@ -145,7 +208,9 @@ export const AddCollectionModal = ({ collections }: AddCollectionModalProps) => 
               <Button color="sub_primary" onClick={handleCreateNewCollection}>
                 Create new collection
               </Button>
-              <Button type="submit">Done</Button>
+              <Button type="button" onClick={handleDone}>
+                Done
+              </Button>
             </div>
           </>
         )}

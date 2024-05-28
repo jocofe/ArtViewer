@@ -1,11 +1,14 @@
-import { Link, useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Link, NavLink, useSearchParams } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import { ResultItem, ResultListFromApi, ResultsListItem } from '../../models/results-list';
 import { FilterTag } from '../../components/Filters/FilterTag';
 import axios from 'axios';
 import { useFilters } from '../../hooks/useFilters';
+import { Button } from '../../components/Buttons/Buttons';
+import { CtaSection } from '../../components/Sections/CtaSection';
+import { UserContext } from '../../context/UserContextProvider';
 
 const mapResultsFromApi = (result: ResultListFromApi): ResultsListItem[] => {
   return result.records.map((resultItem: ResultItem) => {
@@ -25,22 +28,31 @@ export const SearchPage = () => {
   const searchTerm = searchParams.get('search') || '';
   const [searchResults, setSearchResults] = useState<ResultsListItem[] | null>(null);
   const [loading, setLoading] = useState(false);
-  const { apiUrl, handleFilterClick, activeFilter } = useFilters(searchTerm);
 
+  const { apiUrl, handleFilterClick, activeFilter, handleLoadMore } = useFilters(searchTerm);
+  const { isLoggedIn } = useContext(UserContext);
+
+  // Api call
   useEffect(() => {
     const getResults = async () => {
-      setLoading(true);
-      const response = await axios.get<ResultListFromApi>(apiUrl);
-      const mappedResults = mapResultsFromApi(response.data);
-      setSearchResults(mappedResults);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const response = await axios.get<ResultListFromApi>(apiUrl);
+        const mappedResults = mapResultsFromApi(response.data);
+        setSearchResults(mappedResults);
+      } catch(error) {
+        console.log('mal')
+      }
     };
     getResults();
+    setLoading(false);
   }, [apiUrl]);
+
 
   if (loading) {
     return <div>Loading...</div>;
   }
+  
 
   return (
     <div className="masonry-section">
@@ -87,6 +99,7 @@ export const SearchPage = () => {
             {searchResults.map(result => (
               <Link key={result.id} to={`/art-piece/${result.id}`}>
                 <ArtCard 
+                  key={`art-item-${result.id}.id`}
                   title={result.title} 
                   author={result.author} 
                   date={result.date} 
@@ -101,6 +114,19 @@ export const SearchPage = () => {
         <div className="no-results">
           <h3>Sorry, no results found</h3>
           <p>Try searching for something else?</p>
+        </div>
+      )} 
+      {isLoggedIn && (
+        <div className="masonry__button">
+        <Button onClick={handleLoadMore}>Load More</Button>
+        </div>
+      )}
+      {!isLoggedIn && (
+        <div>
+          <div className='masonry__button'>
+            <Button color='sub_primary' component={NavLink} to='/signup' className='btn-link--black'>Sign Up to continue</Button>
+          </div>
+          <CtaSection/>
         </div>
       )}
     </div>

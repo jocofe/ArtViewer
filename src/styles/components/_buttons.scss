@@ -1,6 +1,7 @@
 .btn {
   user-select: none;
   box-sizing: border-box;
+  width: max-content;
 
   //Disabled
   &:disabled {
@@ -150,3 +151,15 @@
   }
 }
 
+/* Styles for link buttons */
+.btn-link {
+  &--white {
+    color: var(--color-white);
+    text-decoration: none;
+  }
+
+  &--black {
+    color: var(--color-blackout);
+    text-decoration: none;
+  }
+}

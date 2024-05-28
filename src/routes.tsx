@@ -20,6 +20,7 @@ import { BrandTypography } from './views/brand-guideline/BrandTypography';
 import { BrandGuideline } from './views/brand-guideline/BrandGuideline';
 import { BrandColor } from './views/brand-guideline/BrandColor';
 import { SignUpNewUser } from './views/SignIn-LogIn/SignUpNewUser';
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
@@ -53,52 +54,70 @@ export const router = createBrowserRouter([
             element: <ArtDetailPage />,
           },
           {
-            path: '/settings/general',
-            element: <GeneralSettings />,
-          },
-          {
-            path: '/settings/profile',
-            element: <ProfileSettings />,
-          },
-          {
-            path: '/settings/password',
-            element: <PasswordSettings />,
-          },
-          {
-            path: '/settings/sessions',
-            element: <SessionsSettings />,
-          },
-          {
-            path: '/user-collection',
-            element: <UserCollection />,
-          },
-          {
-            path: '/:username',
-            element: <UserPage />,
-          },
-          {
-            path: '/:username/settings',
-            element: <UserSettings />,
+            path: '/settings',
+            element: <ProtectedRoute />,
             children: [
               {
-                path: '',
-                element: <Navigate to="general" />,
-              },
-              {
-                path: 'general',
+                path: '/settings/general',
                 element: <GeneralSettings />,
               },
               {
-                path: 'profile',
+                path: '/settings/profile',
                 element: <ProfileSettings />,
               },
               {
-                path: 'password',
+                path: '/settings/password',
                 element: <PasswordSettings />,
               },
               {
-                path: 'sessions',
+                path: '/settings/sessions',
                 element: <SessionsSettings />,
+              },
+            ],
+          },
+          {
+            path: '/collection',
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: '/collection/:collectionId',
+                element: <UserCollection />,
+              },
+            ],
+          },
+          {
+            path: '/:username',
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: '',
+                element: <UserPage />,
+              },
+              {
+                path: '/:username/settings',
+                element: <UserSettings />,
+                children: [
+                  {
+                    path: '',
+                    element: <Navigate to="general" />,
+                  },
+                  {
+                    path: 'general',
+                    element: <GeneralSettings />,
+                  },
+                  {
+                    path: 'profile',
+                    element: <ProfileSettings />,
+                  },
+                  {
+                    path: 'password',
+                    element: <PasswordSettings />,
+                  },
+                  {
+                    path: 'sessions',
+                    element: <SessionsSettings />,
+                  },
+                ],
               },
             ],
           },
