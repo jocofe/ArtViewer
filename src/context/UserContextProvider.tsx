@@ -8,6 +8,7 @@ import { UserContextProviderFirebaseProps } from '../models/usercontext';
 interface UserContextType {
   isLoggedIn: boolean;
   userData: UserData | null;
+  updateUserProfilePhoto: (newPhotoURL: string) => void; // Nuevo método
 }
 
 export interface UserData {
@@ -16,19 +17,29 @@ export interface UserData {
   email: string;
   displayName: string;
   username: string;
+  photoURL: string;
   // Otros datos que deseas del usuario
 }
 
-export const UserContext = createContext<UserContextType>({ isLoggedIn: false, userData: null });
+export const UserContext = createContext<UserContextType>({ isLoggedIn: false, userData: null, updateUserProfilePhoto: () => {} });
 
 // Componente de proveedor de usuario con Firebase
 export const UserContextProviderFirebase: React.FC<UserContextProviderFirebaseProps> = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => {
+    // Recuperar el estado de autentificacion desde el localStorage
+    return localStorage.getItem('isLoggedIn') === 'true';
+  });
+
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async user => {
+      const loggedin = !!user;
       setIsLoggedIn(!!user);
+
+      // Guardar el estado de autentificacion en localStorage
+      localStorage.setItem('isLoggedIn', String(loggedin));
+
       if (user) {
         const userEmail = user.email;
         if (userEmail) {
@@ -48,5 +59,9 @@ export const UserContextProviderFirebase: React.FC<UserContextProviderFirebasePr
     return () => unsubscribe();
   }, []);
 
-  return <UserContext.Provider value={{ isLoggedIn, userData }}>{children}</UserContext.Provider>;
+  const updateUserProfilePhoto = (newPhotoURL: string) => {
+    setUserData(prevData => prevData ? { ...prevData, photoURL: newPhotoURL } : prevData);
+  }
+
+  return <UserContext.Provider value={{ isLoggedIn, userData, updateUserProfilePhoto }}>{children}</UserContext.Provider>;
 };

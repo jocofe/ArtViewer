@@ -1,8 +1,22 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { auth, db } from '../../config/config';
 import { doc, deleteDoc } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 
 export const SettingsList = () => {
+  // Keep track of actual route
+  const location = useLocation();
+  const [selectedLink, setSelectedLink] = useState('');
+
+  // Set selected link based on actual ubication
+  useEffect(() => {
+    setSelectedLink(location.pathname.split('/').pop() || '');
+  }, [location]);
+
+  const handleLinkClick = (link: string) => {
+    setSelectedLink(link);
+  };
+
   const handleDeleteAccount = async () => {
     try {
       const user = auth.currentUser;
@@ -20,19 +34,44 @@ export const SettingsList = () => {
     <div className="user__menu">
       <ul className="menu-list">
         <li className="menu-list__item">
-          <Link to={`general`}>General</Link>
+          <Link 
+            to={`general`}
+            className={selectedLink === 'general' ? 'active' : ''}
+            onClick={() => handleLinkClick('general')}
+          >
+            General
+          </Link>
         </li>
         <li className="menu-list__item">
-          <Link to={`profile`}>Edit Profile</Link>
+          <Link 
+            to={`profile`}
+            className={selectedLink === 'profile' ? 'active' : ''}
+            onClick={() => handleLinkClick('profile')}
+          >
+            Edit Profile
+          </Link>
         </li>
         <li className="menu-list__item">
-          <Link to={`password`}>Password</Link>
+          <Link 
+            to={`password`}
+            className={selectedLink === 'password' ? 'active' : ''}
+            onClick={() => handleLinkClick('password')}
+          >
+            Password
+          </Link>
         </li>
         <li className="menu-list__item">
-          <Link to={`sessions`}>Sessions</Link>
+          <Link 
+            to={`sessions`}
+            className={selectedLink === 'sessions' ? 'active' : ''}
+            onClick={() => handleLinkClick('sessions')}
+          >
+            Sessions
+          </Link>
         </li>
       </ul>
-      <button onClick={handleDeleteAccount}>Delete account</button>
+      <hr className='settings-hr'/>
+      <button onClick={handleDeleteAccount} className='user__delete'>Delete account</button>
     </div>
   );
 };

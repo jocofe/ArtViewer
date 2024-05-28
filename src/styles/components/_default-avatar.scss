@@ -1,8 +1,8 @@
 .avatar-default {
   background-color: var(--color-wooden);
-  width: 48px;
   color: var(--color-white);
-  height: 48px;
+  width: inherit;
+  height: inherit;
   border-radius: 60px;
   display: flex;
   align-items: center;

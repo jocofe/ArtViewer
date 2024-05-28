@@ -1,0 +1,21 @@
+.user__delete {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: var(--color-redcream);
+    font-weight: var(--font-weight-normal);
+    white-space: nowrap;
+    margin-top: 6px;
+}
+
+
+.menu-list__item {
+    margin-bottom: 6px;
+    & a {
+        color: var(--color-blackout-light);
+    }
+
+    & a.active {
+        color: var(--color-blackout);
+    }
+}

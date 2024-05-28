@@ -11,5 +11,13 @@ export const DefaultAvatar = () => {
     }
   }, [userData]); // Actualizamos el estado cuando cambia userData
 
-  return <div className="avatar-default">{initial}</div>;
+  return (
+    <div className="avatar-default">
+      {userData?.photoURL ? (
+         <img src={userData.photoURL} alt="User Profile" className="avatar-default" />
+      ) : (
+        initial
+      )}
+    </div>
+    );
 };

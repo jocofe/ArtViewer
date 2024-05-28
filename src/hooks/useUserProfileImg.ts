@@ -34,7 +34,7 @@ export const useUserProfilePhoto = (): ProfileImageProps | null => {
     };
 
     getUserProfilePhoto();
-  }, []);
+  }, [userPhotoURL]);
 
   return userPhotoURL ? { imageUrl: userPhotoURL } : null;
 };
