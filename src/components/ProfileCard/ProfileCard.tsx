@@ -26,7 +26,7 @@ export const ProfileCard = () => {
       <div className="profilecard-info">
         <h1 className="h3 profilecard__name">{fullName}</h1>
         <h3 className="h4 profilecard__location">{location}</h3>
-        <Button component={NavLink} to={`settings/general`} className="edit-btn" color="sub_primary">
+        <Button component={NavLink} to={`settings/general`} className="btn-link--black" color="sub_primary">
           Edit Profile
         </Button>
       </div>

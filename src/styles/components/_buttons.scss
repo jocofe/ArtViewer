@@ -1,6 +1,7 @@
 .btn {
   user-select: none;
   box-sizing: border-box;
+  width: max-content;
 
   //Disabled
   &:disabled {
@@ -162,4 +163,3 @@
     text-decoration: none;
   }
 }
-
