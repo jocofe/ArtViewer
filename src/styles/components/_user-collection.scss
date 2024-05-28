@@ -1,0 +1,32 @@
+.usercollection-wrapper {
+  margin-top: 6.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.usercollection-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 6.4rem;
+}
+
+.usercollectioncard-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.usercollection__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 1.2rem;
+}
+
+.usercollection-buttons {
+  display: flex;
+  gap: 3.2rem;
+}

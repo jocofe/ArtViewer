@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { DefaultAvatar } from '../../../components/Avatar/DefaultAvatar';
-import { ProfileImageProps, useUserProfilePhoto } from '../../../hooks/useUserProfileImg';
 import { UserContext } from '../../../context/UserContextProvider';
 import { Outlet } from 'react-router-dom';
 import { SettingsList } from '../../../components/List/SettingsList';
@@ -8,11 +7,12 @@ import { SettingsList } from '../../../components/List/SettingsList';
 export const UserSettings = () => {
   const { userData } = useContext(UserContext);
   const [fullName, setFullName] = useState<string | null>(null);
-  const userProfilePhoto: ProfileImageProps | null = useUserProfilePhoto();
+  const [picture, setPicture] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (userData && userData.name) {
-      setFullName(userData.name);
+    if (userData) {
+      setFullName(userData.name || null);
+      setPicture(userData.picture || undefined);
     }
   }, [userData]);
 
@@ -21,8 +21,8 @@ export const UserSettings = () => {
       <div className="settings-menu-wrapper">
         <div className="profile-wrapper">
           <div className="profile-picture">
-            {userProfilePhoto && userProfilePhoto.imageUrl !== 'default' ? (
-              <img src={userProfilePhoto.imageUrl} alt="User Profile" className="profilecard-image" />
+            {picture && picture !== 'default' ? (
+              <img src={picture} alt="User Profile" className="profilecard-image" />
             ) : (
               <DefaultAvatar />
             )}

@@ -76,11 +76,11 @@ export const router = createBrowserRouter([
             ],
           },
           {
-            path: '/user-collection',
+            path: '/collection',
             element: <ProtectedRoute />,
             children: [
               {
-                path: '',
+                path: '/collection/:collectionId',
                 element: <UserCollection />,
               },
             ],

@@ -1,6 +1,9 @@
 @import "global.styles";
 @import "components/searchbar";
+@import "components/colecction-checkbox";
 @import "components/default-avatar";
+@import "components/user-collection";
+@import "components/collection-card";
 @import "components/dropdownprofilebutton";
 @import "components/artcard";
 @import "components/socials";
@@ -25,8 +28,8 @@
 @import "components/artist-slider";
 @import "components/filter-tag";
 @import "components/tabs";
-@import 'layouts/landing-page';
-@import 'components/mosaic-images';
-@import 'components/terms';
-@import 'components/typing-bar';
-@import 'components/toaster';
+@import "layouts/landing-page";
+@import "components/mosaic-images";
+@import "components/terms";
+@import "components/typing-bar";
+@import "components/toaster";

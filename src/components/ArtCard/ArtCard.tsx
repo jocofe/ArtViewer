@@ -1,12 +1,11 @@
 import { ArtCardDetails } from '../../models/art-card';
 import { Socials } from '../Socials/Socials';
 
-const constructImageUrl = (imageId: string) => {
+export const constructImageUrl = (imageId: string) => {
   return `https://framemark.vam.ac.uk/collections/${imageId}/full/!500,500/0/default.jpg`;
-}
+};
 
 export const ArtCard = (props: ArtCardDetails) => {
-
   const { imageId, title, author, date, id } = props;
   const imageUrl = constructImageUrl(imageId);
 
@@ -30,7 +29,14 @@ export const ArtCard = (props: ArtCardDetails) => {
       </section>
 
       <section className="art-card__buttons">
-        <Socials artPieceId={id}/>
+        <Socials
+          artPieceId={id}
+          artPieceImageId={imageId}
+          artPieceAuthor={author}
+          artPieceDate={date}
+          artPieceTitle={title}
+          artPieceImageUrl={imageUrl}
+        />
       </section>
     </div>
   );

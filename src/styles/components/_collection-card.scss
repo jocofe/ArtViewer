@@ -1,0 +1,33 @@
+.collectioncard-wrapper {
+  width: 440px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.image-wrapper {
+  height: 275px;
+}
+
+.collectioncard {
+  &__image {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    user-select: none;
+    border-radius: 15px;
+  }
+
+  &__name {
+    font-size: var(--font-size-20);
+    font-weight: var(--font-weight-bold);
+    line-height: 2.5rem;
+  }
+
+  &__count {
+    color: var(--color-blackout);
+    font-size: 20px;
+    font-weight: 400;
+  }
+}
