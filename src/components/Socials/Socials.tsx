@@ -8,6 +8,7 @@ import { useLikes } from '../Likes/LikesContext';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/config';
 import { SocialProps } from '../../models/socials';
+import { Toaster } from '../Dialogs/Toaster Message/ToasterMessage';
 
 export const Socials = ({
   artPieceId,
@@ -19,6 +20,7 @@ export const Socials = ({
 }: SocialProps) => {
   const [isOnSaved, setIsOnSaved] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isLinkCopied, setIsLinkCopied] = useState(false); // Nuevo estado para controlar si el enlace se ha copiado
   const { userData } = useContext(UserContext);
 
   const { favourites, toggleLike } = useLikes();
@@ -68,16 +70,34 @@ export const Socials = ({
     setShowModal(false);
   };
 
+  const copyArtworkLink = () => {
+    const baseUrl = location.origin;
+    const copiedUrl = `${baseUrl}/art-piece/${artPieceId}`;
+    navigator.clipboard
+      .writeText(copiedUrl)
+      .then(() => {
+        setIsLinkCopied(true);
+        setTimeout(() => {
+          setIsLinkCopied(false);
+        }, 3000); // Duración del mensaje en milisegundos
+      })
+      .catch(error => {
+        console.error('Error copying link:', error);
+      });
+  };
+
   return (
     <>
       <div className="socials-wrapper">
-        <i>
+        <i onClick={copyArtworkLink}>
           <CopyLink className="icon" />
         </i>
         <i onClick={handleSaved}>{isOnSaved ? <FullBookmark className="icon" /> : <Bookmark className="icon" />}</i>
         <i onClick={handleFav}>{isFavourite ? <FullHeart className="icon" /> : <Heart className="icon" />}</i>
       </div>
-      <ModalDefault show={showModal} size="md" onClose={handleCloseModal}>
+      {isLinkCopied && <Toaster message="Copied Link!" onClose={() => setIsLinkCopied(false)} />}{' '}
+      {/* Mostrar el Toaster si isLinkCopied es true */}
+      <ModalDefault title="Add this Piece to a Collection" show={showModal} size="md" onClose={handleCloseModal}>
         <AddCollectionModal
           collections={[]}
           artPieceDetails={{

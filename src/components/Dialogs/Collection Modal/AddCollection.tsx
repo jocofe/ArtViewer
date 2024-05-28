@@ -4,16 +4,15 @@ import { collection, getDocs, addDoc, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../../config/config';
 import { Button } from '../../Buttons/Buttons';
 import { FilterCollectionBar } from '../../Form/FilterCollectionBar';
-import { Close } from '../../Icons/icons';
 import { UserContext } from '../../../context/UserContextProvider';
 import { AddCollectionModalProps, CollectionUser, NewCollectionFormInputs } from '../../../models/collection';
 
 export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSave }: AddCollectionModalProps) => {
-  const { userData } = useContext(UserContext);
-  const [filteredCollections, setFilteredCollections] = useState<CollectionUser[]>(collections);
   const [isCreatingNewCollection, setIsCreatingNewCollection] = useState(false);
+  const [filteredCollections, setFilteredCollections] = useState<CollectionUser[]>(collections);
   const [userCollections, setUserCollections] = useState<CollectionUser[]>([]);
   const [selectedCollections, setSelectedCollections] = useState<Set<string>>(new Set());
+  const { userData } = useContext(UserContext);
   const { register, handleSubmit, reset } = useForm<NewCollectionFormInputs>();
 
   useEffect(() => {
@@ -51,9 +50,12 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
   };
 
   const handleCloseModal = () => {
-    setIsCreatingNewCollection(false);
-    reset();
-    onClose();
+    if (isCreatingNewCollection) {
+      setIsCreatingNewCollection(false);
+      reset();
+    } else {
+      onClose();
+    }
   };
 
   const onSubmit: SubmitHandler<NewCollectionFormInputs> = async data => {
@@ -134,17 +136,15 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
 
   return (
     <div className="collection-modal-wrapper">
-      <div className="collection-modal__title">
-        <h3>{isCreatingNewCollection ? 'Create New Collection' : 'Add this Piece to a collection'}</h3>
-        <Close className="icon-absolute" onClick={handleCloseModal} />
-      </div>
       <div className="collection-modal__content">
         {isCreatingNewCollection ? (
           <form onSubmit={handleSubmit(onSubmit)} className="collection-modal-wrapper">
             <div className="collection-modal__content">
               <div className="collection-modal__form">
                 <div className="collection-modal__name">
-                  <p>Name</p> <p>64</p>
+                  <div className="collection-modal__text">
+                    <p>Name</p> <p>64</p>
+                  </div>
                   <input
                     className="collection-input__name"
                     type="text"
@@ -152,7 +152,9 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
                   />
                 </div>
                 <div className="collection-modal__description">
-                  <p>Description (optional)</p> <p>160</p>
+                  <div className="collection-modal__text">
+                    <p>Description (optional)</p> <p>160</p>
+                  </div>
                   <input
                     className="collection-input__description"
                     type="text"
@@ -179,13 +181,18 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
                   <div className="collections-wrapper" key={collection.id}>
                     <div className="collection">
                       <div className="collection__image">
-                        <img src="" alt="" />
+                        {collection.artpieces && collection.artpieces.length > 0 ? (
+                          <img className="image-collection" src={collection.artpieces[0].imageUrl} alt="" />
+                        ) : (
+                          <div className="placeholder-image"></div>
+                        )}
                       </div>
                       <div className="collection-info">
                         <p className="collection__name">{collection.name}</p>
                         <p className="collection__artpieces">{collection.artpieces?.length ?? 0} Pieces</p>
                       </div>
                       <input
+                        className="checkbox-collection"
                         type="checkbox"
                         onChange={() => handleCollectionSelect(collection.id)}
                         checked={selectedCollections.has(collection.id)}

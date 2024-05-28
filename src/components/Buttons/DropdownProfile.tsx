@@ -60,7 +60,7 @@ export const DropdownProfileButton = () => {
               <Link to={`/${username}/settings`}>Settings</Link>
             </li>
             <li className="dropdown__item" onClick={() => signOut(auth)}>
-              <Link to='/'>Sign Out</Link>
+              <Link to="/">Sign Out</Link>
             </li>
           </ul>
         </div>
