@@ -1,6 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { Button } from '../../../components/Buttons/Buttons';
-import { changePassword } from '../../../features/authentication/ChangePassword';
+import { changePassword } from '../../../features/authentication/changePassword';
 
 export const PasswordSettings = () => {
   const [oldPassword, setOldPassword] = useState('');

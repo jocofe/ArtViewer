@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 import { auth, db } from '../config/config';
 import 'firebase/auth';
 import { UserContextProviderFirebaseProps } from '../models/usercontext';
-import { registerLoginSession, getUserLoginSessions } from '../components/Services/Sessions';
+import { registerLoginSession, getUserLoginSessions } from '../components/Services/sessions';
 import { doc, getDoc } from 'firebase/firestore';
 import { UserSessions } from '../models/userSessions';
 

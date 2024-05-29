@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/UserContextProvider";
 import { UserSessions } from "../../../models/userSessions";
-import { closeSession, getUserLoginSessions } from "../../../components/Services/Sessions";
+import { closeSession, getUserLoginSessions } from "../../../components/Services/sessions";
 import { parseUserAgent } from "../../../components/Services/userAgentParser";
 
 export const SessionsSettings = () => {
