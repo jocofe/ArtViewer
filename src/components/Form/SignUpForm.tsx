@@ -14,14 +14,13 @@ interface Error {
   message: string;
 }
 
-
 interface FormInputs {
   name: string;
   email: string;
   password: string;
 }
 
-export const SignUpForm: React.FC = () => {
+export const SignUpForm = () => {
   const navigate = useNavigate();
   const {
     register,

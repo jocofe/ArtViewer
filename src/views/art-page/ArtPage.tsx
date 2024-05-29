@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {
   ArtArtistDetails,
   ArtArtistFromApi,
@@ -8,13 +8,14 @@ import {
   ArtObjectFromApi,
 } from '../../models/art-list';
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import { Socials } from '../../components/Socials/Socials';
 import { Button } from '../../components/Buttons/Buttons';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import Viewer from 'react-viewer';
 import { generateArtworkDescription } from '../../features/openai/openai';
+import { UserContext } from '../../context/UserContextProvider';
 
 export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDetails[] => {
   return art.map((artItem: ArtObject) => {
@@ -52,6 +53,7 @@ export const ArtPage = () => {
   const [selectedImageUrl, setSelectedImageUrl] = useState('');
   const [description, setDescription] = useState('');
   const { artId } = useParams();
+  const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     const getInforforArtPage = async () => {
@@ -150,11 +152,11 @@ export const ArtPage = () => {
         <div className="artpiece-info-wrapper">
           <h1 className="art__title">{artDetailsInfo.title}</h1>
           <div className="artpiece__properties">
-            <h3>{artDetailsInfo.artist}</h3>
-            <p>{artDetailsInfo.date}</p>
-            <p>{artDetailsInfo.type}</p>
-            <p>{artDetailsInfo.dimensions}</p>
-            <p>{artDetailsInfo.location}</p>
+            <h3 className="artpiece__artist">{artDetailsInfo.artist}</h3>
+            <p className="artpiece__date">{artDetailsInfo.date}</p>
+            <p className="artpiece__type">{artDetailsInfo.type}</p>
+            <p className="artpiece__dimensions">{artDetailsInfo.dimensions}</p>
+            <p className="artpiece__location">{artDetailsInfo.location}</p>
           </div>
           <div className="artpiece__socials">
             <Socials
@@ -194,11 +196,13 @@ export const ArtPage = () => {
               ))}
             </Masonry>
           </ResponsiveMasonry>
-          <Link to={'/signup'}>
+          {!isLoggedIn && (
             <div className="masonry__button">
-              <Button color="sub_primary">Sign Up to continue</Button>
+              <Button component={NavLink} to={'/signup'} color="sub_primary">
+                Sign Up to continue
+              </Button>
             </div>
-          </Link>
+          )}
         </div>
       </div>
     </>

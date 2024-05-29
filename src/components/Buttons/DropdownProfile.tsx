@@ -34,7 +34,7 @@ export const DropdownProfileButton = () => {
   }, [userData]);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(prevState => !prevState);
   };
 
   if (!isLoggedIn) {
@@ -42,7 +42,7 @@ export const DropdownProfileButton = () => {
   }
 
   return (
-    <div className="profile-wrapper">
+    <div className="profile-wrapper" ref={dropdownRef}>
       <button className="profile__btn" onClick={toggleMenu}>
         {picture && picture !== 'default' ? (
           <img src={picture} alt="User Profile" className="profile-image" />
@@ -51,7 +51,7 @@ export const DropdownProfileButton = () => {
         )}
       </button>
       {isOpen && (
-        <div className="dropdown-menu" ref={dropdownRef}>
+        <div className="dropdown-menu">
           <ul className="dropdown__list">
             <li className="dropdown__item">
               <Link to={`/${username}`}>Profile</Link>

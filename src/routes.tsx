@@ -21,6 +21,8 @@ import { BrandGuideline } from './views/brand-guideline/BrandGuideline';
 import { BrandColor } from './views/brand-guideline/BrandColor';
 import { SignUpNewUser } from './views/SignIn-LogIn/SignUpNewUser';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
+import { TermsConditions } from './views/terms-policy/TermsConditions';
+import { PrivacyPolicy } from './views/terms-policy/PrivacyPolicy';
 
 export const router = createBrowserRouter([
   {
@@ -120,6 +122,14 @@ export const router = createBrowserRouter([
                 ],
               },
             ],
+          },
+          {
+            path: '/terms-conditions',
+            element: <TermsConditions />,
+          },
+          {
+            path: '/privacy-policy',
+            element: <PrivacyPolicy />,
           },
         ],
       },

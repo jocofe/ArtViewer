@@ -7,7 +7,7 @@ interface DropdownButtonProps {
   onOptionSelect: (option: string) => void;
 }
 
-export const DropdownButton: React.FC<DropdownButtonProps> = ({ label, options, onOptionSelect }) => {
+export const DropdownButton = ({ label, options, onOptionSelect }: DropdownButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [icon, setIcon] = useState(<ArrowDown className="icon" />);
 

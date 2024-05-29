@@ -25,7 +25,6 @@ export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
 export const ArtMasonryRandom = () => {
   const [artList, setArtList] = useState<ArtListItem[]>([]);
   const [page, setPage] = useState(1);
-
   const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
@@ -37,7 +36,7 @@ export const ArtMasonryRandom = () => {
     };
 
     fetchArt();
-  }, [page]);
+  }, [artList, page]);
 
   const handleLoadMore = () => {
     setPage(page + 1);

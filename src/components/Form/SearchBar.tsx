@@ -33,15 +33,13 @@ export const SearchBar = (props: SearchBarProps) => {
 
   return (
     <form className="searchbar-wrapper" onSubmit={handleSubmit}>
-      <div className="searchbar__magnifying" onClick={handleIconClick}>
-        <SearchGlass className="icon--absolute" />
-      </div>
       <input
         className={searchBarClass}
         placeholder={placeholder}
         value={searchTerm}
         onChange={event => setSearchTerm(event.target.value)}
       />
+      <SearchGlass onClick={handleIconClick} className="icon--absolute" />
     </form>
   );
 };
