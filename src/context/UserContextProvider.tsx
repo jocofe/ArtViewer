@@ -1,16 +1,9 @@
-import React, { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { auth, db } from '../config/config';
-import { doc, getDoc } from 'firebase/firestore';
 import 'firebase/auth';
 import { UserContextProviderFirebaseProps } from '../models/usercontext';
-
-// Context del usuario
-interface UserContextType {
-  isLoggedIn: boolean;
-  userData: UserData | null;
-  updateUserProfilePhoto: (newPhotoURL: string) => void; // Nuevo método
-  updateUserProfileName: (newName: string) => void;
-}
+import { registerLoginSession, getUserLoginSessions } from '../components/Services/Sessions';
+import { doc, getDoc } from 'firebase/firestore';
 
 export interface UserData {
   location: string;
@@ -22,39 +15,50 @@ export interface UserData {
   // Otros datos que deseas del usuario
 }
 
+// Context del usuario
+interface UserContextType {
+  isLoggedIn: boolean;
+  userData: UserData | null;
+  updateUserProfilePhoto: (newPhotoURL: string) => void; // Nuevo método
+  updateUserProfileName: (newName: string) => void;
+  getUserLoginSessions: (userEmail: string) => Promise<any[]>
+}
+
 export const UserContext = createContext<UserContextType>({ 
   isLoggedIn: false, 
   userData: null, 
   updateUserProfilePhoto: () => {},
   updateUserProfileName: () => {},
+  getUserLoginSessions: async () => [],
 });
 
 // Componente de proveedor de usuario con Firebase
 export const UserContextProviderFirebase: React.FC<UserContextProviderFirebaseProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    // Recuperar el estado de autentificacion desde el localStorage
     return localStorage.getItem('isLoggedIn') === 'true';
   });
 
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async user => {
-      const loggedin = !!user;
-      setIsLoggedIn(!!user);
+    const unsubscribe = auth.onAuthStateChanged(async user => { // Listen to changes on auth state
+      const loggedIn = !!user;
+      setIsLoggedIn(loggedIn);
 
-      // Guardar el estado de autentificacion en localStorage
-      localStorage.setItem('isLoggedIn', String(loggedin));
+      localStorage.setItem('isLoggedIn', String(loggedIn));
 
-      if (user) {
+      if (user) { // If user is logged in obtain info from firestore
         const userEmail = user.email;
         if (userEmail) {
           try {
             const userDoc = await getDoc(doc(db, 'users', userEmail));
             const userDataFromFirestore = userDoc.data() as UserData;
             setUserData(userDataFromFirestore);
+
+            // Register user's login session
+            await registerLoginSession(userEmail);
           } catch (error) {
-            console.error('Error fetching user data:', error);
+            console.error('Error fetching user data', error);
           }
         }
       } else {
@@ -66,19 +70,20 @@ export const UserContextProviderFirebase: React.FC<UserContextProviderFirebasePr
   }, []);
 
   const updateUserProfilePhoto = (newPhotoURL: string) => {
-    setUserData(prevData => prevData ? { ...prevData, photoURL: newPhotoURL } : prevData);
+    setUserData((prevData) => prevData ? { ...prevData, photoURL: newPhotoURL } : prevData);
   };
 
   const updateUserProfileName = (newName: string) => {
-    setUserData(prevData => prevData ? { ...prevData, name: newName } : prevData);
+    setUserData((prevData) => prevData ? { ...prevData, name: newName } : prevData);
   };
 
-  return ( 
-    <UserContext.Provider value={{ 
-      isLoggedIn, 
-      userData, 
+  return (
+    <UserContext.Provider value={{
+      isLoggedIn,
+      userData,
       updateUserProfilePhoto,
       updateUserProfileName,
+      getUserLoginSessions
     }}>
       {children}
     </UserContext.Provider>

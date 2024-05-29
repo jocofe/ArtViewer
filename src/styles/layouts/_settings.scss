@@ -42,4 +42,30 @@
     color: var(--color-blackout-light);
 }
 
+.sessions-devices {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sessions-btn {
+    border: none;
+    background-color: transparent;
+    color: var(--color-blackout);
+
+    &:not(:disabled) {
+        &:hover {
+            background-color: transparent;
+            color: var(--color-redcream);
+            border: none;
+        }
+    }
+    
+}
+
+.sessions-hr {
+    margin: 16px 0;
+    width: 100%;
+}
+
 

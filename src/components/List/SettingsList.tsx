@@ -1,12 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
 import { auth, db } from '../../config/config';
 import { doc, deleteDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../context/UserContextProvider';
 
 export const SettingsList = () => {
   // Keep track of actual route
   const location = useLocation();
   const [selectedLink, setSelectedLink] = useState('');
+  const { userData } = useContext(UserContext):
+
+  const userEmail = userData?.email;
+  // get Doc
+
 
   // Set selected link based on actual ubication
   useEffect(() => {
@@ -17,7 +23,11 @@ export const SettingsList = () => {
     setSelectedLink(link);
   };
 
-  const handleDeleteAccount = async () => {
+  const handleDeleteAccount = () => {
+    deleteAccount();
+  }
+
+  const deleteAccount = async () => {
     try {
       const user = auth.currentUser;
       if (user) {
@@ -33,6 +43,7 @@ export const SettingsList = () => {
   return (
     <div className="user__menu">
       <ul className="menu-list">
+        {}
         <li className="menu-list__item">
           <Link 
             to={`general`}

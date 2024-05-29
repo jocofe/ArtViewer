@@ -13,7 +13,7 @@ export const GeneralSettings = () => {
 
   useEffect(() => {
     if (userData) {
-      setUsername(userData.name || '');
+      setUsername(userData.username || '');
       setEmail(userData.email || '')
     }
   }, [userData]);

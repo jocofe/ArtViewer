@@ -6,22 +6,10 @@ type TermsCheckboxProps = {
 export const TermsCheckbox: React.FC<TermsCheckboxProps> = ({ checked, onChange}) => {
     
     return (
-        <div className="loquesea">
+        <div className="terms">
             <input type="checkbox" id="terms" checked={checked} onChange={onChange} />
-            <p className="terms_text">
-            I agree with ArtViewer{' '}
-                <a className="sign-up-page__link" href="">
-                  Terms of Service
-                </a>
-                ,{' '}
-                <a className="sign-up-page__link" href="">
-                  Privacy Policy
-                </a>
-                , and default{' '}
-                <a className="sign-up-page__link" href="">
-                  Notification Settings
-                </a>
-                . 
+            <p className="terms__text">
+            I agree with ArtViewer <a className="sign-up-page__link" href="">Terms of Service</a> and <a className="sign-up-page__link" href=""> Privacy Policy</a>. 
             </p>
         </div>
     )

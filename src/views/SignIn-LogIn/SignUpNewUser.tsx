@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { db, auth, storage } from '../../config/config';
 import { Link, useNavigate } from 'react-router-dom';
 import { Camera, Logotype } from '../../components/Icons/icons';
@@ -40,10 +40,7 @@ export const SignUpNewUser = () => {
 
       if (userEmail) {
         const userRef = doc(db, 'users', userEmail);
-        await setDoc(userRef, {
-          id: user.uid,
-          email: userEmail,
-          name: user.displayName,
+        await updateDoc(userRef, {
           picture: userUploadedAvatar || selectedAvatar,
           username: data.username,
           location: data.location,
