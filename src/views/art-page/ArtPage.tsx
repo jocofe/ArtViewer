@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import {
   ArtArtistDetails,
   ArtArtistFromApi,
@@ -15,6 +15,7 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import Viewer from 'react-viewer';
 import { generateArtworkDescription } from '../../features/openai/openai';
+import { UserContext } from '../../context/UserContextProvider';
 
 export const mapArtObjectApitoArtObject = (art: ArtObjectFromApi): ArtObjectDetails[] => {
   return art.map((artItem: ArtObject) => {
@@ -52,6 +53,7 @@ export const ArtPage = () => {
   const [selectedImageUrl, setSelectedImageUrl] = useState('');
   const [description, setDescription] = useState('');
   const { artId } = useParams();
+  const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
     const getInforforArtPage = async () => {
@@ -194,11 +196,13 @@ export const ArtPage = () => {
               ))}
             </Masonry>
           </ResponsiveMasonry>
-          <div className="masonry__button">
-            <Button component={NavLink} to={'/singup'} color="sub_primary">
-              Sign Up to continue
-            </Button>
-          </div>
+          {!isLoggedIn && (
+            <div className="masonry__button">
+              <Button component={NavLink} to={'/signup'} color="sub_primary">
+                Sign Up to continue
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </>
