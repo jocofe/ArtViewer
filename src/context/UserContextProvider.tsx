@@ -27,7 +27,7 @@ export interface UserData {
 interface UserContextType {
   isLoggedIn: boolean;
   userData: UserData | null;
-  updateUserProfilePhoto: (newPhotoURL: string) => void; // Nuevo método
+  updateUserProfilePhoto: (newPhotoURL: string | null) => void; // Nuevo método
   updateUserProfileName: (newName: string) => void;
   getUserLoginSessions: (userEmail: string) => Promise<UserSessions[]>
 }
@@ -91,7 +91,7 @@ export const UserContextProviderFirebase = ({ children }: UserContextProviderFir
     return () => unsubscribe();
   }, []);
 
-  const updateUserProfilePhoto = (newPhotoURL: string) => {
+  const updateUserProfilePhoto = (newPhotoURL: string | null) => {
     setUserData((prevData) => prevData ? { ...prevData, photoURL: newPhotoURL } : prevData);
   };
 

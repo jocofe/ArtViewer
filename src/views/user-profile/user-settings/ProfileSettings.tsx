@@ -2,7 +2,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { DefaultAvatar } from "../../../components/Avatar/DefaultAvatar";
 import { Button } from "../../../components/Buttons/Buttons";
 import { db, storage } from "../../../config/config";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../../context/UserContextProvider";
 
@@ -12,7 +12,6 @@ export const ProfileSettings = () => {
   const [picture, setPicture] = useState<string | undefined>(undefined);
   const [name, setName] = useState<string>(userData?.name || '');
   const [location, setLocation] = useState<string>(userData?.location || '');
-
 
   useEffect(() => {
     if (userData) {
@@ -39,6 +38,31 @@ export const ProfileSettings = () => {
       }
     }
   };
+
+  const handleFileDelete = async () => {
+    if (userData?.email) {
+      const userDocRef = doc(db, 'users', userData.email);
+
+      // Obtener referencia a la imagen actual
+      if (picture && picture !== 'default') {
+        const pictureRef = ref(storage, picture);
+
+        // Borrar la imagen del almacenamiento
+        try {
+          await deleteObject(pictureRef);
+        } catch (error) {
+          console.error('Error deleting image:', error);
+        }
+      }
+
+      // Actualizar el documento del usuario en Firestore para establecer photoURL en null
+      await updateDoc(userDocRef, { photoURL: null });
+
+      // Actualizar el estado y el contexto
+      updateUserProfilePhoto(null);
+      setPicture(undefined);
+    }
+  };;
 
   const handleSaveChanges = async () => {
     if (userData?.email) {
@@ -70,7 +94,7 @@ export const ProfileSettings = () => {
           onChange={handleFileChange}
           accept="image/*"
         />
-        <Button color="sub_primary">Delete</Button>
+        <Button color="sub_primary" onClick={handleFileDelete}>Delete</Button>
       </div>
       <p>Name</p>
       <input
