@@ -8,7 +8,7 @@ export const SettingsList = () => {
   // Keep track of actual route
   const location = useLocation();
   const [selectedLink, setSelectedLink] = useState('');
-  const { userData } = useContext(UserContext):
+  const { userData } = useContext(UserContext);
 
   const userEmail = userData?.email;
   // get Doc
