@@ -1,18 +1,15 @@
 import { Link, useLocation } from 'react-router-dom';
 import { auth, db } from '../../config/config';
 import { doc, deleteDoc } from 'firebase/firestore';
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../context/UserContextProvider';
+import { useEffect, useState } from 'react';
+import { ModalDefault } from '../Dialogs/ModalDefault';
+import { Button } from '../Buttons/Buttons';
 
 export const SettingsList = () => {
   // Keep track of actual route
   const location = useLocation();
   const [selectedLink, setSelectedLink] = useState('');
-  const { userData } = useContext(UserContext);
-
-  const userEmail = userData?.email;
-  // get Doc
-
+  const [showModal, setShowModal] = useState(false);
 
   // Set selected link based on actual ubication
   useEffect(() => {
@@ -23,10 +20,21 @@ export const SettingsList = () => {
     setSelectedLink(link);
   };
 
+  // Show and close delete account modal
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  // Handle delete account for button in modal
   const handleDeleteAccount = () => {
     deleteAccount();
-  }
+  };
 
+  // Delete account logic
   const deleteAccount = async () => {
     try {
       const user = auth.currentUser;
@@ -45,7 +53,7 @@ export const SettingsList = () => {
       <ul className="menu-list">
         {}
         <li className="menu-list__item">
-          <Link 
+          <Link
             to={`general`}
             className={selectedLink === 'general' ? 'active' : ''}
             onClick={() => handleLinkClick('general')}
@@ -54,7 +62,7 @@ export const SettingsList = () => {
           </Link>
         </li>
         <li className="menu-list__item">
-          <Link 
+          <Link
             to={`profile`}
             className={selectedLink === 'profile' ? 'active' : ''}
             onClick={() => handleLinkClick('profile')}
@@ -63,7 +71,7 @@ export const SettingsList = () => {
           </Link>
         </li>
         <li className="menu-list__item">
-          <Link 
+          <Link
             to={`password`}
             className={selectedLink === 'password' ? 'active' : ''}
             onClick={() => handleLinkClick('password')}
@@ -72,7 +80,7 @@ export const SettingsList = () => {
           </Link>
         </li>
         <li className="menu-list__item">
-          <Link 
+          <Link
             to={`sessions`}
             className={selectedLink === 'sessions' ? 'active' : ''}
             onClick={() => handleLinkClick('sessions')}
@@ -81,8 +89,22 @@ export const SettingsList = () => {
           </Link>
         </li>
       </ul>
-      <hr className='settings-hr'/>
-      <button onClick={handleDeleteAccount} className='user__delete'>Delete account</button>
+      <hr className="settings-hr" />
+      <button onClick={handleShowModal} className="user__delete">
+        Delete account
+      </button>
+      <ModalDefault show={showModal} title="Are you sure?" onClose={handleCloseModal}>
+        <p>
+          You are about to delete your account. This actions is <strong>permanent</strong> and{' '}
+          <strong>unrecoverable</strong>.
+        </p>
+        <div className="delete-user__btn">
+          <Button onClick={handleDeleteAccount} color="sub_primary">
+            Delete account
+          </Button>
+          <Button onClick={handleCloseModal}>Cancel</Button>
+        </div>
+      </ModalDefault>
     </div>
   );
 };
