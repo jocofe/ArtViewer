@@ -27,9 +27,44 @@
   }
 }
 
+.sign-up-page {
+  &__already {
+    display: flex;
+    flex-direction: row;
+    gap: 1.6rem;
+  }
+
+  &__terms {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos dentro del flex container se ajusten a la línea */
+    align-items: center; /* Centra verticalmente los elementos */
+    line-height: 2rem;
+  }
+
+  &__link {
+    margin-left: 1px;
+    margin-right: 1px;
+  }
+
+  &__content {
+    width: auto;
+  }
+}
+
+.sign-up-page-politics {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
 .error {
   color: var(--color-redcream);
   font-size: var(--font-size-12);
+}
+
+.politics-form {
+  display: flex;
+  gap: 1.6rem;
 }
 
 //Landing version
@@ -37,4 +72,24 @@
   background-color: white;
   border-radius: 25px;
   padding: 32px;
+}
+
+@media (max-width: 768px) {
+  .sign-up-page__img {
+    display: none;
+  }
+
+  .sign-up-page {
+    justify-content: center;
+  }
+
+  .sign-up-page__content {
+    padding: 0 1.6rem 0 1.6rem;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .sign-up-form {
+    width: 85%;
+  }
 }

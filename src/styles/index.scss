@@ -1,7 +1,10 @@
 @import "global.styles";
 
 @import "components/searchbar";
+@import "components/colecction-checkbox";
 @import "components/default-avatar";
+@import "components/user-collection";
+@import "components/collection-card";
 @import "components/dropdownprofilebutton";
 @import "components/artcard";
 @import "components/socials";
@@ -25,6 +28,7 @@
 @import "layouts/footer";
 @import "layouts/home";
 @import "layouts/topbar";
+@import "layouts/termspolicy";
 @import "layouts/profilepage";
 @import "layouts/signinpage";
 @import "layouts/signuppage";
@@ -33,4 +37,14 @@
 @import "layouts/artpage";
 @import "layouts/brandguideline";
 @import "layouts/newuser";
+@import "components/modal-default";
+@import "components/masonry";
+@import "components/artist-slider";
+@import "components/filter-tag";
+@import "components/tabs";
+@import "layouts/landing-page";
+@import "components/mosaic-images";
+@import "components/terms";
+@import "components/typing-bar";
+@import "components/toaster";
 @import 'layouts/landing-page';

@@ -1,6 +1,7 @@
 .btn {
   user-select: none;
   box-sizing: border-box;
+  width: max-content;
 
   //Disabled
   &:disabled {
@@ -67,6 +68,7 @@
 .btn--sub_primary {
   background-color: var(--color-white);
   border: 1px solid var(--color-blackout);
+  color: var(--color-blackout);
 
   &:not(:disabled) {
     &:hover {
@@ -162,4 +164,3 @@
     text-decoration: none;
   }
 }
-

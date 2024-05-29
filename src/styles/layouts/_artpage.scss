@@ -1,25 +1,49 @@
 .artpiece-section {
-  margin-top: 134px;
+  margin-top: 13.4rem;
+  margin-bottom: 13.4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 3.2rem;
 }
 
 .artpiece__img {
-  margin-bottom: 32px;
+  margin-bottom: 3.2rem;
 }
 
 .artpiece-info-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  padding: 0 32px 0 32px;
+  align-items: center;
+  gap: 3.2rem;
+  padding: 0 3.2rem 0 3.2rem;
+}
+
+.artpiece__description {
+  margin: 3.2rem 0 3.2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  width: 40%;
 }
 
 .art__title {
   text-align: center;
+}
+
+.artpiece {
+  &__artist {
+    font-size: var(--font-size-36);
+    text-align: center;
+  }
+
+  &__date,
+  &__type,
+  &__dimensions,
+  &__location {
+    font-size: var(--font-size-20);
+  }
 }
 
 .artpiece__properties {
@@ -27,13 +51,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 2.8rem;
+  margin-bottom: 1.6rem;
 }
 
 .artpiece__btn {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 1.6rem;
 }
 
 .art-visualizer {
@@ -52,14 +77,14 @@
     flex-direction: row;
     justify-content: center;
     height: auto;
-    padding-bottom: 32px;
-    gap: 16px;
+    padding-bottom: 3.2rem;
+    gap: 1.6rem;
   }
 
   & .react-viewer-btn {
     background-color: var(--color-golden-lighter);
-    height: 48px;
-    width: 48px;
+    height: 4.8rem;
+    width: 4.8rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,11 +99,11 @@
   }
 
   & .react-viewer-close {
-    top: 32px;
-    right: 32px;
-    height: 48px;
-    width: 48px;
-    border-radius: 60px;
+    top: 3.2rem;
+    right: 3.2rem;
+    height: 4.8rem;
+    width: 4.8rem;
+    border-radius: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,5 +111,24 @@
     & i {
       position: static;
     }
+  }
+}
+
+@media (max-width: 768px) {
+  .artpiece-section {
+    margin-top: 4.6rem;
+  }
+
+  .art__title {
+    font-size: var(--font-size-48);
+    line-height: 6.4rem;
+  }
+
+  .artpiece__description {
+    margin: 3.2rem 0 3.2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3.2rem;
+    width: 100%;
   }
 }

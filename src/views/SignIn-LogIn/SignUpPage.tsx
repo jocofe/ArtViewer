@@ -11,7 +11,6 @@ export const SignUpPage = () => {
 
   return (
     <div className="sign-up-page">
-      <div className="topbar topbar--absolute topbar--white"></div>
       <div className="sign-up-page__img"></div>
       <div className={`sign-up-page__content ${showForm ? 'hidden' : ''}`}>
         <h4 className="h4--bold sign-up-page__title">Sign Up to ArtViewer</h4>
@@ -24,30 +23,24 @@ export const SignUpPage = () => {
         <button className="sign-up-page__btn" onClick={handleShowForm}>
           Sign Up
         </button>
-        <div>
+        <div className="sign-up-page-politics">
           <p className="sign-up-page__terms">
-            By creating an account you agree with our{' '}
+            By creating an account you agree with our
             <a className="sign-up-page__link" href="">
               Terms of Service
             </a>
-            ,{' '}
+            and{' '}
             <a className="sign-up-page__link" href="">
               Privacy Policy
-            </a>
-            , and our default{' '}
-            <a className="sign-up-page__link" href="">
-              Notification Settings
             </a>
             .
           </p>
         </div>
-        <div>
-          <p className="sign-up-page__sign-in">
-            Already have an account?{' '}
-            <a className="sign-up-page__link--bold" href="/signin">
-              Sign In
-            </a>{' '}
-          </p>
+        <div className="sign-up-page__already">
+          <p className="sign-up-page__sign-in">Already have an account? </p>
+          <a className="sign-up-page__link--bold" href="/signin">
+            Sign In
+          </a>
         </div>
       </div>
       {showForm && (

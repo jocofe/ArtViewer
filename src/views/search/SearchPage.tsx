@@ -4,6 +4,7 @@ import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import { ResultItem, ResultListFromApi, ResultsListItem } from '../../models/results-list';
 import { FilterTag } from '../../components/Filters/FilterTag';
+import { SearchBar } from '../../components/Form/SearchBar';
 import axios from 'axios';
 import { useFilters } from '../../hooks/useFilters';
 import { Button } from '../../components/Buttons/Buttons';
@@ -40,19 +41,17 @@ export const SearchPage = () => {
         const response = await axios.get<ResultListFromApi>(apiUrl);
         const mappedResults = mapResultsFromApi(response.data);
         setSearchResults(mappedResults);
-      } catch(error) {
-        console.log('mal')
+      } catch (error) {
+        console.log('mal');
       }
     };
     getResults();
     setLoading(false);
   }, [apiUrl]);
 
-
   if (loading) {
     return <div>Loading...</div>;
   }
-  
 
   return (
     <div className="masonry-section">
@@ -61,52 +60,57 @@ export const SearchPage = () => {
       ) : (
         <h2 className="masonry__title">{searchTerm}</h2>
       )}
-
-      <div className="filters">
-        <FilterTag
-          className={`filter ${activeFilter === 'author' ? 'active' : ''}`}
-          type="author"
-          onClick={() => handleFilterClick('author')}
-        >
-          Artist
-        </FilterTag>
-        <FilterTag
-          className={`filter ${activeFilter === 'type' ? 'active' : ''}`}
-          type="type"
-          onClick={() => handleFilterClick('type')}
-        >
-          Type
-        </FilterTag>
-        <FilterTag
-          className={`filter ${activeFilter === 'technique' ? 'active' : ''}`}
-          type="technique"
-          onClick={() => handleFilterClick('technique')}
-        >
-          Technique
-        </FilterTag>
-        <FilterTag
-          className={`filter ${activeFilter === 'location' ? 'active' : ''}`}
-          type="location"
-          onClick={() => handleFilterClick('location')}
-        >
-          Location
-        </FilterTag>
+      <div className="searchbar-mobile">
+        <SearchBar size="small" placeholder="Search for art..." />
+      </div>
+      <div className="filters-container">
+        <div className="filters">
+          <FilterTag
+            className={`filter ${activeFilter === 'author' ? 'active' : ''}`}
+            type="author"
+            onClick={() => handleFilterClick('author')}
+          >
+            Artist
+          </FilterTag>
+          <FilterTag
+            className={`filter ${activeFilter === 'type' ? 'active' : ''}`}
+            type="type"
+            onClick={() => handleFilterClick('type')}
+          >
+            Type
+          </FilterTag>
+          <FilterTag
+            className={`filter ${activeFilter === 'technique' ? 'active' : ''}`}
+            type="technique"
+            onClick={() => handleFilterClick('technique')}
+          >
+            Technique
+          </FilterTag>
+          <FilterTag
+            className={`filter ${activeFilter === 'location' ? 'active' : ''}`}
+            type="location"
+            onClick={() => handleFilterClick('location')}
+          >
+            Location
+          </FilterTag>
+        </div>
       </div>
 
       {searchResults && searchResults.length > 0 ? (
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>
           <Masonry className="masonry__columns" gutter="32px">
             {searchResults.map(result => (
-              <Link key={result.id} to={`/art-piece/${result.id}`}>
-                <ArtCard 
+              <div className="relative" key={result.id}>
+                <ArtCard
                   key={`art-item-${result.id}.id`}
-                  title={result.title} 
-                  author={result.author} 
-                  date={result.date} 
-                  imageId={result.imageId} 
+                  title={result.title}
+                  imageId={result.imageId}
+                  author={result.author}
+                  date={result.date}
                   id={result.id}
-                  />
-              </Link>
+                />
+                <Link className="expanded-anchor" to={`/art-piece/${result.id}`} />
+              </div>
             ))}
           </Masonry>
         </ResponsiveMasonry>
@@ -115,18 +119,20 @@ export const SearchPage = () => {
           <h3>Sorry, no results found</h3>
           <p>Try searching for something else?</p>
         </div>
-      )} 
+      )}
       {isLoggedIn && (
         <div className="masonry__button">
-        <Button onClick={handleLoadMore}>Load More</Button>
+          <Button onClick={handleLoadMore}>Load More</Button>
         </div>
       )}
       {!isLoggedIn && (
         <div>
-          <div className='masonry__button'>
-            <Button color='sub_primary' component={NavLink} to='/signup' className='btn-link--black'>Sign Up to continue</Button>
+          <div className="masonry__button">
+            <Button color="sub_primary" component={NavLink} to="/signup" className="btn-link--black">
+              Sign Up to continue
+            </Button>
           </div>
-          <CtaSection/>
+          <CtaSection />
         </div>
       )}
     </div>

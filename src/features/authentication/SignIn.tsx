@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/config';
 import '../../styles/index.scss';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '../../components/Buttons/Buttons';
 
 export const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -44,9 +45,9 @@ export const SignIn = () => {
           <input className="signincomp__input" type="password" value={password} onChange={handlePasswordInputChange} />
         </div>
 
-        <button className="btnsign--white" type="submit">
+        <Button className="btnsign--white" type="submit">
           Sign In
-        </button>
+        </Button>
       </form>
     </div>
   );

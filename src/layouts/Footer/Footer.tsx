@@ -1,6 +1,6 @@
-import { Logotype, ArrowUp } from "../../components/Icons/icons";
-import "../../styles/index.scss";
-import "../../styles/layouts/_footer.scss";
+import { Logotype, ArrowUp } from '../../components/Icons/icons';
+import '../../styles/index.scss';
+import '../../styles/layouts/_footer.scss';
 
 export const Footer = () => {
   return (
@@ -45,10 +45,10 @@ export const Footer = () => {
 
       <div className="footer--bottom">
         <div className="footer--copy">
-              <p>ArtView © 2024</p>
-              <a href="">Terms & policies</a>
-              <a href="">Privacy policy</a>
-              <a href="/brand-guidelines">Brand guidelines</a>
+          <p>ArtView © 2024</p>
+          <a href="/terms-conditions">Terms & policies</a>
+          <a href="/privacy-policy">Privacy policy</a>
+          <a href="/brand-guidelines">Brand guidelines</a>
         </div>
 
         <a className="footer--top" href="">

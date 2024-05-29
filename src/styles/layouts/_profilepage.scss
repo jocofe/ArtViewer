@@ -2,8 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 32px;
-  margin-top: 64px;
+  gap: 3.2rem;
+  margin-top: 6.4rem;
 }
 
 .profile-picture {
@@ -31,4 +31,22 @@
 
 .edit-btn {
   width: 164px;
+}
+
+@media (max-width: 768px) {
+  .profilecard-wrapper {
+    flex-direction: column;
+  }
+
+  .profilecard-info {
+    align-items: center;
+  }
+
+  .collectioncard-wrapper {
+    width: 350px;
+  }
+
+  .image-wrapper {
+    height: auto;
+  }
 }

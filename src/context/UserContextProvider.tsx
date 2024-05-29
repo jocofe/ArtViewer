@@ -1,19 +1,26 @@
 import { createContext, useEffect, useState } from 'react';
 import { auth, db } from '../config/config';
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import 'firebase/auth';
 import { UserContextProviderFirebaseProps } from '../models/usercontext';
+import { Collection } from '../models/collection';
+
+interface UserContextType {
+  isLoggedIn: boolean;
+  userData: UserData | null;
+}
 import { registerLoginSession, getUserLoginSessions } from '../components/Services/sessions';
-import { doc, getDoc } from 'firebase/firestore';
 import { UserSessions } from '../models/userSessions';
 
 export interface UserData {
+  picture: string | null;
+  photoURL: string | null;
   location: string;
   name: string | null;
   email: string;
   displayName: string;
   username: string;
-  photoURL: string;
-  // Otros datos que deseas del usuario
+  collections?: Collection[];
 }
 
 // Context del usuario
@@ -33,8 +40,7 @@ export const UserContext = createContext<UserContextType>({
   getUserLoginSessions: async () => [],
 });
 
-// Componente de proveedor de usuario con Firebase
-export const UserContextProviderFirebase: React.FC<UserContextProviderFirebaseProps> = ({ children }) => {
+export const UserContextProviderFirebase = ({ children }: UserContextProviderFirebaseProps) => {
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem('isLoggedIn') === 'true';
   });
@@ -54,7 +60,22 @@ export const UserContextProviderFirebase: React.FC<UserContextProviderFirebasePr
           try {
             const userDoc = await getDoc(doc(db, 'users', userEmail));
             const userDataFromFirestore = userDoc.data() as UserData;
-            setUserData(userDataFromFirestore);
+
+            // Obtener colecciones del usuario
+            const collectionsRef = collection(db, `users/${userEmail}/collections`);
+            const collectionsSnapshot = await getDocs(collectionsRef);
+            const collections: Collection[] = collectionsSnapshot.docs.map(docSnapshot => {
+              const collectionData = docSnapshot.data() as Omit<Collection, 'id'>;
+              return {
+                id: docSnapshot.id,
+                ...collectionData,
+              };
+            });
+
+            // Agregar colecciones a userData sin sobrescribir la propiedad 'id'
+            const updatedUserData = { ...userDataFromFirestore, collections };
+
+            setUserData(updatedUserData);
 
             // Register user's login session
             await registerLoginSession(userEmail);

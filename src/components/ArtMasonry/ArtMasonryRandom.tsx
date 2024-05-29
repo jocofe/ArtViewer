@@ -25,7 +25,6 @@ export const mapArtApitoArtView = (art: ArtListItemFromApi): ArtListItem[] => {
 export const ArtMasonryRandom = () => {
   const [artList, setArtList] = useState<ArtListItem[]>([]);
   const [page, setPage] = useState(1);
-
   const { isLoggedIn } = useContext(UserContext);
 
   useEffect(() => {
@@ -37,12 +36,11 @@ export const ArtMasonryRandom = () => {
     };
 
     fetchArt();
-
   }, [page]);
 
   const handleLoadMore = () => {
     setPage(page + 1);
-  }
+  };
 
   useEffect(() => {
     if (artList.length > 0) {
@@ -60,7 +58,7 @@ export const ArtMasonryRandom = () => {
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>
           <Masonry className="masonry__columns" gutter="32px">
             {artList.map((artItem: ArtListItem) => (
-              <div className="relative">
+              <div className="relative" key={artItem.id}>
                 <ArtCard
                   key={`art-item-${artItem.id}.id`}
                   title={artItem.title}
@@ -69,19 +67,23 @@ export const ArtMasonryRandom = () => {
                   date={artItem.date}
                   id={artItem.id}
                 />
-                <Link className="expanded-anchor" key={artItem.id} to={`/art-piece/${artItem.id}`} />
+                <Link className="expanded-anchor" to={`/art-piece/${artItem.id}`} />
               </div>
             ))}
           </Masonry>
         </ResponsiveMasonry>
-          <div className="masonry__button">
-            {isLoggedIn && (
-              <Button color='sub_primary' onClick={handleLoadMore}>Load More</Button>
-            )}
-            {!isLoggedIn && (
-              <Button color='sub_primary' component={NavLink} to='/signup' className='btn-link--black'>Sign Up to continue</Button>
-            )}
-          </div>
+        <div className="masonry__button">
+          {isLoggedIn && (
+            <Button color="sub_primary" onClick={handleLoadMore}>
+              Load More
+            </Button>
+          )}
+          {!isLoggedIn && (
+            <Button color="sub_primary" component={NavLink} to="/signup" className="btn-link--black">
+              Sign Up to continue
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );
