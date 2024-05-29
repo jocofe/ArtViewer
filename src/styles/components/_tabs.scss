@@ -14,12 +14,14 @@
 }
 
 .tab {
-  background-color: white;
+  background-color: var(--color-white);
   border: 0;
   font-size: var(--font-size-20);
+  color: var(--color-blackout);
 
   &--selected {
     border-bottom: 1px solid var(--color-blackout);
+    color: var(--color-blackout);
   }
 }
 
