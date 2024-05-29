@@ -4,6 +4,7 @@ import 'firebase/auth';
 import { UserContextProviderFirebaseProps } from '../models/usercontext';
 import { registerLoginSession, getUserLoginSessions } from '../components/Services/Sessions';
 import { doc, getDoc } from 'firebase/firestore';
+import { UserSessions } from '../models/userSessions';
 
 export interface UserData {
   location: string;
@@ -21,7 +22,7 @@ interface UserContextType {
   userData: UserData | null;
   updateUserProfilePhoto: (newPhotoURL: string) => void; // Nuevo método
   updateUserProfileName: (newName: string) => void;
-  getUserLoginSessions: (userEmail: string) => Promise<any[]>
+  getUserLoginSessions: (userEmail: string) => Promise<UserSessions[]>
 }
 
 export const UserContext = createContext<UserContextType>({ 
