@@ -1,8 +1,6 @@
-import { FormEvent, useState } from "react";
-import { Button } from "../../../components/Buttons/Buttons";
-import { changePassword } from "../../../features/authentication/ChangePassword";
-
-
+import { FormEvent, useState } from 'react';
+import { Button } from '../../../components/Buttons/Buttons';
+import { changePassword } from '../../../features/authentication/ChangePassword';
 
 export const PasswordSettings = () => {
   const [oldPassword, setOldPassword] = useState('');
@@ -13,44 +11,45 @@ export const PasswordSettings = () => {
     event.preventDefault();
     console.log('change password button clicked');
     // Verify that inputs are not empty
-    if(!oldPassword || !newPassword) {
+    if (!oldPassword || !newPassword) {
       setMessage('Please fill both password fields');
       return;
     }
 
-    console.log('old password', oldPassword);
-    console.log('New Password', newPassword);
+    if (newPassword.length < 6) {
+      setMessage('Password must be at least 6 characters');
+      return;
+    }
+
     try {
       await changePassword(oldPassword, newPassword);
-      setMessage('');
+      setMessage('Password changed succesfylly');
       setOldPassword('');
       setNewPassword('');
-
-    } catch (error) {
-      setMessage('Error changing password');
+    } catch (error: unknown) {
+      const firebaseError = error as Error;
+      if (firebaseError.message === 'Incorrect old password.') {
+        setMessage('Incorrect old password.');
+      } else {
+        setMessage('Error changing password');
+      }
     }
-    setMessage('password changed succesfully');
-  }
-  return(
-    <div className="settings">
-      <form onSubmit={handleChangePassword}>
-    <p>Old password</p>
-    <input 
-      type="password"
-      value={oldPassword}
-      onChange={(event) => setOldPassword(event.target.value)}
-    />
-    <p>New password</p>
-    <input 
-      type="password" 
-      value={newPassword}
-      onChange={(event) => setNewPassword(event.target.value)}
-    />
-    <p>{message}</p>
-  <div className="settings-btn">
-    <Button size="small" type="submit">Save changes</Button>
-  </div>
-  </form>
-</div>
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleChangePassword} className="settings">
+        <p>Old password</p>
+        <input type="password" value={oldPassword} onChange={event => setOldPassword(event.target.value)} />
+        <p>New password</p>
+        <input type="password" value={newPassword} onChange={event => setNewPassword(event.target.value)} />
+        <p className="error">{message}</p>
+        <div className="settings-btn">
+          <Button size="small" type="submit">
+            Save changes
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
