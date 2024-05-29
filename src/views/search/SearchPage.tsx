@@ -30,8 +30,10 @@ export const SearchPage = () => {
   const [searchResults, setSearchResults] = useState<ResultsListItem[] | null>(null);
   const [loading, setLoading] = useState(false);
 
+ 
   const { apiUrl, handleFilterClick, activeFilter, handleLoadMore } = useFilters(searchTerm);
   const { isLoggedIn } = useContext(UserContext);
+
 
   // Api call
   useEffect(() => {
@@ -42,7 +44,7 @@ export const SearchPage = () => {
         const mappedResults = mapResultsFromApi(response.data);
         setSearchResults(mappedResults);
       } catch (error) {
-        console.log('mal');
+        console.log('error');
       }
     };
     getResults();

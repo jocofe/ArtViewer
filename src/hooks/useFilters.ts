@@ -10,20 +10,37 @@ const apiUrlParams: Record<ActiveFilter, string> = {
 };
 
 export const useFilters = (searchTerm: string) => {
-  const [activeFilter, setActiveFilter] = useState<ActiveFilter>();
+  const [activeFilter, setActiveFilter] = useState<ActiveFilter | null>(null);
   const [apiUrl, setApiUrl] = useState('');
+  const [page, setPage] = useState(15);
+
+  // Construct APiUrl call depending on searchTerm and filter selected
 
   useEffect(() => {
-    let url = `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&images_exist=true`;
-    if (activeFilter) {
-      url = `https://api.vam.ac.uk/v2/objects/search?${apiUrlParams[activeFilter]}=${searchTerm}&images_exist=true`;
-    }
-    setApiUrl(url);
-  }, [searchTerm, activeFilter]);
+    const constructApiUrl = () => {
+      let url = `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&order_sort=asc&page=1&page_size=${page}&images_exist=true`;
+      if (activeFilter) {
+        url = `https://api.vam.ac.uk/v2/objects/search?${apiUrlParams[activeFilter]}=${searchTerm}&order_sort=asc&page=1&page_size=${page}&images_exist=true`;
+      }
+      setApiUrl(url);
+    };
+    constructApiUrl();
+  }, [searchTerm, activeFilter, page]);
 
+  // If new searchTerm, state of page return to 15 results
+  useEffect(() => {
+    setPage(15);
+  }, [searchTerm]);
+
+  // Allows only 1 filter at time, diselect a filter if is alredy selected
   const handleFilterClick = (filter: ActiveFilter) => {
-    setActiveFilter(prevFilter => (prevFilter === filter ? undefined : filter));
+    setActiveFilter(prevFilter => (prevFilter === filter ? null : filter));
   };
 
-  return { apiUrl, handleFilterClick, activeFilter };
+  // Double results if "load more" btn is clicked on searchPage
+  const handleLoadMore = () => {
+    setPage(page * 2);
+  }
+
+  return { apiUrl, handleFilterClick, activeFilter, handleLoadMore };
 };

@@ -3,17 +3,22 @@ import { DefaultAvatar } from "../../../components/Avatar/DefaultAvatar";
 import { Button } from "../../../components/Buttons/Buttons";
 import { db, storage } from "../../../config/config";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useContext, useRef, useState } from "react";
-import { ProfileImageProps, useUserProfilePhoto } from "../../../hooks/useUserProfileImg";
+import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../../context/UserContextProvider";
 
 export const ProfileSettings = () => {
   const { userData, updateUserProfilePhoto, updateUserProfileName } = useContext(UserContext);
-  const userProfilePhoto: ProfileImageProps | null = useUserProfilePhoto();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [picture, setPicture] = useState<string | undefined>(undefined);
   const [name, setName] = useState<string>(userData?.name || '');
   const [location, setLocation] = useState<string>(userData?.location || '');
 
+
+  useEffect(() => {
+    if (userData) {
+      setPicture(userData.picture || undefined);
+    }
+  }, [userData]);
 
   const handleChooseBtnClick = () => {
     if (fileInputRef.current) {
@@ -49,8 +54,8 @@ export const ProfileSettings = () => {
     <div className="settings">
       <div className="settings-picture">
         <div className="profile-picture-settings">
-        {userProfilePhoto && userProfilePhoto.imageUrl !== 'default' ? (
-            <img src={userProfilePhoto.imageUrl} alt="User Profile" className="profilecard-image" />
+        {picture && picture !== 'default' ? (
+            <img src={picture} alt="User Profile" className="profilecard-image" />
           ) : (
             <div className="profile-picture-settings">
               <DefaultAvatar />

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc, updateDoc } from 'firebase/firestore';
 import { db, auth, storage } from '../../config/config';
 import { Link, useNavigate } from 'react-router-dom';
 import { IconLogotype, Logotype } from '../../components/Icons/icons';
