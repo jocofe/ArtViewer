@@ -26,28 +26,28 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 32px;
+  gap: 3.2rem;
 }
 
 .input-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1.6rem;
 }
 
 .input__box {
-  height: 48px;
-  max-height: 48px;
-  border-radius: 60px;
-  padding-left: 24px;
+  height: 4.8rem;
+  max-height: 4.8rem;
+  border-radius: 6rem;
+  padding-left: 2.4rem;
   border: 1px solid var(--color-blackout-light);
-  width: 500px;
+  width: 100%;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 4.8rem;
 }
 
 .submit-btn {
@@ -63,12 +63,12 @@
   display: flex;
   width: 164px;
   height: 164px;
-  padding: 10px;
+  padding: 1rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  border-radius: 109px;
+  gap: 1rem;
+  border-radius: 10rem;
   background-color: var(--color-white);
   border: 1px dashed var(--AV---Blackout-Lighter, #808080);
 }
@@ -76,33 +76,33 @@
 .options-wrapper {
   display: flex;
   flex-direction: row;
-  gap: 32px;
+  gap: 3.2rem;
 }
 
 .selector-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 3.2rem;
 }
 
 .google-image {
-  width: 48px;
-  height: 48px;
-  border-radius: 60px;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 6rem;
 }
 
 .uploaded-image {
-  width: 164px;
-  height: 164px;
-  border-radius: 100px;
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 10rem;
 }
 
 .checkbox__circle label {
   background-color: var(--color-wooden);
-  width: 48px;
+  width: 4.8rem;
   color: var(--color-white);
-  height: 48px;
-  border-radius: 60px;
+  height: 4.8rem;
+  border-radius: 6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,7 +130,7 @@
   width: 164px;
   color: var(--color-white);
   height: 164px;
-  border-radius: 100px;
+  border-radius: 10rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,16 +153,16 @@
 
 .options-selector {
   display: flex;
-  gap: 16px;
+  gap: 1.6rem;
 }
 
 .submit-btn {
   user-select: none;
   box-sizing: border-box;
   background-color: var(--color-white);
-  border-radius: 40px;
-  height: 56px;
-  padding: 0px 24px;
+  border-radius: 4rem;
+  height: 5.6rem;
+  padding: 0 2.4rem;
   border: 1px solid var(--color-blackout);
 
   &:focus {
@@ -191,5 +191,21 @@
       inset 0 0 0 3px var(--color-white);
     background-color: var(--color-blackout);
     color: var(--color-white);
+  }
+}
+
+@media (max-width: 768px) {
+  .newuser-wrapper {
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .info-wrapper {
+    padding: 0;
+    width: 100vw;
+  }
+
+  .imgsetup-wrapper {
+    display: none;
   }
 }

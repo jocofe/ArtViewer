@@ -1,9 +1,9 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { doc, setDoc } from 'firebase/firestore';
 import { db, auth, storage } from '../../config/config';
 import { Link, useNavigate } from 'react-router-dom';
-import { Camera, Logotype } from '../../components/Icons/icons';
+import { IconLogotype, Logotype } from '../../components/Icons/icons';
 import { Button } from '../../components/Buttons/Buttons';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
@@ -26,6 +26,25 @@ export const SignUpNewUser = () => {
   const user = auth.currentUser;
   const providerData = user?.providerData[0];
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isCollapse, setIsCollapse] = useState(false);
+
+  useEffect(() => {
+    const checkWindowSize = () => {
+      setIsCollapse(window.matchMedia('(max-width: 1100px)').matches);
+    };
+
+    checkWindowSize();
+
+    const resizeListener = () => {
+      checkWindowSize();
+    };
+
+    window.addEventListener('resize', resizeListener);
+
+    return () => {
+      window.removeEventListener('resize', resizeListener);
+    };
+  }, []);
 
   const onSubmit: SubmitHandler<FormInputs> = async data => {
     setIsSubmitting(true);
@@ -77,16 +96,14 @@ export const SignUpNewUser = () => {
       await uploadBytes(storageRef, file);
       const url = await getDownloadURL(storageRef);
       setUserUploadedAvatar(url);
-      handleAvatarSelection('uploaded');
+      handleAvatarSelection(url);
     }
   };
 
   return (
     <div className="newuser-wrapper">
-      <div className="topbar topbar--absolute topbar--black">
-        <Link to={`/`}>
-          <Logotype />
-        </Link>
+      <div className="topbar topbar--black">
+        <Link to={'/'}>{isCollapse ? <IconLogotype className="icon" /> : <Logotype className="logotype" />}</Link>
       </div>
       <div className="info-wrapper">
         <div className="info__form">
@@ -113,28 +130,6 @@ export const SignUpNewUser = () => {
             <div className="input-wrapper">
               <label className="h4">Add an avatar</label>
               <div className="options-wrapper">
-                <div className="upload-wrapper">
-                  {!userUploadedAvatar && (
-                    <div className="upload__btn" onClick={handleChooseBtnClick}>
-                      <Camera />
-                    </div>
-                  )}
-                  {userUploadedAvatar && ( // Si hay una foto subida por el usuario
-                    <div className="checkbox-container-uploaded">
-                      <div className="checkbox__circle-uploaded">
-                        <input
-                          type="checkbox"
-                          id="uploaded-checkbox"
-                          checked={selectedAvatar === 'uploaded'}
-                          onChange={() => handleAvatarSelection('uploaded')}
-                        />
-                        <label htmlFor="uploaded-checkbox">
-                          <img className="uploaded-image" src={userUploadedAvatar} alt="Uploaded Avatar" />
-                        </label>
-                      </div>
-                    </div>
-                  )}
-                </div>
                 <div className="selector-wrapper">
                   <Button
                     className="choose-btn"
@@ -143,7 +138,7 @@ export const SignUpNewUser = () => {
                       handleChooseBtnClick(); // Llamar a la función handleChooseBtnClick para abrir el explorador de archivos
                     }}
                   >
-                    Choose Image
+                    Upload Image
                   </Button>
                   <input
                     type="file"
@@ -152,7 +147,7 @@ export const SignUpNewUser = () => {
                     onChange={handleFileChange}
                     accept="image/*"
                   />
-                  <h5>Or choose one of our defaults</h5>
+                  <h5>Upload an image or choose one of our defaults</h5>
                   <div className="options-selector">
                     {providerData?.providerId === 'google.com' && user?.photoURL && (
                       <div className="checkbox-container">
@@ -180,6 +175,21 @@ export const SignUpNewUser = () => {
                         <label htmlFor="default-checkbox">{user?.displayName?.charAt(0)}</label>
                       </div>
                     </div>
+                    {userUploadedAvatar && (
+                      <div className="checkbox-container">
+                        <div className="checkbox__circle">
+                          <input
+                            type="checkbox"
+                            id="uploaded-checkbox"
+                            checked={selectedAvatar === userUploadedAvatar}
+                            onChange={() => handleAvatarSelection(userUploadedAvatar)}
+                          />
+                          <label htmlFor="uploaded-checkbox">
+                            <img className="uploaded-image" src={userUploadedAvatar} alt="Uploaded profile" />
+                          </label>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
