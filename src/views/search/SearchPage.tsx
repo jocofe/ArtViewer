@@ -100,16 +100,17 @@ export const SearchPage = () => {
         <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 768: 2, 1200: 3, 1920: 4 }}>
           <Masonry className="masonry__columns" gutter="32px">
             {searchResults.map(result => (
-              <Link key={result.id} to={`/art-piece/${result.id}`}>
+              <div className="relative" key={result.id}>
                 <ArtCard
                   key={`art-item-${result.id}.id`}
                   title={result.title}
+                  imageId={result.imageId}
                   author={result.author}
                   date={result.date}
-                  imageId={result.imageId}
                   id={result.id}
                 />
-              </Link>
+                <Link className="expanded-anchor" to={`/art-piece/${result.id}`} />
+              </div>
             ))}
           </Masonry>
         </ResponsiveMasonry>
