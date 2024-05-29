@@ -11,8 +11,8 @@
   width: 132px;
 
   & .avatar-default {
-    height: 132px;
-    width: 132px;
+    height: inherit;
+    width: inherit;
     border-radius: 100px;
   }
 }

@@ -15,6 +15,7 @@ export const useFilters = (searchTerm: string) => {
   const [page, setPage] = useState(15);
 
   // Construct APiUrl call depending on searchTerm and filter selected
+
   useEffect(() => {
     const constructApiUrl = () => {
       let url = `https://api.vam.ac.uk/v2/objects/search?q=${searchTerm}&order_sort=asc&page=1&page_size=${page}&images_exist=true`;
@@ -31,7 +32,6 @@ export const useFilters = (searchTerm: string) => {
     setPage(15);
   }, [searchTerm]);
 
-  
   // Allows only 1 filter at time, diselect a filter if is alredy selected
   const handleFilterClick = (filter: ActiveFilter) => {
     setActiveFilter(prevFilter => (prevFilter === filter ? null : filter));
