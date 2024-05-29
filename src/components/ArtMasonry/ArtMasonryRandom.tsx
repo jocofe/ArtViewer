@@ -36,7 +36,7 @@ export const ArtMasonryRandom = () => {
     };
 
     fetchArt();
-  }, [artList, page]);
+  }, [page]);
 
   const handleLoadMore = () => {
     setPage(page + 1);
