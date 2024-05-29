@@ -6,32 +6,34 @@ import { Button } from '../../Buttons/Buttons';
 import { FilterCollectionBar } from '../../Form/FilterCollectionBar';
 import { UserContext } from '../../../context/UserContextProvider';
 import { AddCollectionModalProps, CollectionUser, NewCollectionFormInputs } from '../../../models/collection';
+import { ArrowLeft, ArrowRight } from '../../Icons/icons'; // Asegúrate de que la ruta de importación sea correcta
 
 export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSave }: AddCollectionModalProps) => {
   const [isCreatingNewCollection, setIsCreatingNewCollection] = useState(false);
   const [filteredCollections, setFilteredCollections] = useState<CollectionUser[]>(collections);
   const [userCollections, setUserCollections] = useState<CollectionUser[]>([]);
   const [selectedCollections, setSelectedCollections] = useState<Set<string>>(new Set());
+  const [currentPage, setCurrentPage] = useState(1);
+  const collectionsPerPage = 3;
   const { userData } = useContext(UserContext);
   const { register, handleSubmit, reset } = useForm<NewCollectionFormInputs>();
 
-  useEffect(() => {
-    if (userData) {
-      const fetchCollections = async () => {
-        const collectionRef = collection(db, `users/${userData.email}/collections`);
-        const collectionSnap = await getDocs(collectionRef);
-        const collectionsData = collectionSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }) as CollectionUser);
-        setUserCollections(collectionsData);
-        setFilteredCollections(collectionsData);
-        const collectionsWithArtPiece = collectionsData.filter(collection =>
-          collection.artpieces.some(piece => piece.id === artPieceDetails.id),
-        );
-        const selectedCollectionIds = new Set(collectionsWithArtPiece.map(collection => collection.id));
-        setSelectedCollections(selectedCollectionIds);
-      };
+  const fetchCollections = async () => {
+    if (!userData) return;
+    const collectionRef = collection(db, `users/${userData.email}/collections`);
+    const collectionSnap = await getDocs(collectionRef);
+    const collectionsData = collectionSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }) as CollectionUser);
+    setUserCollections(collectionsData);
+    setFilteredCollections(collectionsData);
+    const collectionsWithArtPiece = collectionsData.filter(collection =>
+      collection.artpieces.some(piece => piece.id === artPieceDetails.id),
+    );
+    const selectedCollectionIds = new Set(collectionsWithArtPiece.map(collection => collection.id));
+    setSelectedCollections(selectedCollectionIds);
+  };
 
-      fetchCollections();
-    }
+  useEffect(() => {
+    fetchCollections();
   }, [userData, artPieceDetails.id]);
 
   const handleSearch = (searchTerm: string) => {
@@ -69,9 +71,9 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
       };
 
       await addDoc(collection(db, `users/${userData.email}/collections`), newCollection);
+      await fetchCollections(); // Fetch the updated collections
       setIsCreatingNewCollection(false);
-      onSave();
-      handleCloseModal();
+      reset();
     } catch (error) {
       console.error('Error creating collection:', error);
     }
@@ -110,7 +112,7 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
                   author: artPieceDetails.author || '',
                   date: artPieceDetails.date || '',
                   imageId: artPieceDetails.imageId,
-                  imageUrl: imageUrl, // Agregar el campo imageUrl
+                  imageUrl: imageUrl,
                 },
               ];
               await updateDoc(collectionDoc, { artpieces: updatedArtPieces });
@@ -133,6 +135,18 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
       console.error('Error updating art piece in collections:', error);
     }
   };
+
+  const handleNextPage = () => {
+    setCurrentPage(prev => prev + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage(prev => prev - 1);
+  };
+
+  const indexOfLastCollection = currentPage * collectionsPerPage;
+  const indexOfFirstCollection = indexOfLastCollection - collectionsPerPage;
+  const currentCollections = filteredCollections.slice(indexOfFirstCollection, indexOfLastCollection);
 
   return (
     <div className="collection-modal-wrapper">
@@ -176,8 +190,8 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
           <>
             <FilterCollectionBar size={'normal'} placeholder={'Filter collections'} onSearch={handleSearch} />
             <div className="collection-modal__collections">
-              {filteredCollections.length > 0 ? (
-                filteredCollections.map(collection => (
+              {currentCollections.length > 0 ? (
+                currentCollections.map(collection => (
                   <div className="collections-wrapper" key={collection.id}>
                     <div className="collection">
                       <div className="collection__image">
@@ -203,6 +217,19 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
               ) : (
                 <p>There's not any collection created. Create one collection to add the Piece.</p>
               )}
+            </div>
+            <div className="collection-modal__pagination">
+              <button type="button" onClick={handlePrevPage} disabled={currentPage === 1} className="pagination-icon">
+                <ArrowLeft />
+              </button>
+              <button
+                type="button"
+                onClick={handleNextPage}
+                disabled={indexOfLastCollection >= filteredCollections.length}
+                className="pagination-icon"
+              >
+                <ArrowRight />
+              </button>
             </div>
             <div className="collection-modal__buttons">
               <Button color="sub_primary" onClick={handleCreateNewCollection}>
