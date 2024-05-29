@@ -8,7 +8,6 @@ import '../../styles/index.scss';
 export const SignInPage = () => {
   return (
     <div className="signinpage-wrapper">
-      <div className="topbar topbar--absolute topbar--white"></div>
       <div className="imgsign-wrapper"></div>
       <div className="sign-wrapper">
         <div className="sign__content">

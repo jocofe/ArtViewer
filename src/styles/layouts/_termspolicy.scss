@@ -1,0 +1,44 @@
+.header-terms {
+  margin-top: 3.2rem;
+}
+
+.header-privacy {
+  margin-top: 3.2rem;
+}
+
+.privacy-wrapper {
+  margin-top: 6.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.2rem;
+}
+
+.terms-wrapper {
+  margin-top: 6.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.2rem;
+}
+
+.content-wrapper {
+  gap: 4.6rem;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 6.4rem;
+}
+
+.content__section {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

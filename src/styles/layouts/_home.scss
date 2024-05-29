@@ -1,10 +1,10 @@
 .hero-section {
-  margin-top: 128px;
+  margin-top: 12.8rem;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 64px;
-  margin-bottom: 128px;
+  gap: 6.4rem;
+  margin-bottom: 12.8rem;
 
   & h1,
   h2 {
@@ -15,13 +15,13 @@
 
 .cta-section {
   background-color: var(--color-golden);
-  gap: 64px;
+  gap: 6.4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 128px 0 128px 0;
-  margin-top: 128px;
-  margin-bottom: 128px;
+  padding: 12.8rem 0 12.8rem 0;
+  margin-top: 12.8rem;
+  margin-bottom: 12.8rem;
 
   & h2,
   h3 {
@@ -30,8 +30,44 @@
   }
 }
 
-.button-wrapper {
+.cta__title {
+  font-weight: var(--font-weight-semibold);
+}
+
+.cta__buttons {
   display: flex;
   flex-direction: row;
-  gap: 64px;
+  gap: 6.4rem;
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 0 2.4rem 0 2.4rem;
+  }
+
+  .hero__title {
+    padding: 0 1.6rem 0 1.6rem;
+    font-size: var(--font-size-62);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .cta-section {
+    padding: 7.2rem 1.6rem 7.2em 1.6rem;
+  }
+
+  .cta__title {
+    line-height: 5.2rem;
+  }
+
+  .cta__buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 3.2rem;
+  }
+
+  .hero-section {
+    margin-top: 4.8rem;
+    gap: 4.8rem;
+    margin-bottom: 12.8rem;
+  }
 }
