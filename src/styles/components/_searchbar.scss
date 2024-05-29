@@ -2,7 +2,6 @@
   position: relative;
   align-items: center;
   width: 500px;
-  min-width: 500px;
   height: 48px;
   max-height: 48px;
   display: flex;
@@ -23,5 +22,21 @@
 
   &:focus {
     outline: 1px solid var(--color-blackout-light);
+  }
+}
+
+.searchbar-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .searchbar-wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .searchbar-mobile {
+    display: block;
+    padding: 0 2.4rem 0 2.4rem;
   }
 }

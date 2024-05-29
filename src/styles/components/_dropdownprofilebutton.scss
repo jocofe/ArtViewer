@@ -4,8 +4,9 @@
 
 .dropdown-menu {
   position: absolute;
+  width: 100px;
   top: calc(100% + 5px); /* Ajusta la distancia entre el botón y la lista */
-  left: 0;
+  right: 0.5rem;
   z-index: 1000;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -28,6 +29,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 
 .profile__btn img {
