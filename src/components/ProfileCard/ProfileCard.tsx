@@ -15,6 +15,12 @@ export const ProfileCard = () => {
       setFullName(userData.name);
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (userData && userData.location) {
+      setLocation(userData.location);
+    }
+  }, [userData]);
   
   useEffect(() => {
     if (userData && userData.picture) {
