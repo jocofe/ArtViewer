@@ -5,7 +5,7 @@ import { db } from '../../config/config';
 import { doc, setDoc } from 'firebase/firestore';
 import { ArrowLeft } from '../Icons/icons';
 import { Button } from '../Buttons/Buttons';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { PASSWORD_MIN_LENGTH, validateEmail, validatePasswordLength } from '../../utils/validation';
 import { TermsCheckbox } from '../TermsCheckbox/TermsCheckbox';
 
@@ -44,12 +44,15 @@ export const SignUpForm = () => {
       const user = userCredential.user;
       const userEmail = user.email;
 
+      // Actualiza el perfil del usuario para establecer el displayName
+      await updateProfile(user, { displayName: name });
+
       if (userEmail) {
         const userRef = doc(db, 'users', userEmail);
         await setDoc(userRef, {
           id: user.uid,
           email: userEmail,
-          name,
+          name: user.displayName,
           provider: 'manual-register',
           createdAt: new Date(),
           updatedAt: new Date(),

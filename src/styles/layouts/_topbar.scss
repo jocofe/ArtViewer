@@ -37,10 +37,10 @@
   flex-direction: row;
   gap: 12px;
   align-items: center;
+}
 
-  & .profile-image {
-    border-radius: 60px;
-    height: 48px;
-    width: 48px;
-  }
+.profile-image {
+  border-radius: 60px;
+  height: inherit;
+  width: inherit;
 }

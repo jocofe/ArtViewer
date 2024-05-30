@@ -266,7 +266,7 @@ export const ArrowLeft = (className: IconProps) => {
 export const ArrowRight = (className: IconProps) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="25" viewBox="0 0 24 25" fill="none">
-      <g clip-path="url(#clip0_201_578)">
+      <g clipPath="url(#clip0_201_578)">
         <path
           d="M19 12.5C18.9863 12.0265 18.808 11.6206 18.4378 11.2554L7.76983 0.959977C7.45446 0.662345 7.08423 0.5 6.63173 0.5C5.71303 0.5 5 1.20349 5 2.10992C5 2.54284 5.17826 2.9487 5.49363 3.25987L15.0921 12.5L5.49363 21.7401C5.17826 22.0513 5 22.4436 5 22.8901C5 23.7965 5.71303 24.5 6.63173 24.5C7.07052 24.5 7.45446 24.3377 7.76983 24.04L18.4378 13.7311C18.8217 13.3794 19 12.9735 19 12.5Z"
           fill="#161616"

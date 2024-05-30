@@ -56,28 +56,6 @@ export const router = createBrowserRouter([
             element: <ArtDetailPage />,
           },
           {
-            path: '/settings',
-            element: <ProtectedRoute />,
-            children: [
-              {
-                path: '/settings/general',
-                element: <GeneralSettings />,
-              },
-              {
-                path: '/settings/profile',
-                element: <ProfileSettings />,
-              },
-              {
-                path: '/settings/password',
-                element: <PasswordSettings />,
-              },
-              {
-                path: '/settings/sessions',
-                element: <SessionsSettings />,
-              },
-            ],
-          },
-          {
             path: '/collection',
             element: <ProtectedRoute />,
             children: [
