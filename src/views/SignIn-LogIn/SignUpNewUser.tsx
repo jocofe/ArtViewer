@@ -132,6 +132,7 @@ export const SignUpNewUser = () => {
               <div className="options-wrapper">
                 <div className="selector-wrapper">
                   <Button
+                    type="button"
                     className="choose-btn"
                     color="sub_primary"
                     onClick={() => {
