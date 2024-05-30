@@ -8,21 +8,32 @@ export const ProfileCard = () => {
   const { userData } = useContext(UserContext);
   const [fullName, setFullName] = useState<string | null>(null);
   const [location, setLocation] = useState<string | null>(null);
-  const [picture, setPicture] = useState<string | null>(null);
+  const [picture, setPicture] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (userData && userData.name && userData.location && userData.picture) {
+    if (userData && userData.name) {
       setFullName(userData.name);
-      setLocation(userData.location);
-      setPicture(userData.picture);
     }
   }, [userData]);
+  
+  useEffect(() => {
+    if (userData && userData.picture) {
+      setPicture(userData.picture);
+    } else {
+      setPicture(undefined);
+    }
+  }, [userData]);
+
+
 
   return (
     <div className="profilecard-wrapper">
       <div className="profile-picture">
-        {picture ? <img src={picture} alt="User Profile" className="profilecard-image" /> : <DefaultAvatar />}
-      </div>
+      {picture && picture !== 'default' ? (
+          <img src={picture} alt="User Profile" className="profile-image" />
+        ) : (
+          <DefaultAvatar />
+        )}      </div>
       <div className="profilecard-info">
         <h1 className="h3 profilecard__name">{fullName}</h1>
         <h3 className="h4 profilecard__location">{location}</h3>
