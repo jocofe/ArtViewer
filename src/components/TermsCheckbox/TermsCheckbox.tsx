@@ -1,7 +1,4 @@
-type TermsCheckboxProps = {
-  checked: boolean;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
-};
+import { TermsCheckboxProps } from '../../models/terms-checkbox';
 
 export const TermsCheckbox = ({ checked, onChange }: TermsCheckboxProps) => {
   return (

@@ -6,7 +6,6 @@ import { ModalDefault } from '../Dialogs/ModalDefault';
 import { Button } from '../Buttons/Buttons';
 
 export const SettingsList = () => {
-  // Keep track of actual route
   const location = useLocation();
   const [selectedLink, setSelectedLink] = useState('');
   const [showModal, setShowModal] = useState(false);

@@ -1,37 +1,16 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { collection, doc, getDocs, addDoc, deleteDoc } from 'firebase/firestore';
-import { db } from '../../config/config';
+import { db } from '../config/config';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { Toaster } from '../Dialogs/Toaster Message/ToasterMessage';
-import { ModalDefault } from '../Dialogs/ModalDefault';
-import { Button } from '../Buttons/Buttons';
+import { Toaster } from '../components/Dialogs/Toaster Message/ToasterMessage';
+import { ModalDefault } from '../components/Dialogs/ModalDefault';
+import { Button } from '../components/Buttons/Buttons';
 import { NavLink } from 'react-router-dom';
+import { Favourite, LikesContextProps, LikesProviderProps } from '../models/likes';
 
-interface Favourite {
-  artPieceId: string;
-  id?: string;
-}
+export const LikesContext = createContext<LikesContextProps | undefined>(undefined);
 
-interface LikesContextProps {
-  favourites: Favourite[];
-  toggleLike: (artPieceId: string) => void;
-}
-
-interface LikesProviderProps {
-  children: ReactNode;
-}
-
-const LikesContext = createContext<LikesContextProps | undefined>(undefined);
-
-export const useLikes = () => {
-  const context = useContext(LikesContext);
-  if (!context) {
-    throw new Error('useLikes must be used within a LikesProvider');
-  }
-  return context;
-};
-
-export const LikesProvider: React.FC<LikesProviderProps> = ({ children }) => {
+export const LikesProvider = ({ children }: LikesProviderProps) => {
   const [favourites, setFavourites] = useState<Favourite[]>([]);
   const [toasterMessage, setToasterMessage] = useState<string | null>(null);
   const [showLoginModal, setShowLoginModal] = useState(false);

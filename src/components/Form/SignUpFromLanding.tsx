@@ -8,17 +8,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../config/config';
 import { doc, setDoc } from 'firebase/firestore';
 import { PASSWORD_MIN_LENGTH, validateEmail } from '../../utils/validation';
-
-interface FormInputs {
-  name: string;
-  email: string;
-  password: string;
-}
-
-interface Error {
-  code: string;
-  message: string;
-}
+import { FirebaseError, FormInputs } from '../../models/forms';
 
 export const SignUpFromLanding: React.FC = () => {
   const navigate = useNavigate();
@@ -60,11 +50,11 @@ export const SignUpFromLanding: React.FC = () => {
         setErrorMessage('Unknown error occurred');
       }
     } catch (error) {
-      const errorCode = (error as Error).code;
-      if (errorCode === 'auth/email-already-in-use') {
-        setErrorMessage('Email has alredy been taken');
+      const firebaseError = error as FirebaseError;
+      if (firebaseError.code === 'auth/email-already-in-use') {
+        setErrorMessage('Email has already been taken');
       } else {
-        setErrorMessage(`Error adding user data to Firestore: ${(error as Error).message}`);
+        setErrorMessage(`Error adding user data to Firestore: ${firebaseError.message}`);
       }
     }
     setIsSubmitting(false);

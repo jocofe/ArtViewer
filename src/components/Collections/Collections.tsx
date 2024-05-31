@@ -1,11 +1,7 @@
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { CollectionCard } from './CollectionCard';
-import { Collection } from '../../models/collection';
+import { CollectionsProps } from '../../models/collection';
 import { Link } from 'react-router-dom';
-
-interface CollectionsProps {
-  collections: Collection[];
-}
 
 export const Collections = ({ collections }: CollectionsProps) => {
   return (

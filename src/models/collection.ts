@@ -37,3 +37,12 @@ export interface NewCollectionFormInputs {
   name: string;
   description: string;
 }
+
+export interface CollectionsProps {
+  collections: Collection[];
+}
+
+export interface NewCollection {
+  name: 'Name';
+  description: 'Description (optional)';
+}

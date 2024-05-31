@@ -1,11 +1,6 @@
 import { useState } from 'react';
 import { ArrowDown, ArrowUp } from '../Icons/icons';
-
-interface DropdownButtonProps {
-  label: string;
-  options: string[];
-  onOptionSelect: (option: string) => void;
-}
+import { DropdownButtonProps } from '../../models/dropdown-button';
 
 export const DropdownButton = ({ label, options, onOptionSelect }: DropdownButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);

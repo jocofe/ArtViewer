@@ -1,12 +1,6 @@
 import { useState } from 'react';
-import { Collection } from '../../models/collection';
 import { Collections } from '../Collections/Collections';
-
-interface TabsProps {
-  collections: Collection[];
-  likes: React.ReactNode;
-  className?: string;
-}
+import { TabsProps } from '../../models/tabs';
 
 export const Tabs = ({ collections, likes, className }: TabsProps) => {
   const [selectedTab, setSelectedTab] = useState('collections');

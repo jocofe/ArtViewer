@@ -8,17 +8,7 @@ import { Button } from '../Buttons/Buttons';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { PASSWORD_MIN_LENGTH, validateEmail, validatePasswordLength } from '../../utils/validation';
 import { TermsCheckbox } from '../TermsCheckbox/TermsCheckbox';
-
-interface Error {
-  code: string;
-  message: string;
-}
-
-interface FormInputs {
-  name: string;
-  email: string;
-  password: string;
-}
+import { FormInputs, FirebaseError } from '../../models/forms';
 
 export const SignUpForm = () => {
   const navigate = useNavigate();
@@ -63,11 +53,11 @@ export const SignUpForm = () => {
         setErrorMessage('Unknown error occurred');
       }
     } catch (error) {
-      const errorCode = (error as Error).code;
-      if (errorCode === 'auth/email-already-in-use') {
-        setErrorMessage('Email has alredy been taken');
+      const firebaseError = error as FirebaseError;
+      if (firebaseError.code === 'auth/email-already-in-use') {
+        setErrorMessage('Email has already been taken');
       } else {
-        setErrorMessage(`Error adding user data to Firestore: ${(error as Error).message}`);
+        setErrorMessage(`Error adding user data to Firestore: ${firebaseError.message}`);
       }
     }
     setIsSubmitting(false);
