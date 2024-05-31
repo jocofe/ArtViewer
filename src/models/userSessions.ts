@@ -1,5 +1,5 @@
-export interface UserSessions {
-    ipAddres: string;
+export interface UserSessionsProps {
+    ipAddress: string;
     userAgent: string;
     loginTime: Date;
     lastAccess: Date;

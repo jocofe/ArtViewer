@@ -41,6 +41,7 @@
 
 .profile-image {
   border-radius: 60px;
-  height: inherit;
-  width: inherit;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }

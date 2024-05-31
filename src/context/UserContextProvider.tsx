@@ -10,7 +10,7 @@ interface UserContextType {
   userData: UserData | null;
 }
 import { registerLoginSession, getUserLoginSessions } from '../components/Services/sessions';
-import { UserSessions } from '../models/userSessions';
+import { UserSessionsProps } from '../models/userSessions';
 
 export interface UserData {
   picture: string | null;
@@ -28,7 +28,7 @@ interface UserContextType {
   userData: UserData | null;
   updateUserProfilePhoto: (newPhotoURL: string | null) => void; // Nuevo método
   updateUserProfileName: (newName: string) => void;
-  getUserLoginSessions: (userEmail: string) => Promise<UserSessions[]>
+  getUserLoginSessions: (userEmail: string) => Promise<UserSessionsProps[]>
 }
 
 export const UserContext = createContext<UserContextType>({ 

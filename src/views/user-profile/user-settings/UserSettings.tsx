@@ -3,13 +3,16 @@ import { DefaultAvatar } from '../../../components/Avatar/DefaultAvatar';
 import { UserContext } from '../../../context/UserContextProvider';
 import { Outlet, useLocation } from 'react-router-dom';
 import { SettingsList } from '../../../components/List/SettingsList';
+import { SettingsListMobile } from '../../../components/List/SettingsListMobile';
+import useWindowSize from '../../../hooks/useWindowSize';
 
 export const UserSettings = () => {
   const { userData } = useContext(UserContext);
   const [fullName, setFullName] = useState<string | null>(null);
-  const [description, setDescription] = useState<string>('Descripción')
+  const [description, setDescription] = useState<string>('Descripción');
   const location = useLocation();
   const [picture, setPicture] = useState<string | undefined>(undefined);
+  const { width } = useWindowSize();
 
   useEffect(() => {
     if (userData) {
@@ -25,16 +28,18 @@ export const UserSettings = () => {
         setDescription('Update your username and manage your email account');
         break;
       case 'general':
-        setDescription('Set up your profile information')
+        setDescription('Set up your profile information');
         break;
       case 'password':
-        setDescription('Manage your password')
+        setDescription('Manage your password');
         break;
       case 'sessions':
-        setDescription('Manage your sessions')
+        setDescription('Manage your sessions');
         break;
+      default:
+        setDescription('Descripción');
     }
-},[location]);
+  }, [location]);
 
   return (
     <div className="settings-wrapper">
@@ -53,7 +58,7 @@ export const UserSettings = () => {
           </div>
         </div>
         <div className="user-settings">
-          <SettingsList />
+          {width <= 768 ? <SettingsListMobile /> : <SettingsList />}
           <div className="user__settings">
             <Outlet />
           </div>
