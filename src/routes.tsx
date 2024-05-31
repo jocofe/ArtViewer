@@ -5,7 +5,6 @@ import { SignInPage } from './views/SignIn-LogIn/SignInPage';
 import AppLayout from './AppLayout';
 import { ExplorePage } from './views/explore/ExplorePage';
 import { ArtPage } from './views/art-page/ArtPage';
-import { ArtDetailPage } from './views/art-detail/ArtDetailPage';
 import { UserPage } from './views/user-profile/UserPage';
 import { LandingPage } from './views/landing-page/LandingPage';
 import { GeneralSettings } from './views/user-profile/user-settings/GeneralSettings';
@@ -50,32 +49,6 @@ export const router = createBrowserRouter([
           {
             path: '/art-piece/:artId',
             element: <ArtPage />,
-          },
-          {
-            path: '/art-detail',
-            element: <ArtDetailPage />,
-          },
-          {
-            path: '/settings',
-            element: <ProtectedRoute />,
-            children: [
-              {
-                path: '/settings/general',
-                element: <GeneralSettings />,
-              },
-              {
-                path: '/settings/profile',
-                element: <ProfileSettings />,
-              },
-              {
-                path: '/settings/password',
-                element: <PasswordSettings />,
-              },
-              {
-                path: '/settings/sessions',
-                element: <SessionsSettings />,
-              },
-            ],
           },
           {
             path: '/collection',

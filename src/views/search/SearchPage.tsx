@@ -1,53 +1,21 @@
 import { Link, NavLink, useSearchParams } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
-import { ResultItem, ResultListFromApi, ResultsListItem } from '../../models/results-list';
 import { FilterTag } from '../../components/Filters/FilterTag';
 import { SearchBar } from '../../components/Form/SearchBar';
-import axios from 'axios';
 import { useFilters } from '../../hooks/useFilters';
 import { Button } from '../../components/Buttons/Buttons';
 import { CtaSection } from '../../components/Sections/CtaSection';
 import { UserContext } from '../../context/UserContextProvider';
-
-const mapResultsFromApi = (result: ResultListFromApi): ResultsListItem[] => {
-  return result.records.map((resultItem: ResultItem) => {
-    return {
-      title: resultItem._primaryTitle,
-      id: resultItem.systemNumber,
-      author: resultItem._primaryMaker.name,
-      date: resultItem._primaryDate,
-      location: resultItem._primaryPlace,
-      imageId: resultItem._primaryImageId,
-    };
-  });
-};
+import { useResults } from '../../hooks/useResults';
 
 export const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
-  const [searchResults, setSearchResults] = useState<ResultsListItem[] | null>(null);
-  const [loading, setLoading] = useState(false);
-
   const { apiUrl, handleFilterClick, activeFilter, handleLoadMore } = useFilters(searchTerm);
   const { isLoggedIn } = useContext(UserContext);
-
-  // Api call
-  useEffect(() => {
-    const getResults = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get<ResultListFromApi>(apiUrl);
-        const mappedResults = mapResultsFromApi(response.data);
-        setSearchResults(mappedResults);
-      } catch (error) {
-        console.log('mal');
-      }
-    };
-    getResults();
-    setLoading(false);
-  }, [apiUrl]);
+  const { searchResults, loading } = useResults(apiUrl);
 
   if (loading) {
     return <div>Loading...</div>;

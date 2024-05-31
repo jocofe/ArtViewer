@@ -6,10 +6,17 @@
   justify-content: space-between;
 }
 
-.imgsetup-wrapper {
-  width: 100%;
-  height: 100vh;
-  background: url("../src/assets/noche-estrellada-van-gogh.jpg") lightgray 50% / cover no-repeat;
+.newuserpanel-wrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 6.4rem;
+}
+
+.imgnewuser-wrapper {
+  width: 50%;
+  height: 100%;
+  position: relative;
 }
 
 .info-wrapper {
@@ -205,7 +212,7 @@
     width: 100vw;
   }
 
-  .imgsetup-wrapper {
+  .imgnewuser-wrapper {
     display: none;
   }
 }

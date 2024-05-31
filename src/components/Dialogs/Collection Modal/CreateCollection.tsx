@@ -1,9 +1,5 @@
+import { NewCollection } from '../../../models/collection';
 import { Button } from '../../Buttons/Buttons';
-
-export interface NewCollection {
-  name: 'Name';
-  description: 'Description (optional)';
-}
 
 export const CreateCollection = ({ name, description }: NewCollection) => {
   return (

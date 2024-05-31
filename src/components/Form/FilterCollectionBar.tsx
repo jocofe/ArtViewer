@@ -1,12 +1,7 @@
 import classNames from 'classnames';
 import { SearchGlass } from '../Icons/icons';
 import { useState } from 'react';
-
-export interface FilterCollectionBarProps {
-  size: 'normal' | 'small';
-  placeholder: string;
-  onSearch: (searchTerm: string) => void; // Nueva prop onSearch
-}
+import { FilterCollectionBarProps } from '../../models/filters';
 
 export const FilterCollectionBar = ({ placeholder, size, onSearch }: FilterCollectionBarProps) => {
   const [searchTerm, setSearchTerm] = useState('');

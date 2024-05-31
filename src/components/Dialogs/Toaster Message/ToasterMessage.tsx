@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Close } from '../../Icons/icons';
-
-interface ToasterProps {
-  message: string;
-  onClose: () => void;
-  time?: number;
-}
+import { ToasterProps } from '../../../models/toaster';
 
 export const Toaster = ({ message, time = 3000, onClose }: ToasterProps) => {
   const [isActive, setIsActive] = useState(false);

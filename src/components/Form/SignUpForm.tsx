@@ -5,20 +5,10 @@ import { db } from '../../config/config';
 import { doc, setDoc } from 'firebase/firestore';
 import { ArrowLeft } from '../Icons/icons';
 import { Button } from '../Buttons/Buttons';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { PASSWORD_MIN_LENGTH, validateEmail, validatePasswordLength } from '../../utils/validation';
 import { TermsCheckbox } from '../TermsCheckbox/TermsCheckbox';
-
-interface Error {
-  code: string;
-  message: string;
-}
-
-interface FormInputs {
-  name: string;
-  email: string;
-  password: string;
-}
+import { FormInputs, FirebaseError } from '../../models/forms';
 
 export const SignUpForm = () => {
   const navigate = useNavigate();
@@ -44,12 +34,15 @@ export const SignUpForm = () => {
       const user = userCredential.user;
       const userEmail = user.email;
 
+      // Actualiza el perfil del usuario para establecer el displayName
+      await updateProfile(user, { displayName: name });
+
       if (userEmail) {
         const userRef = doc(db, 'users', userEmail);
         await setDoc(userRef, {
           id: user.uid,
           email: userEmail,
-          name,
+          name: user.displayName,
           provider: 'manual-register',
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -60,11 +53,11 @@ export const SignUpForm = () => {
         setErrorMessage('Unknown error occurred');
       }
     } catch (error) {
-      const errorCode = (error as Error).code;
-      if (errorCode === 'auth/email-already-in-use') {
-        setErrorMessage('Email has alredy been taken');
+      const firebaseError = error as FirebaseError;
+      if (firebaseError.code === 'auth/email-already-in-use') {
+        setErrorMessage('Email has already been taken');
       } else {
-        setErrorMessage(`Error adding user data to Firestore: ${(error as Error).message}`);
+        setErrorMessage(`Error adding user data to Firestore: ${firebaseError.message}`);
       }
     }
     setIsSubmitting(false);

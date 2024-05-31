@@ -1,0 +1,42 @@
+/* User settings menu */
+.settings-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 64px;
+}
+
+.settings-menu-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  width: 550px;
+}
+
+.profile-wrapper {
+  display: flex;
+  gap: 64px;
+}
+
+.profile-picture-settings {
+  width: 64px;
+  height: 64px;
+  border-radius: 100px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile__general {
+  color: var(--color-blackout-light);
+}
+
+.user-settings {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}

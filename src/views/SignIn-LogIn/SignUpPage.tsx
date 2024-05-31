@@ -1,17 +1,34 @@
 import { SignGoogle } from '../../features/authentication/SignGoogle';
 import { useState } from 'react';
 import { SignUpForm } from '../../components/Form/SignUpForm';
+import { useGetRandomImgApi } from '../../hooks/useGetRandomImgApi';
+import { Link } from 'react-router-dom';
 
 export const SignUpPage = () => {
+  const apiUrl =
+    'https://api.vam.ac.uk/v2/objects/search?q=oil%20canvas&min_length=2&max_length=16&images_exist=true&order_sort=asc&page=1&page_size=15&cluster_size=20&images=false&random=false';
+  const { imageId, loading, systemNumber } = useGetRandomImgApi(apiUrl);
   const [showForm, setShowForm] = useState(false);
-
   const handleShowForm = () => {
     setShowForm(true);
   };
 
   return (
     <div className="sign-up-page">
-      <div className="sign-up-page__img"></div>
+      {!loading && imageId && (
+        <div
+          className={`imgsign-wrapper`}
+          key={imageId}
+          style={{
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'auto',
+            backgroundImage: `url(https://framemark.vam.ac.uk/collections/${imageId}/full/full/0/default.jpg)`,
+          }}
+        >
+          {loading ? <div>Loading...</div> : null}
+          <Link className="expanded-anchor" to={`/art-piece/${systemNumber}`}></Link>
+        </div>
+      )}
       <div className={`sign-up-page__content ${showForm ? 'hidden' : ''}`}>
         <h4 className="h4--bold sign-up-page__title">Sign Up to ArtViewer</h4>
         <SignGoogle className="sign-google--white" label="Sign Up With Google" />

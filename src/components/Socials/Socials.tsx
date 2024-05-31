@@ -4,7 +4,7 @@ import { ModalDefault } from '../Dialogs/ModalDefault';
 import { AddCollectionModal } from '../Dialogs/Collection Modal/AddCollection';
 import { CollectionUser } from '../../models/collection';
 import { UserContext } from '../../context/UserContextProvider';
-import { useLikes } from '../Likes/LikesContext';
+import { useLikes } from '../../hooks/useLikes';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../config/config';
 import { SocialProps } from '../../models/socials';
@@ -90,7 +90,7 @@ export const Socials = ({
         setIsLinkCopied(true);
         setTimeout(() => {
           setIsLinkCopied(false);
-        }, 3000); // Duración del mensaje en milisegundos
+        }, 3000);
       })
       .catch(error => {
         console.error('Error copying link:', error);

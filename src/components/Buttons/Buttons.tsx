@@ -8,6 +8,7 @@ export const Button = ({
   size = 'medium',
   disabled,
   color = 'primary',
+  type = 'button',
   children,
   onClick,
   ...rest
@@ -22,7 +23,7 @@ export const Button = ({
 
   const Component = component;
   return (
-    <Component className={btnClass} disabled={disabled} onClick={onClick} {...rest}>
+    <Component className={btnClass} type={type} disabled={disabled} onClick={onClick} {...rest}>
       {children}
     </Component>
   );
