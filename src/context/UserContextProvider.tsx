@@ -14,7 +14,6 @@ import { UserSessions } from '../models/userSessions';
 
 export interface UserData {
   picture: string | null;
-  photoURL: string | null;
   location: string;
   name: string | null;
   email: string;
@@ -92,7 +91,7 @@ export const UserContextProviderFirebase = ({ children }: UserContextProviderFir
   }, []);
 
   const updateUserProfilePhoto = (newPhotoURL: string | null) => {
-    setUserData((prevData) => prevData ? { ...prevData, photoURL: newPhotoURL } : prevData);
+    setUserData((prevData) => prevData ? { ...prevData, picture: newPhotoURL } : prevData);
   };
 
   const updateUserProfileName = (newName: string) => {

@@ -33,7 +33,7 @@ export const ProfileSettings = () => {
       const url = await getDownloadURL(storageRef);
       if ( userData?.email) {
         const userDocRef = doc(db, 'users', userData.email);
-        await updateDoc(userDocRef, { photoURL: url }); // Actualizar el estado en el context
+        await updateDoc(userDocRef, { picture: url }); // Actualizar el estado en el context
         updateUserProfilePhoto(url) // Actualiza la imagen que se muestra
       }
     }
@@ -55,8 +55,8 @@ export const ProfileSettings = () => {
         }
       }
 
-      // Actualizar el documento del usuario en Firestore para establecer photoURL en null
-      await updateDoc(userDocRef, { photoURL: null });
+      // Actualizar el documento del usuario en Firestore para establecer picture en null
+      await updateDoc(userDocRef, { picture: null });
 
       // Actualizar el estado y el contexto
       updateUserProfilePhoto(null);
@@ -64,8 +64,7 @@ export const ProfileSettings = () => {
     }
   };;
 
-  const handleSubmitChanges = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSaveChanges = async () => {
     if (userData?.email) {
       const userDocRef = doc(db, 'users', userData.email);
       await updateDoc(userDocRef, { name, location });
@@ -76,46 +75,44 @@ export const ProfileSettings = () => {
   };
 
   return (
-    <>
-      <form className="settings" onSubmit={handleSubmitChanges}>
-        <div className="settings-picture">
-          <div className="profile-picture-settings">
-          {picture && picture !== 'default' ? (
-              <img src={picture} alt="User Profile" className="profilecard-image" />
-            ) : (
-              <div className="profile-picture-settings">
-                <DefaultAvatar />
-              </div>
-            )}
-          </div>
-          <Button color="sub_primary" onClick={handleChooseBtnClick}>Upload new picture</Button>
-          <input
-            type="file"
-            ref={fileInputRef}
-            style={{ display: 'none' }}
-            onChange={handleFileChange}
-            accept="image/*"
-          />
-          <Button color="sub_primary" onClick={handleFileDelete}>Delete</Button>
+    <div className="settings">
+      <div className="settings-picture">
+        <div className="profile-picture-settings">
+        {picture && picture !== 'default' ? (
+            <img src={picture} alt="User Profile" className="profilecard-image" />
+          ) : (
+            <div className="profile-picture-settings">
+              <DefaultAvatar />
+            </div>
+          )}
         </div>
-        <p>Name</p>
+        <Button color="sub_primary" onClick={handleChooseBtnClick}>Upload new picture</Button>
         <input
-          type="text"
-          placeholder="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          type="file"
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+          accept="image/*"
         />
-        <p>Location</p>
-        <input
-          type="text"
-          placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        <div className="settings-btn">
-          <Button size="small" type="submit">Save changes</Button>
-        </div>
-      </form>
-    </>
+        <Button color="sub_primary" onClick={handleFileDelete}>Delete</Button>
+      </div>
+      <p>Name</p>
+      <input
+        type="text"
+        placeholder="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <p>Location</p>
+      <input
+        type="text"
+        placeholder="Location"
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
+      />
+      <div className="settings-btn">
+        <Button size="small" onClick={handleSaveChanges}>Save changes</Button>
+      </div>
+    </div>
   );
 };
