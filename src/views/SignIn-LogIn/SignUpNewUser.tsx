@@ -6,12 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { IconLogotype, Logotype } from '../../components/Icons/icons';
 import { Button } from '../../components/Buttons/Buttons';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-
-interface FormInputs {
-  username: string;
-  location: string;
-  picture: string;
-}
+import { FormNewUserInputs } from '../../models/forms';
 
 export const SignUpNewUser = () => {
   const navigate = useNavigate();
@@ -19,7 +14,7 @@ export const SignUpNewUser = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputs>();
+  } = useForm<FormNewUserInputs>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const [userUploadedAvatar, setUserUploadedAvatar] = useState<string | null>(null);
@@ -46,7 +41,7 @@ export const SignUpNewUser = () => {
     };
   }, []);
 
-  const onSubmit: SubmitHandler<FormInputs> = async data => {
+  const onSubmit: SubmitHandler<FormNewUserInputs> = async data => {
     setIsSubmitting(true);
     try {
       const user = auth.currentUser;

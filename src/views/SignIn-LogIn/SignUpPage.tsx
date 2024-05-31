@@ -4,7 +4,6 @@ import { SignUpForm } from '../../components/Form/SignUpForm';
 
 export const SignUpPage = () => {
   const [showForm, setShowForm] = useState(false);
-
   const handleShowForm = () => {
     setShowForm(true);
   };

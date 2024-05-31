@@ -1,19 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
-import { doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { useContext, useState } from 'react';
+import { doc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { db } from '../../config/config';
 import { Button } from '../../components/Buttons/Buttons';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
-import { Collection } from '../../models/collection';
 import { UserContext } from '../../context/UserContextProvider';
 import { useParams } from 'react-router-dom';
 import { ModalDefault } from '../../components/Dialogs/ModalDefault';
 import { Navigate } from 'react-router-dom';
+import { useFetchCollection } from '../../hooks/useFetchCollection';
 
 export const UserCollection = () => {
   const { userData } = useContext(UserContext);
   const username = userData?.username;
-  const [collectionData, setCollectionData] = useState<Collection | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [newName, setNewName] = useState('');
@@ -21,26 +20,7 @@ export const UserCollection = () => {
   const { collectionId } = useParams<{ collectionId: string }>();
   const [collectionDeleted, setCollectionDeleted] = useState(false);
 
-  useEffect(() => {
-    if (userData && collectionId) {
-      const fetchCollection = async () => {
-        try {
-          const collectionDoc = await getDoc(doc(db, `users/${userData.email}/collections/${collectionId}`));
-          if (collectionDoc.exists()) {
-            setCollectionData({ id: collectionDoc.id, ...collectionDoc.data() } as Collection);
-            setNewName(collectionDoc.data().name);
-            setNewDescription(collectionDoc.data().description);
-          } else {
-            console.error('No collection found');
-          }
-        } catch (error) {
-          console.error('Error fetching collection data:', error);
-        }
-      };
-
-      fetchCollection();
-    }
-  }, [userData, collectionId]);
+  const collectionData = useFetchCollection();
 
   const handleEditCollection = () => {
     setShowEditModal(true);
@@ -73,12 +53,8 @@ export const UserCollection = () => {
         description: newDescription,
       });
       setShowEditModal(false);
-      setCollectionData(prevState => {
-        if (prevState) {
-          return { ...prevState, name: newName, description: newDescription };
-        }
-        return null;
-      });
+      setNewName(newName);
+      setNewDescription(newDescription);
     } catch (error) {
       console.error('Error updating collection:', error);
     }
