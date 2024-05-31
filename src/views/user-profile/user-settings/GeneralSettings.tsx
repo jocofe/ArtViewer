@@ -4,13 +4,14 @@ import { UserContext } from "../../../context/UserContextProvider";
 import { auth, db } from "../../../config/config";
 import { doc, updateDoc } from "firebase/firestore";
 import { updateEmail } from "firebase/auth";
+import { useClearsMessage } from "../../../hooks/useClearMessage";
 
 export const GeneralSettings = () => {
   const { userData } = useContext(UserContext);
+  const { message, setMessage, error, setError } = useClearsMessage();
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState<string | null>(null);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     if (userData) {
@@ -22,7 +23,6 @@ export const GeneralSettings = () => {
 
   const handleSubmitChanges = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setMessage(null); // Reset the message
     const user = auth.currentUser;
     if (user && user.email) {
       const userEmail = user.email;
@@ -31,7 +31,7 @@ export const GeneralSettings = () => {
         const userDocRef = doc(db, 'users', userEmail);
 
         await updateDoc(userDocRef, {
-          name: username,
+          username: username,
           email: email,
         });
 
@@ -72,7 +72,7 @@ export const GeneralSettings = () => {
           <p className="settings-message">{message}</p>
         )}
         {error && !message && (
-          <p className="settings-message">{error}</p>
+          <p className="settings-error">{error}</p>
         )}
       </form>
     </>
