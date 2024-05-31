@@ -1,4 +1,4 @@
-import { ArtArtistDetails, ArtArtistFromApi, ArtArtistItem } from '../models/art-list';
+import { ArtArtistDetails, ArtArtistFromApi, ArtArtistItem } from '../../models/art-list';
 
 export const mapArtApiToArtView = (art: ArtArtistFromApi): ArtArtistItem[] => {
   return art.records.map((artArtist: ArtArtistDetails) => {

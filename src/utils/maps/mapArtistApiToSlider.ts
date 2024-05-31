@@ -1,5 +1,5 @@
-import { ArtistItem, ArtistSliderItem, ArtistSliderItemFromApi } from '../models/artist-slider';
-import { formatAuthorName } from './format-author-name';
+import { ArtistItem, ArtistSliderItem, ArtistSliderItemFromApi } from '../../models/artist-slider';
+import { formatAuthorName } from '../format-author-name';
 
 export const mapArtistApiToSlider = (artist: ArtistSliderItemFromApi): ArtistSliderItem[] => {
   const arrayMapping: Record<string, boolean> = {};

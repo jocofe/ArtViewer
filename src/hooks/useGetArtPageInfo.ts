@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { ArtArtistItem, ArtObjectDetails } from '../models/art-list';
-import { mapArtApiToArtView } from '../utils/mapArtApiToArtView';
-import { mapArtObjectApiToArtObject } from '../utils/mapArtObjectApiToArtObject';
+import { mapArtApiToArtView } from '../utils/maps/mapArtApiToArtView';
+import { mapArtObjectApiToArtObject } from '../utils/maps/mapArtObjectApiToArtObject';
 
 export const useGetArtPageInfo = () => {
   const { artId } = useParams();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { mapArtistApiToSlider } from '../utils/mapArtistApiToSlider';
+import { mapArtistApiToSlider } from '../utils/maps/mapArtistApiToSlider';
 import { ArtistSliderItem, ArtistSliderItemFromApi } from '../models/artist-slider';
 
 export const useFetchArtists = (initialPage: number = 1, pageSize: number = 10) => {
