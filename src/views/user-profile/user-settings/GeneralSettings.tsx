@@ -19,7 +19,8 @@ export const GeneralSettings = () => {
   }, [userData]);
 
 
-  const handleSaveChanges = async () => {
+  const handleSubmitChanges = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setMessage(null); // Reset the message
     const user = auth.currentUser;
     if (user && user.email) {
@@ -47,7 +48,8 @@ export const GeneralSettings = () => {
   };
 
   return (
-    <div className="settings">
+    <>
+      <form onSubmit={handleSubmitChanges} className="settings">
         <p>Username</p>
         <input 
           type="text"
@@ -63,9 +65,10 @@ export const GeneralSettings = () => {
           onChange={(event) => setEmail(event.target.value)}
         />
       <div className="settings-btn">
-        <Button size="small" onClick={handleSaveChanges}>Save changes</Button>
+        <Button size="small" type="submit">Save changes</Button>
       </div>
+      </form>
       {message && <p>{message}</p>}
-    </div>
+    </>
   );
 };

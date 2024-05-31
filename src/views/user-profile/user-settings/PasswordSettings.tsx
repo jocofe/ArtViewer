@@ -37,7 +37,7 @@ export const PasswordSettings = () => {
   };
 
   return (
-    <div>
+    <>
       <form onSubmit={handleChangePassword} className="settings">
         <p>Old password</p>
         <input type="password" value={oldPassword} onChange={event => setOldPassword(event.target.value)} />
@@ -50,6 +50,6 @@ export const PasswordSettings = () => {
           </Button>
         </div>
       </form>
-    </div>
+    </>
   );
 };

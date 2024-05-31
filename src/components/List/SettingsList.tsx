@@ -28,13 +28,9 @@ export const SettingsList = () => {
     setShowModal(false);
   };
 
-  // Handle delete account for button in modal
-  const handleDeleteAccount = () => {
-    deleteAccount();
-  };
 
   // Delete account logic
-  const deleteAccount = async () => {
+  const handleDeleteAccount = async () => {
     try {
       const user = auth.currentUser;
       if (user) {
