@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useClearsMessage = (timeout = 3000) => { // Set time (3sec)
+export const useClearsMessage = (timeout = 9000) => { // Set time (3sec)
   const [message, setMessage] = useState<string>('');
   const [error, setError] = useState<string>('');
 

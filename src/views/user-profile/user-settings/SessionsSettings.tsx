@@ -3,11 +3,12 @@ import { UserContext } from "../../../context/UserContextProvider";
 import { UserSessions } from "../../../models/userSessions";
 import { closeSession, getUserLoginSessions } from "../../../components/Services/sessions";
 import { parseUserAgent } from "../../../components/Services/userAgentParser";
+import { useClearsMessage } from "../../../hooks/useClearMessage";
 
 export const SessionsSettings = () => {
   const { userData } = useContext(UserContext);
   const [sessions, setSessions] = useState<UserSessions[]>([]);
-  const [message, setMessage] = useState<string | null>(null);
+  const { message, setMessage } = useClearsMessage();
   
   useEffect(() => {
     const fetchSessions = async () => {
@@ -25,7 +26,7 @@ export const SessionsSettings = () => {
   }, [userData]);
 
   const handleCloseSession = async (sessionId: string) => {
-    setMessage(null);
+    setMessage('');
     if (userData?.email) {
       try {
         await closeSession(userData.email, sessionId);

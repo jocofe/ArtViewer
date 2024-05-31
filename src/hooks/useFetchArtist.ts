@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { mapArtistApiToSlider } from '../utils/maps/mapArtistApiToSlider';
 import { ArtistSliderItem, ArtistSliderItemFromApi } from '../models/artist-slider';
+import { useClearsMessage } from './useClearMessage';
 
 export const useFetchArtists = (initialPage: number = 1, pageSize: number = 10) => {
+  const {error, setError } = useClearsMessage();
   const [artist, setArtist] = useState<ArtistSliderItem[]>([]);
-  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {

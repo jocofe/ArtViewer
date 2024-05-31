@@ -2,14 +2,16 @@ import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/config';
 import { ChangeEvent, FormEvent } from 'react';
+import { useClearsMessage } from '../../hooks/useClearMessage';
 
 export const useSignUp = () => {
+  const { error, setError } = useClearsMessage();
+  
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const [error, setError] = useState<null | string>(null);
 
   const handleNameInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
