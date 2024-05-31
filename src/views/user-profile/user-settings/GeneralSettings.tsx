@@ -10,6 +10,7 @@ export const GeneralSettings = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState<string | null>(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (userData) {
@@ -39,10 +40,10 @@ export const GeneralSettings = () => {
           await updateEmail(user, email);
         }
 
-        setMessage('Changes saved successfully');
+        setMessage('Your changes have been succesfully saved!');
       } catch (error) {
         console.error('Error updating user data:', error);
-        setMessage('Failed to save changes');
+        setError('Failed to save changes');
       }
     }
   };
@@ -64,11 +65,16 @@ export const GeneralSettings = () => {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-      <div className="settings-btn">
-        <Button size="small" type="submit">Save changes</Button>
-      </div>
+        <div className="settings-btn">
+          <Button size="small" type="submit">Save changes</Button>
+        </div>
+        {message && !error && ( 
+          <p className="settings-message">{message}</p>
+        )}
+        {error && !message && (
+          <p className="settings-message">{error}</p>
+        )}
       </form>
-      {message && <p>{message}</p>}
     </>
   );
 };
