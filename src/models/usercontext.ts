@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Collection } from './collection';
-import { UserSessions } from './userSessions';
+import { UserSessionsProps } from './userSessions';
 
 export interface UserContextProviderFirebaseProps {
   children: ReactNode;
@@ -11,7 +11,7 @@ export interface UserContextType {
   userData: UserData | null;
   updateUserProfilePhoto: (newPhotoURL: string | null) => void; // Nuevo método
   updateUserProfileName: (newName: string) => void;
-  getUserLoginSessions: (userEmail: string) => Promise<UserSessions[]>;
+  getUserLoginSessions: (userEmail: string) => Promise<UserSessionsProps[]>;
 }
 
 export interface UserData {

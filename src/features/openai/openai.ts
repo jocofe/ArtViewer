@@ -7,7 +7,7 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-export const generateArtworkDescription = async (imageId: string, author: string, title: string): Promise<string> => {
+export const generateArtworkDescription = async (imageId: string, author?: string, title?: string): Promise<string> => {
   const prompt = `Write a detailed description with a maximum of three hundred words and with an end point of the work with ID: \n\n${imageId}\n\n on the V&A museum page. If you can't provide me information, try make a description with the \n\n${title}\n\n of the art piece or the \n\n${author}\n\n. I want just the description, without title, subtitles or the ID in text, this description will show in a app web and must be serious.`;
 
   try {
