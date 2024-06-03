@@ -4,37 +4,12 @@ import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 import 'firebase/auth';
 import { UserContextProviderFirebaseProps } from '../models/usercontext';
 import { Collection } from '../models/collection';
-
-interface UserContextType {
-  isLoggedIn: boolean;
-  userData: UserData | null;
-}
 import { registerLoginSession, getUserLoginSessions } from '../components/Services/sessions';
-import { UserSessions } from '../models/userSessions';
+import { UserData, UserContextType } from '../models/usercontext';
 
-export interface UserData {
-  picture: string | null;
-  photoURL: string | null;
-  location: string;
-  name: string | null;
-  email: string;
-  displayName: string;
-  username: string;
-  collections?: Collection[];
-}
-
-// Context del usuario
-interface UserContextType {
-  isLoggedIn: boolean;
-  userData: UserData | null;
-  updateUserProfilePhoto: (newPhotoURL: string | null) => void; // Nuevo método
-  updateUserProfileName: (newName: string) => void;
-  getUserLoginSessions: (userEmail: string) => Promise<UserSessions[]>
-}
-
-export const UserContext = createContext<UserContextType>({ 
-  isLoggedIn: false, 
-  userData: null, 
+export const UserContext = createContext<UserContextType>({
+  isLoggedIn: false,
+  userData: null,
   updateUserProfilePhoto: () => {},
   updateUserProfileName: () => {},
   getUserLoginSessions: async () => [],
@@ -48,13 +23,15 @@ export const UserContextProviderFirebase = ({ children }: UserContextProviderFir
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async user => { // Listen to changes on auth state
+    const unsubscribe = auth.onAuthStateChanged(async user => {
+      // Listen to changes on auth state
       const loggedIn = !!user;
       setIsLoggedIn(loggedIn);
 
       localStorage.setItem('isLoggedIn', String(loggedIn));
 
-      if (user) { // If user is logged in obtain info from firestore
+      if (user) {
+        // If user is logged in obtain info from firestore
         const userEmail = user.email;
         if (userEmail) {
           try {
@@ -92,21 +69,23 @@ export const UserContextProviderFirebase = ({ children }: UserContextProviderFir
   }, []);
 
   const updateUserProfilePhoto = (newPhotoURL: string | null) => {
-    setUserData((prevData) => prevData ? { ...prevData, photoURL: newPhotoURL } : prevData);
+    setUserData(prevData => (prevData ? { ...prevData, photoURL: newPhotoURL } : prevData));
   };
 
   const updateUserProfileName = (newName: string) => {
-    setUserData((prevData) => prevData ? { ...prevData, name: newName } : prevData);
+    setUserData(prevData => (prevData ? { ...prevData, name: newName } : prevData));
   };
 
   return (
-    <UserContext.Provider value={{
-      isLoggedIn,
-      userData,
-      updateUserProfilePhoto,
-      updateUserProfileName,
-      getUserLoginSessions
-    }}>
+    <UserContext.Provider
+      value={{
+        isLoggedIn,
+        userData,
+        updateUserProfilePhoto,
+        updateUserProfileName,
+        getUserLoginSessions,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
