@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArtistCard } from './ArtistCard';
 import useArtistCarousel from '../../hooks/useArtistCarousel';
@@ -7,52 +7,64 @@ export const ArtistCarousel = () => {
   const { artists, error, isLoading } = useArtistCarousel();
   const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number | null>(null);
-  const speed = 0.1; // Velocidad del desplazamiento
-  let position = 0;
-  let isPaused = false;
+  const [isPaused, setIsPaused] = useState(false);
+  const speed = 0.25;
+  const positionRef = useRef(0); // Ref para almacenar la posición
+
+  let startX = 0;
+  let currentX = 0;
 
   const handleMouseEnter = () => {
-    isPaused = true;
-    cancelAnimationFrame(animationRef.current!);
-    animationRef.current = null;
+    setIsPaused(true);
   };
 
   const handleMouseLeave = () => {
-    isPaused = false;
-    animateScroll();
+    setIsPaused(false);
   };
 
-  const animateScroll = () => {
-    const track = trackRef.current;
-    const container = containerRef.current;
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    startX = e.touches[0].clientX;
+  };
 
-    if (!track || !container || isPaused) return;
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    currentX = e.touches[0].clientX;
+  };
 
-    position += speed;
+  const handleTouchEnd = () => {
+    const diff = startX - currentX;
 
-    if (position >= track.scrollWidth - container.offsetWidth) {
-      position = 0;
-      const firstElement = track.children[0] as HTMLElement;
-      track.appendChild(firstElement.cloneNode(true));
-      track.removeChild(firstElement);
+    if (diff > 50) {
+      // Swipe right
+      positionRef.current += 100;
+    } else if (diff < -50) {
+      // Swipe left
+      positionRef.current -= 100;
     }
 
-    track.style.transform = `translateX(-${position}px)`;
+    if (positionRef.current < 0) {
+      positionRef.current = 0;
+    } else if (positionRef.current > trackRef.current!.scrollWidth - containerRef.current!.offsetWidth) {
+      positionRef.current = trackRef.current!.scrollWidth - containerRef.current!.offsetWidth;
+    }
 
-    animationRef.current = requestAnimationFrame(animateScroll);
+    trackRef.current!.style.transform = `translateX(-${positionRef.current}px)`;
   };
 
-  // Llamar a animateScroll aquí para iniciar el bucle de animación
-  animateScroll();
-
   useEffect(() => {
-    return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, []);
+    if (!isPaused) {
+      const timer = setInterval(() => {
+        positionRef.current += speed;
+
+        if (positionRef.current > trackRef.current!.scrollWidth - containerRef.current!.offsetWidth) {
+          positionRef.current = 0;
+        }
+
+        trackRef.current!.style.transform = `translateX(-${positionRef.current}px)`;
+      }, 100);
+
+      return () => clearInterval(timer);
+    }
+  }, [isPaused]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
@@ -63,6 +75,9 @@ export const ArtistCarousel = () => {
       ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       <div className="carousel__track" ref={trackRef}>
         {artists.map((artistItem, index) => (

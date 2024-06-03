@@ -82,7 +82,12 @@ export const Socials = ({
   };
 
   const copyArtworkLink = () => {
-    const baseUrl = location.origin;
+    if (!navigator.clipboard) {
+      console.error('Clipboard API not supported');
+      return;
+    }
+
+    const baseUrl = window.location.origin;
     const copiedUrl = `${baseUrl}/art-piece/${artPieceId}`;
     navigator.clipboard
       .writeText(copiedUrl)
@@ -100,11 +105,15 @@ export const Socials = ({
   return (
     <>
       <div className="socials-wrapper">
-        <i onClick={copyArtworkLink}>
+        <div onClick={copyArtworkLink} className="icon-wrapper">
           <CopyLink className="icon" />
-        </i>
-        <i onClick={handleSaved}>{isOnSaved ? <FullBookmark className="icon" /> : <Bookmark className="icon" />}</i>
-        <i onClick={handleFav}>{isFavourite ? <FullHeart className="icon" /> : <Heart className="icon" />}</i>
+        </div>
+        <div onClick={handleSaved} className="icon-wrapper">
+          {isOnSaved ? <FullBookmark className="icon" /> : <Bookmark className="icon" />}
+        </div>
+        <div onClick={handleFav} className="icon-wrapper">
+          {isFavourite ? <FullHeart className="icon" /> : <Heart className="icon" />}
+        </div>
       </div>
       {isLinkCopied && <Toaster message="Copied Link!" onClose={() => setIsLinkCopied(false)} />}
       {isLoggedIn ? (
