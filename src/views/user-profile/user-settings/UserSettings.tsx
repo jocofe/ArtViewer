@@ -24,16 +24,16 @@ export const UserSettings = () => {
   useEffect(() => {
     const path = location.pathname.split('/').pop();
     switch (path) {
-      case 'profile':
+      case 'Profile':
         setDescription('Update your username and manage your email account');
         break;
-      case 'general':
+      case 'General':
         setDescription('Set up your profile information');
         break;
-      case 'password':
+      case 'Password':
         setDescription('Manage your password');
         break;
-      case 'sessions':
+      case 'Sessions':
         setDescription('Manage your sessions');
         break;
       default:
@@ -44,7 +44,7 @@ export const UserSettings = () => {
   return (
     <div className="settings-wrapper">
       <div className="settings-menu-wrapper">
-        <div className="profile-wrapper">
+        <div className="profile-wrapper-settings">
           <div className="profile-picture-settings">
             {picture && picture !== 'default' ? (
               <img src={picture} alt="User Profile" className="profilecard-image" />

@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ModalDefault } from '../Dialogs/ModalDefault';
 import { Button } from '../Buttons/Buttons';
 import { auth, db } from '../../config/config';
 import { doc, deleteDoc, getDoc } from 'firebase/firestore';
 import { UserContext } from '../../context/UserContextProvider';
-import { useContext, useEffect } from 'react';
+import { ArrowDown } from '../Icons/icons';
 
 export const SettingsListMobile = () => {
   const location = useLocation();
@@ -14,6 +14,7 @@ export const SettingsListMobile = () => {
   const [showModal, setShowModal] = useState(false);
   const [provider, setProvider] = useState<string | null>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const menuRef = useRef<HTMLUListElement | null>(null);
 
   // Set selected link based on actual location
   useEffect(() => {
@@ -22,6 +23,7 @@ export const SettingsListMobile = () => {
 
   const handleLinkClick = (link: string) => {
     setSelectedLink(link);
+    setDropdownOpen(false); // Close menu when link is clicked
   };
 
   // Obtain provider from firebase
@@ -63,54 +65,78 @@ export const SettingsListMobile = () => {
     }
   };
 
+  // Dropdown menu btn
+  const settingMenu = () => {
+    setDropdownOpen(prevState => !prevState);
+  };
+
+  // Close menu if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    if (dropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownOpen]);
+
   return (
-    <div className="user__menu">
-      <button onClick={() => setDropdownOpen(!dropdownOpen)} className="dropdown-button">
-        Menu
+    <div className="user-mobile">
+      <button onClick={settingMenu} className="dropdown-btn-settings">
+        <div>{selectedLink}</div>
+        <div><ArrowDown/></div>
       </button>
       {dropdownOpen && (
-        <ul className="menu-list">
-          <li className="menu-list__item">
+        <ul ref={menuRef} className="menu-list-mobile">
+          <li className="menu-list-mobile__item">
             <Link
-              to={`general`}
-              className={selectedLink === 'general' ? 'active' : ''}
-              onClick={() => handleLinkClick('general')}
+              to={`General`}
+              className={selectedLink === 'General' ? 'active' : ''}
+              onClick={() => handleLinkClick('General')}
             >
               General
             </Link>
           </li>
-          <li className="menu-list__item">
+          <li className="menu-list-mobile__item">
             <Link
-              to={`profile`}
-              className={selectedLink === 'profile' ? 'active' : ''}
-              onClick={() => handleLinkClick('profile')}
+              to={`Profile`}
+              className={selectedLink === 'Profile' ? 'active' : ''}
+              onClick={() => handleLinkClick('Profile')}
             >
-              Edit Profile
+              Profile
             </Link>
           </li>
           {provider !== 'google' && (
-            <li className="menu-list__item">
+            <li className="menu-list-mobile__item">
               <Link
-                to={`password`}
-                className={selectedLink === 'password' ? 'active' : ''}
-                onClick={() => handleLinkClick('password')}
+                to={`Password`}
+                className={selectedLink === 'Password' ? 'active' : ''}
+                onClick={() => handleLinkClick('Password')}
               >
                 Password
               </Link>
             </li>
           )}
-          <li className="menu-list__item">
+          <li className="menu-list-mobile__item">
             <Link
-              to={`sessions`}
-              className={selectedLink === 'sessions' ? 'active' : ''}
-              onClick={() => handleLinkClick('sessions')}
+              to={`Sessions`}
+              className={selectedLink === 'Sessions' ? 'active' : ''}
+              onClick={() => handleLinkClick('Sessions')}
             >
               Sessions
             </Link>
           </li>
         </ul>
       )}
-      <hr className="settings-hr" />
       <button onClick={handleShowModal} className="user__delete">
         Delete account
       </button>

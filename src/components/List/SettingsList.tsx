@@ -71,18 +71,18 @@ export const SettingsList = () => {
       <ul className="menu-list">
         <li className="menu-list__item">
           <Link
-            to={`general`}
-            className={selectedLink === 'general' ? 'active' : ''}
-            onClick={() => handleLinkClick('general')}
+            to={`General`}
+            className={selectedLink === 'General' ? 'active' : ''}
+            onClick={() => handleLinkClick('General')}
           >
             General
           </Link>
         </li>
         <li className="menu-list__item">
           <Link
-            to={`profile`}
-            className={selectedLink === 'profile' ? 'active' : ''}
-            onClick={() => handleLinkClick('profile')}
+            to={`Profile`}
+            className={selectedLink === 'Profile' ? 'active' : ''}
+            onClick={() => handleLinkClick('Profile')}
           >
             Edit Profile
           </Link>
@@ -90,9 +90,9 @@ export const SettingsList = () => {
         {provider !== 'google' && (
           <li className="menu-list__item">
             <Link
-              to={`password`}
-              className={selectedLink === 'password' ? 'active' : ''}
-              onClick={() => handleLinkClick('password')}
+              to={`Password`}
+              className={selectedLink === 'Password' ? 'active' : ''}
+              onClick={() => handleLinkClick('Password')}
             >
               Password
             </Link>
@@ -100,9 +100,9 @@ export const SettingsList = () => {
         )}
         <li className="menu-list__item">
           <Link
-            to={`sessions`}
-            className={selectedLink === 'sessions' ? 'active' : ''}
-            onClick={() => handleLinkClick('sessions')}
+            to={`Sessions`}
+            className={selectedLink === 'Sessions' ? 'active' : ''}
+            onClick={() => handleLinkClick('Sessions')}
           >
             Sessions
           </Link>

@@ -109,7 +109,7 @@ export const ProfileSettings = () => {
             </div>
           )}
         </div>
-        <Button color="sub_primary" onClick={handleChooseBtnClick}>Upload new picture</Button>
+        <Button color="sub_primary" size="small" onClick={handleChooseBtnClick}>Upload new picture</Button>
         <input
           type="file"
           ref={fileInputRef}
@@ -117,7 +117,7 @@ export const ProfileSettings = () => {
           onChange={handleFileChange}
           accept="image/*"
         />
-        <Button color="sub_primary" onClick={handleFileDelete}>Delete</Button>
+        <Button color="sub_primary" size="small" onClick={handleFileDelete}>Delete</Button>
       </div>
       <p>Name</p>
       <input

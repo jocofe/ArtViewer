@@ -54,6 +54,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 16px;
 }
 
 .sessions-btn {
@@ -72,8 +73,17 @@
 }
 
 .sessions-hr {
-    margin: 16px 0;
     width: 100%;
 }
 
+@media (max-width: 768px) {
+    .settings {
+        margin-left: 0px;
+        width: 100%;
+    }
 
+    .settings-btn {
+        display: flex;
+        justify-content: center;
+    }
+}
