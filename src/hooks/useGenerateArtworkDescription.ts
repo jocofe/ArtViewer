@@ -15,7 +15,7 @@ export const useGenerateArtworkDescription = (artTitle: string, imageId: string,
     };
 
     setDescriptionAsync();
-  }, [artTitle]);
+  }, [artTitle, author, imageId]);
 
   return description;
 };
