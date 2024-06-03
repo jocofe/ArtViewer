@@ -15,7 +15,7 @@ export const ArtistCarousel = () => {
       if (track && track.scrollLeft >= track.scrollWidth / 2) {
         track.scrollLeft = 0;
       } else if (track) {
-        track.scrollLeft += 1;
+        track.scrollLeft += 0.25; // Reduce the scroll increment for slower movement
       }
       animationFrameId = requestAnimationFrame(scroll);
     };

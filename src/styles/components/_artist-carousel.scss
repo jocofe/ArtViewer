@@ -1,14 +1,18 @@
 .carousel-container {
   position: relative;
   width: 100%;
-  margin: 0 auto;
-  z-index: 2;
   overflow: hidden;
 }
 
 .carousel__track {
   display: flex;
   gap: 32px;
+  width: max-content;
+  animation: scroll 100s linear infinite;
+}
+
+.carousel__track a {
+  flex: 0 0 auto;
 }
 
 .carousel-item {
@@ -17,7 +21,6 @@
   position: relative;
   overflow: hidden;
   border-radius: 5px;
-  margin-right: 32px;
 }
 
 .carousel-item__img {
@@ -45,4 +48,13 @@
 .carousel-item__author:hover {
   background-color: transparent;
   transition: 1.5s;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
