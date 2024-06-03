@@ -1,71 +1,94 @@
 /* Global settings styles */
 
 .settings {
-    width: 550px;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-left: 64px;
+
+  & input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid var(--color-blackout-light);
+    border-radius: 6px;
+    padding: 15px;
+  }
+
+  &-btn {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-    margin-left: 64px;
+    justify-content: flex-end;
+  }
 
-    & input {
-        width: 100%;
-        height: 48px;
-        border: 1px solid var(--color-blackout-light);
-        border-radius: 6px;
-        padding: 15px;
-    }
+  &-hr {
+    color: var(--color-blackout-light);
+    width: 100%;
+  }
+}
 
-    &-btn {
-        display: flex;
-        justify-content: flex-end;
-    }
+.settings-message {
+  color: var(--color-limegreen);
+}
 
-    &-hr {
-        color: var(--color-blackout-light);
-        width: 100%;
-    }
+.settings-error {
+  color: var(--color-redcream);
 }
 
 /* Profile Settings */
 
 .settings-picture {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 
 /* Sessions settings */
 
 .sessions-text {
-    font-size: var(--font-size-14);
-    color: var(--color-blackout-light);
+  font-size: var(--font-size-14);
+  color: var(--color-blackout-light);
 }
 
 .sessions-devices {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .sessions-btn {
-    border: none;
-    background-color: transparent;
-    color: var(--color-blackout);
+  border: none;
+  background-color: transparent;
+  color: var(--color-blackout);
 
-    &:not(:disabled) {
-        &:hover {
-            background-color: transparent;
-            color: var(--color-redcream);
-            border: none;
-        }
+  &:not(:disabled) {
+    &:hover {
+      background-color: transparent;
+      color: var(--color-redcream);
+      border: none;
     }
-    
+  }
 }
 
 .sessions-hr {
-    margin: 16px 0;
-    width: 100%;
+  width: 100%;
 }
 
+.sessions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
 
+@media (max-width: 768px) {
+  .settings {
+    margin-left: 0px;
+    width: 100%;
+  }
+
+  .settings-btn {
+    display: flex;
+    justify-content: center;
+  }
+}

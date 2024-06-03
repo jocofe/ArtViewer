@@ -1,14 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
 import { auth, db } from '../../config/config';
-import { doc, deleteDoc } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { doc, deleteDoc, getDoc } from 'firebase/firestore';
+import { useContext, useEffect, useState } from 'react';
 import { ModalDefault } from '../Dialogs/ModalDefault';
 import { Button } from '../Buttons/Buttons';
+import { UserContext } from '../../context/UserContextProvider';
 
 export const SettingsList = () => {
   const location = useLocation();
+  const { userData } = useContext(UserContext);
   const [selectedLink, setSelectedLink] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [provider, setProvider] = useState<string | null>(null);
+
 
   // Set selected link based on actual ubication
   useEffect(() => {
@@ -19,6 +23,25 @@ export const SettingsList = () => {
     setSelectedLink(link);
   };
 
+
+  // Obtain provider from firebase
+  useEffect(() => {
+    // Obtener el proveedor de autenticación del usuario desde Firestore
+    const fetchUserProvider = async () => {
+      if (userData) {
+        const userRef = doc(db, 'users', userData.email);
+        const userDoc = await getDoc(userRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setProvider(userData.provider);
+        }
+      }
+    };
+
+    fetchUserProvider();
+  }, [userData, SettingsList]);
+
+
   // Show and close delete account modal
   const handleShowModal = () => {
     setShowModal(true);
@@ -28,13 +51,9 @@ export const SettingsList = () => {
     setShowModal(false);
   };
 
-  // Handle delete account for button in modal
-  const handleDeleteAccount = () => {
-    deleteAccount();
-  };
 
   // Delete account logic
-  const deleteAccount = async () => {
+  const handleDeleteAccount = async () => {
     try {
       const user = auth.currentUser;
       if (user) {
@@ -50,39 +69,40 @@ export const SettingsList = () => {
   return (
     <div className="user__menu">
       <ul className="menu-list">
-        {}
         <li className="menu-list__item">
           <Link
-            to={`general`}
-            className={selectedLink === 'general' ? 'active' : ''}
-            onClick={() => handleLinkClick('general')}
+            to={`General`}
+            className={selectedLink === 'General' ? 'active' : ''}
+            onClick={() => handleLinkClick('General')}
           >
             General
           </Link>
         </li>
         <li className="menu-list__item">
           <Link
-            to={`profile`}
-            className={selectedLink === 'profile' ? 'active' : ''}
-            onClick={() => handleLinkClick('profile')}
+            to={`Profile`}
+            className={selectedLink === 'Profile' ? 'active' : ''}
+            onClick={() => handleLinkClick('Profile')}
           >
             Edit Profile
           </Link>
         </li>
+        {provider !== 'google' && (
+          <li className="menu-list__item">
+            <Link
+              to={`Password`}
+              className={selectedLink === 'Password' ? 'active' : ''}
+              onClick={() => handleLinkClick('Password')}
+            >
+              Password
+            </Link>
+          </li>
+        )}
         <li className="menu-list__item">
           <Link
-            to={`password`}
-            className={selectedLink === 'password' ? 'active' : ''}
-            onClick={() => handleLinkClick('password')}
-          >
-            Password
-          </Link>
-        </li>
-        <li className="menu-list__item">
-          <Link
-            to={`sessions`}
-            className={selectedLink === 'sessions' ? 'active' : ''}
-            onClick={() => handleLinkClick('sessions')}
+            to={`Sessions`}
+            className={selectedLink === 'Sessions' ? 'active' : ''}
+            onClick={() => handleLinkClick('Sessions')}
           >
             Sessions
           </Link>

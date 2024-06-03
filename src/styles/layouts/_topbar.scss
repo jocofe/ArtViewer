@@ -40,7 +40,8 @@
 }
 
 .profile-image {
-  border-radius: 100px;
-  height: inherit;
-  width: inherit;
+  border-radius: 60px;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }

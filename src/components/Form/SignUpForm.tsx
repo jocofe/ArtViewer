@@ -9,6 +9,7 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase
 import { PASSWORD_MIN_LENGTH, validateEmail, validatePasswordLength } from '../../utils/validation';
 import { TermsCheckbox } from '../TermsCheckbox/TermsCheckbox';
 import { FormInputs, FirebaseError } from '../../models/forms';
+import { useClearsMessage } from '../../hooks/useClearMessage';
 
 export const SignUpForm = () => {
   const navigate = useNavigate();
@@ -17,14 +18,15 @@ export const SignUpForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>();
+
+  const { error, setError } = useClearsMessage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const auth = getAuth();
 
   const onSubmit: SubmitHandler<FormInputs> = async data => {
     if (!termsAccepted) {
-      alert('Please accept the terms and conditions');
+      setError('Please accept the terms and conditions');
       return;
     }
     setIsSubmitting(true);
@@ -50,14 +52,14 @@ export const SignUpForm = () => {
         console.log('user data added to Firestore');
         navigate('/new-user');
       } else {
-        setErrorMessage('Unknown error occurred');
+        setError('Unknown error occurred');
       }
     } catch (error) {
       const firebaseError = error as FirebaseError;
       if (firebaseError.code === 'auth/email-already-in-use') {
-        setErrorMessage('Email has already been taken');
+        setError('Email has already been taken');
       } else {
-        setErrorMessage(`Error adding user data to Firestore: ${firebaseError.message}`);
+        setError(`Error adding user data to Firestore: ${firebaseError.message}`);
       }
     }
     setIsSubmitting(false);
@@ -67,7 +69,7 @@ export const SignUpForm = () => {
     <form onSubmit={handleSubmit(onSubmit)} className="sign-up-form">
       <ArrowLeft onClick={() => navigate(-1)} className="sign-up-form__back" />
       <h4>Sign up to ArtViewer</h4>
-      {errorMessage && <span className="error">{errorMessage}</span>}
+      {error && <span className="error">{error}</span>}
       {errors.name && <span className="error">{errors.name.message}</span>}
       {errors.password && <span className="error">{errors.password.message}</span>}
       <div>
