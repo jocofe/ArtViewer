@@ -7,8 +7,6 @@
 .carousel__track {
   display: flex;
   gap: 32px;
-  width: max-content;
-  animation: scroll 100s linear infinite;
 }
 
 .carousel__track a {
@@ -48,13 +46,4 @@
 .carousel-item__author:hover {
   background-color: transparent;
   transition: 1.5s;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
