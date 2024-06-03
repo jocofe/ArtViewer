@@ -1,5 +1,4 @@
 @import "global.styles";
-
 @import "components/searchbar";
 @import "components/colecction-checkbox";
 @import "components/default-avatar";
@@ -16,15 +15,14 @@
 @import "components/icons";
 @import "components/modal-default";
 @import "components/masonry";
-@import "components/artist-slider";
+@import "components/artist-carousel";
 @import "components/filter-tag";
 @import "components/tabs";
-@import 'components/mosaic-images';
-@import 'components/terms';
-@import 'components/typing-bar';
-@import 'components/toaster';
-@import 'components/settings-list';
-
+@import "components/mosaic-images";
+@import "components/terms";
+@import "components/typing-bar";
+@import "components/toaster";
+@import "components/settings-list";
 @import "layouts/footer";
 @import "layouts/home";
 @import "layouts/topbar";
@@ -32,14 +30,13 @@
 @import "layouts/profilepage";
 @import "layouts/signinpage";
 @import "layouts/signuppage";
-@import 'layouts/settings-menu';
-@import 'layouts/settings';
+@import "layouts/settings-menu";
+@import "layouts/settings";
 @import "layouts/artpage";
 @import "layouts/brandguideline";
 @import "layouts/newuser";
 @import "components/modal-default";
 @import "components/masonry";
-@import "components/artist-slider";
 @import "components/filter-tag";
 @import "components/tabs";
 @import "layouts/landing-page";
@@ -47,4 +44,4 @@
 @import "components/terms";
 @import "components/typing-bar";
 @import "components/toaster";
-@import 'layouts/landing-page';
+@import "layouts/landing-page";
