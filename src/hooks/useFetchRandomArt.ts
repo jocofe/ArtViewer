@@ -30,7 +30,19 @@ export const useFetchArt = (initialPage: number) => {
         const apiURL = `https://api.vam.ac.uk/v2/objects/search?q_object_type=drawing&order_sort=asc&page=${page}&page_size=15&images_exist=true`;
         const response = await axios.get<ArtListItemFromApi>(apiURL);
         const mappedArtList = mapArtApiToArtView(response.data);
-        setArtList(prevArtList => [...prevArtList, ...mappedArtList]);
+
+        // Si es la primera página, se reemplaza directamente el estado con la nueva lista
+        if (page === 1) {
+          setArtList(mappedArtList);
+        } else {
+          // Para las páginas siguientes, se agregan solo las nuevas obras
+          setArtList(prevArtList => {
+            const newArtList = mappedArtList.filter(
+              newArtItem => !prevArtList.some(existingArtItem => existingArtItem.id === newArtItem.id),
+            );
+            return [...prevArtList, ...newArtList];
+          });
+        }
       } catch (err) {
         setError('Failed to fetch art data');
       } finally {
