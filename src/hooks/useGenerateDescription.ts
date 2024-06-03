@@ -11,9 +11,9 @@ const useGenerateDescription = () => {
   const [description, setDescription] = useState('');
 
   useEffect(() => {
-    const generateDescription = async (title: string) => {
+    const generateDescription = async (title: string, author: string, imageId: string) => {
       try {
-        const description = await generateArtworkDescription(title);
+        const description = await generateArtworkDescription(title, author, imageId);
         setDescription(description);
         const artworkRef = doc(db, 'artworks', artDetailsInfo.id);
         await setDoc(artworkRef, {
@@ -37,7 +37,7 @@ const useGenerateDescription = () => {
           const artworkData = artworkSnapshot.data();
           setDescription(artworkData.description);
         }
-        generateDescription(artDetailsInfo.title);
+        generateDescription(artDetailsInfo.title, artDetailsInfo.artist, artDetailsInfo.imageId);
       } catch (error) {
         console.error('Error generating or retrieving artwork description:', error);
       }
