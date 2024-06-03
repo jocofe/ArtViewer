@@ -62,7 +62,7 @@ export const ArtPage = () => {
           className="art-visualizer"
         />
         <div className="artpiece-info-wrapper">
-          <h1 className="art__title">{artDetailsInfo.title}</h1>
+          <h1 className="art__title">{artDetailsInfo.title !== '' ? artDetailsInfo.title : 'Unknown title'}</h1>
           <div className="artpiece__properties">
             <h3 className="artpiece__artist">{artDetailsInfo.artist}</h3>
             <p className="artpiece__date">{artDetailsInfo.date}</p>

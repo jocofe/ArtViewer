@@ -23,7 +23,7 @@ export const ArtCard = (props: ArtCardDetails) => {
     <div className="art-card">
       <img src={imageUrl} onLoad={handleImageSize} alt={title} className="art-card__image" />
       <section className="art-card__info">
-        <h2 className="art-card__title">{title}</h2>
+        <h2 className="art-card__title">{title !== '' ? title : 'Unknown Title'}</h2>
         <p className="art-card__author">{author}</p>
         <p className="art-card__date">{date}</p>
       </section>
