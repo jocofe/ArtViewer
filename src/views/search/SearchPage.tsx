@@ -1,5 +1,5 @@
 import { Link, NavLink, useSearchParams } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import { FilterTag } from '../../components/Filters/FilterTag';
@@ -8,16 +8,26 @@ import { useFilters } from '../../hooks/useFilters';
 import { Button } from '../../components/Buttons/Buttons';
 import { CtaSection } from '../../components/Sections/CtaSection';
 import { UserContext } from '../../context/UserContextProvider';
-import { useResults } from '../../hooks/useResults';
 
 export const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const searchTerm = searchParams.get('search') || '';
-  const { apiUrl, handleFilterClick, activeFilter, handleLoadMore } = useFilters(searchTerm);
+  const { searchResults, loading, handleFilterClick, activeFilter, handleLoadMore } = useFilters(searchTerm);
   const { isLoggedIn } = useContext(UserContext);
-  const { searchResults, loading } = useResults(apiUrl);
 
-  if (loading) {
+  const loadMoreButtonRef = useRef(null);
+
+  const handleLoadMoreClick = () => {
+    const scrollPosition = window.scrollY;
+
+    handleLoadMore();
+
+    setTimeout(() => {
+      window.scrollTo(0, scrollPosition);
+    }, 0);
+  };
+
+  if (loading && searchResults.length === 0) {
     return <div>Loading...</div>;
   }
 
@@ -70,7 +80,7 @@ export const SearchPage = () => {
             {searchResults.map(result => (
               <div className="relative" key={result.id}>
                 <ArtCard
-                  key={`art-item-${result.id}.id`}
+                  key={`art-item-${result.id}`}
                   title={result.title}
                   imageId={result.imageId}
                   author={result.author}
@@ -83,14 +93,18 @@ export const SearchPage = () => {
           </Masonry>
         </ResponsiveMasonry>
       ) : (
-        <div className="no-results">
-          <h3>Sorry, no results found</h3>
-          <p>Try searching for something else?</p>
-        </div>
+        !loading && (
+          <div className="no-results">
+            <h3>Sorry, no results found</h3>
+            <p>Try searching for something else?</p>
+          </div>
+        )
       )}
-      {isLoggedIn && (
+      {isLoggedIn && searchResults.length > 0 && (
         <div className="masonry__button">
-          <Button onClick={handleLoadMore}>Load More</Button>
+          <Button ref={loadMoreButtonRef} onClick={handleLoadMoreClick}>
+            Load More
+          </Button>
         </div>
       )}
       {!isLoggedIn && (
@@ -103,6 +117,7 @@ export const SearchPage = () => {
           <CtaSection />
         </div>
       )}
+      {loading && <div>Loading more results...</div>}
     </div>
   );
 };
