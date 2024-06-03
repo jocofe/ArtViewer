@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { SearchBarProps } from '../../models/searchbar';
 import { SearchGlass } from '../Icons/icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export const SearchBar = (props: SearchBarProps) => {
@@ -30,6 +30,13 @@ export const SearchBar = (props: SearchBarProps) => {
       setSearchParams({ search: searchTerm });
     }
   };
+
+  // Clear SearchBar afet navigate
+  useEffect(() => {
+    if (location.pathname !== '/search') {
+      setSearchTerm('');
+    }
+  }, [location]);
 
   return (
     <form className="searchbar-wrapper" onSubmit={handleSubmit}>

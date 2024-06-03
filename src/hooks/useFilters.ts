@@ -31,6 +31,7 @@ export const useResults = (apiUrl: string) => {
       }
     };
     if (apiUrl) {
+      setSearchResults([]);
       getResults();
     }
   }, [apiUrl]);
