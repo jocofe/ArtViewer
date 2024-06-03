@@ -8,8 +8,7 @@
 
 .carousel__track {
   display: flex;
-  animation: scroll 45s linear infinite;
-  will-change: transform;
+  gap: 32px;
 }
 
 .carousel-item {
@@ -46,17 +45,4 @@
 .carousel-item__author:hover {
   background-color: transparent;
   transition: 1.5s;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(calc(-50% - 16px), 0, 0);
-  }
-}
-
-.carousel-container:hover .carousel__track {
-  animation-play-state: paused;
 }
