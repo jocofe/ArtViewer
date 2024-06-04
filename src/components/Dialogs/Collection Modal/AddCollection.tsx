@@ -6,7 +6,7 @@ import { Button } from '../../Buttons/Buttons';
 import { FilterCollectionBar } from '../../Form/FilterCollectionBar';
 import { UserContext } from '../../../context/UserContextProvider';
 import { AddCollectionModalProps, CollectionUser, NewCollectionFormInputs } from '../../../models/collection';
-import { ArrowLeft, ArrowRight } from '../../Icons/icons'; // Asegúrate de que la ruta de importación sea correcta
+import { ArrowLeft, ArrowRight } from '../../Icons/icons';
 
 export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSave }: AddCollectionModalProps) => {
   const [isCreatingNewCollection, setIsCreatingNewCollection] = useState(false);
@@ -71,7 +71,7 @@ export const AddCollectionModal = ({ collections, artPieceDetails, onClose, onSa
       };
 
       await addDoc(collection(db, `users/${userData.email}/collections`), newCollection);
-      await fetchCollections(); // Fetch the updated collections
+      await fetchCollections();
       setIsCreatingNewCollection(false);
       reset();
     } catch (error) {
