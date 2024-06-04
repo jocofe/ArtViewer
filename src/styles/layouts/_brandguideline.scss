@@ -16,7 +16,7 @@
 }
 
 .header__content {
-  padding-top: 6rem;
+  padding: 6rem 6.4rem 0 6.4rem;
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
@@ -29,6 +29,10 @@
   padding-top: 16rem;
   display: flex;
   flex-direction: row;
+}
+
+.guide-wrapper {
+  width: 100%;
 }
 
 .guide__navbar {
@@ -188,4 +192,59 @@
   flex-direction: column;
   gap: 3.2rem;
   max-width: 635px;
+}
+
+.guide__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 6.4rem;
+}
+
+.palette-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+}
+
+.pallete__color {
+  width: 100%;
+  height: auto;
+  padding: 2.4rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.palette-name {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.palette__contrast {
+  border-collapse: collapse;
+  width: 40%;
+}
+
+.contrast__size,
+.contrast__color {
+  vertical-align: middle;
+}
+
+.contrast__pixels,
+.contrast__name,
+.contrast__check {
+  padding: 10px;
+  text-align: center;
+}
+
+.contrast__pixels {
+  width: 50px;
+}
+
+.contrast__name {
+  width: 100px;
+}
+
+.contrast__check {
+  width: 50px;
 }

@@ -36,16 +36,6 @@ export const BrandGuideline = () => {
                   <span className="nav-label">Color</span>
                 </a>
               </li>
-              <li className="navbar__item">
-                <a href="/brand-guidelines/grid-system">
-                  <span className="nav-label">Grid System</span>
-                </a>
-              </li>
-              <li className="navbar__item">
-                <a href="/brand-guidelines/icons">
-                  <span className="nav-label">Icons</span>
-                </a>
-              </li>
             </ul>
             <p className="navbar__title">Components</p>
             <ul className="navbar__list">
