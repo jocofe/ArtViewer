@@ -15,17 +15,6 @@ export const SearchPage = () => {
   const { searchResults, loading, handleFilterClick, activeFilter, handleLoadMore } = useFilters(searchTerm);
   const { isLoggedIn } = useContext(UserContext);
 
-  const loadMoreButtonRef = useRef(null);
-
-  const handleLoadMoreClick = () => {
-    const scrollPosition = window.scrollY;
-
-    handleLoadMore();
-
-    setTimeout(() => {
-      window.scrollTo(0, scrollPosition);
-    }, 0);
-  };
 
   if (loading && searchResults.length === 0) {
     return <div>Loading...</div>;
@@ -102,7 +91,7 @@ export const SearchPage = () => {
       )}
       {isLoggedIn && searchResults.length > 0 && (
         <div className="masonry__button">
-          <Button ref={loadMoreButtonRef} onClick={handleLoadMoreClick}>
+          <Button  onClick={handleLoadMore}>
             Load More
           </Button>
         </div>
