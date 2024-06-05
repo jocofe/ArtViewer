@@ -8,18 +8,11 @@ import useWindowSize from '../../../hooks/useWindowSize';
 
 export const UserSettings = () => {
   const { userData } = useContext(UserContext);
-  const [fullName, setFullName] = useState<string | null>(null);
-  const [description, setDescription] = useState<string>('Descripción');
+  const [description, setDescription] = useState<string>('');
   const location = useLocation();
-  const [picture, setPicture] = useState<string | undefined>(undefined);
-  const { width } = useWindowSize();
+  const { width } = useWindowSize(); // TODO change -> window.size?
 
-  useEffect(() => {
-    if (userData) {
-      setFullName(userData.name || null);
-      setPicture(userData.picture || undefined);
-    }
-  }, [userData]);
+  const picture = userData?.picture;
 
   useEffect(() => {
     const path = location.pathname.split('/').pop();
@@ -53,7 +46,7 @@ export const UserSettings = () => {
             )}
           </div>
           <div className="profile-info">
-            <h1 className="h3 profile__name">{fullName}</h1>
+            <h1 className="h3 profile__name">{userData?.name}</h1>
             <h5 className="profile__general">{description}</h5>
           </div>
         </div>
