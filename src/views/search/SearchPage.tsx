@@ -1,5 +1,5 @@
 import { Link, NavLink, useSearchParams } from 'react-router-dom';
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import { FilterTag } from '../../components/Filters/FilterTag';
