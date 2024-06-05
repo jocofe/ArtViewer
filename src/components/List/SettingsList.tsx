@@ -1,36 +1,21 @@
-import { Link, useLocation } from 'react-router-dom';
-import { auth, db } from '../../config/config';
-import { doc, deleteDoc } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
 import { useContext, useMemo, useState } from 'react';
 import { ModalDefault } from '../Dialogs/ModalDefault';
 import { Button } from '../Buttons/Buttons';
 import { UserContext } from '../../context/UserContextProvider';
+import { handleDeleteAccount } from '../../hooks/useDeleteAccount';
 
 export const SettingsList = () => {
   const { userData } = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
-  const location = useLocation();
+
   
   // Set selected link based on actual ubication
-  const selectedLink = useMemo(() =>location.pathname.split('/').pop() || '', [location.pathname])
+  const selectedLink = useMemo(() => location.pathname.split('/').pop() || '', [location.pathname])
 
   // Set showModal state -> opposite boolean value
   const toggleModal = () => {
     setShowModal((prev) => !prev)
-  };
-
-  // Delete account logic
-  const handleDeleteAccount = async () => {
-    try {
-      const user = auth.currentUser;
-      if (user) {
-        const userRef = doc(db, 'users', user.uid);
-        await deleteDoc(userRef); // Utiliza la función deleteDoc para eliminar el documento
-        await user.delete();
-      }
-    } catch (error) {
-      console.error('Error deleting account:', error);
-    }
   };
 
   return (
