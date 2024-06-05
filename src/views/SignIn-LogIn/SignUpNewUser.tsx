@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db, auth, storage } from '../../config/config';
@@ -8,6 +8,7 @@ import { Button } from '../../components/Buttons/Buttons';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { FormNewUserInputs } from '../../models/forms';
 import { useGetRandomImgApi } from '../../hooks/useGetRandomImgApi';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 export const SignUpNewUser = () => {
   const apiUrl =
@@ -25,25 +26,8 @@ export const SignUpNewUser = () => {
   const user = auth.currentUser;
   const providerData = user?.providerData[0];
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isCollapse, setIsCollapse] = useState(false);
-
-  useEffect(() => {
-    const checkWindowSize = () => {
-      setIsCollapse(window.matchMedia('(max-width: 1100px)').matches);
-    };
-
-    checkWindowSize();
-
-    const resizeListener = () => {
-      checkWindowSize();
-    };
-
-    window.addEventListener('resize', resizeListener);
-
-    return () => {
-      window.removeEventListener('resize', resizeListener);
-    };
-  }, []);
+  
+  const isCollapse = useMediaQuery('(max-width: 1100px)');
 
   const onSubmit: SubmitHandler<FormNewUserInputs> = async data => {
     setIsSubmitting(true);
