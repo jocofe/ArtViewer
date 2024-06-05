@@ -23,4 +23,5 @@ export interface UserData {
   displayName: string;
   username: string;
   collections?: Collection[];
+  provider: string;
 }
