@@ -1,8 +1,8 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContextProvider';
 import { ModalDefault } from '../Dialogs/ModalDefault';
 import { Button } from '../Buttons/Buttons';
-import { UserContext } from '../../context/UserContextProvider';
 import { ArrowDown } from '../Icons/icons';
 import { useSelectedLink, useToggleModal } from '../../hooks/useSettingsList';
 import { handleDeleteAccount } from '../../hooks/useDeleteAccount';
