@@ -1,22 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useContext, useMemo, useState } from 'react';
+import { useContext } from 'react';
 import { ModalDefault } from '../Dialogs/ModalDefault';
 import { Button } from '../Buttons/Buttons';
 import { UserContext } from '../../context/UserContextProvider';
 import { handleDeleteAccount } from '../../hooks/useDeleteAccount';
+import { useSelectedLink, useToggleModal } from '../../hooks/useSettingsList';
 
 export const SettingsList = () => {
   const { userData } = useContext(UserContext);
-  const [showModal, setShowModal] = useState(false);
-
-  
-  // Set selected link based on actual ubication
-  const selectedLink = useMemo(() => location.pathname.split('/').pop() || '', [location.pathname])
-
-  // Set showModal state -> opposite boolean value
-  const toggleModal = () => {
-    setShowModal((prev) => !prev)
-  };
+  const { selectedLink } = useSelectedLink();
+  const { showModal, toggleModal } = useToggleModal();
 
   return (
     <div className="user__menu">
