@@ -14,15 +14,10 @@ export const SettingsList = () => {
   // Set selected link based on actual ubication
   const selectedLink = useMemo(() =>location.pathname.split('/').pop() || '', [location.pathname])
 
-  // Show and close delete account modal
-  const handleShowModal = () => {
-    setShowModal(true);
+  // Set showModal state -> opposite boolean value
+  const toggleModal = () => {
+    setShowModal((prev) => !prev)
   };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
 
   // Delete account logic
   const handleDeleteAccount = async () => {
@@ -77,10 +72,10 @@ export const SettingsList = () => {
         </li>
       </ul>
       <hr className="settings-hr" />
-      <button onClick={handleShowModal} className="user__delete">
+      <button onClick={toggleModal} className="user__delete">
         Delete account
       </button>
-      <ModalDefault show={showModal} title="Are you sure?" onClose={handleCloseModal}>
+      <ModalDefault show={showModal} title="Are you sure?" onClose={toggleModal}>
         <p>
           You are about to delete your account. This actions is <strong>permanent</strong> and{' '}
           <strong>unrecoverable</strong>.
@@ -89,7 +84,7 @@ export const SettingsList = () => {
           <Button onClick={handleDeleteAccount} color="sub_primary">
             Delete account
           </Button>
-          <Button onClick={handleCloseModal}>Cancel</Button>
+          <Button onClick={toggleModal}>Cancel</Button>
         </div>
       </ModalDefault>
     </div>
