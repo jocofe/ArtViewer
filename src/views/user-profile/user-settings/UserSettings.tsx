@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useMemo } from 'react';
 import { DefaultAvatar } from '../../../components/Avatar/DefaultAvatar';
 import { UserContext } from '../../../context/UserContextProvider';
 import { Outlet, useLocation } from 'react-router-dom';
@@ -8,31 +8,27 @@ import useWindowSize from '../../../hooks/useWindowSize';
 
 export const UserSettings = () => {
   const { userData } = useContext(UserContext);
-  const [description, setDescription] = useState<string>('');
-  const location = useLocation();
   const { width } = useWindowSize(); // TODO change -> window.size?
-
+  const location = useLocation();
   const picture = userData?.picture;
 
-  useEffect(() => {
-    const path = location.pathname.split('/').pop();
+
+  const description = useMemo(() => {
+    const path = location.pathname.split('/').pop(); // Array de strings del pathname y coger el ultimo string de la lista
     switch (path) {
-      case 'Profile':
-        setDescription('Update your username and manage your email account');
-        break;
-      case 'General':
-        setDescription('Set up your profile information');
-        break;
-      case 'Password':
-        setDescription('Manage your password');
-        break;
-      case 'Sessions':
-        setDescription('Manage your sessions');
-        break;
+    case 'profile':
+        return 'Update your username and manage your email account';
+      case 'general':
+        return 'Set up your profile information';
+      case 'password':
+        return 'Manage your password';
+      case 'sessions':
+        return 'Manage your sessions';
       default:
-        setDescription('Descripción');
+        return 'Set up your profile information';
     }
-  }, [location]);
+  }, [location.pathname]);
+
 
   return (
     <div className="settings-wrapper">
