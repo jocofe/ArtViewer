@@ -6,10 +6,14 @@ import { useEffect } from 'react';
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
+  const pathname = location.pathname;
+  const isSearchPage = pathname.startsWith('/search/');
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+  if (!isSearchPage) {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [location.pathname]);
+  }
 
   return (
     <>
