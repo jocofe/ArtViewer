@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db, auth, storage } from '../../config/config';
@@ -8,10 +8,10 @@ import { Button } from '../../components/Buttons/Buttons';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { FormNewUserInputs } from '../../models/forms';
 import { useGetRandomImgApi } from '../../hooks/useGetRandomImgApi';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 export const SignUpNewUser = () => {
-  const apiUrl =
-    'https://api.vam.ac.uk/v2/objects/search?q=oil%20canvas&min_length=2&max_length=16&images_exist=true&order_sort=asc&page=1&page_size=15&cluster_size=20&images=false&random=false';
+  const apiUrl = 'https://api.vam.ac.uk/v2/objects/search?q=oil%20canvas&min_length=2&max_length=16&images_exist=true&order_sort=asc&page=1&page_size=15&cluster_size=20&images=false&random=false';
   const { imageId, loading, systemNumber } = useGetRandomImgApi(apiUrl);
   const navigate = useNavigate();
   const {
@@ -19,31 +19,16 @@ export const SignUpNewUser = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormNewUserInputs>();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const [userUploadedAvatar, setUserUploadedAvatar] = useState<string | null>(null);
   const user = auth.currentUser;
   const providerData = user?.providerData[0];
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [isCollapse, setIsCollapse] = useState(false);
+  
+  const isCollapse = useMediaQuery('(max-width: 1100px)');
 
-  useEffect(() => {
-    const checkWindowSize = () => {
-      setIsCollapse(window.matchMedia('(max-width: 1100px)').matches);
-    };
-
-    checkWindowSize();
-
-    const resizeListener = () => {
-      checkWindowSize();
-    };
-
-    window.addEventListener('resize', resizeListener);
-
-    return () => {
-      window.removeEventListener('resize', resizeListener);
-    };
-  }, []);
 
   const onSubmit: SubmitHandler<FormNewUserInputs> = async data => {
     setIsSubmitting(true);

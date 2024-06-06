@@ -3,18 +3,24 @@ import { TopBar } from './layouts/Topbar/TopBar';
 import { Footer } from './layouts/Footer/Footer';
 import './styles/index.scss';
 import { useEffect } from 'react';
+import { BackToTopBtn } from './components/Buttons/BackToTopBtn';
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
+  const pathname = location.pathname;
+  const isSearchPage = pathname.startsWith('/search/');
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [location.pathname]);
+  if (!isSearchPage) {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [location.pathname]);
+  }
 
   return (
     <>
       <TopBar size="normal" type="without-login" />
       <Outlet />
+      <BackToTopBtn/>
       <Footer />
     </>
   );
