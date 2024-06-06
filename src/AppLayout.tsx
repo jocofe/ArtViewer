@@ -3,6 +3,7 @@ import { TopBar } from './layouts/Topbar/TopBar';
 import { Footer } from './layouts/Footer/Footer';
 import './styles/index.scss';
 import { useEffect } from 'react';
+import { BackToTopBtn } from './components/Buttons/BackToTopBtn';
 
 const AppLayout: React.FC = () => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const AppLayout: React.FC = () => {
     <>
       <TopBar size="normal" type="without-login" />
       <Outlet />
+      <BackToTopBtn/>
       <Footer />
     </>
   );

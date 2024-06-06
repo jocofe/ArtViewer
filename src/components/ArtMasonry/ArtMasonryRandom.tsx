@@ -5,7 +5,6 @@ import { Link, NavLink } from 'react-router-dom';
 import { Button } from '../Buttons/Buttons';
 import { UserContext } from '../../context/UserContextProvider';
 import { useFetchArt } from '../../hooks/useFetchRandomArt';
-import { ArrowUp } from '../Icons/icons';
 
 export const ArtMasonryRandom = () => {
   const { artList, isLoading, error, loadMore } = useFetchArt(1);
@@ -19,10 +18,6 @@ export const ArtMasonryRandom = () => {
       }
     }
   }, [artList]);
-
-  const handleBackToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   return (
     <div className="masonry-section">
@@ -56,9 +51,6 @@ export const ArtMasonryRandom = () => {
             </Button>
           )}
           {error && <p>{error}</p>}
-        </div>  
-        <div className="masonry__button">
-        <Button color='secondary' onClick={handleBackToTop}><ArrowUp/></Button>
         </div>
       </div>
     </div>
