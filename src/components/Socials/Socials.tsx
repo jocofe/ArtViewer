@@ -29,6 +29,9 @@ export const Socials = ({
   const { favourites, toggleLike } = useLikes();
   const isFavourite = favourites.some(fav => fav.artPieceId === artPieceId);
 
+  const [animateSaveIcon, setAnimateSaveIcon] = useState(false);
+  const [animateFavIcon, setAnimateFavIcon] = useState(false);
+
   const checkIfArtPieceIsSaved = useCallback(async () => {
     if (!userData) return;
 
@@ -61,11 +64,13 @@ export const Socials = ({
     } else {
       setShowLoginModal(true);
     }
+    setAnimateSaveIcon(true);
   };
 
   const handleFav = async (event: React.MouseEvent<HTMLElement>) => {
     event?.preventDefault();
     toggleLike(artPieceId);
+    setAnimateFavIcon(true);
   };
 
   const handleCloseModal = () => {
@@ -109,10 +114,10 @@ export const Socials = ({
           <CopyLink className="icon" />
         </div>
         <div onClick={handleSaved} className="icon-wrapper">
-          {isOnSaved ? <FullBookmark className="icon" /> : <Bookmark className="icon" />}
+          {isOnSaved ? <FullBookmark className={`icon icon-effect ${animateSaveIcon? 'animate' : ''}`} /> : <Bookmark className="icon" />}
         </div>
-        <div onClick={handleFav} className="icon-wrapper">
-          {isFavourite ? <FullHeart className="icon" /> : <Heart className="icon" />}
+        <div onClick={handleFav} className="icon-wrapper button-icon">
+          {isFavourite ? <FullHeart className={`icon icon-effect ${animateFavIcon? 'animate' : ''}`} /> : <Heart className="icon" />}
         </div>
       </div>
       {isLinkCopied && <Toaster message="Copied Link!" onClose={() => setIsLinkCopied(false)} />}
