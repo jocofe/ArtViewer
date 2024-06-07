@@ -1,5 +1,5 @@
 import { Link, NavLink, useSearchParams } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { ArtCard } from '../../components/ArtCard/ArtCard';
 import { FilterTag } from '../../components/Filters/FilterTag';
@@ -15,14 +15,17 @@ export const SearchPage = () => {
   const { userData } = useContext(UserContext);
 
   const searchTerm = searchParams.get('search') || '';
-
   const apiUrl = useApiUrl(searchTerm, activeFilter, page);
   const { searchResults, setSearchResults, loading } = useSearchResults(apiUrl);
 
+  useEffect(() => {
+    setPage(1);
+    setSearchResults([]);
+  }, [searchTerm, activeFilter, setSearchResults]);
+  
   const handleFilterClick = (filter: ActiveFilter) => {
     setActiveFilter(prevFilter => (prevFilter === filter ? null : filter));
     setPage(1); // Reset the page when the filter changes
-    setSearchResults([]); // Clear previous results when the filter changes
   };
 
   const handleLoadMore: React.MouseEventHandler<HTMLButtonElement> = (event) => {
