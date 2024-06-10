@@ -1,6 +1,6 @@
 import { addDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../../config/config";
-import { UserSessions } from "../../models/userSessions";
+import { UserSessionsProps } from "../../models/userSessions";
 import { parseUserAgent } from "./userAgentParser";
 
 
@@ -51,20 +51,20 @@ export const updateLastAcced = async (userEmail: string, sessionsId: string): Pr
 };
 
 // Getting user's login sessions
-export const getUserLoginSessions = async (userEmail: string): Promise<UserSessions[]> => { // Return array of objects type UserSessions
+export const getUserLoginSessions = async (userEmail: string): Promise<UserSessionsProps[]> => { // Return array of objects type UserSessions
     const userDocRef = doc(db, 'users', userEmail);
     const sessionsCollectionRef = collection(userDocRef, 'sessions'); // Reference to sessions collection
 
     const sessionDocSnapshot = await getDocs(sessionsCollectionRef); // Obtain docs on sessions
 
     // Process sessions document info
-    const sessions: UserSessions[] = []; // Create empty array to storage sessions info
+    const sessions: UserSessionsProps[] = []; // Create empty array to storage sessions info
 
     sessionDocSnapshot.forEach(doc => { // Mapiing every document on the snapshot
         const sessionData = doc.data(); // obtain document data
         sessions.push({                 // Adding UserSessions object to sessions array with the info
             id: doc.id,
-            ipAddres: sessionData.ipAddres,
+            ipAddress: sessionData.ipAddres,
             userAgent: sessionData.userAgent,
             loginTime: sessionData.loginTime.toDate(),
             lastAccess: sessionData.lastAccess.toDate(),

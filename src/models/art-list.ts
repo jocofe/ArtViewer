@@ -60,6 +60,7 @@ export interface ArtObjectDetails {
   type: string;
   dimensions: string;
   imageUrl: string;
+  description: string;
 }
 
 export interface ArtObjectFromApi {

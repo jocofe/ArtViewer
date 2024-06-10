@@ -1,45 +1,39 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useMemo } from 'react';
 import { DefaultAvatar } from '../../../components/Avatar/DefaultAvatar';
 import { UserContext } from '../../../context/UserContextProvider';
 import { Outlet, useLocation } from 'react-router-dom';
 import { SettingsList } from '../../../components/List/SettingsList';
+import { SettingsListMobile } from '../../../components/List/SettingsListMobile';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
 
 export const UserSettings = () => {
   const { userData } = useContext(UserContext);
-  const [fullName, setFullName] = useState<string | null>(null);
-  const [description, setDescription] = useState<string>('Descripción')
   const location = useLocation();
-  const [picture, setPicture] = useState<string | undefined>(undefined);
+  const picture = userData?.picture;
 
-  useEffect(() => {
-    if (userData) {
-      setFullName(userData.name || null);
-      setPicture(userData.picture || undefined);
-    }
-  }, [userData]);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
-  useEffect(() => {
-    const path = location.pathname.split('/').pop();
+  const description = useMemo(() => {
+    const path = location.pathname.split('/').pop(); // Array de strings del pathname y coger el ultimo string de la lista
     switch (path) {
-      case 'profile':
-        setDescription('Update your username and manage your email account');
-        break;
+    case 'profile':
+        return 'Update your username and manage your email account';
       case 'general':
-        setDescription('Set up your profile information')
-        break;
+        return 'Set up your profile information';
       case 'password':
-        setDescription('Manage your password')
-        break;
+        return 'Manage your password';
       case 'sessions':
-        setDescription('Manage your sessions')
-        break;
+        return 'Manage your sessions';
+      default:
+        return 'Set up your profile information';
     }
-},[location]);
+  }, [location.pathname]);
+
 
   return (
     <div className="settings-wrapper">
       <div className="settings-menu-wrapper">
-        <div className="profile-wrapper">
+        <div className="profile-wrapper-settings">
           <div className="profile-picture-settings">
             {picture && picture !== 'default' ? (
               <img src={picture} alt="User Profile" className="profilecard-image" />
@@ -48,12 +42,12 @@ export const UserSettings = () => {
             )}
           </div>
           <div className="profile-info">
-            <h1 className="h3 profile__name">{fullName}</h1>
+            <h1 className="h3 profile__name">{userData?.name}</h1>
             <h5 className="profile__general">{description}</h5>
           </div>
         </div>
         <div className="user-settings">
-          <SettingsList />
+          {isMobile ? <SettingsListMobile /> : <SettingsList />}
           <div className="user__settings">
             <Outlet />
           </div>

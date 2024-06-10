@@ -28,7 +28,6 @@ export const ArtMasonryRandom = () => {
             {artList.map(artItem => (
               <div className="relative" key={artItem.id}>
                 <ArtCard
-                  key={`art-item-${artItem.id}.id`}
                   title={artItem.title}
                   imageId={artItem.imageId}
                   author={artItem.author}

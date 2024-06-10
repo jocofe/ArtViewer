@@ -13,8 +13,8 @@ export const DefaultAvatar = () => {
 
   return (
     <div className="avatar-default">
-      {userData?.photoURL ? (
-         <img src={userData.photoURL} alt="User Profile" className="avatar-default" />
+      {userData?.picture ? (
+         <img src={userData.picture} alt="User Profile" className="avatar-default" />
       ) : (
         initial
       )}

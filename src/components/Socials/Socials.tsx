@@ -29,6 +29,9 @@ export const Socials = ({
   const { favourites, toggleLike } = useLikes();
   const isFavourite = favourites.some(fav => fav.artPieceId === artPieceId);
 
+  const [animateSaveIcon, setAnimateSaveIcon] = useState(false);
+  const [animateFavIcon, setAnimateFavIcon] = useState(false);
+
   const checkIfArtPieceIsSaved = useCallback(async () => {
     if (!userData) return;
 
@@ -61,11 +64,13 @@ export const Socials = ({
     } else {
       setShowLoginModal(true);
     }
+    setAnimateSaveIcon(true);
   };
 
   const handleFav = async (event: React.MouseEvent<HTMLElement>) => {
     event?.preventDefault();
     toggleLike(artPieceId);
+    setAnimateFavIcon(true);
   };
 
   const handleCloseModal = () => {
@@ -82,7 +87,12 @@ export const Socials = ({
   };
 
   const copyArtworkLink = () => {
-    const baseUrl = location.origin;
+    if (!navigator.clipboard) {
+      console.error('Clipboard API not supported');
+      return;
+    }
+
+    const baseUrl = window.location.origin;
     const copiedUrl = `${baseUrl}/art-piece/${artPieceId}`;
     navigator.clipboard
       .writeText(copiedUrl)
@@ -100,11 +110,15 @@ export const Socials = ({
   return (
     <>
       <div className="socials-wrapper">
-        <i onClick={copyArtworkLink}>
+        <div onClick={copyArtworkLink} className="icon-wrapper">
           <CopyLink className="icon" />
-        </i>
-        <i onClick={handleSaved}>{isOnSaved ? <FullBookmark className="icon" /> : <Bookmark className="icon" />}</i>
-        <i onClick={handleFav}>{isFavourite ? <FullHeart className="icon" /> : <Heart className="icon" />}</i>
+        </div>
+        <div onClick={handleSaved} className="icon-wrapper">
+          {isOnSaved ? <FullBookmark className={`icon icon-effect ${animateSaveIcon? 'animate' : ''}`} /> : <Bookmark className="icon" />}
+        </div>
+        <div onClick={handleFav} className="icon-wrapper button-icon">
+          {isFavourite ? <FullHeart className={`icon icon-effect ${animateFavIcon? 'animate' : ''}`} /> : <Heart className="icon" />}
+        </div>
       </div>
       {isLinkCopied && <Toaster message="Copied Link!" onClose={() => setIsLinkCopied(false)} />}
       {isLoggedIn ? (

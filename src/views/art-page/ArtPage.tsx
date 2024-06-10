@@ -7,7 +7,8 @@ import { ArtCard } from '../../components/ArtCard/ArtCard';
 import Viewer from 'react-viewer';
 import { UserContext } from '../../context/UserContextProvider';
 import { useGetArtPageInfo } from '../../hooks/useGetArtPageInfo';
-import { useGenerateArtworkDescription } from '../../hooks/useGenerateArtworkDescription';
+import useGenerateDescription from '../../hooks/useGenerateDescription'; // Importar el hook
+import useOfficialPageLink from '../../hooks/useLinkToOfficialInfo';
 
 export const ArtPage = () => {
   const [isViewerVisible, setIsViewerVisible] = useState(false);
@@ -15,12 +16,8 @@ export const ArtPage = () => {
   const { isLoggedIn } = useContext(UserContext);
   const { artDetails, relatedArt } = useGetArtPageInfo();
   const artDetailsInfo = artDetails?.[0];
-  const description = useGenerateArtworkDescription(artDetailsInfo?.title || '');
-
-  const linkToOfficialInfo = () => {
-    const officialPageURL = `https://collections.vam.ac.uk/item/${artDetailsInfo.id}`;
-    window.open(officialPageURL, '_blank');
-  };
+  const description: string = useGenerateDescription();
+  const linkToOfficialInfo = useOfficialPageLink(artDetailsInfo?.id);
 
   if (!artDetailsInfo) {
     return <h3>No details found for this art.</h3>;
@@ -65,7 +62,7 @@ export const ArtPage = () => {
           className="art-visualizer"
         />
         <div className="artpiece-info-wrapper">
-          <h1 className="art__title">{artDetailsInfo.title}</h1>
+          <h1 className="art__title">{artDetailsInfo.title !== '' ? artDetailsInfo.title : 'Unknown title'}</h1>
           <div className="artpiece__properties">
             <h3 className="artpiece__artist">{artDetailsInfo.artist}</h3>
             <p className="artpiece__date">{artDetailsInfo.date}</p>

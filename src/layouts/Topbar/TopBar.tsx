@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import classNames from 'classnames';
 import '../../styles/index.scss';
 import { Button } from '../../components/Buttons/Buttons';
@@ -8,6 +8,7 @@ import { SearchBar } from '../../components/Form/SearchBar';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../context/UserContextProvider';
 import { DropdownProfileButton } from '../../components/Buttons/DropdownProfile';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 export const TopBar = (props: TopBarProps) => {
   const { isLoggedIn } = useContext(UserContext);
@@ -16,25 +17,8 @@ export const TopBar = (props: TopBarProps) => {
     'topbar--login': isLoggedIn,
     'topbar--without-login': !isLoggedIn,
   });
-  const [isCollapse, setIsCollapse] = useState(false);
 
-  useEffect(() => {
-    const checkWindowSize = () => {
-      setIsCollapse(window.matchMedia('(max-width: 1100px)').matches);
-    };
-
-    checkWindowSize();
-
-    const resizeListener = () => {
-      checkWindowSize();
-    };
-
-    window.addEventListener('resize', resizeListener);
-
-    return () => {
-      window.removeEventListener('resize', resizeListener);
-    };
-  }, []);
+  const isCollapse = useMediaQuery('(max-width: 1100px)');
 
   return (
     <div className={topBarClass}>

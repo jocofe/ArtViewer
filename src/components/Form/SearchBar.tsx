@@ -15,6 +15,7 @@ export const SearchBar = (props: SearchBarProps) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     handleSearch();
+    setSearchTerm('');
   };
 
   const handleIconClick = () => {

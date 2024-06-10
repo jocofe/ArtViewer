@@ -30,6 +30,7 @@
 
 .art__title {
   text-align: center;
+  padding: 0 21rem 0 21rem;
 }
 
 .artpiece {
@@ -122,10 +123,17 @@
   .art__title {
     font-size: var(--font-size-48);
     line-height: 6.4rem;
+    width: 100%;
+    padding: 0 2.4rem 0 2.4rem;
+  }
+
+  .artpiece-info-wrapper {
+    width: 100vw;
   }
 
   .artpiece__description {
     margin: 3.2rem 0 3.2rem 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 3.2rem;

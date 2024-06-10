@@ -4,12 +4,14 @@ import { UserContext } from "../../../context/UserContextProvider";
 import { auth, db } from "../../../config/config";
 import { doc, updateDoc } from "firebase/firestore";
 import { updateEmail } from "firebase/auth";
+import { useClearsMessage } from "../../../hooks/useClearMessage";
 
 export const GeneralSettings = () => {
   const { userData } = useContext(UserContext);
+  const { message, setMessage, error, setError } = useClearsMessage();
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (userData) {
@@ -19,8 +21,8 @@ export const GeneralSettings = () => {
   }, [userData]);
 
 
-  const handleSaveChanges = async () => {
-    setMessage(null); // Reset the message
+  const handleSubmitChanges = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     const user = auth.currentUser;
     if (user && user.email) {
       const userEmail = user.email;
@@ -29,7 +31,7 @@ export const GeneralSettings = () => {
         const userDocRef = doc(db, 'users', userEmail);
 
         await updateDoc(userDocRef, {
-          name: username,
+          username: username,
           email: email,
         });
 
@@ -38,16 +40,17 @@ export const GeneralSettings = () => {
           await updateEmail(user, email);
         }
 
-        setMessage('Changes saved successfully');
+        setMessage('Your changes have been succesfully saved!');
       } catch (error) {
         console.error('Error updating user data:', error);
-        setMessage('Failed to save changes');
+        setError('Failed to save changes');
       }
     }
   };
 
   return (
-    <div className="settings">
+    <>
+      <form onSubmit={handleSubmitChanges} className="settings">
         <p>Username</p>
         <input 
           type="text"
@@ -62,10 +65,16 @@ export const GeneralSettings = () => {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-      <div className="settings-btn">
-        <Button size="small" onClick={handleSaveChanges}>Save changes</Button>
-      </div>
-      {message && <p>{message}</p>}
-    </div>
+        <div className="settings-btn">
+          <Button size="small" type="submit">Save changes</Button>
+        </div>
+        {message && !error && ( 
+          <p className="settings-message">{message}</p>
+        )}
+        {error && !message && (
+          <p className="settings-error">{error}</p>
+        )}
+      </form>
+    </>
   );
 };
