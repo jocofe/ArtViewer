@@ -21,7 +21,8 @@ export const SignIn = () => {
   const submitSignIn = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then(userCredential => {
+        console.log(userCredential);
         navigate('/');
       })
       .catch(error => {
