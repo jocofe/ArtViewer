@@ -3,12 +3,14 @@ import { UserContext } from '../../context/UserContextProvider';
 import { Link } from 'react-router-dom';
 import { signOut, getAuth } from 'firebase/auth';
 import { DefaultAvatar } from '../Avatar/DefaultAvatar';
+import { Loading } from '../Icons/icons';
 
 export const DropdownProfileButton = () => {
   const auth = getAuth();
   const [isOpen, setIsOpen] = useState(false);
   const { isLoggedIn, userData } = useContext(UserContext);
   const [picture, setPicture] = useState<string | undefined>(undefined);
+  const [isLoading, setIsLoading] = useState(true);
   const username = userData?.username;
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -28,8 +30,10 @@ export const DropdownProfileButton = () => {
   useEffect(() => {
     if (userData && userData.picture) {
       setPicture(userData.picture);
+      setIsLoading(false);
     } else {
       setPicture(undefined);
+      setIsLoading(false)
     }
   }, [userData]);
 
@@ -39,6 +43,12 @@ export const DropdownProfileButton = () => {
 
   if (!isLoggedIn) {
     return null;
+  }
+
+  if (isLoading) {
+    return (
+      <div><Loading className='loading-animation'/></div>
+    )
   }
 
   return (

@@ -6,9 +6,11 @@
   
   .loading-animation {
     animation: loading 1s linear infinite;
+  }
+
+  .loading-md {
     width: 46px;
     height: 46px;
-  
   }
   
   @keyframes loading {

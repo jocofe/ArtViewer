@@ -70,7 +70,7 @@ export const ArtistCarousel = () => {
   if (isLoading) {
     return (
       <div className='loading'>
-        <Loading className='loading-animation'/>
+        <Loading className='loading-animation loading-md'/>
       </div>
     )};
   
