@@ -26,25 +26,18 @@ export const changePassword = async (oldPassword: string, newPassword: string): 
         // Reautenticar al usuario con su contraseña actual antes de cambiarla
 
         const credential = EmailAuthProvider.credential(user.email, oldPassword);
-        console.log(oldPassword);
         await reauthenticateWithCredential(user, credential);
 
         await updatePassword(user, newPassword);
-        console.log('Contraseña cambiada exitosamente.');
       } catch (error: unknown) {
-        console.log('ME mata', error);
         const firebaseError = error as Error;
         if (firebaseError.code === 'auth/invalid-credential') {
           throw new Error('Incorrect old password.');
         }
-        console.error('error cambiando la contraseña');
         throw new Error('Incorrect old password.');
-      }
-    } else {
-      console.log('usuario registrado no manualmente');
-    }
+      } 
   } else {
-    console.log('No hay usuario logeado');
     throw new Error('el usuario no esta logeado');
   }
+}
 };

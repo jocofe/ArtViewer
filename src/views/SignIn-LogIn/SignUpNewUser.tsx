@@ -49,7 +49,6 @@ export const SignUpNewUser = () => {
           location: data.location,
           updatedAt: new Date(),
         });
-        console.log('User data added to Firestore successfully!');
         navigate('/');
       } else {
         console.error('No user email found');

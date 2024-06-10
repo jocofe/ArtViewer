@@ -11,7 +11,6 @@ export const PasswordSettings = () => {
 
   const handleChangePassword = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('change password button clicked');
     // Verify that inputs are not empty
     if (!oldPassword || !newPassword) {
       setError('Please fill both password fields');
