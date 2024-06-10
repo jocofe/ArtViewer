@@ -51,7 +51,9 @@ export const SessionsSettings = () => {
         sessionStorage.setItem('sessionIpAddress', sessionIpAddress);
         const activeSessionIpAddress = sessionStorage.getItem('sessionIpAddress');
         const isCurrentSession = activeSessionIpAddress === sessionIpAddress;
-        
+        console.log(sessionIpAddress);
+
+
         if (isCurrentSession && auth) {
           // Verifica si 'auth' existe
           await auth.signOut(); // Utiliza 'auth.signOut()' para cerrar la sesión
