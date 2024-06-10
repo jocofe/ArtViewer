@@ -1,0 +1,21 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loading-animation {
+    animation: loading 1s linear infinite;
+    width: 46px;
+    height: 46px;
+  
+  }
+  
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
