@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Socials } from '../../components/Socials/Socials';
 import { Button } from '../../components/Buttons/Buttons';
@@ -9,15 +9,26 @@ import { UserContext } from '../../context/UserContextProvider';
 import { useGetArtPageInfo } from '../../hooks/useGetArtPageInfo';
 import useGenerateDescription from '../../hooks/useGenerateDescription'; // Importar el hook
 import useOfficialPageLink from '../../hooks/useLinkToOfficialInfo';
+import { Loading } from '../../components/Icons/icons';
 
 export const ArtPage = () => {
   const [isViewerVisible, setIsViewerVisible] = useState(false);
   const [selectedImageUrl, setSelectedImageUrl] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const { isLoggedIn } = useContext(UserContext);
   const { artDetails, relatedArt } = useGetArtPageInfo();
   const artDetailsInfo = artDetails?.[0];
   const description: string = useGenerateDescription();
   const linkToOfficialInfo = useOfficialPageLink(artDetailsInfo?.id);
+
+  useEffect(() => {
+    if (artDetailsInfo)
+      setIsLoading(false);
+  }, [artDetailsInfo]);
+
+  if (isLoading) {
+    return <div className='loading'><Loading className='loading-animation loading-md'/></div>
+  }
 
   if (!artDetailsInfo) {
     return <h3>No details found for this art.</h3>;

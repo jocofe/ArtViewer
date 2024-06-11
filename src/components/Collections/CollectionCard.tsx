@@ -10,8 +10,6 @@ export const CollectionCard = ({ collection }: CollectionCardProps) => {
     setFirstArtPiece(artpieces && artpieces.length > 0 ? artpieces[0] : null);
   }, [artpieces]);
 
-  console.log('Imagen URL:', firstArtPiece?.imageUrl);
-
   return (
     <div key={collection.id} className="collectioncard-wrapper">
       {firstArtPiece ? (

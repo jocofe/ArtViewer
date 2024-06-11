@@ -39,10 +39,8 @@ export const GeneralSettings = () => {
         if (email !== user.email) {
           await updateEmail(user, email);
         }
-
         setMessage('Your changes have been succesfully saved!');
       } catch (error) {
-        console.error('Error updating user data:', error);
         setError('Failed to save changes');
       }
     }

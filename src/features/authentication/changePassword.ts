@@ -31,6 +31,7 @@ export const changePassword = async (oldPassword: string, newPassword: string): 
 
         await updatePassword(user, newPassword);
         console.log('Contraseña cambiada exitosamente.');
+
       } catch (error: unknown) {
         console.log('ME mata', error);
         const firebaseError = error as Error;
@@ -39,7 +40,7 @@ export const changePassword = async (oldPassword: string, newPassword: string): 
         }
         console.error('error cambiando la contraseña');
         throw new Error('Incorrect old password.');
-      }
+      } 
     } else {
       console.log('usuario registrado no manualmente');
     }

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArtistCard } from './ArtistCard';
 import useArtistCarousel from '../../hooks/useArtistCarousel';
+import { Loading } from '../Icons/icons';
 
 export const ArtistCarousel = () => {
   const { artists, error, isLoading } = useArtistCarousel();
@@ -66,7 +67,13 @@ export const ArtistCarousel = () => {
     }
   }, [isPaused]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className='loading'>
+        <Loading className='loading-animation loading-md'/>
+      </div>
+    )};
+  
   if (error) return <div>{error}</div>;
 
   return (
