@@ -1,33 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Button } from "../../components/Buttons/Buttons"
-import { RandomMosaicImages } from '../../components/MosaicImage/RandomMosaicImages';
-import { SignUpFromLanding } from "../../components/Form/SignUpFromLanding"
+import { Button } from "../../components/Buttons/Buttons";
+import { SignUpFromLanding } from "../../components/Form/SignUpFromLanding";
+import { MosaicImages } from "../../components/MosaicImages/MosaicImages";
 import { TypingBar } from '../../components/TypingBar/TypingBar';
 
 export const LandingPage = () => {
-    const [currentTextIndex, setCurrentTextIndex] = useState(0)
-    const texts = ['research', 'explore', 'inspire', 'collect', 'discover']
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentTextIndex((currentTextIndex + 1) % texts.length);
-        }, 2000);
-        
-        return () => clearInterval(interval);
-    }, [currentTextIndex, texts.length]);
+    // const texts = ['research', 'explore', 'inspire', 'collect', 'discover'];
     
     return (
         <div>
-            <section className="hero">
-                <div className="hero__text">
-                    <h1 id="changing-text">Find art to <span className="changing-text">{texts[currentTextIndex]}</span></h1>
-                </div>
-                <div className="mosaic-images">
-                    <div className="mosaic-column">
-                        <RandomMosaicImages/>
-                    </div>
-                </div>
-            </section>
+            <div className="hero">
+                <MosaicImages/>
+            </div>
             <section className="section section--golden">
                 <TypingBar/>
                 <div className="section__claim">
