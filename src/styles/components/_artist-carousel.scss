@@ -6,7 +6,10 @@
 
 .carousel__track {
   display: flex;
+  width: 1000%;
   gap: 32px;
+  transform: translateX(0);
+  transition: transform 0.1s linear;
 }
 
 .carousel__track a {

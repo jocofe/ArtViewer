@@ -11,7 +11,8 @@ import { useGetRandomImgApi } from '../../hooks/useGetRandomImgApi';
 import { useMediaQuery } from '../../hooks/useMediaQuery';
 
 export const SignUpNewUser = () => {
-  const apiUrl = 'https://api.vam.ac.uk/v2/objects/search?q=oil%20canvas&min_length=2&max_length=16&images_exist=true&order_sort=asc&page=1&page_size=15&cluster_size=20&images=false&random=false';
+  const apiUrl =
+    'https://api.vam.ac.uk/v2/objects/search?q=oil%20canvas&min_length=2&max_length=16&images_exist=true&order_sort=asc&page=1&page_size=15&cluster_size=20&images=false&random=false';
   const { imageId, loading, systemNumber } = useGetRandomImgApi(apiUrl);
   const navigate = useNavigate();
   const {
@@ -26,9 +27,21 @@ export const SignUpNewUser = () => {
   const user = auth.currentUser;
   const providerData = user?.providerData[0];
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
   const isCollapse = useMediaQuery('(max-width: 1100px)');
 
+  const handleAvatarSelection = (avatar: string) => {
+    setSelectedAvatar(avatar);
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const storageRef = ref(storage, `avatars/${file.name}`);
+      await uploadBytes(storageRef, file);
+      const url = await getDownloadURL(storageRef);
+      setUserUploadedAvatar(url);
+    }
+  };
 
   const onSubmit: SubmitHandler<FormNewUserInputs> = async data => {
     setIsSubmitting(true);
@@ -44,7 +57,7 @@ export const SignUpNewUser = () => {
       if (userEmail) {
         const userRef = doc(db, 'users', userEmail);
         await updateDoc(userRef, {
-          picture: userUploadedAvatar || selectedAvatar,
+          picture: selectedAvatar || userUploadedAvatar,
           username: data.username,
           location: data.location,
           updatedAt: new Date(),
@@ -57,28 +70,7 @@ export const SignUpNewUser = () => {
     } catch (error) {
       console.error('Error adding user data to Firestore:', error);
     } finally {
-      setIsSubmitting(false); // Establecer isSubmitting en false independientemente del resultado del envío del formulario
-    }
-  };
-
-  const handleAvatarSelection = (avatar: string) => {
-    setSelectedAvatar(avatar);
-  };
-
-  const handleChooseBtnClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const storageRef = ref(storage, `avatars/${file.name}`);
-      await uploadBytes(storageRef, file);
-      const url = await getDownloadURL(storageRef);
-      setUserUploadedAvatar(url);
-      handleAvatarSelection(url);
+      setIsSubmitting(false);
     }
   };
 
@@ -119,7 +111,9 @@ export const SignUpNewUser = () => {
                       className="choose-btn"
                       color="sub_primary"
                       onClick={() => {
-                        handleChooseBtnClick(); // Llamar a la función handleChooseBtnClick para abrir el explorador de archivos
+                        if (fileInputRef.current) {
+                          fileInputRef.current.click();
+                        }
                       }}
                     >
                       Upload Image
