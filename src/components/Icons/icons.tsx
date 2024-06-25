@@ -294,3 +294,13 @@ export const Close = (className: IconProps) => {
     </svg>
   );
 };
+
+
+//Loading icon
+export const Loading = (className: IconProps) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" {...className} width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 4.00706V2.00706C10.6868 2.00706 9.38642 2.26572 8.17317 2.76827C6.95991 3.27082 5.85752 4.00741 4.92893 4.936C3.05357 6.81136 2 9.3549 2 12.0071H4C4 9.88533 4.84285 7.8505 6.34315 6.35021C7.84344 4.84992 9.87827 4.00706 12 4.00706Z" fill="black"/>
+    </svg>
+  )
+}

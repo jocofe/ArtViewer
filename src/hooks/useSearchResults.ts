@@ -12,7 +12,8 @@ export const useSearchResults = (apiUrl: string) => {
         setLoading(true);
         const response = await axios.get<ResultListFromApi>(apiUrl);
         const mappedResults = mapResultsFromApi(response.data);
-        setSearchResults(prevResults => apiUrl.includes("&page=1&") ? mappedResults : [...prevResults, ...mappedResults]);      } catch (error) {
+        setSearchResults(prevResults => apiUrl.includes("&page=1&") ? mappedResults : [...prevResults, ...mappedResults]);      
+      } catch (error) {
         console.log('Error fetching data', error);
       } finally {
         setLoading(false);
@@ -22,6 +23,6 @@ export const useSearchResults = (apiUrl: string) => {
     useEffect(() => {
       getResults();
     }, [getResults]);
-  
+
     return { searchResults, setSearchResults, loading };
   };

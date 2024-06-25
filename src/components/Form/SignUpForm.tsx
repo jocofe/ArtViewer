@@ -49,7 +49,6 @@ export const SignUpForm = () => {
           createdAt: new Date(),
           updatedAt: new Date(),
         });
-        console.log('user data added to Firestore');
         navigate('/new-user');
       } else {
         setError('Unknown error occurred');

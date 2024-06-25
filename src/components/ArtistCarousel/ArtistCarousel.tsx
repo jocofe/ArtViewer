@@ -1,72 +1,77 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { ArtistCard } from './ArtistCard';
 import useArtistCarousel from '../../hooks/useArtistCarousel';
+import { Loading } from '../Icons/icons';
 
 export const ArtistCarousel = () => {
   const { artists, error, isLoading } = useArtistCarousel();
   const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
-  const speed = 0.25;
-  const positionRef = useRef(0); // Ref para almacenar la posición
-
-  let startX = 0;
-  let currentX = 0;
+  const speed = 0.5;
+  const positionRef = useRef(0);
+  const animationRef = useRef<number | null>(null);
 
   const handleMouseEnter = () => {
     setIsPaused(true);
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+    }
   };
 
   const handleMouseLeave = () => {
     setIsPaused(false);
+    animateScroll();
   };
 
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    startX = e.touches[0].clientX;
-  };
+  const animateScroll = useCallback(() => {
+    if (!trackRef.current || !containerRef.current) return;
 
-  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    currentX = e.touches[0].clientX;
-  };
+    positionRef.current += speed;
 
-  const handleTouchEnd = () => {
-    const diff = startX - currentX;
-
-    if (diff > 50) {
-      // Swipe right
-      positionRef.current += 100;
-    } else if (diff < -50) {
-      // Swipe left
-      positionRef.current -= 100;
-    }
-
-    if (positionRef.current < 0) {
+    if (positionRef.current >= trackRef.current.scrollWidth / 2) {
       positionRef.current = 0;
-    } else if (positionRef.current > trackRef.current!.scrollWidth - containerRef.current!.offsetWidth) {
-      positionRef.current = trackRef.current!.scrollWidth - containerRef.current!.offsetWidth;
     }
 
-    trackRef.current!.style.transform = `translateX(-${positionRef.current}px)`;
-  };
+    trackRef.current.style.transform = `translateX(-${positionRef.current}px)`;
 
-  useEffect(() => {
     if (!isPaused) {
-      const timer = setInterval(() => {
-        positionRef.current += speed;
-
-        if (positionRef.current > trackRef.current!.scrollWidth - containerRef.current!.offsetWidth) {
-          positionRef.current = 0;
-        }
-
-        trackRef.current!.style.transform = `translateX(-${positionRef.current}px)`;
-      }, 100);
-
-      return () => clearInterval(timer);
+      animationRef.current = requestAnimationFrame(animateScroll);
     }
   }, [isPaused]);
 
-  if (isLoading) return <div>Loading...</div>;
+  useEffect(() => {
+    if (!isPaused) {
+      animationRef.current = requestAnimationFrame(animateScroll);
+    }
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isPaused, animateScroll]);
+
+  useEffect(() => {
+    if (!isPaused && !isLoading && artists.length > 0) {
+      animationRef.current = requestAnimationFrame(animateScroll);
+    }
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isPaused, isLoading, artists, animateScroll]);
+
+  if (isLoading) {
+    return (
+      <div className="loading">
+        <Loading className="loading-animation loading-md" />
+      </div>
+    );
+  }
+
   if (error) return <div>{error}</div>;
 
   return (
@@ -75,15 +80,19 @@ export const ArtistCarousel = () => {
       ref={containerRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
     >
       <div className="carousel__track" ref={trackRef}>
         {artists.map((artistItem, index) => (
-          <Link key={index} to={`/artist/${artistItem.id}`}>
-            <ArtistCard author={artistItem.author} imageId={artistItem.imageId} imageUrl={''} id={''} />
-          </Link>
+          <ArtistCard key={index} author={artistItem.author} imageId={artistItem.imageId} imageUrl={''} id={''} />
+        ))}
+        {artists.map((artistItem, index) => (
+          <ArtistCard
+            key={`clone-${index}`}
+            author={artistItem.author}
+            imageId={artistItem.imageId}
+            imageUrl={''}
+            id={''}
+          />
         ))}
       </div>
     </div>

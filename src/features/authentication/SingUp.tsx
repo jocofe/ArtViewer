@@ -6,7 +6,7 @@ import { useClearsMessage } from '../../hooks/useClearMessage';
 
 export const useSignUp = () => {
   const { error, setError } = useClearsMessage();
-  
+
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -48,5 +48,18 @@ export const useSignUp = () => {
     }
   };
 
-  return { name, username, email, password, termsAccepted, error, handleNameInputChange, handleUsernameInputChange, handleEmailInputChange, handlePasswordInputChange, handleTermsCheckboxChange, submitSignUp };
+  return {
+    name,
+    username,
+    email,
+    password,
+    termsAccepted,
+    error,
+    handleNameInputChange,
+    handleUsernameInputChange,
+    handleEmailInputChange,
+    handlePasswordInputChange,
+    handleTermsCheckboxChange,
+    submitSignUp,
+  };
 };
