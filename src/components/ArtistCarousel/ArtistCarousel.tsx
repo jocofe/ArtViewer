@@ -8,7 +8,7 @@ export const ArtistCarousel = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
-  const speed = 0.25;
+  const speed = 0.5;
   const positionRef = useRef(0);
   const animationRef = useRef<number | null>(null);
 
@@ -41,14 +41,28 @@ export const ArtistCarousel = () => {
   }, [isPaused]);
 
   useEffect(() => {
-    animationRef.current = requestAnimationFrame(animateScroll);
+    if (!isPaused) {
+      animationRef.current = requestAnimationFrame(animateScroll);
+    }
 
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [animateScroll]);
+  }, [isPaused, animateScroll]);
+
+  useEffect(() => {
+    if (!isPaused && !isLoading && artists.length > 0) {
+      animationRef.current = requestAnimationFrame(animateScroll);
+    }
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isPaused, isLoading, artists, animateScroll]);
 
   if (isLoading) {
     return (
@@ -59,6 +73,8 @@ export const ArtistCarousel = () => {
   }
 
   if (error) return <div>{error}</div>;
+
+  console.log(isPaused);
 
   return (
     <div
