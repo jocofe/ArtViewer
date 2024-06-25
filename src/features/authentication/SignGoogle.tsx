@@ -23,7 +23,6 @@ export const SignGoogle = (props: SignGoogleProps) => {
     try {
       const userCredential: UserCredential = await signInWithPopup(auth, new GoogleAuthProvider());
       const additionalUserInfo = await getAdditionalUserInfo(userCredential);
-      console.log(additionalUserInfo);
       const isNewUser = additionalUserInfo?.isNewUser;
 
       const user = userCredential.user;
@@ -39,7 +38,6 @@ export const SignGoogle = (props: SignGoogleProps) => {
           createdAt: new Date(),
           updatedAt: new Date(),
         });
-        console.log('User data added to Firestore for new Google user');
         navigate('/new-user');
       } else {
         navigate('/');

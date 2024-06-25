@@ -74,8 +74,6 @@ export const ArtistCarousel = () => {
 
   if (error) return <div>{error}</div>;
 
-  console.log(isPaused);
-
   return (
     <div
       className="carousel-container"
