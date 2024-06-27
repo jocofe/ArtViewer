@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import classNames from 'classnames';
 import '../../styles/index.scss';
 import { Button } from '../../components/Buttons/Buttons';
-import { Logotype, IconLogotype, SearchGlass } from '../../components/Icons/icons';
+import { Logotype, IconLogotype } from '../../components/Icons/icons';
 import { TopBarProps } from '../../models/topbar';
 import { SearchBar } from '../../components/Form/SearchBar';
 import { Link } from 'react-router-dom';
@@ -27,22 +27,18 @@ export const TopBar = (props: TopBarProps) => {
       </div>
       {!isCollapse && <SearchBar size="large" placeholder="Search..." />}
       {isCollapse && !isLoggedIn && (
-        <div className="signup-wrapper">
-          <Link to={'/search'}>
-            <SearchGlass className="icon" />
-          </Link>
+        <>
+          <SearchBar size="small" placeholder="Search..." />
           <Link to={'/signup'}>
             <Button>Sign Up</Button>
           </Link>
-        </div>
+        </>
       )}
       {isCollapse && isLoggedIn && (
-        <div className="profile-wrapper">
-          <Link to={'/search'}>
-            <SearchGlass className="icon" />
-          </Link>
+        <>
+          <SearchBar size="small" placeholder="Search..." />
           <DropdownProfileButton />
-        </div>
+        </>
       )}
       {!isCollapse && !isLoggedIn && (
         <div className="signup-wrapper">

@@ -19,6 +19,16 @@
   }
 }
 
+.menu-list-mobile__item {
+  & a {
+    color: var(--color-blackout-light);
+  }
+
+  & a.active {
+    color: var(--color-blackout);
+  }
+}
+
 .delete-user__btn {
   width: 100%;
   display: flex;
