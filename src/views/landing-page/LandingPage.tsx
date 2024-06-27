@@ -4,10 +4,9 @@ import { MosaicImages } from "../../components/MosaicImages/MosaicImages";
 import { TypingBar } from '../../components/TypingBar/TypingBar';
 
 export const LandingPage = () => {
-    // const texts = ['research', 'explore', 'inspire', 'collect', 'discover'];
-    
+
     return (
-        <div>
+        <div className="landing">
             <div className="hero">
                 <MosaicImages/>
             </div>

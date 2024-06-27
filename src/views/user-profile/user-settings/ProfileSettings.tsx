@@ -109,7 +109,7 @@ export const ProfileSettings = () => {
             </div>
           )}
         </div>
-        <Button color="sub_primary" size="small" onClick={handleChooseBtnClick}>Upload new picture</Button>
+        <Button color="sub_primary" size="small" onClick={handleChooseBtnClick}>Upload picture</Button>
         <input
           type="file"
           ref={fileInputRef}
