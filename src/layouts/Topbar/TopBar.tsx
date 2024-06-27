@@ -41,14 +41,14 @@ export const TopBar = (props: TopBarProps) => {
         </>
       )}
       {!isCollapse && !isLoggedIn && (
-        <>
+        <div className="signup-wrapper">
           <Link to={'/signup'}>
             <Button>Sign Up</Button>
           </Link>
           <Link to={'/signin'}>
             <Button color="sub_primary">Sign In</Button>
           </Link>
-        </>
+        </div>
       )}
       {!isCollapse && isLoggedIn && (
         <div className="profile-wrapper">
