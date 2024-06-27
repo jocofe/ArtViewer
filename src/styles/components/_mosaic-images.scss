@@ -1,32 +1,153 @@
-.image-container {
+.mosaic-container {
+    max-width: 1000px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    z-index: -1;
+    margin-top: 180px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
     width: 255px;
     height: 420px;
     border-radius: 50px;
+    margin-bottom: 36px;
+    margin-left: 36px;
     overflow: hidden;
-    background: url('https://framemark.vam.ac.uk/collections/${state.imageId}/full/full/0/default.jpg') / cover no-repeat;
-    background-position: center center;
+}
 
+.mosaic-image {
+    width: 300px; /* adjust width to fit your needs */
+    margin: 10px; /* adjust margin to fit your needs */
+    display: inline-block;
+    overflow: hidden;
     opacity: 0;
-    transition: opacity 1000ms ease-in;
 }
 
-.image-container.loaded {
+.image-2 {
+    margin-top: -100px;
+}
+
+.image-5 {
+    margin-top: -100px;
+}
+
+.mosaic-image {
+   animation: imageAppear 6s ease-in-out infinite;
+}
+
+@keyframes imageAppear {
+  0% {
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+
+  40% {
+    transform: translateY(0px);
     opacity: 1;
+  }
+
+  60% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
 }
 
-.mosaic-images{
+
+.landing-animation {
     display: flex;
     flex-direction: row;
-    gap: 34px;
-    margin-top: 150px;
-    z-index: -1;
-}
-.mosaic-column {
-    display: flex;
-    flex-direction: column;
-    gap: 34px;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+    user-select: none;
 }
 
-.column-center {
-    margin-top: -100px;
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.word {
+    color: var(--color-wooden);
+    margin-top: 48px;
+    animation: appear 6s ease-in-out forwards;
+    
+    &.hidden {
+        display: none;
+    }
+}
+
+@keyframes appear {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    40% {
+        transform: translateY(-50%);
+        opacity: 1;
+    }
+
+    60% {
+        transform: translateY(-50%);
+        opacity: 1;
+    }
+    
+    100% {
+    transform: translateY(-100%);
+    opacity: 0;
+    }
+}
+
+// Media queries
+@media (max-width: 767px) {
+    .landing-animation {
+        flex-direction: column;
+        gap:12px;
+    }
+
+    .mosaic-container {
+        margin-top: 200px;
+        display: grid;
+        grid-template-columns: 200px 200px 200px;
+    }
+
+    .mosaic-image {
+        width: 200px;
+    }
+
+    .image {
+        width: 150px;
+        height: 300px;
+        border-radius: 25px;
+        margin-bottom: 16px;
+        margin-left: none;
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1200px)  {
+    .landing-animation {
+        flex-direction: column;
+        gap:12px;
+    }
+
+    .mosaic-container {
+        margin-top: 200px;
+        display: grid;
+        grid-template-columns: 300px 300px 300px;
+    }
+    
 }
